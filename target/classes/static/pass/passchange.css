@@ -1,0 +1,35 @@
+#all{
+    width: 812px;
+    margin: 50px auto 0 auto;
+}
+
+#firstlogin{
+    background: url("png/firstlogin.png") no-repeat;
+    width: 360px;
+    height: 72px;
+    margin: 20px auto 0 auto;
+}
+
+#input input{
+    margin: 20px auto 20px auto;
+    display: block;
+    width: 250px;
+    height: 25px;
+    text-align: center;
+    font-size: 14px;
+    background-image: none;
+}
+
+#input input.passchange{
+    width: 258px;
+    height: 30px;
+    font-size: 16px;
+}
+
+p {
+    font-size: 12px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    color: red;
+    text-align: center;
+    font-weight:bold;
+}

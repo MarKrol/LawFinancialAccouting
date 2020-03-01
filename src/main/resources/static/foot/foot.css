@@ -1,0 +1,11 @@
+#foot p{
+    border-top-style: solid;
+    border-top-width: thin;
+    text-align: center;
+    font-size: 12px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    line-height: 2.0;
+    color: #082567;
+    border-top-color: #082567;
+}

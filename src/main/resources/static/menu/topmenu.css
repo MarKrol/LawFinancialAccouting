@@ -1,0 +1,117 @@
+#all{
+    width: 920px;
+    margin: 50px auto 0 auto;
+}
+
+#head{
+    margin: 0px auto 0 auto;
+}
+
+#loginemployee p{
+    padding-top: 10px;
+    padding-right: 60px;
+    text-align: right;
+    border-top-color: #082567;
+    border-top-style: solid;
+    border-top-width: thin;
+    font-size: 12px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-weight:bold;
+}
+
+#topmenu{
+    width: 920px;
+    border-top: 1px solid #082567;
+    border-bottom: 1px solid #082567;
+    display:inline-block;
+}
+
+#loginemployee p{
+    font-size: 12px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#text p{
+    margin-left:20px;
+    font-size: 12px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+ul {
+     list-style: none;
+     float: left;
+}
+
+ul > li {
+     margin: 0;
+     padding: 0;
+     float: left;
+     position: relative;
+     height: 20px;
+}
+
+ul > li > a {
+     padding: 10px;
+     color: #444;
+     text-decoration: none;
+     font-size: 14px;
+     font-family: Verdana, Helvetica, Arial, sans-serif;
+     font-weight:bold;
+}
+
+ul > li > a:hover,
+ul > li:hover > a {
+     color: #0027c2;
+     text-decoration: none;
+     font-size: 14px;
+     font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+ul > li ul {
+     padding: 0;
+     position: absolute;
+     display: none;
+     left: 0px;
+     top: 20px;
+     width: 200px;
+     text-align: left;
+     background-color: #fcfcfc;
+     border: 1px solid #ccc;
+}
+
+ul li:hover > ul {
+     display: block;
+}
+
+ul > li ul ul {
+     left: 200px;
+     top: -1px;
+}
+
+ul > li ul li {
+     margin: 0;
+     padding: 0;
+     position: relative;
+     float: none;
+     height: auto;
+}
+
+ul > li ul li a {
+     padding: 10px 20px;
+     color: #505050;
+     text-decoration: none;
+     display: block;
+     font-size: 12px;
+     font-family: Verdana, Helvetica, Arial, sans-serif;
+     font-weight:normal;
+}
+
+ul > li ul li a:hover,
+ul > li ul li:hover > a {
+     text-decoration: none;
+     color: #fff;
+     background-color: #0027c2;
+     font-size: 12px;
+     font-family: Verdana, Helvetica, Arial, sans-serif;
+     font-weight:normal;
+}
