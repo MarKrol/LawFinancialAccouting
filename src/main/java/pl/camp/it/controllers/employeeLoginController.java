@@ -20,28 +20,37 @@ public class employeeLoginController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String login(Model model){
+        sessionObject.setEmployee(null);
+        sessionObject.setLogged(false);
         model.addAttribute("employeeLogin", new EmployeeLogin());
         return "login";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login1(Model model){
+        sessionObject.setEmployee(null);
+        sessionObject.setLogged(false);
         model.addAttribute("employeeLogin", new EmployeeLogin());
         return "login";
     }
 
     @RequestMapping(value = "afterloggingin", method = RequestMethod.GET)
     public String afterloggingin(Model model){
-        model.addAttribute("employeeLogged", sessionObject.getEmployee().getName()+" "+
-                            sessionObject.getEmployee().getSurname());
-        return "afterloggingin";
+        if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            return "afterloggingin";
+        } else{
+            return "redirect:login";
+        }
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String login(@ModelAttribute EmployeeLogin employeeLogin, Model model) {
+        sessionObject.setLogged(false);
         if (!sessionObject.isLogged()) {
             EmployeeLogin tempEmployeeLogin = employeeService.getEmployeeByLogin(employeeLogin.getLogin());
-            if ( tempEmployeeLogin!= null) {
+            if (tempEmployeeLogin!= null) {
                 if (employeeService.isFirstLoginEmployee(tempEmployeeLogin)){
                     if (tempEmployeeLogin.getPass().equals(employeeLogin.getPass())){
                         sessionObject.setEmployee(tempEmployeeLogin.getEmployee());
@@ -53,6 +62,7 @@ public class employeeLoginController {
                 } else{
                     if (tempEmployeeLogin.getPass().equals(employeeService.hashPassword(employeeLogin.getPass()))) {
                         sessionObject.setLogged(true);
+                        sessionObject.setEmployee(tempEmployeeLogin.getEmployee());
                         return "redirect:afterloggingin";
                     } else{
                         model.addAttribute("message", "Wprawadzono niepoprawne hasło!");
@@ -90,20 +100,27 @@ public class employeeLoginController {
                              @RequestParam String newPass, @RequestParam String repeatNewPass, Model model){
         if (sessionObject.getEmployee()!=null) {
             EmployeeLogin tempEmployeeLogin = employeeService.getEmployeeById(sessionObject.getEmployee().getId());
-            if (employeeService.oldPasswordsMatch(tempEmployeeLogin, employeeLogin)) {
-                if (employeeService.newPasswordsMatch(newPass, repeatNewPass)) {
-                    tempEmployeeLogin.setPass(employeeService.hashPassword(newPass));
-                    employeeService.changePassEmployee(tempEmployeeLogin);
-                    sessionObject.setLogged(true);
-                    return "redirect:afterloggingin";
-                } else{
-                    model.addAttribute("message","Niezgodność nowych haseł!");
+
+            if (employeeService.isFirstLoginEmployee(tempEmployeeLogin)) {
+
+                if (employeeService.oldPasswordsMatch(tempEmployeeLogin, employeeLogin)) {
+                    if (employeeService.newPasswordsMatch(newPass, repeatNewPass)) {
+                        tempEmployeeLogin.setPass(employeeService.hashPassword(newPass));
+                        employeeService.changePassEmployee(tempEmployeeLogin);
+                        sessionObject.setLogged(true);
+                        return "redirect:afterloggingin";
+                    } else {
+                        model.addAttribute("message", "Niezgodność nowych haseł!");
+                        return "passchange";
+                    }
+                } else {
+                    model.addAttribute("message", "Błędnie wprowadzono stare hasło!");
                     return "passchange";
                 }
             } else {
-                model.addAttribute("message","Błędnie wprowadzono stare hasło!");
-                return "passchange";
+                return "redirect:login";
             }
+
         } else {
             return "redirect:login";
         }

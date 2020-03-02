@@ -15,7 +15,7 @@
         <div id="input">
             <form action="/" method="post">
                 <p id="message" th:text="${message}"></p>
-                <input type="text" placeholder="login" name="login" th:field="*{employeeLogin.login}">
+                <input type="text" autocomplete="off" placeholder="login" name="login" th:field="*{employeeLogin.login}">
                 <input type="password" placeholder="pass" name="pass" th:field="*{employeeLogin.pass}">
                 <input type="submit" value="Zaloguj" name="signin" class="signin">
             </form>
