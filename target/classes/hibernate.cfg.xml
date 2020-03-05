@@ -26,7 +26,7 @@
         </property>
 
         <property name="show_sql">true</property>
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">update</property> <!--create lub update - w zależności czy tworzymy czy dopisujemy-->
 
         <!-- List of XML mapping files -->
         <mapping class="pl.camp.it.model.employee.Employee"/>

@@ -1,0 +1,37 @@
+#addgroup p.label{
+    margin-left:20px;
+    font-size: 13px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    text-decoration: underline;
+}
+
+table tr td > tr > td {
+    width: 300px;
+}
+
+#group label p.name {
+    margin-left:20px;
+    padding-top:10px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    text-decoration: underline;
+}
+
+#group input.name{
+    margin-top:10px;
+    width: 250px;
+    height: 25px;
+    text-align: center;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#group #savegroup{
+    margin-top:20px;
+    margin-bottom:20px;
+    width: 258px;
+    height: 30px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}

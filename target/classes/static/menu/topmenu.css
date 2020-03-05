@@ -1,5 +1,5 @@
 #all{
-    width: 920px;
+    width: 1000px;
     margin: 50px auto 0 auto;
 }
 
@@ -9,7 +9,7 @@
 
 #loginemployee p{
     padding-top: 10px;
-    padding-right: 60px;
+    padding-right: 5px;
     text-align: right;
     border-top-color: #082567;
     border-top-style: solid;
@@ -20,7 +20,7 @@
 }
 
 #topmenu{
-    width: 920px;
+    width: 1000px;
     border-top: 1px solid #082567;
     border-bottom: 1px solid #082567;
     display:inline-block;
