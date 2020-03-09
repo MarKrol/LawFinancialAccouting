@@ -39,7 +39,7 @@ table tr td > tr > td {
     text-decoration: underline;
 }
 
-#preschooler select.listgroup, select.listteacher{
+#preschooler select.listgroup{
     margin-top:20px;
     margin-left:60px;
     font-size: 13px;
@@ -53,4 +53,12 @@ table tr td > tr > td {
     height: 30px;
     font-size: 14px;
     font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#preschooler label p.message{
+    margin-left: 230px;
+    font-size: 13px;
+    font-weight:bold;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    color: red;
 }

@@ -15,9 +15,9 @@
     <div id="input">
         <form action="/passchange" method="post">
             <p id="message" th:text="${message}"></p>
-            <input type="password" placeholder="old password" name="oldpass" th:field="*{employeeLogin.pass}">
-            <input type="password" placeholder="new password" name="newPass" >
-            <input type="password" placeholder="repeat new password" name="repeatNewPass">
+            <input type="password" required placeholder="old password" name="oldpass" th:field="*{employeeLogin.pass}">
+            <input type="password" required placeholder="new password" name="newPass" >
+            <input type="password" required placeholder="repeat new password" name="repeatNewPass">
             <input type="submit" value="Zmień hasło" name="passchange" class="passchange">
         </form>
     </div>

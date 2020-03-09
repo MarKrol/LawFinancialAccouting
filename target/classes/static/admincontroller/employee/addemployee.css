@@ -59,3 +59,11 @@ table tr td > tr > td {
     font-size: 14px;
     font-family: Verdana, Helvetica, Arial, sans-serif;
 }
+
+#employee label p.message{
+    margin-left: 230px;
+    font-size: 13px;
+    font-weight:bold;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    color: red;
+}

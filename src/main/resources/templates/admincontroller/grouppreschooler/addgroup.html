@@ -24,11 +24,13 @@
     <div th:replace="menu/topmenu.html::topmenu"></div>
     <div id="addgroup">
         <p class="label">Moduł dodawania nowej grupy przedszkolnej do bazy</p>
-        <from>
+        <p class="message" th:text="${message}"></p>
+        <form action="../../admincontroller/grouppreschooler/addgroup" method="post">
             <table id="group">
                 <tr>
                     <td style="width: 225px;"><label><p class="name">Nazwa grupy: </p></label></td>
-                    <td><input type="text" autocomplete="off" placeholder="nazwa" class="name"></td>
+                    <td><input type="text" autocomplete="off" placeholder="nazwa" class="name" required
+                                        th:field="*{preschoolGroup.nameGroup}"></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -37,7 +39,7 @@
                     </td>
                 </tr>
             </table>
-        </from>
+        </form>
     </div>
     <div th:replace="foot/foot.html::foot"></div>
 </div>

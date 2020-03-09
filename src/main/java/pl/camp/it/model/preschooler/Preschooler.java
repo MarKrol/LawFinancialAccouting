@@ -20,10 +20,6 @@ public class Preschooler {
     private LocalDate localDateDeleteFromDB;
 
     @ManyToOne
-    @JoinColumn(name = "employeeId")
-    Employee employee;
-
-    @ManyToOne
     @JoinColumn(name = "preschoolerGroupId")
     PreschoolGroup preschoolGroup;
 
@@ -73,14 +69,6 @@ public class Preschooler {
 
     public void setLocalDateDeleteFromDB(LocalDate localDateDeleteFromDB) {
         this.localDateDeleteFromDB = localDateDeleteFromDB;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     public PreschoolGroup getPreschoolGroup() {

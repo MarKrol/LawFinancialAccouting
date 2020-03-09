@@ -5,4 +5,5 @@ import pl.camp.it.model.preschooler.Preschooler;
 
 public interface IPreschoolerService {
     void persistPreschooler(Preschooler preschooler);
+    Preschooler setPreschoolerAndAddPreschoolGroupToPreschooler(Preschooler preschooler, String nameGroup);
 }

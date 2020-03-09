@@ -23,6 +23,10 @@ public class Employee {
         this.role = role;
     }
 
+    public String getRole() {
+        return role;
+    }
+
     private LocalDate localDateDeleteFromDB;
 
     public int getId() {

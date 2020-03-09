@@ -5,8 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.camp.it.dao.IEmployeeDAO;
 import pl.camp.it.model.employee.Employee;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.userLogin.EmployeeLogin;
 import pl.camp.it.services.IEmployeeService;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class EmployeeServiceImpl implements IEmployeeService {
@@ -16,6 +20,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Override
     public void persistEmployee(Employee employee) {
+        employee.setName(employee.getName().toUpperCase());
+        employee.setSurname(employee.getSurname().toUpperCase());
+        employee.setLocalDateAddToDB(LocalDate.now());
+        employee.setQuantity(true);
+        employee.setRole(employeeRole(employee).getRole().toUpperCase());
         this.employeeDAO.persistEmployee(employee);
     }
 
@@ -27,6 +36,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public void changePassEmployee(EmployeeLogin employeeLogin) {
         this.employeeDAO.changePassEmployee(employeeLogin);
+    }
+
+    @Override
+    public List<Employee> getListEmployeeTeacher() {
+        return this.employeeDAO.getListEmployeeTeacher();
     }
 
     @Override
@@ -69,5 +83,18 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public String hashPassword(String pass) {
         return DigestUtils.md5Hex(pass);
+    }
+
+    private Employee employeeRole(Employee employee){
+        if (employee.getRole()=="teacher") {
+            employee.setRole(EmployeeRole.TEACHER.toString());
+        }
+        if (employee.getRole()=="teacher") {
+            employee.setRole(EmployeeRole.ACCOUNTANT.toString());
+        }
+        if (employee.getRole()=="teacher") {
+            employee.setRole(EmployeeRole.ADMIN.toString());
+        }
+        return employee;
     }
 }

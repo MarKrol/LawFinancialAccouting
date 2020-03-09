@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pl.camp.it.dao.IEmployeeDAO;
 import pl.camp.it.model.employee.Employee;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.userLogin.EmployeeLogin;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Repository
@@ -58,6 +61,19 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
                 uniqueResult();
         session.close();
         return employeeLogin;
+    }
+
+    @Override
+    public List<Employee> getListEmployeeTeacher() {
+        List<Employee> tempolary=new ArrayList<>();
+        Session session=sessionFactory.openSession();
+        List<Employee> employee = session.createQuery("FROM pl.camp.it.model.employee.Employee").list();
+        for (Employee tempEmploye : employee){
+            if (tempEmploye.isQuantity() && tempEmploye.getRole().equals(EmployeeRole.TEACHER.toString())){
+                tempolary.add(tempEmploye);
+            }
+        }
+        return tempolary;
     }
 
     @Override

@@ -24,30 +24,27 @@
     <div th:replace="menu/topmenu.html::topmenu"></div>
     <div id="addpreschooler">
         <p class="label">Moduł dodawania nowego przedszkolaka do bazy</p>
-        <from>
+        <form action="../../admincontroller/preschooler/addpreschooler" method="post">
             <table id="preschooler">
                 <tr>
                     <td style="width: 225px;"><label><p class="name">Imię: </p></label></td>
-                    <td><input type="text" autocomplete="off" placeholder="imię" class="name"></td>
+                    <td><input type="text" required autocomplete="off" placeholder="imię" class="name"
+                                th:field="*{preschooler.name}"></td>
                 </tr>
                 <tr>
                     <td><label><p class="surname">Nazwisko: </p></label></td>
-                    <td><input type="text" autocomplete="off" placeholder="nazwisko" class="surname"></td>
+                    <td><input type="text" required autocomplete="off" placeholder="nazwisko" class="surname"
+                                th:field="*{preschooler.surname}"></td>
                 </tr>
                 <tr>
                     <td colspan="2"><label class="group">Grupa przedszkolna:</label>
-                        <select style="width: 250px" name="choose1" path="orderId" class="listgroup">
+                        <select style="width: 250px" name="chooseGroupPreschool" path="orderId" class="listgroup">
                             <option value="">Wybierz grupę przedszkolną</option>
-                            <option th:each="order:${order}" th:value="${order.id}" th:text="${order.id}"></option>
+                            <option th:each="listGroupPreschool:${listGroupPreschool}"
+                                    th:value="${listGroupPreschool.nameGroup}"
+                                    th:text="${listGroupPreschool.nameGroup}"></option>
                         </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2"><label class="group">Wychowawca grupy:</label>
-                        <select style="width: 250px" name="choose2" path="orderId" class="listteacher">
-                            <option value="">Wybierz wychowawcę grupy</option>
-                            <option th:each="order:${order}" th:value="${order.id}" th:text="${order.id}"></option>
-                        </select>
+                        <label><p class="message" th:text="${message}"></p></label>
                     </td>
                 </tr>
                 <tr>
@@ -57,7 +54,7 @@
                     </td>
                 </tr>
             </table>
-        </from>
+        </form>
     </div>
     <div th:replace="foot/foot.html::foot"></div>
 </div>
