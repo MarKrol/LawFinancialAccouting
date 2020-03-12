@@ -4,4 +4,5 @@ import pl.camp.it.model.meals.SingleBoardPrice;
 
 public interface ISingleBoardPriceService {
     void persistSingleBoardPrice(SingleBoardPrice singleBoardPrice);
+    boolean isSingleMealInDB(String name);
 }

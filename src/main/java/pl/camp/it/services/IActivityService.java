@@ -4,4 +4,5 @@ import pl.camp.it.model.activities.Activities;
 
 public interface IActivityService {
     void persistActivity(Activities activities);
+    boolean isActivityInDB(String name);
 }

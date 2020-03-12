@@ -14,6 +14,13 @@ public class ActivityServiceImpl implements IActivityService {
 
     @Override
     public void persistActivity(Activities activities) {
+        activities.setQuantity(true);
+        activities.setName(activities.getName().toUpperCase());
         this.activityDAO.persistActivity(activities);
+    }
+
+    @Override
+    public boolean isActivityInDB(String name) {
+        return this.activityDAO.isActivityInDB(name);
     }
 }

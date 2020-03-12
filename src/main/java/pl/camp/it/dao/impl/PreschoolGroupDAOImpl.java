@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pl.camp.it.dao.IPreschoolGroupDAO;
+import pl.camp.it.model.meals.FullBoardPrice;
 import pl.camp.it.model.preschoolGroup.PreschoolGroup;
 
 import javax.persistence.criteria.From;
@@ -29,21 +30,20 @@ public class PreschoolGroupDAOImpl implements IPreschoolGroupDAO {
     @Override
     public boolean isPreschoolGroupInDB(String nameGroup) {
         Session session=sessionFactory.openSession();
-        PreschoolGroup preschoolGroup = session.createQuery
+        List<PreschoolGroup> preschoolGroup = session.createQuery
                 ("FROM pl.camp.it.model.preschoolGroup.PreschoolGroup WHERE nameGroup='"+nameGroup.toUpperCase()+"'",
-                                                                                PreschoolGroup.class).uniqueResult();
+                                                                                PreschoolGroup.class).list();
         session.close();
-        if (preschoolGroup==null) {
-            return false;
-        } else
-        {
-            if (preschoolGroup.isQuantity()){
-                return true;
-            }
-            else {
-                return false;
+        boolean isInDB=false;
+        if (preschoolGroup!=null) {
+            for (PreschoolGroup temp : preschoolGroup) {
+                if (temp.isQuantity()) {
+                    isInDB = true;
+                    break;
+                }
             }
         }
+        return isInDB;
     }
 
     @Override
@@ -62,10 +62,18 @@ public class PreschoolGroupDAOImpl implements IPreschoolGroupDAO {
     @Override
     public PreschoolGroup getPreschoolGroup(String nameGroup) {
         Session session=sessionFactory.openSession();
-        PreschoolGroup preschoolGroup = session.createQuery
+        List<PreschoolGroup> preschoolGroup = session.createQuery
                 ("FROM pl.camp.it.model.preschoolGroup.PreschoolGroup WHERE nameGroup='"+nameGroup+"'",
-                                                                            PreschoolGroup.class).uniqueResult();
+                                                                            PreschoolGroup.class).list();
         session.close();
-        return preschoolGroup;
+
+        PreschoolGroup preschoolGroup1=null;
+        for(PreschoolGroup temp: preschoolGroup){
+            if (temp.isQuantity()){
+                preschoolGroup1 = temp;
+                break;
+            }
+        }
+        return preschoolGroup1;
     }
 }

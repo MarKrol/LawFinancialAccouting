@@ -34,12 +34,12 @@ public class SingleBoardPrice {
         this.name = name;
     }
 
-    public double getPrice() {
+    public double getPriceNet() {
         return priceNet;
     }
 
-    public void setPrice(double price) {
-        this.priceNet = price;
+    public void setPriceNet(double priceNet) {
+        this.priceNet = priceNet;
     }
 
     public int getVAT() {
