@@ -76,4 +76,14 @@ public class PreschoolGroupDAOImpl implements IPreschoolGroupDAO {
         }
         return preschoolGroup1;
     }
+
+    @Override
+    public PreschoolGroup getPreschoolGroupById(int id) {
+        Session session = sessionFactory.openSession();
+        PreschoolGroup preschoolGroup = session.createQuery
+                ("FROM pl.camp.it.model.preschoolGroup.PreschoolGroup WHERE id="+id+
+                                            "and quantity="+true,PreschoolGroup.class).uniqueResult();
+        session.close();
+        return preschoolGroup;
+    }
 }

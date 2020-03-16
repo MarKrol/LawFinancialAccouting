@@ -40,4 +40,9 @@ public class PreschoolGroupServiceImpl implements IPreschoolGroupService {
         preschoolGroup.setEmployee(employee);
         this.preschoolerGroupDAO.persistPreschoolGroup(preschoolGroup);
     }
+
+    @Override
+    public String getNameGroupPreschoolById(int idGroup) {
+        return this.preschoolerGroupDAO.getPreschoolGroupById(idGroup).getNameGroup();
+    }
 }

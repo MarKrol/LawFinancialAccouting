@@ -16,7 +16,7 @@ import pl.camp.it.session.SessionObject;
 import javax.annotation.Resource;
 
 @Controller
-public class adminAddUserController {
+public class adminUserController {
 
     @Resource
     SessionObject sessionObject;

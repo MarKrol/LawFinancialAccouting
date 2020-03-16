@@ -23,25 +23,18 @@
     </div>
     <div th:replace="menu/topmenu.html::topmenu"></div>
     <div id="addfull">
-        <p class="label">Moduł dodawania nowego posiłku do bazy</p>
-        <form action="../../admincontroller/meals/single" method="post">
+        <p class="label">Moduł dodawania miesięcznej liczby  całodziennego wyżywienia dla przedszkolaka</p>
+        <form action="../../admincontroller/meals/fullselectgroup" method="post">
             <table id="full">
                 <tr>
-                    <td style="width: 325px;"><label><p class="name">Nazwa wyżywienia: </p></label></td>
-                    <td><input type="text" required autocomplete="off" placeholder="nazwa" class="name" value=""
-                               th:field="*{singleMeal.name}"></td>
-                </tr>
-                <tr>
-                    <td ><label><p class="name">Cena netto wyżywienia [zł]: </p></label></td>
-                    <td><input type="text" required autocomplete="off"
-                               pattern="^\d+(\.\d{2})$" placeholder="cena" class="name" value="0.00"
-                               th:field="*{singleMeal.priceNet}"></td>
-                </tr>
-                <tr>
-                    <td ><label><p class="name">VAT [%]: </p></label></td>
-                    <td><input type="text" required autocomplete="off"
-                               pattern="^\d{1,2}$" placeholder="VAT" class="name" value="0"
-                               th:field="*{singleMeal.VAT}"></td>
+                    <td style="width: 225px;"><label><p class="name">Grupa przedszkolna: </p></label></td>
+                    <td ><select required name="choose" path="orderId" id="list">
+                        <option value="">Wybierz grupę przedszkolną</option>
+                        <option th:each="listPreschoolGroup:${listPreschoolGroup}"
+                                th:value="${listPreschoolGroup.id}"
+                                th:text="${listPreschoolGroup.nameGroup}">
+                        </option>
+                    </select></td>
                 </tr>
                 <tr>
                     <td colspan="2">
@@ -51,7 +44,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <input type="submit" value="ZAPISZ POSIŁEK W BAZIE" id="savemeal">
+                        <input type="submit" value="WYBIERAM GRUPĘ" id="save">
                     </td>
                 </tr>
             </table>

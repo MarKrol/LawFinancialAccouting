@@ -1,0 +1,107 @@
+#addfull p.label{
+    margin-left:20px;
+    font-size: 13px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    text-decoration: underline;
+}
+
+table tr td > tr > td {
+    width: 300px;
+}
+
+#optiontoall label p.name {
+    margin-left:20px;
+    padding-top:10px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    text-decoration: underline;
+}
+
+#full label p.name {
+    margin-left:20px;
+    padding-top:10px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    text-decoration: underline;
+}
+
+#full input.name{
+    margin-top:10px;
+    width: 350px;
+    height: 25px;
+    text-align: center;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#full #savemeal, #saveactivity, #savestay, #save, #savedata, #editdata{
+    margin-top:20px;
+    margin-bottom:20px;
+    width: 358px;
+    height: 30px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#full p.message{
+    margin-left: 330px;
+    font-size: 13px;
+    font-weight:bold;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    color: red;
+}
+
+#full p.messageOK{
+    margin-left: 330px;
+    font-size: 13px;
+    font-weight:bold;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    color: blue;
+}
+
+#addfull p.message{
+    margin-left: 330px;
+    font-size: 13px;
+    font-weight:bold;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    color: red;
+}
+
+#addfull p.messageOK{
+    margin-left: 330px;
+    font-size: 13px;
+    font-weight:bold;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    color: blue;
+}
+
+
+#bordersettings, #borderpreschooler{
+    border: solid 1px blue;
+}
+
+#full #preschooler{
+    margin-left: 20px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-weight:bold;
+}
+
+#full #list,#lis1, #list2, #list01, #list00, #list1{
+    margin-top: 5px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    width: 350px;
+    height: 30px;
+}
+
+#full #list0{
+    margin-top: 5px;
+    margin-right: 30px;
+    margin-left: 20px;
+    width:280px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+

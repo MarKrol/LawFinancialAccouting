@@ -7,6 +7,7 @@ import pl.camp.it.model.meals.FullBoardPrice;
 import pl.camp.it.services.IFullBoardPriceService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class FullBoardPriceServiceImpl implements IFullBoardPriceService {
@@ -25,5 +26,20 @@ public class FullBoardPriceServiceImpl implements IFullBoardPriceService {
     @Override
     public boolean isFullMealInDB(String name) {
         return this.fullBoardPriceDAO.isFullMealInDB(name);
+    }
+
+    @Override
+    public List<FullBoardPrice> getListFullMeal() {
+        return this.fullBoardPriceDAO.getListFullMeal();
+    }
+
+    @Override
+    public FullBoardPrice getFullBoardPriceById(int id) {
+        return this.fullBoardPriceDAO.getFullBoardPriceById(id);
+    }
+
+    @Override
+    public int getIdFullBoardPriceByName(String name) {
+        return this.fullBoardPriceDAO.getIdFullBoardPriceByName(name);
     }
 }

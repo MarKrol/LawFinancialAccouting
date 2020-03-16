@@ -12,5 +12,6 @@ public interface IPreschoolGroupService {
     boolean isPreschoolGroupInDB(String nameGroup);
     List<PreschoolGroup> getListPreschoolerGroup();
     void setPreschoolGroupAndAddEmployeeToGroup(String nameGroup, Employee employee);
+    String getNameGroupPreschoolById(int idGroup);
 
 }

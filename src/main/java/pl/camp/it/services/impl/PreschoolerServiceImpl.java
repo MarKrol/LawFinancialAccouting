@@ -9,6 +9,7 @@ import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.services.IPreschoolerService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class PreschoolerServiceImpl implements IPreschoolerService {
@@ -32,5 +33,15 @@ public class PreschoolerServiceImpl implements IPreschoolerService {
         PreschoolGroup preschoolGroup = this.preschoolGroupDAO.getPreschoolGroup(nameGroup);
         preschooler.setPreschoolGroup(preschoolGroup);
         return preschooler;
+    }
+
+    @Override
+    public List<Preschooler> getPreschoolerList(int idGroup) {
+        return this.preschoolerDAO.getPreschoolerList(idGroup);
+    }
+
+    @Override
+    public Preschooler getPreschoolerById(int id) {
+        return this.preschoolerDAO.getPreschoolerById(id);
     }
 }

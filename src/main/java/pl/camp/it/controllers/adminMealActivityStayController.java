@@ -19,7 +19,7 @@ import pl.camp.it.session.SessionObject;
 import javax.annotation.Resource;
 
 @Controller
-public class adminAddMealActivityStayController {
+public class adminMealActivityStayController {
 
     @Resource
     SessionObject sessionObject;
@@ -93,19 +93,19 @@ public class adminAddMealActivityStayController {
         }
     }
 
-    @RequestMapping(value = "admincontroller/meals/activity", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/activity/activity", method = RequestMethod.GET)
     public String addActivity(Model model){
         if (sessionObject.getEmployee()!=null){
             model.addAttribute("activity", new Activities());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            return "admincontroller/meals/activity";
+            return "admincontroller/activity/activity";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="admincontroller/meals/activity", method = RequestMethod.POST)
+    @RequestMapping(value ="admincontroller/activity/activity", method = RequestMethod.POST)
     public String addActivityToDB(@ModelAttribute Activities activities, Model model){
         if (sessionObject.getEmployee()!=null){
             if (activityService.isActivityInDB(activities.getName().toUpperCase())){
@@ -113,29 +113,29 @@ public class adminAddMealActivityStayController {
                 model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                         sessionObject.getEmployee().getSurname());
                 model.addAttribute("activity", new Activities());
-                return "admincontroller/meals/activity";
+                return "admincontroller/activity/activity";
             } else{
                 activityService.persistActivity(activities);
-                return "redirect:../../admincontroller/meals/statementa";
+                return "redirect:../../admincontroller/activity/statementa";
             }
         }else{
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "admincontroller/meals/stay", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/stay/stay", method = RequestMethod.GET)
     public String addstay(Model model){
         if (sessionObject.getEmployee()!=null){
             model.addAttribute("stay", new Stay());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            return "admincontroller/meals/stay";
+            return "admincontroller/stay/stay";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="admincontroller/meals/stay", method = RequestMethod.POST)
+    @RequestMapping(value ="admincontroller/stay/stay", method = RequestMethod.POST)
     public String addStayToDB(@ModelAttribute Stay stay, Model model){
         if (sessionObject.getEmployee()!=null){
             if (stayService.isStayInDB(stay.getName().toUpperCase())){
@@ -143,10 +143,10 @@ public class adminAddMealActivityStayController {
                 model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                         sessionObject.getEmployee().getSurname());
                 model.addAttribute("stay", new Stay());
-                return "admincontroller/meals/stay";
+                return "admincontroller/stay/stay";
             } else{
                 stayService.persistStay(stay);
-                return "redirect:../../admincontroller/meals/statements";
+                return "redirect:../../admincontroller/stay/statements";
             }
         }else{
             return "redirect:../../login";
@@ -164,23 +164,23 @@ public class adminAddMealActivityStayController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/statementa", method = RequestMethod.GET)
+    @RequestMapping(value ="/admincontroller/activity/statementa", method = RequestMethod.GET)
     public String statementActivity(Model model){
         if (sessionObject.getEmployee()!=null){
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            return "admincontroller/meals/statementa";
+            return "admincontroller/activity/statementa";
         } else{
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/statements", method = RequestMethod.GET)
+    @RequestMapping(value ="/admincontroller/stay/statements", method = RequestMethod.GET)
     public String statementStay(Model model){
         if (sessionObject.getEmployee()!=null){
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            return "admincontroller/meals/statements";
+            return "admincontroller/stay/statements";
         } else{
             return "redirect:../../login";
         }
