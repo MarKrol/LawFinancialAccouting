@@ -29,7 +29,7 @@ public class PreschoolerFullBoardInMonthDAOImpl implements IPreschoolerFullBoard
         Session session = sessionFactory.openSession();
         List<PreschoolerFullBoardInMonth> preschoolerFullBoardInMonth = session.createQuery
                 ("FROM pl.camp.it.model.meals.PreschoolerFullBoardInMonth WHERE preschoolerId="
-                        +idPreschooler,PreschoolerFullBoardInMonth.class).list();
+                        +idPreschooler+"and quantity="+true,PreschoolerFullBoardInMonth.class).list();
         session.close();
         if (preschoolerFullBoardInMonth.size()!=0){
             return preschoolerFullBoardInMonth.get(preschoolerFullBoardInMonth.size()-1).getNameDiet();

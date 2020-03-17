@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
 import pl.camp.it.model.month.Month;
-import pl.camp.it.model.preschoolGroup.PreschoolGroup;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.services.*;
 import pl.camp.it.session.SessionObject;

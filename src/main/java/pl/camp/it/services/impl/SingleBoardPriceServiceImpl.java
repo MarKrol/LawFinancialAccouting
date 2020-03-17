@@ -7,6 +7,7 @@ import pl.camp.it.model.meals.SingleBoardPrice;
 import pl.camp.it.services.ISingleBoardPriceService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class SingleBoardPriceServiceImpl implements ISingleBoardPriceService {
@@ -24,5 +25,15 @@ public class SingleBoardPriceServiceImpl implements ISingleBoardPriceService {
     @Override
     public boolean isSingleMealInDB(String name) {
         return this.singleBoardPriceDAO.isSingleMealInDB(name);
+    }
+
+    @Override
+    public List<SingleBoardPrice> getListSingleMeal() {
+        return this.singleBoardPriceDAO.getListSingleMeal();
+    }
+
+    @Override
+    public SingleBoardPrice getNameSingleMealById(int id) {
+        return this.singleBoardPriceDAO.getNameSingleMealById(id);
     }
 }

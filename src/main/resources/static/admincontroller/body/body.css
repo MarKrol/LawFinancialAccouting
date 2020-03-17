@@ -28,7 +28,7 @@ table tr td > tr > td {
 
 #full input.name{
     margin-top:10px;
-    width: 350px;
+    width: 320px;
     height: 25px;
     text-align: center;
     font-size: 14px;
@@ -38,7 +38,7 @@ table tr td > tr > td {
 #full #savemeal, #saveactivity, #savestay, #save, #savedata, #editdata{
     margin-top:20px;
     margin-bottom:20px;
-    width: 358px;
+    width: 330px;
     height: 30px;
     font-size: 14px;
     font-family: Verdana, Helvetica, Arial, sans-serif;
@@ -92,7 +92,7 @@ table tr td > tr > td {
     margin-top: 5px;
     font-size: 14px;
     font-family: Verdana, Helvetica, Arial, sans-serif;
-    width: 350px;
+    width: 325px;
     height: 30px;
 }
 

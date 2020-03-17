@@ -23,8 +23,8 @@
     </div>
     <div th:replace="menu/topmenu.html::topmenu"></div>
     <div id="addfull">
-        <p class="label">Moduł edytowania miesięcznej liczby całodziennego wyżywienia dla przedszkolaka</p>
-        <form action="../../admincontroller/meals/fullmonthE" method="post">
+        <p class="label">Moduł edytowania miesięcznej liczby pojedynczego wyżywienia dla przedszkolaka</p>
+        <form action="../../admincontroller/meals/singlemonthE" method="post">
             <label><p class="message" th:text="${message}"></p></label>
             <label><p class="messageOK" th:text="${messageOK}"></p></label>
             <table id="full">
@@ -36,52 +36,37 @@
                             <option th:each="preschooler: ${preschoolerList}"
                                     th:value="${preschooler.id}"
                                     th:text="${preschooler.name+' '+preschooler.surname}"
-                                    th:selected="${preschooler.name+' '+preschooler.surname==nameSurnamePreschooler}">
+                                    th:selected="${preschooler.name+' '+preschooler.surname==nameSurname}">
                             </option>
                         </select></td>
-                        <td style="width: 325px;"><label><p class="name">Wybierz miesiąc rozliczenia do edycji: </p></label></td>
+                        <td style="width: 325px;"><label><p class="name">Ustaw miesiąc rozliczenia posiłków: </p></label></td>
                         <td><select required name="choose1" path="orderId" id="list00">
                             <option value="">Wybierz miesiąc rozliczenia posiłków</option>
                             <option th:each="listMonth:${listMonth}"
                                     th:value="${listMonth}"
                                     th:text="${listMonth}"
-                                    th:selected="${listMonth==monthEdit}">
+                                    th:selected="${listMonth==month}">
                             </option>
                         </select></td>
                     </tr>
                     <tr>
-                        <td style="width: 325px;"><label><p class="name">Ustaw dietę przedszkolaka: </p></label></td>
-                        <td><select name="choose2" path="orderId" id="list1">
-                            <option value="-1">Wybierz dietę dla przedszkolaka</option>
-                            <option th:each="listFullMeal:${listFullMeal}"
-                                    th:value="${listFullMeal.id}"
-                                    th:text="${listFullMeal.name}"
-                                    th:selected="${listFullMeal.name==dietEdit}">
+                        <td style="width: 325px;"><label><p class="name">Ustaw pojedynczy posiłek przedszkolaka: </p></label></td>
+                        <td><select required name="choose2" path="orderId" id="list1">
+                            <option value="">Wybierz posiłek dla przedszkolaka</option>
+                            <option th:each="listSingleMeal:${listSingleMeal}"
+                                    th:value="${listSingleMeal.id}"
+                                    th:text="${listSingleMeal.name}"
+                                    th:selected="${listSingleMeal.name==nameSingle}">
                             </option>
                         </select></td>
                     </tr>
                 <tr>
-                    <td style="width: 325px;"><label><p class="name">Ilość pierwszych śniadań: </p></label></td>
+                    <td style="width: 325px;"><label><p class="name">Miesięczna liczba posiłku: </p></label></td>
                     <td><input type="text" required autocomplete="off" placeholder="ilość" class="name"
-                               pattern="^\d{1,2}$" th:field="*{fullMeal.numberFirstBreakfast}"></td>
+                               pattern="^\d{1,2}$" th:field="*{singleMeal.number}"></td>
                     </tr>
                 <tr>
-                    <td style="width: 325px;"><label><p class="name">Ilość drugich śniadań: </p></label></td>
-                    <td><input type="text" required autocomplete="off" placeholder="ilość" class="name"
-                               pattern="^\d{1,2}$" th:field="*{fullMeal.numberSecondBreakfast}"></td>
-                </tr>
-                <tr>
-                    <td style="width: 325px;"><label><p class="name">Ilość obiadów: </p></label></td>
-                    <td><input type="text" required autocomplete="off" placeholder="ilość" class="name"
-                               pattern="^\d{1,2}$" th:field="*{fullMeal.numberDinner}"></td>
-                </tr>
-                <tr>
-                    <td style="width: 325px;"><label><p class="name">Ilość podwieczorków: </p></label></td>
-                    <td><input type="text" required autocomplete="off" placeholder="ilość" class="name"
-                               pattern="^\d{1,2}$" th:field="*{fullMeal.numberTea}"></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="EDYTUJ DANE" id="editdata" name="edit"></td>
+                    <td style="width: 325px;"><input type="submit" value="EDYTUJ DANE" id="editdata" name="edit"></td>
                     <td><input type="submit" value="ZAPISZ DANE" id="savedata" name="save"></td>
                 </tr>
             </table>

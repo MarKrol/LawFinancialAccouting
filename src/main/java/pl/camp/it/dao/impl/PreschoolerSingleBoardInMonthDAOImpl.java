@@ -20,4 +20,32 @@ public class PreschoolerSingleBoardInMonthDAOImpl implements IPreschoolerSingleB
         session.saveOrUpdate(preschoolerSingleBoardInMonth);
         session.getTransaction().commit();
     }
+
+    @Override
+    public boolean isPreschoolerSingleMealMonthInDB(int idPreschooler, String month, String name) {
+        Session session = sessionFactory.openSession();
+        PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth =session.createQuery
+                ("FROM pl.camp.it.model.meals.PreschoolerSingleBoardInMonth WHERE preschoolerId="+idPreschooler+
+                        "and month='"+month.toUpperCase()+"'"+"and name='"+name.toUpperCase()+"'"+"and quantity="+true,
+                        PreschoolerSingleBoardInMonth.class).uniqueResult();
+        session.close();
+        if (preschoolerSingleBoardInMonth!=null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public PreschoolerSingleBoardInMonth preschoolerSingleMealMonthInDB(int idPreschooler, String month, String name) {
+        Session session = sessionFactory.openSession();
+        PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth =session.createQuery
+                ("FROM pl.camp.it.model.meals.PreschoolerSingleBoardInMonth WHERE preschoolerId="+idPreschooler+
+                                "and month='"+month.toUpperCase()+"'"+"and name='"+name.toUpperCase()+"'"+"and quantity="+true,
+                        PreschoolerSingleBoardInMonth.class).uniqueResult();
+        session.close();
+
+        return preschoolerSingleBoardInMonth;
+    }
+
 }

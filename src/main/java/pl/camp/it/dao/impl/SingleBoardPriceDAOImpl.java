@@ -41,4 +41,27 @@ public class SingleBoardPriceDAOImpl implements ISingleBoardPriceDAO {
         }
         return isInDB;
     }
+
+    @Override
+    public List<SingleBoardPrice> getListSingleMeal() {
+        Session session=sessionFactory.openSession();
+        List<SingleBoardPrice> singleBoardPrices = session.createQuery
+                ("FROM pl.camp.it.model.meals.SingleBoardPrice WHERE quantity="+true, SingleBoardPrice.class).list();
+        session.close();
+        return  singleBoardPrices;
+    }
+
+    @Override
+    public SingleBoardPrice getNameSingleMealById(int id) {
+        Session session = sessionFactory.openSession();
+        SingleBoardPrice singleBoardPrice = session.createQuery
+                ("FROM pl.camp.it.model.meals.SingleBoardPrice WHERE id="+id+"and quantity="+true,
+                        SingleBoardPrice.class).uniqueResult();
+        session.close();
+        if(singleBoardPrice==null){
+            return new SingleBoardPrice();
+        } else{
+            return singleBoardPrice;
+        }
+    }
 }
