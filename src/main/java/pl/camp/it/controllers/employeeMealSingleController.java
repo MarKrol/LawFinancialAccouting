@@ -189,6 +189,8 @@ public class employeeMealSingleController {
                 model.addAttribute("messageOK", "Edytujesz dane dla przedszkolaka: " +
                         " " + preschooler.getName() + " " + preschooler.getSurname() + " w miesiącu " + month.toUpperCase() + ".");
             } else{
+                this.idPreschoolerEditSave=-1;
+                this.idSingleMealEditSave=-1;
                 model.addAttribute("nameSingle","");
                 model.addAttribute("nameSurname","");
                 model.addAttribute("month","");
@@ -223,7 +225,7 @@ public class employeeMealSingleController {
             model.addAttribute("month","");
             model.addAttribute("nameSingle","");
 
-            if (idPreschooler!=this.idPreschoolerEditSave || !month.equals(this.monthEditSave) || idSingleMeal!=idSingleMealEditSave){
+            if (idPreschooler!=this.idPreschoolerEditSave || !month.equals(this.monthEditSave) || idSingleMeal!=this.idSingleMealEditSave){
 
                 model.addAttribute("message", "Zapis nie jest możliwy z powodu zaznaczenia innego " +
                         "przedszkolaka i/lub miesiąca i/lub posiłku niż edytowane dane! Edytuj dane jeszcze raz!");

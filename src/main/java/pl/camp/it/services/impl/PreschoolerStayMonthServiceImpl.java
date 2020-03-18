@@ -30,4 +30,15 @@ public class PreschoolerStayMonthServiceImpl implements IPreschoolerStayMonthSer
 
         this.preschoolerStayMonthDAO.persistPreschoolerStayMonth(preschoolerStayMonth);
     }
+
+    @Override
+    public PreschoolerStayMonth preschoolerStayMonth(int idPreschooler, String month, String nameStay) {
+        return this.preschoolerStayMonthDAO.preschoolerStayMonth(idPreschooler, month,nameStay);
+    }
+
+    @Override
+    public void saveChangeStayMonth(PreschoolerStayMonth preschoolerStayMonth, PreschoolerStayMonth preschoolerStayMonthEdit) {
+        preschoolerStayMonth.setNumber(preschoolerStayMonthEdit.getNumber());
+        this.preschoolerStayMonthDAO.persistPreschoolerStayMonth(preschoolerStayMonth);
+    }
 }

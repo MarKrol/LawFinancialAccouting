@@ -28,10 +28,22 @@ public class PreschoolerStayMonthDAOImpl implements IPreschoolerStayMonthDAO {
                 ("FROM pl.camp.it.model.stay.PreschoolerStayMonth WHERE preschoolerId="+idPreschooler+
                                 "and month='"+month.toUpperCase()+"'"+"and name='"+nameStay.toUpperCase()+"'"+"and quantity="+true,
                         PreschoolerStayMonth.class).uniqueResult();
+        session.close();
         if (preschoolerStayMonth!=null){
             return true;
         } else{
             return false;
         }
+    }
+
+    @Override
+    public PreschoolerStayMonth preschoolerStayMonth(int idPreschooler, String month, String nameStay) {
+        Session session=sessionFactory.openSession();
+        PreschoolerStayMonth preschoolerStayMonth = session.createQuery
+                ("FROM pl.camp.it.model.stay.PreschoolerStayMonth WHERE preschoolerId="+idPreschooler+
+                                "and month='"+month.toUpperCase()+"'"+"and name='"+nameStay.toUpperCase()+"'"+"and quantity="+true,
+                        PreschoolerStayMonth.class).uniqueResult();
+        session.close();
+        return preschoolerStayMonth;
     }
 }

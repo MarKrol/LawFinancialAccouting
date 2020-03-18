@@ -201,6 +201,7 @@ public class employeeMealFullController {
                 model.addAttribute("messageOK", "Edytujesz dane dla przedszkolaka: " +
                         " " + preschooler.getName() + " " + preschooler.getSurname() + " w miesiącu " + month.toUpperCase() + ".");
             } else {
+                this.idPreschoolerEditSave=-1;
                 model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
                 model.addAttribute("listMonth", Month.getMonth());
                 model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
