@@ -8,6 +8,7 @@ import pl.camp.it.dao.IStayDAO;
 import pl.camp.it.model.activities.Activities;
 import pl.camp.it.model.stay.Stay;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -41,5 +42,32 @@ public class StayDAOImpl implements IStayDAO {
             }
         }
         return isInDB;
+    }
+
+    @Override
+    public List<Stay> getListStay() {
+        Session session = sessionFactory.openSession();
+        List<Stay> stayList = session.createQuery
+                ("FROM pl.camp.it.model.stay.Stay WHERE quantity="+true, Stay.class).list();
+        session.close();
+        if (stayList==null){
+            stayList=new ArrayList<>();
+            return stayList;
+        } else {
+            return stayList;
+        }
+    }
+
+    @Override
+    public Stay getStayById(int idStay) {
+        Session session = sessionFactory.openSession();
+        Stay stay = session.createQuery("FROM pl.camp.it.model.stay.Stay WHERE id="+idStay+"and quantity="+true,
+                Stay.class).uniqueResult();
+        session.close();
+        if (stay==null){
+            return new Stay();
+        } else{
+            return stay;
+        }
     }
 }

@@ -6,6 +6,8 @@ import pl.camp.it.dao.IStayDAO;
 import pl.camp.it.model.stay.Stay;
 import pl.camp.it.services.IStayService;
 
+import java.util.List;
+
 @Service
 public class IStayServiceImpl implements IStayService {
 
@@ -22,5 +24,15 @@ public class IStayServiceImpl implements IStayService {
     @Override
     public boolean isStayInDB(String name) {
         return this.stayDAO.isStayInDB(name);
+    }
+
+    @Override
+    public List<Stay> getListStay() {
+        return this.stayDAO.getListStay();
+    }
+
+    @Override
+    public Stay getStayById(int idStay) {
+        return this.stayDAO.getStayById(idStay);
     }
 }

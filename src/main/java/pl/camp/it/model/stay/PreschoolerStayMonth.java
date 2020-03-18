@@ -11,12 +11,22 @@ public class PreschoolerStayMonth {
     private int id;
     private String month;
     private String name;
-    private int priceNet;
+    private double priceNet;
+    private  int number;
+    private boolean quantity;
     private int VAT;
 
     @ManyToOne
     @JoinColumn(name = "preschoolerId")
     Preschooler preschooler;
+
+    public boolean isQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(boolean quantity) {
+        this.quantity = quantity;
+    }
 
     public int getId() {
         return id;
@@ -42,11 +52,11 @@ public class PreschoolerStayMonth {
         this.name = name;
     }
 
-    public int getPriceNet() {
+    public double getPriceNet() {
         return priceNet;
     }
 
-    public void setPriceNet(int priceNet) {
+    public void setPriceNet(double priceNet) {
         this.priceNet = priceNet;
     }
 
@@ -56,6 +66,14 @@ public class PreschoolerStayMonth {
 
     public void setVAT(int VAT) {
         this.VAT = VAT;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public Preschooler getPreschooler() {
