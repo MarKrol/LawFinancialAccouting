@@ -105,3 +105,12 @@ table tr td > tr > td {
     font-family: Verdana, Helvetica, Arial, sans-serif;
 }
 
+#full #list0Activity{
+    margin-top: 5px;
+    margin-right: 20px;
+    margin-left: 20px;
+    width:250px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+

@@ -6,6 +6,8 @@ import pl.camp.it.dao.IActivityDAO;
 import pl.camp.it.model.activities.Activities;
 import pl.camp.it.services.IActivityService;
 
+import java.util.List;
+
 @Service
 public class ActivityServiceImpl implements IActivityService {
 
@@ -22,5 +24,15 @@ public class ActivityServiceImpl implements IActivityService {
     @Override
     public boolean isActivityInDB(String name) {
         return this.activityDAO.isActivityInDB(name);
+    }
+
+    @Override
+    public List<Activities> activitiesList() {
+        return this.activityDAO.activitiesList();
+    }
+
+    @Override
+    public Activities getActivity(int idActivity) {
+        return this.activityDAO.getActivity(idActivity);
     }
 }
