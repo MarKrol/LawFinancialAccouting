@@ -50,4 +50,30 @@ public class PreschoolerActivityInMonthServiceImpl implements IPreschoolerActivi
             }
         }
     }
+
+    @Override
+    public List<PreschoolerActivityInMonth> listPreschoolerActivityInMonth(int idPreschooler, String month) {
+        return this.preschoolerActivityInMonthDAO.listPreschoolerActivityInMonth(idPreschooler, month);
+    }
+
+    @Override
+    public List<Activities> listNoPreschoolerActivityInMonth
+            (List<Activities> activitiesList, List<PreschoolerActivityInMonth> preschoolerActivityInMonthList) {
+
+        List<Activities> temp = new ArrayList<>();
+
+        for(Activities activities: activitiesList){
+            boolean isOnListActivity = false;
+            for(PreschoolerActivityInMonth preschoolerActivityInMonth: preschoolerActivityInMonthList){
+                if (activities.getName().equals(preschoolerActivityInMonth.getNameAcivity())){
+                    isOnListActivity = true;
+                    break;
+                }
+            }
+            if (!isOnListActivity){
+                temp.add(activities);
+            }
+        }
+        return temp;
+    }
 }

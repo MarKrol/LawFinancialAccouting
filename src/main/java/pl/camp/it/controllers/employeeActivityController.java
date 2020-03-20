@@ -6,8 +6,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.camp.it.model.activities.Activities;
+import pl.camp.it.model.activities.PreschoolerActivityInMonth;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.month.Month;
+import pl.camp.it.model.preschoolGroup.PreschoolGroup;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.model.stay.PreschoolerStayMonth;
 import pl.camp.it.model.stay.Stay;
@@ -112,13 +115,33 @@ public class employeeActivityController {
     }
 
 
+    @RequestMapping(value = "/admincontroller/activity/activityselectgroupE", method = RequestMethod.GET)
+    public String addStaySelectGroupE(Model model){
+        if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
+            return "/admincontroller/activity/activityselectgroupE";
+        } else {
+            return "redirect:../../login";
+        }
+    }
 
+    @RequestMapping(value = "/admincontroller/activity/activityselectgroupE", method = RequestMethod.POST)
+    public String addStaySelectGroupChooseE(@RequestParam int choose, Model model){
+        if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            this.choose = choose;
+            return "redirect:../../admincontroller/activity/activitymonthE";
+        } else {
+            return "redirect:../../login";
+        }
+    }
 
-
-
-    @RequestMapping(value = "/admincontroller/activity/activitymonthE", method = RequestMethod.POST, params = "edit=EDYTUJ DANE")
-    public String editActivityMonth(@RequestParam("activity") List<String> activity,
-                                   @RequestParam("choose") int idPreschooler, Model model){
+    @RequestMapping(value = "/admincontroller/activity/activitymonthE", method = RequestMethod.GET)
+    public String addStayMonthE(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -126,6 +149,46 @@ public class employeeActivityController {
             model.addAttribute("listMonth", Month.getMonth());
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
             model.addAttribute("activityList", activityService.activitiesList());
+            model.addAttribute("quantity", new Boolean(false));
+            return "/admincontroller/activity/activitymonthE";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/activity/activitymonthE", method = RequestMethod.POST, params = "edit=EDYTUJ DANE")
+    public String editActivityMonth(@RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
+                                    Model model){
+
+        if (sessionObject.getEmployee()!=null) {
+            this.idPreschoolerEdit=idPreschooler;
+            this.monthPreviousEdit=month;
+
+            Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
+
+            model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
+
+            List<Activities> activitiesList = activityService.activitiesList();
+            List<PreschoolerActivityInMonth> preschoolerActivityInMonthList =
+                    preschoolerActivityInMonthService.listPreschoolerActivityInMonth(idPreschooler,month);
+            List<Activities> noActivitiesPreschoolerInMonth = preschoolerActivityInMonthService.listNoPreschoolerActivityInMonth
+                    (activitiesList,preschoolerActivityInMonthList);
+
+            model.addAttribute("nameSurnamePreschooler",
+                    preschooler.getName() + " " + preschooler.getSurname());
+            model.addAttribute("monthEdit",month);
+            model.addAttribute("activityList", activitiesList);
+            model.addAttribute("listActivityPreschoolerInMonth", preschoolerActivityInMonthList);
+            model.addAttribute("listNoActivityPreschoolerInMonth", noActivitiesPreschoolerInMonth);
+
+            model.addAttribute("messageOK", "Edytujesz dane dla przedszkolaka: " +
+                    " " + preschooler.getName() + " " + preschooler.getSurname() + " za miesiąc " + month.toUpperCase() + ".");
+
+
 
             return "/admincontroller/activity/activitymonthE";
         } else {

@@ -23,8 +23,8 @@
     </div>
     <div th:replace="menu/topmenu.html::topmenu"></div>
     <div id="addfull">
-        <p class="label">Moduł przypisywania zajęć dodatkowych przedszkolakom</p>
-        <form action="../../admincontroller/activity/activitymonth" method="post">
+        <p class="label">Moduł edycji zajęć dodatkowych przedszkolaków</p>
+        <form action="../../admincontroller/activity/activitymonthE" method="post">
             <label><p class="message" th:text="${message}"></p></label>
             <label><p class="messageOK" th:text="${messageOK}"></p></label>
 
@@ -39,7 +39,7 @@
                         <option th:each="preschooler: ${preschoolerList}"
                                 th:value="${preschooler.id}"
                                 th:text="${preschooler.name+' '+preschooler.surname}"
-                                th:selected="${preschooler.name+' '+preschooler.surname==nameSurname}">
+                                th:selected="${preschooler.name+' '+preschooler.surname==nameSurnamePreschooler}">
                         </option>
                     </select></td>
                 </tr>
@@ -56,7 +56,7 @@
                         <option th:each="listMonth:${listMonth}"
                                 th:value="${listMonth}"
                                 th:text="${listMonth}"
-                                th:selected="${listMonth==month}">
+                                th:selected="${listMonth==monthEdit}">
 
                         </option>
                         </select>
@@ -66,11 +66,27 @@
                     <tr>
                         <td style="width:200px"><label><p class="name" th:text="${activity.name}"></p></label></td>
                         <!--th:block th:each="i : ${#numbers.sequence( 1,12)}"-->
-                        <td style="width:35px"><input type="checkbox" class="activities" name="activity" th:value="${activity.id}"/></td>
+                        <td style="width:35px">
+
+                        <th:block th:each="activityPreschoolerInMonth : ${listActivityPreschoolerInMonth}">
+                            <th:block th:if="${activity.name==activityPreschoolerInMonth.nameAcivity}">
+                                <input type="checkbox" class="activities" name="activity" th:value="${activity.id}"
+                                   th:checked="true"/>
+                            </th:block>
+                        </th:block>
+
+                            <th:block th:each="noActivityPreschoolerInMonth : ${listNoActivityPreschoolerInMonth}">
+                             <th:block th:if="${activity.name==noActivityPreschoolerInMonth.name}">
+                                <input type="checkbox" class="activities" name="activity" th:value="${activity.id}"
+                                           th:checked="false"/>
+                             </th:block>
+                        </th:block>
+
+                        </td>
                     </tr>
                 </th:block>
                 <tr>
-                    <td></td>
+                    <td><input type="submit" value="EDYTUJ DANE" id="editdata" name="edit"></td>
                     <td><input type="submit" value="ZAPISZ DANE" id="savedata" name="save" disabled></td>
                 </tr>
             </table>

@@ -38,4 +38,15 @@ public class PreschoolerActivityInMonthDAOImpl implements IPreschoolerActivityIn
             return false;
         }
     }
+
+    @Override
+    public List<PreschoolerActivityInMonth> listPreschoolerActivityInMonth(int idPreschooler, String month) {
+        Session session =sessionFactory.openSession();
+        List<PreschoolerActivityInMonth> preschoolerActivityInMonthList=session.createQuery
+                ("FROM pl.camp.it.model.activities.PreschoolerActivityInMonth WHERE preschoolerID="+idPreschooler+
+                        " and month='"+month.toUpperCase()+"'"+" and quantity="+true, PreschoolerActivityInMonth.class)
+                .list();
+        session.close();
+        return preschoolerActivityInMonthList;
+    }
 }

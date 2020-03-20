@@ -2,29 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3598b4e1-9580-42b9-8717-3e68b07d16b5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/employeeActivityController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/activity/activitymonth.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/activity/activityselectgroup.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/activity/activitymonthE.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/activity/activityselectgroupE.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/IActivityDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/IActivityDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/employeeActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/employeeActivityController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/IPreschoolerActivityInMonthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/IPreschoolerActivityInMonthDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/impl/ActivityDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/impl/ActivityDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/impl/PreschoolerActivityInMonthDAODAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/impl/PreschoolerActivityInMonthDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IActivityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/impl/PreschoolerActivityInMonthDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/impl/PreschoolerActivityInMonthDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPreschoolerActivityInMonthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPreschoolerActivityInMonthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/ActivityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/ActivityServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PreschoolerActivityInMonthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PreschoolerActivityInMonthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/admincontroller/body/body.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/admincontroller/body/body.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/activity/activitymonth.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/activity/activitymonth.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/activity/activityselectgroup.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/activity/activityselectgroup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/menu/topmenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/menu/topmenu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IActivityDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IActivityDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeActivityController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeActivityController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerActivityInMonthDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerActivityInMonthDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/ActivityDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/ActivityDAOImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PreschoolerActivityInMonthDAODAOImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IActivityService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IActivityService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerActivityInMonthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerActivityInMonthService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/ActivityServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/ActivityServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerActivityInMonthServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerActivityInMonthServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/admincontroller/body/body.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/admincontroller/body/body.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/admincontroller/activity/activitymonth.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admincontroller/activity/activitymonth.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/admincontroller/activity/activityselectgroup.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admincontroller/activity/activityselectgroup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/menu/topmenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/menu/topmenu.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,7 +55,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../JavaFX/15.03.2020/slupkowywykres" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -69,19 +63,19 @@
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\stay" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\activity" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\admincontroller\employee" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\head\png" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\login" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\activity" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\stay" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\meals" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\admincontroller\meal" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\preschooler" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\stay" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\activity" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\admincontroller\employee" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\head\png" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\login" />
     </key>
   </component>
   <component name="RunManager">
@@ -134,10 +128,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1582540910489" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1584655172984">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1584735581307">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584655172984" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1584735581307" />
     <state x="669" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584544975992">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -146,46 +140,50 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="483" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1583077612960" />
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1584615071930">
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1584722521754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584615071930" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1584658595201">
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584722521754" />
+    <state width="1877" height="227" key="GridCell.Tab.0.bottom" timestamp="1584738790191">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584658595201" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1584658595201">
+    <state width="1877" height="227" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584738790191" />
+    <state width="1877" height="227" key="GridCell.Tab.0.center" timestamp="1584738790191">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584658595201" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1584658595201">
+    <state width="1877" height="227" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584738790191" />
+    <state width="1877" height="227" key="GridCell.Tab.0.left" timestamp="1584738790191">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584658595201" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1584658595201">
+    <state width="1877" height="227" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584738790191" />
+    <state width="1877" height="227" key="GridCell.Tab.0.right" timestamp="1584738790191">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584658595201" />
-    <state width="1877" height="227" key="GridCell.Tab.1.bottom" timestamp="1584658595201">
+    <state width="1877" height="227" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584738790191" />
+    <state width="1877" height="227" key="GridCell.Tab.1.bottom" timestamp="1584738790191">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584658595201" />
-    <state width="1877" height="227" key="GridCell.Tab.1.center" timestamp="1584658595201">
+    <state width="1877" height="227" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584738790191" />
+    <state width="1877" height="227" key="GridCell.Tab.1.center" timestamp="1584738790191">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584658595201" />
-    <state width="1877" height="227" key="GridCell.Tab.1.left" timestamp="1584658595201">
+    <state width="1877" height="227" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584738790191" />
+    <state width="1877" height="227" key="GridCell.Tab.1.left" timestamp="1584738790191">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584658595201" />
-    <state width="1877" height="227" key="GridCell.Tab.1.right" timestamp="1584658595201">
+    <state width="1877" height="227" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584738790191" />
+    <state width="1877" height="227" key="GridCell.Tab.1.right" timestamp="1584738790191">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584658595201" />
+    <state width="1877" height="227" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584738790191" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1583334316314">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1583334316314" />
+    <state width="500" height="446" key="SwitcherDM" timestamp="1584716671158">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="500" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1584716671158" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1583501552348">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -202,8 +200,7 @@
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="Application">
-        <watch expression="sessionObject.getEmployee()" language="JAVA" />
-        <watch expression="preschoolerFullBoardInMonthService.getPreschoolerFullBoardInMonth(idPreschooler,month).getNameDiet()" language="JAVA" />
+        <watch expression="preschoolerActivityInMonthService.listNoPreschoolerActivityInMonth(activitiesList,preschoolerActivityInMonthList))" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>
