@@ -76,4 +76,52 @@ public class PreschoolerActivityInMonthServiceImpl implements IPreschoolerActivi
         }
         return temp;
     }
+
+
+    @Override
+    public List<Integer> activityListIdToSave
+            (List<PreschoolerActivityInMonth> preschoolerActivityListInMonthBeforeSave, List<Integer> activityListId,
+             String month) {
+
+        List<Integer> activityListIdToSave = new ArrayList<>();
+        Activities activities = new Activities();
+        List<Activities> tempActivitiesList = new ArrayList<>();
+
+        for (Integer idActivity: activityListId) {
+            if(((activities= activityDAO.getActivity(idActivity))!=null)){
+                tempActivitiesList.add(activities);
+            }
+        }
+        for(PreschoolerActivityInMonth tempActivityInMonthPreschooler: preschoolerActivityListInMonthBeforeSave){
+            boolean delete = false;
+            for(Activities tempActivity:tempActivitiesList ){
+                if(tempActivityInMonthPreschooler.getNameAcivity().equals(tempActivity.getName())){
+                    delete=false;
+                    break;
+                } else{
+                    delete=true;
+                }
+            }
+            if (delete){
+                tempActivityInMonthPreschooler.setQuantity(false);
+                preschoolerActivityInMonthDAO.persistPreschoolerActivityInMonth(tempActivityInMonthPreschooler);
+            }
+        }
+
+        for(Activities tempActivity:tempActivitiesList){
+            boolean add = false;
+            for(PreschoolerActivityInMonth tempActivityInMonthPreschooler: preschoolerActivityListInMonthBeforeSave){
+                if(tempActivityInMonthPreschooler.getNameAcivity().equals(tempActivity.getName())){
+                    add=false;
+                    break;
+                } else{
+                    add=true;
+                }
+            }
+            if (add){
+                activityListIdToSave.add(tempActivity.getId());
+            }
+        }
+        return activityListIdToSave;
+    }
 }

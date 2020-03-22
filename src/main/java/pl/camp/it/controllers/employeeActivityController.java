@@ -149,7 +149,6 @@ public class employeeActivityController {
             model.addAttribute("listMonth", Month.getMonth());
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
             model.addAttribute("activityList", activityService.activitiesList());
-            model.addAttribute("quantity", new Boolean(false));
             return "/admincontroller/activity/activitymonthE";
         } else {
             return "redirect:../../login";
@@ -178,18 +177,75 @@ public class employeeActivityController {
             List<Activities> noActivitiesPreschoolerInMonth = preschoolerActivityInMonthService.listNoPreschoolerActivityInMonth
                     (activitiesList,preschoolerActivityInMonthList);
 
-            model.addAttribute("nameSurnamePreschooler",
-                    preschooler.getName() + " " + preschooler.getSurname());
-            model.addAttribute("monthEdit",month);
             model.addAttribute("activityList", activitiesList);
-            model.addAttribute("listActivityPreschoolerInMonth", preschoolerActivityInMonthList);
-            model.addAttribute("listNoActivityPreschoolerInMonth", noActivitiesPreschoolerInMonth);
 
-            model.addAttribute("messageOK", "Edytujesz dane dla przedszkolaka: " +
-                    " " + preschooler.getName() + " " + preschooler.getSurname() + " za miesiąc " + month.toUpperCase() + ".");
+            if (preschoolerActivityInMonthList.size()!=0) {
 
+                model.addAttribute("nameSurnamePreschooler",
+                        preschooler.getName() + " " + preschooler.getSurname());
+                model.addAttribute("monthEdit", month);
+                model.addAttribute("listActivityPreschoolerInMonth", preschoolerActivityInMonthList);
+                model.addAttribute("listNoActivityPreschoolerInMonth", noActivitiesPreschoolerInMonth);
 
+                model.addAttribute("messageOK", "Edytujesz dane dla przedszkolaka: " +
+                        " " + preschooler.getName() + " " + preschooler.getSurname() + " za miesiąc " + month.toUpperCase() + ".");
+            }else{
+                model.addAttribute("message", "Edycja nie jest możliwa z powodu braku przydzielenia zajęć dla " +
+                        "edytowanego przedszkolaka! Przejdź do modułu przydziału zajęć!");
+            }
 
+            return "/admincontroller/activity/activitymonthE";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/activity/activitymonthE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
+    public String saveEditActivityMonthE(@RequestParam("choose") int idPreschooler,
+                                         @RequestParam("choose1") String month,
+                                         @RequestParam("activity") List<Integer> activityListId,
+                                         Model model){
+
+        if (sessionObject.getEmployee()!=null) {
+
+            Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
+
+            model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
+
+            List<Activities> activitiesList = activityService.activitiesList();
+            model.addAttribute("activityList", activitiesList);
+
+            if (idPreschoolerEdit==idPreschooler && month.equals(monthPreviousEdit)) {
+
+                List<PreschoolerActivityInMonth> preschoolerActivityInMonthListBeforeSave =
+                        preschoolerActivityInMonthService.listPreschoolerActivityInMonth(idPreschooler, month);
+                List<Integer> activityListIdToSave = preschoolerActivityInMonthService.activityListIdToSave
+                                                            (preschoolerActivityInMonthListBeforeSave, activityListId, month);
+
+                preschoolerActivityInMonthService.addMonthActivityToDB(preschooler, activityListIdToSave, month);
+
+                List<PreschoolerActivityInMonth> preschoolerActivityInMonthList =
+                        preschoolerActivityInMonthService.listPreschoolerActivityInMonth(idPreschooler, month);
+
+                List<Activities> noActivitiesPreschoolerInMonth = preschoolerActivityInMonthService.listNoPreschoolerActivityInMonth
+                        (activitiesList, preschoolerActivityInMonthList);
+
+                model.addAttribute("nameSurnamePreschooler",
+                        preschooler.getName() + " " + preschooler.getSurname());
+                model.addAttribute("monthEdit",month);
+                model.addAttribute("listActivityPreschoolerInMonth", preschoolerActivityInMonthList);
+                model.addAttribute("listNoActivityPreschoolerInMonth", noActivitiesPreschoolerInMonth);
+
+                model.addAttribute("messageOK", "Zapisano zmodyfikowane dane dla przedszkolaka: " +
+                        " " + preschooler.getName() + " " + preschooler.getSurname() + " za miesiąc " + month.toUpperCase() + ".");
+            } else {
+                model.addAttribute("message", "Zapis nie jest możliwy z powodu zaznaczenia innego " +
+                        "przedszkolaka i/lub miesiąca niż edytowane dane! Edytuj dane jeszcze raz!");
+            }
             return "/admincontroller/activity/activitymonthE";
         } else {
             return "redirect:../../login";

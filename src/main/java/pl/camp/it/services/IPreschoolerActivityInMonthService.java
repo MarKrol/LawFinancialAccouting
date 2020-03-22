@@ -13,4 +13,6 @@ public interface IPreschoolerActivityInMonthService {
     List<PreschoolerActivityInMonth> listPreschoolerActivityInMonth(int idPreschooler, String month);
     List<Activities> listNoPreschoolerActivityInMonth
                     (List<Activities> activitiesList, List<PreschoolerActivityInMonth> preschoolerActivityInMonthList);
+    List<Integer> activityListIdToSave(List<PreschoolerActivityInMonth> preschoolerActivityInMonth,
+                                       List<Integer> activityListId, String month);
 }
