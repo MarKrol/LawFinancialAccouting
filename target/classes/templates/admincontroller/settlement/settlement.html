@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LowFinancialAccounting</title>
+    <link rel="stylesheet" href="../../admincontroller/body/body.css">
+    <link rel="stylesheet" href="../../logout/logout.css">
+    <link rel="stylesheet" href="../../menu/topmenu.css">
+    <link rel="stylesheet" href="../../head/head.css">
+    <link rel="stylesheet" href="../../foot/foot.css">
+</head>
+
+<body>
+<div id="all">
+    <div id="signout">
+        <div th:replace="logout.html::logout"></div>
+    </div>
+    <div id="head">
+        <div th:replace="head/head.html::head"></div>
+    </div>
+    <div id="loginemployee">
+        <p th:text="${'Zalogowany pracownik: '+employeeLogged}"></p>
+    </div>
+    <div th:replace="menu/topmenu.html::topmenu"></div>
+    <div id="addfull">
+        <p class="label">Moduł podglądu rozliczenia miesięcznego przedszkolaka</p>
+        <form action="../../admincontroller/settlement/settlement" method="post">
+            <label><p class="message" th:text="${message}"></p></label>
+            <label><p class="messageOK" th:text="${messageOK}"></p></label>
+
+            <div id="full">
+            <div style="float:left">
+            <table>
+                <tr>
+                    <td><label><p class="name" th:text="${'Miesiąc rozliczenia: '}"></p></label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select required name="choose1" path="orderId" id="list00settlement">
+                            <option value="">Wybierz miesiąc rozliczenia</option>
+                            <option th:each="listMonth:${listMonth}"
+                                    th:value="${listMonth}"
+                                    th:text="${listMonth}"
+                                    th:selected="${listMonth==month}">
+
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label><p class="name" th:text="${'GRUPA: '+nameGroup}"></p></label></td>
+                </tr>
+                <tr>
+                    <td><select required name="choose" path="orderId" size="23" id="list0Activity" >
+                        <option th:each="preschooler: ${preschoolerList}"
+                                th:value="${preschooler.id}"
+                                th:text="${preschooler.name+' '+preschooler.surname}"
+                                th:selected="${preschooler.name+' '+preschooler.surname==nameSurname}">
+                        </option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="POKAŻ ROZLICZENIE" id="showSettlement" name="show"></td>
+                </tr>
+            </table>
+            </div>
+            <div>
+            <table border="1" rules="all" frame="void">
+                <tr>
+                    <td></td>
+                <tr>
+            </table>
+            </div>
+            </div>
+        </form>
+    </div>
+    <div id="footer" style="display: block; clear: left" >
+    <div th:replace="foot/foot.html::foot"></div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</body>
+</html>

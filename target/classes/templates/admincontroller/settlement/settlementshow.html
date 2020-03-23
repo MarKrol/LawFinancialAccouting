@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LowFinancialAccounting</title>
+    <link rel="stylesheet" href="../../admincontroller/body/body.css">
+    <link rel="stylesheet" href="../../logout/logout.css">
+    <link rel="stylesheet" href="../../menu/topmenu.css">
+    <link rel="stylesheet" href="../../head/head.css">
+    <link rel="stylesheet" href="../../foot/foot.css">
+</head>
+
+<body>
+<div id="all">
+    <div id="signout">
+        <div th:replace="logout.html::logout"></div>
+    </div>
+    <div id="head">
+        <div th:replace="head/head.html::head"></div>
+    </div>
+    <div id="loginemployee">
+        <p th:text="${'Zalogowany pracownik: '+employeeLogged}"></p>
+    </div>
+    <div th:replace="menu/topmenu.html::topmenu"></div>
+    <div id="addfull">
+        <p class="label">Moduł podglądu rozliczenia miesięcznego przedszkolaka</p>
+        <form action="../../admincontroller/settlement/settlementshow" method="post">
+            <label><p class="message" th:text="${message}"></p></label>
+            <label><p class="messageOK" th:text="${messageOK}"></p></label>
+
+            <div id="full">
+            <div style="float:left">
+            <table>
+                <tr>
+                    <td><label><p class="name" th:text="${'Miesiąc rozliczenia: '}"></p></label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select required name="choose1" path="orderId" id="list00settlement">
+                            <option value="">Wybierz miesiąc rozliczenia</option>
+                            <option th:each="listMonth:${listMonth}"
+                                    th:value="${listMonth}"
+                                    th:text="${listMonth}"
+                                    th:selected="${listMonth==month}">
+
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label><p class="name" th:text="${'GRUPA: '+nameGroup}"></p></label></td>
+                </tr>
+                <tr>
+                    <td><select required name="choose" path="orderId" size="23" id="list0Activity" >
+                        <option th:each="preschooler: ${preschoolerList}"
+                                th:value="${preschooler.id}"
+                                th:text="${preschooler.name+' '+preschooler.surname}"
+                                th:selected="${preschooler.name+' '+preschooler.surname==nameSurname}">
+                        </option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="POKAŻ ROZLICZENIE" id="showSettlement" name="show"></td>
+                </tr>
+            </table>
+            </div>
+            <div>
+            <table border="1" rules="all" frame="void" style="margin-bottom: 40px">
+                <tr>
+                    <td colspan="7"><label><p class="name" th:text="${'ROZLICZENIE MIESIĘCZNE - CENTRUM RODZINKI'}"></p></label></td>
+                </tr>
+                <tr style="background-color:#87CEFA; font-weight: bold">
+                    <td class="colTableName" style="width: 200px" th:text="${'NAZWA'}"></td>
+                    <td class="colTable" th:text="${'Ilość'}"></td>
+                    <td class="colTable" th:text="${'Cena netto [zł]'}"></td>
+                    <td class="colTable" th:text="${'Wartość netto [zł]'}"></td>
+                    <td class="colTable" th:text="${'VAT [%]'}"></td>
+                    <td class="colTable" th:text="${'Wartość brutto [zł]'}"></td>
+                    <td class="colTable" th:text="${'Edytuj'}"></td>
+                </tr>
+                <th:block th:each="fullMeal: ${fullMealMonth}">
+                    <tr>
+                        <td class="colTableName" th:text="${'PIERWSZE ŚNIADANIE'}"></td>
+                        <td class="colTable" th:text="${fullMeal.numberFirstBreakfast}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(fullMeal.priceNetFB,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(fullMeal.numberFirstBreakfast*fullMeal.priceNetFB,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${fullMeal.VAT}"></td>
+                        <th:block th:with="priceNet=${fullMeal.numberFirstBreakfast*fullMeal.priceNetFB}">
+                            <th:block th:with="VAT=${1+(fullMeal.VAT*0.01)}">
+                                <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
+                            </th:block>
+                        </th:block>
+                        <td class="colTable" th:text=${'edytuj'}></td>
+                    </tr>
+                    <tr>
+                        <td class="colTableName" th:text="${'DRUGIE ŚNIADANIE'}"></td>
+                        <td class="colTable" th:text="${fullMeal.numberSecondBreakfast}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(fullMeal.priceNetSB,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(fullMeal.numberSecondBreakfast*fullMeal.priceNetSB,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${fullMeal.VAT}"></td>
+                        <th:block th:with="priceNet=${fullMeal.numberSecondBreakfast*fullMeal.priceNetSB}">
+                            <th:block th:with="VAT=${1+(fullMeal.VAT*0.01)}">
+                                <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
+                            </th:block>
+                        </th:block>
+                        <td class="colTable" th:text=${'edytuj'}></td>
+                    </tr>
+                    <tr>
+                        <td class="colTableName" th:text="${'OBIAD'}"></td>
+                        <td class="colTable" th:text="${fullMeal.numberDinner}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(fullMeal.priceNetDiner,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(fullMeal.numberDinner*fullMeal.priceNetDiner,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${fullMeal.VAT}"></td>
+                        <th:block th:with="priceNet=${fullMeal.numberDinner*fullMeal.priceNetDiner}">
+                            <th:block th:with="VAT=${1+(fullMeal.VAT*0.01)}">
+                                <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
+                            </th:block>
+                        </th:block>
+                        <td class="colTable" th:text=${'edytuj'}></td>
+                    </tr>
+                    <tr>
+                        <td class="colTableName" th:text="${'PODWIECZOREK'}"></td>
+                        <td class="colTable" th:text="${fullMeal.numberTea}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(fullMeal.priceNetTea,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(fullMeal.numberTea*fullMeal.priceNetTea,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${fullMeal.VAT}"></td>
+                        <th:block th:with="priceNet=${fullMeal.numberTea*fullMeal.priceNetTea}">
+                            <th:block th:with="VAT=${1+(fullMeal.VAT*0.01)}">
+                                <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
+                            </th:block>
+                        </th:block>
+                        <td class="colTable" th:text=${'edytuj'}></td>
+                    </tr>
+                    <tr style="background-color:#87CEFA; font-weight: bold">
+                        <td colspan="5" class="colTable" style="text-align: right" th:text="${'DO ZAPŁATY:'}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal((((fullMeal.numberDinner*fullMeal.priceNetDiner)
+                        +(fullMeal.numberTea*fullMeal.priceNetTea)+(fullMeal.numberSecondBreakfast*fullMeal.priceNetSB)+
+                        (fullMeal.numberFirstBreakfast*fullMeal.priceNetFB))*(1+fullMeal.VAT*0.01)),1, 2, 'POINT')+' zł'}"></td>
+                        <td></td>
+                    </tr>
+                </th:block>
+
+                <th:block th:each="singleMeal: ${singleMealMonth}">
+                    <tr style="background-color:#F0F8FF;">
+                        <td class="colTableName" th:text="${singleMeal.name}"></td>
+                        <td class="colTable" th:text="${singleMeal.number}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(singleMeal.price,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(singleMeal.number*singleMeal.price,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${singleMeal.VAT}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(singleMeal.number*singleMeal.price*(1+singleMeal.VAT*0.01),1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text=${'edytuj'}></td>
+                    </tr>
+                </th:block>
+                <th:block th:unless="${#lists.isEmpty(singleMealMonth)}">
+                    <tr style="background-color:#87CEFA; font-weight: bold">
+                        <td colspan="5" class="colTable" style="text-align: right" th:text="${'DO ZAPŁATY:'}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal((singleMealMonthToPay),1, 2, 'POINT')+' zł'}"></td>
+                        <td></td>
+                    </tr>
+                </th:block>
+
+                <th:block th:each="stay: ${stayMonth}">
+                    <tr style="background-color:#FFFFFF;">
+                        <td class="colTableName" th:text="${stay.name}"></td>
+                        <td class="colTable" th:text="${stay.number}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(stay.priceNet,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(stay.number*stay.priceNet,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${stay.VAT}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(stay.number*stay.priceNet*(1+stay.VAT*0.01),1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text=${'edytuj'}></td>
+                    </tr>
+                </th:block>
+                <th:block th:unless="${#lists.isEmpty(stayMonth)}">
+                    <tr style="background-color:#87CEFA; font-weight: bold">
+                        <td colspan="5" class="colTable" style="text-align: right" th:text="${'DO ZAPŁATY:'}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal((stayMonthToPay),1, 2, 'POINT')+' zł'}"></td>
+                        <td></td>
+                    </tr>
+                </th:block>
+                <tr style="background-color:#87CEFA; font-weight: bold">
+                    <td colspan="5" class="colTable" style="text-align: right" th:text="${'ŁĄCZNA KWOTA DO ZAPŁATY NA KONTO CENTRUM RODZNIKI:'}"></td>
+                        <th:block th:if="${fullMealMonth!=null}">
+                        <th:block th:with="priceToPay=${((((fullMealMonth.numberDinner*fullMealMonth.priceNetDiner)
+                        +(fullMealMonth.numberTea*fullMealMonth.priceNetTea)+(fullMealMonth.numberSecondBreakfast*fullMealMonth.priceNetSB)+
+                        (fullMealMonth.numberFirstBreakfast*fullMealMonth.priceNetFB))*(1+fullMealMonth.VAT*0.01))+(singleMealMonthToPay)+
+                        (stayMonthToPay))}">
+                            <td class="colTable" th:text="${#numbers.formatDecimal((priceToPay),1, 2, 'POINT')+' zł'}"></td>
+                        </th:block>
+                        </th:block>
+                        <th:block th:unless="${fullMealMonth!=null}">
+                            <th:block th:with="priceToPay1=${(singleMealMonthToPay)+(stayMonthToPay)}">
+                                <td class="colTable" th:text="${#numbers.formatDecimal((priceToPay1),1, 2, 'POINT')+' zł'}"></td>
+                            </th:block>
+                        </th:block>
+                    <td></td>
+                </tr>
+
+                <tr></tr><tr></tr>
+
+                <tr>
+                    <td colspan="7"><label><p class="name" th:text="${'ROZLICZENIE MIESIĘCZNE - FAMILY PROJECT'}"></p></label></td>
+                </tr>
+                <tr style="background-color:#FAEBD7; font-weight: bold">
+                    <td class="colTableName" style="width: 200px" th:text="${'NAZWA'}"></td>
+                    <td class="colTable" th:text="${'Ilość'}"></td>
+                    <td class="colTable" th:text="${'Cena netto [zł]'}"></td>
+                    <td class="colTable" th:text="${'Wartość netto [zł]'}"></td>
+                    <td class="colTable" th:text="${'VAT [%]'}"></td>
+                    <td class="colTable" th:text="${'Wartość brutto [zł]'}"></td>
+                    <td class="colTable" th:text="${'Edytuj'}"></td>
+                </tr>
+
+                <th:block th:each="activity: ${activityMonth}">
+                    <tr style="background-color:#FFFFFF;">
+                        <td class="colTableName" th:text="${activity.nameAcivity}"></td>
+                        <td class="colTable" th:text="${'1'}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(activity.priceNet,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(activity.priceNet,1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text="${activity.VAT}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal(activity.priceNet*(1+activity.VAT*0.01),1, 2, 'POINT')}"></td>
+                        <td class="colTable" th:text=${'edytuj'}></td>
+                    </tr>
+                </th:block>
+                <th:block th:unless="${#lists.isEmpty(singleMealMonth)}">
+                    <tr style="background-color:#FAEBD7; font-weight: bold">
+                        <td colspan="5" class="colTable" style="text-align: right" th:text="${'DO ZAPŁATY:'}"></td>
+                        <td class="colTable" th:text="${#numbers.formatDecimal((activityToPay),1, 2, 'POINT')+' zł'}"></td>
+                        <td></td>
+                    </tr>
+                </th:block>
+
+                <tr style="background-color:#FAEBD7; font-weight: bold">
+                    <td colspan="5" class="colTable" style="text-align: right" th:text="${'ŁĄCZNA KWOTA DO ZAPŁATY NA KONTO FAMILY PROJECT:'}"></td>
+                    <td class="colTable" th:text="${#numbers.formatDecimal((activityToPay),1, 2, 'POINT')+' zł'}"></td>
+                    <td></td>
+                </tr>
+            </table>
+            </div>
+            </div>
+        </form>
+    </div>
+    <div id="footer" style="display: block; clear: left" >
+    <div th:replace="foot/foot.html::foot"></div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</body>
+</html>

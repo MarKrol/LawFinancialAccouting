@@ -8,6 +8,8 @@ import pl.camp.it.model.meals.SingleBoardPrice;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.services.IPreschoolerSingleBoardInMonthService;
 
+import java.util.List;
+
 @Service
 public class PreschoolerSingleBoardInMonthServiceImpl implements IPreschoolerSingleBoardInMonthService {
     @Autowired
@@ -48,5 +50,22 @@ public class PreschoolerSingleBoardInMonthServiceImpl implements IPreschoolerSin
         preschoolerSingleBoardInMonth.setNumber(preschoolerSingleBoardInMonthEdit.getNumber());
         this.preschoolerSingleBoardInMonthDAO.persistPreschoolerSingleBoardInMonthDAO(preschoolerSingleBoardInMonth);
 
+    }
+
+    @Override
+    public List<PreschoolerSingleBoardInMonth> listPreschoolerSingleMealMonthInDB(int idPreschooler, String month) {
+        return this.preschoolerSingleBoardInMonthDAO.listPreschoolerSingleMealMonthInDB(idPreschooler,month);
+    }
+
+    @Override
+    public double singleMealMonthToPay(List<PreschoolerSingleBoardInMonth> preschoolerSingleBoardInMonthList) {
+        double toPay=0.00;
+
+        for(PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth: preschoolerSingleBoardInMonthList){
+            toPay=toPay+(preschoolerSingleBoardInMonth.getNumber()*preschoolerSingleBoardInMonth.getPrice()*
+                    (1+preschoolerSingleBoardInMonth.getVAT()*0.01));
+        }
+
+        return toPay;
     }
 }

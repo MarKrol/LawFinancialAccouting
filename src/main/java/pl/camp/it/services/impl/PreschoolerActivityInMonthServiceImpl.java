@@ -6,6 +6,7 @@ import pl.camp.it.dao.IActivityDAO;
 import pl.camp.it.dao.IPreschoolerActivityInMonthDAO;
 import pl.camp.it.model.activities.Activities;
 import pl.camp.it.model.activities.PreschoolerActivityInMonth;
+import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.services.IActivityService;
 import pl.camp.it.services.IPreschoolerActivityInMonthService;
@@ -123,5 +124,17 @@ public class PreschoolerActivityInMonthServiceImpl implements IPreschoolerActivi
             }
         }
         return activityListIdToSave;
+    }
+
+
+    @Override
+    public double activityMonthToPay(List<PreschoolerActivityInMonth> preschoolerActivityInMonthList) {
+        double toPay=0.00;
+
+        for(PreschoolerActivityInMonth preschoolerActivityInMonth: preschoolerActivityInMonthList){
+            toPay=toPay+(preschoolerActivityInMonth.getPriceNet()* (1+preschoolerActivityInMonth.getVAT()*0.01));
+        }
+
+        return toPay;
     }
 }

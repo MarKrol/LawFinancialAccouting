@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import pl.camp.it.dao.IPreschoolerSingleBoardInMonthDAO;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 
+import java.util.List;
+
 @Repository
 public class PreschoolerSingleBoardInMonthDAOImpl implements IPreschoolerSingleBoardInMonthDAO {
 
@@ -48,4 +50,13 @@ public class PreschoolerSingleBoardInMonthDAOImpl implements IPreschoolerSingleB
         return preschoolerSingleBoardInMonth;
     }
 
+    @Override
+    public List<PreschoolerSingleBoardInMonth> listPreschoolerSingleMealMonthInDB(int idPreschooler, String month) {
+        Session session = sessionFactory.openSession();
+        List<PreschoolerSingleBoardInMonth> preschoolerSingleBoardInMonthList=session.createQuery
+                ("FROM pl.camp.it.model.meals.PreschoolerSingleBoardInMonth WHERE preschoolerId="+idPreschooler+
+                        " and month='"+month+"'"+" and quantity="+true, PreschoolerSingleBoardInMonth.class).list();
+        session.close();
+        return preschoolerSingleBoardInMonthList;
+    }
 }

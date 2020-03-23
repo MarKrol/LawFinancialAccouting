@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import pl.camp.it.dao.IPreschoolerStayMonthDAO;
 import pl.camp.it.model.stay.PreschoolerStayMonth;
 
+import java.util.List;
+
 @Repository
 public class PreschoolerStayMonthDAOImpl implements IPreschoolerStayMonthDAO {
 
@@ -45,5 +47,16 @@ public class PreschoolerStayMonthDAOImpl implements IPreschoolerStayMonthDAO {
                         PreschoolerStayMonth.class).uniqueResult();
         session.close();
         return preschoolerStayMonth;
+    }
+
+    @Override
+    public List<PreschoolerStayMonth> listPreschoolerStayMonth(int idPreschooler, String month) {
+        Session session=sessionFactory.openSession();
+        List<PreschoolerStayMonth> listPreschoolerStayMonth = session.createQuery
+                ("FROM pl.camp.it.model.stay.PreschoolerStayMonth WHERE preschoolerId="+idPreschooler+
+                                "and month='"+month.toUpperCase()+"'"+"and quantity="+true,
+                        PreschoolerStayMonth.class).list();
+        session.close();
+        return listPreschoolerStayMonth;
     }
 }
