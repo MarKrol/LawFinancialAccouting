@@ -64,4 +64,21 @@ public class PreschoolerFullBoardInMonthServiceImpl implements IPreschoolerFullB
 
         this.preschoolerFullBoardInMonthDAO.persistPreschoolerFullBoardInMonth(preschoolerFullBoardInMonth);
     }
+
+    @Override
+    public void saveEditSettlementPreschoolerFullBoardInMonth(PreschoolerFullBoardInMonth preschoolerFullBoardInMonth,
+                                                              PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit) {
+
+        preschoolerFullBoardInMonth.setNumberFirstBreakfast(preschoolerFullBoardInMonthEdit.getNumberFirstBreakfast());
+        preschoolerFullBoardInMonth.setNumberSecondBreakfast(preschoolerFullBoardInMonthEdit.getNumberSecondBreakfast());
+        preschoolerFullBoardInMonth.setNumberDinner(preschoolerFullBoardInMonthEdit.getNumberDinner());
+        preschoolerFullBoardInMonth.setNumberTea(preschoolerFullBoardInMonthEdit.getNumberTea());
+        preschoolerFullBoardInMonth.setPriceNetFB(preschoolerFullBoardInMonthEdit.getPriceNetFB());
+        preschoolerFullBoardInMonth.setPriceNetSB(preschoolerFullBoardInMonthEdit.getPriceNetSB());
+        preschoolerFullBoardInMonth.setPriceNetDiner(preschoolerFullBoardInMonthEdit.getPriceNetDiner());
+        preschoolerFullBoardInMonth.setPriceNetTea(preschoolerFullBoardInMonthEdit.getPriceNetTea());
+        preschoolerFullBoardInMonth.setVAT(preschoolerFullBoardInMonthEdit.getVAT());
+
+        this.preschoolerFullBoardInMonthDAO.persistPreschoolerFullBoardInMonth(preschoolerFullBoardInMonth);
+    }
 }

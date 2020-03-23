@@ -90,7 +90,7 @@
                                 <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
                             </th:block>
                         </th:block>
-                        <td class="colTable" th:text=${'edytuj'}></td>
+                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/'+fullMealMonth.nameDiet}>edytuj</a></td>
                     </tr>
                     <tr>
                         <td class="colTableName" th:text="${'DRUGIE ŚNIADANIE'}"></td>
@@ -103,7 +103,7 @@
                                 <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
                             </th:block>
                         </th:block>
-                        <td class="colTable" th:text=${'edytuj'}></td>
+                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/'+fullMealMonth.nameDiet}>edytuj</a></td>
                     </tr>
                     <tr>
                         <td class="colTableName" th:text="${'OBIAD'}"></td>
@@ -116,7 +116,7 @@
                                 <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
                             </th:block>
                         </th:block>
-                        <td class="colTable" th:text=${'edytuj'}></td>
+                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/'+fullMealMonth.nameDiet}>edytuj</a></td>
                     </tr>
                     <tr>
                         <td class="colTableName" th:text="${'PODWIECZOREK'}"></td>
@@ -129,7 +129,7 @@
                                 <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
                             </th:block>
                         </th:block>
-                        <td class="colTable" th:text=${'edytuj'}></td>
+                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/'+fullMealMonth.nameDiet}>edytuj</a></td>
                     </tr>
                     <tr style="background-color:#87CEFA; font-weight: bold">
                         <td colspan="5" class="colTable" style="text-align: right" th:text="${'DO ZAPŁATY:'}"></td>

@@ -10,5 +10,7 @@ public interface IPreschoolerFullBoardInMonthService {
     PreschoolerFullBoardInMonth getPreschoolerFullBoardInMonth(int idPreschooler, String month);
     void editAndPersistPreschoolerFullBoardInMonth(PreschoolerFullBoardInMonth preschoolerFullBoardInMonth,
                                                    PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit);
+    void saveEditSettlementPreschoolerFullBoardInMonth(PreschoolerFullBoardInMonth preschoolerFullBoardInMonth,
+                                                   PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit);
 
 }

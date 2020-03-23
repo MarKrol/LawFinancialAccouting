@@ -3,10 +3,9 @@ package pl.camp.it.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.camp.it.model.activities.PreschoolerActivityInMonth;
+import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.month.Month;
 import pl.camp.it.model.preschooler.Preschooler;
@@ -139,6 +138,70 @@ public class adminSettlementController {
             this.monthChoose=month;
             return "redirect:../../admincontroller/settlement/settlementshow";
         } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementshow/{name}",method = RequestMethod.GET)
+    public String showEditSettlementFullMeal(@PathVariable String name, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../../admincontroller/settlement/settlementE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementE",method = RequestMethod.GET)
+    public String editSettlementFullMeal(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
+            Preschooler preschooler = preschoolerService.getPreschoolerById(this.idPreschoolerChoose);
+
+            model.addAttribute("fullMealMonth",
+                    preschoolerFullBoardInMonthService.getPreschoolerFullBoardInMonth(this.idPreschoolerChoose, this.monthChoose));
+
+            model.addAttribute("messageOK","Edytujesz dane przedszkolaka: "+
+                    preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase());
+
+            return "/admincontroller/settlement/settlementE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementE", method = RequestMethod.GET,
+            params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
+    public String returnSettlementShowQ(Model model){
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementE", method = RequestMethod.POST,
+                                                                            params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
+    public String returnSettlementShowNoSave(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementE", method = RequestMethod.POST,
+                                                                                        params = "save=ZAPISZ ZMIANY")
+    public String returnSettlementShowSave(@ModelAttribute PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit){
+        if (sessionObject.getEmployee() != null) {
+            preschoolerFullBoardInMonthService.saveEditSettlementPreschoolerFullBoardInMonth
+                    (preschoolerFullBoardInMonthService.getPreschoolerFullBoardInMonth(this.idPreschoolerChoose, this.monthChoose),
+                            preschoolerFullBoardInMonthEdit);
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
             return "redirect:../../login";
         }
     }
