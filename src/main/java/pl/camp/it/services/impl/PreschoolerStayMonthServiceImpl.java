@@ -62,4 +62,18 @@ public class PreschoolerStayMonthServiceImpl implements IPreschoolerStayMonthSer
         return toPay;
     }
 
+    @Override
+    public PreschoolerStayMonth getPreschoolerStayMonthById(int id) {
+        return this.preschoolerStayMonthDAO.getPreschoolerStayMonthById(id);
+    }
+
+    @Override
+    public void saveEditSettlementStayMonth(PreschoolerStayMonth preschoolerStayMonth,
+                                            PreschoolerStayMonth preschoolerStayMonthEdit) {
+
+        preschoolerStayMonth.setNumber(preschoolerStayMonthEdit.getNumber());
+        preschoolerStayMonth.setPriceNet(preschoolerStayMonthEdit.getPriceNet());
+        preschoolerStayMonth.setVAT(preschoolerStayMonthEdit.getVAT());
+        preschoolerStayMonthDAO.persistPreschoolerStayMonth(preschoolerStayMonth);
+    }
 }

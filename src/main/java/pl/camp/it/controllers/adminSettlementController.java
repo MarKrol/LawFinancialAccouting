@@ -142,10 +142,29 @@ public class adminSettlementController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementshow/{name}",method = RequestMethod.GET)
-    public String showEditSettlementFullMeal(@PathVariable String name, Model model) {
+    @RequestMapping(value = "/admincontroller/settlement/settlementshow/{what}/{id}", method = RequestMethod.GET)
+    public String showEditSettlementFullMeal(@PathVariable String what, @PathVariable int id, Model model) {
         if (sessionObject.getEmployee() != null) {
-            return "redirect:../../../admincontroller/settlement/settlementE";
+            if (what.equals("M")) {
+                return "redirect:../../../../admincontroller/settlement/settlementE";
+            } else {
+                if (what.equals("S")){
+                    sessionObject.setSendData(id);
+                    return "redirect:../../../../admincontroller/settlement/settlementSingleE";
+                }else{
+                    if (what.equals("P")){
+                        sessionObject.setSendData(id);
+                        return "redirect:../../../../admincontroller/settlement/settlementStayE";
+                    }else {
+                        if(what.equals("A")){
+                            sessionObject.setSendData(id);
+                            return "redirect:../../../../admincontroller/settlement/settlementActivityE";
+                        } else {
+                            return "redirect:../../../../admincontroller/settlement/settlementshow";
+                        }
+                    }
+                }
+            }
         }else {
             return "redirect:../../login";
         }
@@ -206,4 +225,167 @@ public class adminSettlementController {
         }
     }
 
+    @RequestMapping(value = "/admincontroller/settlement/settlementSingleE",method = RequestMethod.GET)
+    public String editSettlementSingleMeal(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
+            Preschooler preschooler = preschoolerService.getPreschoolerById(this.idPreschoolerChoose);
+
+            model.addAttribute("singleMealMonth",
+                    preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(sessionObject.getSendData()));
+
+            model.addAttribute("messageOK","Edytujesz dane przedszkolaka: "+
+                    preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase());
+
+            return "/admincontroller/settlement/settlementSingleE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementSingleE", method = RequestMethod.GET,
+            params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
+    public String returnSettlementSingleShowQ(Model model){
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementSingleE", method = RequestMethod.POST,
+            params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
+    public String returnSettlementSingleShowNoSave(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementSingleE", method = RequestMethod.POST,
+            params = "save=ZAPISZ ZMIANY")
+    public String returnSettlementSingleShowSave(@ModelAttribute PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonthEdit){
+        if (sessionObject.getEmployee() != null) {
+            preschoolerSingleBoardInMonthService.saveEditSettlementSingleMealMonth(
+                    (preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(sessionObject.getSendData()))
+                    ,preschoolerSingleBoardInMonthEdit);
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementStayE",method = RequestMethod.GET)
+    public String editSettlementStay(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
+            Preschooler preschooler = preschoolerService.getPreschoolerById(this.idPreschoolerChoose);
+
+            model.addAttribute("stayMonth",
+                    preschoolerStayMonthService.getPreschoolerStayMonthById(sessionObject.getSendData()));
+
+            model.addAttribute("messageOK","Edytujesz dane przedszkolaka: "+
+                    preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase());
+
+            return "/admincontroller/settlement/settlementStayE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementStayE", method = RequestMethod.GET,
+            params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
+    public String returnSettlementStayShowQ(Model model){
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementStayE", method = RequestMethod.POST,
+            params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
+    public String returnSettlementStayShowNoSave(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementStayE", method = RequestMethod.POST,
+            params = "save=ZAPISZ ZMIANY")
+    public String returnSettlementStayShowSave(@ModelAttribute PreschoolerStayMonth preschoolerStayMonthEdit){
+        if (sessionObject.getEmployee() != null) {
+            preschoolerStayMonthService.saveEditSettlementStayMonth
+                    (preschoolerStayMonthService.getPreschoolerStayMonthById(sessionObject.getSendData()),preschoolerStayMonthEdit);
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementActivityE",method = RequestMethod.GET)
+    public String editSettlementActivity(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
+            Preschooler preschooler = preschoolerService.getPreschoolerById(this.idPreschoolerChoose);
+
+            model.addAttribute("activityMonth",
+                    preschoolerActivityInMonthService.getPreschoolerActivityMonthById(sessionObject.getSendData()));
+
+            model.addAttribute("messageOK","Edytujesz dane przedszkolaka: "+
+                    preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase());
+
+            return "/admincontroller/settlement/settlementActivityE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementActivityE", method = RequestMethod.GET,
+            params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
+    public String returnSettlementActivityShowQ(Model model){
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementActivityE", method = RequestMethod.POST,
+            params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
+    public String returnSettlementActivityShowNoSave(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/settlement/settlementActivityE", method = RequestMethod.POST,
+            params = "save=ZAPISZ ZMIANY")
+    public String returnSettlementActivityShowSave(@ModelAttribute PreschoolerActivityInMonth preschoolerActivityInMonthEdit){
+        if (sessionObject.getEmployee() != null) {
+            preschoolerActivityInMonthService.saveEditSettlementActivityMonth
+                    (preschoolerActivityInMonthService.getPreschoolerActivityMonthById(sessionObject.getSendData()),
+                            preschoolerActivityInMonthEdit);
+            return "redirect:../../admincontroller/settlement/settlementshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
 }

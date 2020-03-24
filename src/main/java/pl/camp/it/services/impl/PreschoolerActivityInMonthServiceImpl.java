@@ -137,4 +137,18 @@ public class PreschoolerActivityInMonthServiceImpl implements IPreschoolerActivi
 
         return toPay;
     }
+
+    @Override
+    public PreschoolerActivityInMonth getPreschoolerActivityMonthById(int id) {
+        return this.preschoolerActivityInMonthDAO.getPreschoolerActivityMonthById(id);
+    }
+
+    @Override
+    public void saveEditSettlementActivityMonth(PreschoolerActivityInMonth preschoolerActivityInMonth,
+                                                PreschoolerActivityInMonth preschoolerActivityInMonthEdit) {
+        preschoolerActivityInMonth.setPriceNet(preschoolerActivityInMonthEdit.getPriceNet());
+        preschoolerActivityInMonth.setVAT(preschoolerActivityInMonthEdit.getVAT());
+
+        preschoolerActivityInMonthDAO.persistPreschoolerActivityInMonth(preschoolerActivityInMonth);
+    }
 }

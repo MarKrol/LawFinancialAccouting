@@ -68,4 +68,19 @@ public class PreschoolerSingleBoardInMonthServiceImpl implements IPreschoolerSin
 
         return toPay;
     }
+
+    @Override
+    public PreschoolerSingleBoardInMonth getPreschoolerSingleBoardMonthById(int id) {
+        return this.preschoolerSingleBoardInMonthDAO.getPreschoolerSingleBoardMonthById(id);
+    }
+
+    @Override
+    public void saveEditSettlementSingleMealMonth(PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth,
+                                                  PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonthEdit) {
+        preschoolerSingleBoardInMonth.setNumber(preschoolerSingleBoardInMonthEdit.getNumber());
+        preschoolerSingleBoardInMonth.setPrice(preschoolerSingleBoardInMonthEdit.getPrice());
+        preschoolerSingleBoardInMonth.setVAT(preschoolerSingleBoardInMonthEdit.getVAT());
+
+        preschoolerSingleBoardInMonthDAO.persistPreschoolerSingleBoardInMonthDAO(preschoolerSingleBoardInMonth);
+    }
 }

@@ -9,4 +9,5 @@ public interface IPreschoolerStayMonthDAO {
     void persistPreschoolerStayMonth(PreschoolerStayMonth preschoolerStayMonth);
     PreschoolerStayMonth preschoolerStayMonth(int idPreschooler, String month, String nameStay);
     List<PreschoolerStayMonth> listPreschoolerStayMonth(int idPreschooler, String month);
+    PreschoolerStayMonth getPreschoolerStayMonthById(int id);
 }

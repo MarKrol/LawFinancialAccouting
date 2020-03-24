@@ -11,7 +11,7 @@ public class SessionObject {
     private boolean logged;
     private Employee employee;
     private Preschooler preschooler;
-    private String sendData;
+    private int sendData;
 
     public boolean isLogged() {
         return logged;
@@ -21,11 +21,11 @@ public class SessionObject {
         this.logged = logged;
     }
 
-    public String getSendData() {
+    public int getSendData() {
         return sendData;
     }
 
-    public void setSendData(String sendData) {
+    public void setSendData(int sendData) {
         this.sendData = sendData;
     }
 

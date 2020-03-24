@@ -13,4 +13,7 @@ public interface IPreschoolerStayMonthService {
     void saveChangeStayMonth(PreschoolerStayMonth preschoolerStayMonth, PreschoolerStayMonth preschoolerStayMonthEdit);
     List<PreschoolerStayMonth> listPreschoolerStayMonth(int idPreschooler, String month);
     double stayMonthToPay(List<PreschoolerStayMonth> preschoolerStayInMonthList);
+    PreschoolerStayMonth getPreschoolerStayMonthById(int id);
+    void saveEditSettlementStayMonth(PreschoolerStayMonth preschoolerStayMonth,
+                                     PreschoolerStayMonth preschoolerStayMonthEdit);
 }

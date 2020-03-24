@@ -16,4 +16,7 @@ public interface IPreschoolerActivityInMonthService {
     List<Integer> activityListIdToSave(List<PreschoolerActivityInMonth> preschoolerActivityInMonth,
                                        List<Integer> activityListId, String month);
     double activityMonthToPay(List<PreschoolerActivityInMonth> preschoolerActivityInMonthList);
+    PreschoolerActivityInMonth getPreschoolerActivityMonthById(int id);
+    void saveEditSettlementActivityMonth(PreschoolerActivityInMonth preschoolerActivityInMonth,
+                                         PreschoolerActivityInMonth preschoolerActivityInMonthEdit);
 }

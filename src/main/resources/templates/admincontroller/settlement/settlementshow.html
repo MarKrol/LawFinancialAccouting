@@ -90,7 +90,7 @@
                                 <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
                             </th:block>
                         </th:block>
-                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/'+fullMealMonth.nameDiet}>edytuj</a></td>
+                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/M/'+fullMealMonth.id}>edytuj</a></td>
                     </tr>
                     <tr>
                         <td class="colTableName" th:text="${'DRUGIE ŚNIADANIE'}"></td>
@@ -103,7 +103,7 @@
                                 <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
                             </th:block>
                         </th:block>
-                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/'+fullMealMonth.nameDiet}>edytuj</a></td>
+                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/M/'+fullMealMonth.id}>edytuj</a></td>
                     </tr>
                     <tr>
                         <td class="colTableName" th:text="${'OBIAD'}"></td>
@@ -116,7 +116,7 @@
                                 <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
                             </th:block>
                         </th:block>
-                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/'+fullMealMonth.nameDiet}>edytuj</a></td>
+                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/M/'+fullMealMonth.id}>edytuj</a></td>
                     </tr>
                     <tr>
                         <td class="colTableName" th:text="${'PODWIECZOREK'}"></td>
@@ -129,7 +129,7 @@
                                 <td class="colTable" th:text="${#numbers.formatDecimal(priceNet*VAT,1, 2, 'POINT')}"></td>
                             </th:block>
                         </th:block>
-                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/'+fullMealMonth.nameDiet}>edytuj</a></td>
+                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/M/'+fullMealMonth.id}>edytuj</a></td>
                     </tr>
                     <tr style="background-color:#87CEFA; font-weight: bold">
                         <td colspan="5" class="colTable" style="text-align: right" th:text="${'DO ZAPŁATY:'}"></td>
@@ -148,7 +148,7 @@
                         <td class="colTable" th:text="${#numbers.formatDecimal(singleMeal.number*singleMeal.price,1, 2, 'POINT')}"></td>
                         <td class="colTable" th:text="${singleMeal.VAT}"></td>
                         <td class="colTable" th:text="${#numbers.formatDecimal(singleMeal.number*singleMeal.price*(1+singleMeal.VAT*0.01),1, 2, 'POINT')}"></td>
-                        <td class="colTable" th:text=${'edytuj'}></td>
+                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/S/'+singleMeal.id}>edytuj</a></td>
                     </tr>
                 </th:block>
                 <th:block th:unless="${#lists.isEmpty(singleMealMonth)}">
@@ -167,7 +167,7 @@
                         <td class="colTable" th:text="${#numbers.formatDecimal(stay.number*stay.priceNet,1, 2, 'POINT')}"></td>
                         <td class="colTable" th:text="${stay.VAT}"></td>
                         <td class="colTable" th:text="${#numbers.formatDecimal(stay.number*stay.priceNet*(1+stay.VAT*0.01),1, 2, 'POINT')}"></td>
-                        <td class="colTable" th:text=${'edytuj'}></td>
+                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/P/'+stay.id}>edytuj</a></td>
                     </tr>
                 </th:block>
                 <th:block th:unless="${#lists.isEmpty(stayMonth)}">
@@ -218,7 +218,7 @@
                         <td class="colTable" th:text="${#numbers.formatDecimal(activity.priceNet,1, 2, 'POINT')}"></td>
                         <td class="colTable" th:text="${activity.VAT}"></td>
                         <td class="colTable" th:text="${#numbers.formatDecimal(activity.priceNet*(1+activity.VAT*0.01),1, 2, 'POINT')}"></td>
-                        <td class="colTable" th:text=${'edytuj'}></td>
+                        <td class="colTable"><a th:href=${'/admincontroller/settlement/settlementshow/A/'+activity.id}>edytuj</a></td>
                     </tr>
                 </th:block>
                 <th:block th:unless="${#lists.isEmpty(singleMealMonth)}">

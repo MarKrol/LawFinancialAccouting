@@ -59,4 +59,14 @@ public class PreschoolerSingleBoardInMonthDAOImpl implements IPreschoolerSingleB
         session.close();
         return preschoolerSingleBoardInMonthList;
     }
+
+    @Override
+    public PreschoolerSingleBoardInMonth getPreschoolerSingleBoardMonthById(int id) {
+        Session session = sessionFactory.openSession();
+        PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth =session.createQuery
+                ("FROM pl.camp.it.model.meals.PreschoolerSingleBoardInMonth WHERE id="+id+" and quantity="+true,
+                        PreschoolerSingleBoardInMonth.class).uniqueResult();
+        session.close();
+        return preschoolerSingleBoardInMonth;
+    }
 }

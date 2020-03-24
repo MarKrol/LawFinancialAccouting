@@ -16,4 +16,7 @@ public interface IPreschoolerSingleBoardInMonthService {
                                    PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonthEdit);
     List<PreschoolerSingleBoardInMonth> listPreschoolerSingleMealMonthInDB(int idPreschooler, String month);
     double singleMealMonthToPay(List<PreschoolerSingleBoardInMonth> preschoolerSingleBoardInMonthList);
+    PreschoolerSingleBoardInMonth getPreschoolerSingleBoardMonthById(int id);
+    void saveEditSettlementSingleMealMonth(PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth,
+                                           PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonthEdit);
 }
