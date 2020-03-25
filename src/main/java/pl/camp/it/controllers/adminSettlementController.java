@@ -388,4 +388,56 @@ public class adminSettlementController {
             return "redirect:../../login";
         }
     }
+
+
+    @RequestMapping(value = "/admincontroller/payment/paymentselectgroup", method = RequestMethod.GET)
+    public String paymentSelectGroup(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            return "/admincontroller/payment/paymentselectgroup";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/payment/paymentselectgroup", method = RequestMethod.POST)
+    public String paymentSelectGroupChoose(@RequestParam int choose, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            this.choose = choose;
+            return "redirect:../../admincontroller/payment/paymentshow";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/payment/paymentshow", method = RequestMethod.GET)
+    public String paymentChoose(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
+            return "/admincontroller/payment/paymentshow";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+
+
+    @RequestMapping(value="admincontroller/payment/payment", method = RequestMethod.GET)
+    public String ssss(){
+        return "admincontroller/payment/payment";
+    }
+
+    @RequestMapping(value="admincontroller/payment/payment", method = RequestMethod.POST)
+    public String ssssas(){
+        return "redirect:../../login";
+    }
+
 }

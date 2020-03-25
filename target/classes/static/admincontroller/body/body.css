@@ -105,7 +105,16 @@ table tr td > tr > td {
     font-family: Verdana, Helvetica, Arial, sans-serif;
 }
 
-#full #list0Activity, #list00settlement{
+#full #list0Activity, #list00settlement, #company{
+    margin-top: 5px;
+    margin-right: 20px;
+    margin-left: 20px;
+    width:250px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#full #company{
     margin-top: 5px;
     margin-right: 20px;
     margin-left: 20px;
@@ -146,4 +155,32 @@ table tr td > tr > td {
 #full table a {
     text-decoration: none;
     color: black;
+}
+
+#full fieldset{
+    font-size: 13px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-weight:bold;
+}
+
+#full #payment{
+    font-size: 13px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-weight:normal;
+}
+
+#full #payment input{
+    font-size: 13px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-weight:normal;
+    width: 150px;
+    height: 20px;
+}
+
+#full #payment #addPay{
+    font-size: 13px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-weight:normal;
+    width: 190px;
+    height: 28px;
 }
