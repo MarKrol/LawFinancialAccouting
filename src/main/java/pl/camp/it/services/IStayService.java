@@ -9,4 +9,9 @@ public interface IStayService {
     boolean isStayInDB(String name);
     List<Stay> getListStay();
     Stay getStayById(int idStay);
+    void saveChangeStay(Stay stay, List<String> stayEditSData);
+    List<Stay> getListAllStay();
+    Stay getOldAndActualStayById(int idStay);
+    void deleteStay(Stay stay);
+
 }

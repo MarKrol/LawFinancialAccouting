@@ -20,6 +20,8 @@ import pl.camp.it.services.IStayService;
 import pl.camp.it.session.SessionObject;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class employeeStayController {
@@ -28,6 +30,7 @@ public class employeeStayController {
     private int idPreschoolerEditSave;
     private String monthEditSave;
     private int idStayMonthEditSave;
+    private int chooseStay;
 
     @Resource
     SessionObject sessionObject;
@@ -148,7 +151,7 @@ public class employeeStayController {
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
-            model.addAttribute("listTypeOfStay", stayService.getListStay());
+            model.addAttribute("listTypeOfStay", stayService.getListAllStay());
             model.addAttribute("stayMonth", new PreschoolerStayMonth());
             return "/admincontroller/stay/staymonthE";
         } else {
@@ -172,11 +175,11 @@ public class employeeStayController {
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
-            model.addAttribute("listTypeOfStay", stayService.getListStay());
+            model.addAttribute("listTypeOfStay", stayService.getListAllStay());
             model.addAttribute("nameSurname",preschooler.getName()+" "+preschooler.getSurname());
             model.addAttribute("nameTypeOfStay", Integer.valueOf(idStayMonth));
 
-            Stay stay =stayService.getStayById(idStayMonth);
+            Stay stay =stayService.getOldAndActualStayById(idStayMonth);
 
             if (preschoolerStayMonthService.isPreschoolerStayMonthInDB(idPreschooler, month, stay.getName())){
                 model.addAttribute("stayMonth", preschoolerStayMonthService.preschoolerStayMonth(idPreschooler,month, stay.getName()));
@@ -210,7 +213,7 @@ public class employeeStayController {
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
-            model.addAttribute("listTypeOfStay", stayService.getListStay());
+            model.addAttribute("listTypeOfStay", stayService.getListAllStay());
             model.addAttribute("stayMonth", new PreschoolerStayMonth());
 
             if (idPreschooler!=this.idPreschoolerEditSave || !month.equals(this.monthEditSave) || idStayMonth!=this.idStayMonthEditSave){
@@ -221,7 +224,7 @@ public class employeeStayController {
 
                 preschoolerStayMonthService.saveChangeStayMonth
                         (preschoolerStayMonthService.preschoolerStayMonth(idPreschooler, month,
-                                            stayService.getStayById(idStayMonth).getName()), preschoolerStayMonthEdit);
+                                            stayService.getOldAndActualStayById(idStayMonth).getName()), preschoolerStayMonthEdit);
 
                 model.addAttribute("messageOK", "Zaktualizowano dane w bazie" +
                         " dla przedszkolaka: " + " " + preschooler.getName() + " " + preschooler.getSurname()
@@ -234,4 +237,102 @@ public class employeeStayController {
         }
     }
 
+    @RequestMapping(value = "admincontroller/stay/stayE", method = RequestMethod.GET)
+    public String editStayPage(Model model){
+        if (sessionObject.getEmployee() != null) {
+            this.chooseStay=-1;
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("stay", new Stay());
+            model.addAttribute("stayList",stayService.getListStay());
+            return "/admincontroller/stay/stayE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/stay/stayE", method = RequestMethod.POST, params = "edit=EDYTUJ POBYT")
+    public String editStayShow(@RequestParam("choose") int idStay, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            this.chooseStay=idStay;
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            Stay stay=stayService.getStayById(idStay);
+            model.addAttribute("stay", stay);
+            model.addAttribute("nameStay",stay.getName());
+            model.addAttribute("stayList",stayService.getListStay());
+            return "/admincontroller/stay/stayE";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/stay/stayE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
+    public String saveEditStayShow(@RequestParam("data")List<String> stayEdit, @RequestParam("choose") int idStay, Model model) {
+        if (sessionObject.getEmployee() != null) {
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("stay", new Stay());
+
+            if (this.chooseStay==idStay) {
+                Stay stay = stayService.getStayById(idStay);
+                stayService.saveChangeStay(stay, stayEdit);
+                model.addAttribute("stayList", stayService.getListStay());
+                model.addAttribute("nameStay", stay.getName());
+                model.addAttribute("messageOK", "Zapisano zmiany w bazie dla edytowanego pobytu!");
+            } else{
+                model.addAttribute("message", "Dokunujesz zmian w wyedytowanym pobycie, " +
+                        "który jest inny niż zaznaczony! Edytuj pobyt jeszcze raz!");
+            }
+            return "/admincontroller/stay/stayE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/stay/stayE", method = RequestMethod.POST, params = "delete=USUŃ POBYT")
+    public String deleteStayShow(@RequestParam("choose") int idStay, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            this.chooseStay=idStay;
+            return "redirect:../../admincontroller/stay/stayD";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/stay/stayD",method = RequestMethod.GET)
+    public String confirmDeleteStay(Model model){
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            Stay stay=stayService.getStayById(this.chooseStay);
+            model.addAttribute("stay", stay);
+            model.addAttribute("nameStay",stay.getName());
+            model.addAttribute("stayList",stayService.getListStay());
+            model.addAttribute("message","Czy na pewno chcesz usunąć wybrany pobyt?");
+            return "admincontroller/stay/stayD";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/stay/stayD",method = RequestMethod.POST,params = "nodelete=NIE")
+    public String noDeleteStay(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/stay/stayE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/stay/stayD",method = RequestMethod.POST,params = "delete=TAK")
+    public String yesDeleteStay(){
+        if (sessionObject.getEmployee() != null) {
+            stayService.deleteStay(stayService.getStayById(this.chooseStay));
+            return "redirect:../../admincontroller/stay/stayE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
 }

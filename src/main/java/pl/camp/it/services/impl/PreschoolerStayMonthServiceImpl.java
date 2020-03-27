@@ -76,4 +76,9 @@ public class PreschoolerStayMonthServiceImpl implements IPreschoolerStayMonthSer
         preschoolerStayMonth.setVAT(preschoolerStayMonthEdit.getVAT());
         preschoolerStayMonthDAO.persistPreschoolerStayMonth(preschoolerStayMonth);
     }
+
+    @Override
+    public List<PreschoolerStayMonth> getPreschoolerStayMonthByIdPreschooler(int idPreschooler) {
+        return this.preschoolerStayMonthDAO.getPreschoolerStayMonthByIdPreschooler(idPreschooler);
+    }
 }

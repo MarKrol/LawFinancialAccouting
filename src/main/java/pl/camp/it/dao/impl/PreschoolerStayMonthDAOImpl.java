@@ -69,4 +69,15 @@ public class PreschoolerStayMonthDAOImpl implements IPreschoolerStayMonthDAO {
         session.close();
         return preschoolerStayMonth;
     }
+
+    @Override
+    public List<PreschoolerStayMonth> getPreschoolerStayMonthByIdPreschooler(int idPreschooler) {
+        Session session=sessionFactory.openSession();
+        List<PreschoolerStayMonth> preschoolerStayMonthList = session.createQuery
+                ("FROM pl.camp.it.model.stay.PreschoolerStayMonth WHERE preschholerId="+idPreschooler+" and quantity="+true,
+                        PreschoolerStayMonth.class).list();
+        session.close();
+        return preschoolerStayMonthList;
+    }
+
 }

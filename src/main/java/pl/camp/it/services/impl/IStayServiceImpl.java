@@ -35,4 +35,27 @@ public class IStayServiceImpl implements IStayService {
     public Stay getStayById(int idStay) {
         return this.stayDAO.getStayById(idStay);
     }
+
+    @Override
+    public void saveChangeStay(Stay stay, List<String> stayEditSData) {
+        stay.setPriceNet(Double.parseDouble(stayEditSData.get(0)));
+        stay.setVAT(Integer.parseInt(stayEditSData.get(1)));
+        this.stayDAO.persistStay(stay);
+    }
+
+    @Override
+    public List<Stay> getListAllStay() {
+        return this.stayDAO.getListAllStay();
+    }
+
+    @Override
+    public Stay getOldAndActualStayById(int idStay) {
+        return this.stayDAO.getOldAndActualStayById(idStay);
+    }
+
+    @Override
+    public void deleteStay(Stay stay) {
+        stay.setQuantity(false);
+        this.stayDAO.persistStay(stay);
+    }
 }

@@ -16,4 +16,5 @@ public interface IPreschoolerStayMonthService {
     PreschoolerStayMonth getPreschoolerStayMonthById(int id);
     void saveEditSettlementStayMonth(PreschoolerStayMonth preschoolerStayMonth,
                                      PreschoolerStayMonth preschoolerStayMonthEdit);
+    List<PreschoolerStayMonth> getPreschoolerStayMonthByIdPreschooler(int idPreschooler);
 }

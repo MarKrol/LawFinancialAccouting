@@ -70,4 +70,30 @@ public class StayDAOImpl implements IStayDAO {
             return stay;
         }
     }
+
+    @Override
+    public List<Stay> getListAllStay() {
+        Session session = sessionFactory.openSession();
+        List<Stay> stayList = session.createQuery
+                ("FROM pl.camp.it.model.stay.Stay").list();
+        session.close();
+        if (stayList==null){
+            stayList=new ArrayList<>();
+            return stayList;
+        } else {
+            return stayList;
+        }
+    }
+
+    @Override
+    public Stay getOldAndActualStayById(int idStay) {
+        Session session = sessionFactory.openSession();
+        Stay stay = session.createQuery("FROM pl.camp.it.model.stay.Stay WHERE id="+idStay, Stay.class).uniqueResult();
+        session.close();
+        if (stay==null){
+            return new Stay();
+        } else{
+            return stay;
+        }
+    }
 }
