@@ -114,6 +114,13 @@ table tr td > tr > td {
     font-family: Verdana, Helvetica, Arial, sans-serif;
 }
 
+#full #companyChange{
+    margin-top: 5px;
+    width:325px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
 #full #company{
     margin-top: 5px;
     margin-right: 20px;

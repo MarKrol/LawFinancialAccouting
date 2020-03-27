@@ -5,23 +5,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.camp.it.model.activities.PreschoolerActivityInMonth;
+import pl.camp.it.model.company.Company;
 import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.month.Month;
+import pl.camp.it.model.payment.Payment;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.model.stay.PreschoolerStayMonth;
 import pl.camp.it.services.*;
 import pl.camp.it.session.SessionObject;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
-public class adminSettlementController {
+public class adminSettlementPaymentController {
 
-    private int choose = -1;
+    private int choose = -1; //wybór grupy przedszkolnej
     private int idPreschoolerChoose=-1;
     private String monthChoose=null;
+    private int idCompanyChoose=-1;
 
     @Resource
     SessionObject sessionObject;
@@ -38,6 +43,10 @@ public class adminSettlementController {
     IPreschoolerStayMonthService preschoolerStayMonthService;
     @Autowired
     IPreschoolerActivityInMonthService preschoolerActivityInMonthService;
+    @Autowired
+    ICompanyService companyService;
+    @Autowired
+    IPaymentService paymentService;
 
     @RequestMapping(value = "/admincontroller/settlement/selectgroup", method = RequestMethod.GET)
     public String settlementSelectGroup(Model model) {
@@ -408,6 +417,9 @@ public class adminSettlementController {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             this.choose = choose;
+            this.idPreschoolerChoose=-1;
+            this.monthChoose=null;
+            this.idCompanyChoose=-1;
             return "redirect:../../admincontroller/payment/paymentshow";
         } else {
             return "redirect:../../login";
@@ -421,23 +433,237 @@ public class adminSettlementController {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("companyList", companyService.getListCompany());
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
+            model.addAttribute("sumPayment", 0.00);
+
+            if (this.idCompanyChoose!=-1 && this.idPreschoolerChoose!=-1 && this.monthChoose!=null) {
+                Preschooler preschooler = preschoolerService.getPreschoolerById(this.idPreschoolerChoose);
+                List<Payment> paymentList = paymentService.getListPayment
+                        (this.idPreschoolerChoose,monthChoose,idCompanyChoose);
+
+                model.addAttribute("nameSurname", preschooler.getName()+" "+preschooler.getSurname());
+                model.addAttribute("paymentList", paymentList);
+                model.addAttribute("nameCompany", companyService.getCompanyById(idCompanyChoose).getNameCompany());
+                model.addAttribute("month", monthChoose);
+                model.addAttribute("sumPayment",paymentService.sumPayment(paymentList));
+            }
+
             return "/admincontroller/payment/paymentshow";
         } else {
             return "redirect:../../login";
         }
     }
 
+    @RequestMapping(value = "/admincontroller/payment/paymentshow", method = RequestMethod.POST, params = "addPay=DODAJ WPŁATĘ")
+    public String addPayment(@RequestParam("wplata") List<String> nameAndPayment,
+                             @RequestParam("date") String date, @RequestParam("choose") int idPreschooler,
+                             @RequestParam("choosecompany") int idCompany, Model model){
+        if (sessionObject.getEmployee() != null) {
 
+            this.idPreschoolerChoose=idPreschooler;
+            this.monthChoose=paymentService.getNameMonthByDate(date);
+            this.idCompanyChoose=idCompany;
 
-    @RequestMapping(value="admincontroller/payment/payment", method = RequestMethod.GET)
-    public String ssss(){
-        return "admincontroller/payment/payment";
+            model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("companyList", companyService.getListCompany());
+            model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
+
+            Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
+            Company company = companyService.getCompanyById(idCompany);
+
+            model.addAttribute("month","");
+            model.addAttribute("nameSurname", preschooler.getName()+" "+preschooler.getSurname());
+
+            if (date.equals("")){
+                model.addAttribute("sumPayment", 0.00);
+                model.addAttribute("message","Właty nie dodano do bazy. Ustaw datę wpłaty, aby dodać ją do bazy!");
+            }else {
+                paymentService.addPaymentToDataBase(nameAndPayment, date, preschooler, company);
+
+                List<Payment> paymentList = paymentService.getListPayment
+                        (idPreschooler,paymentService.getNameMonthByDate(date),idCompany);
+
+                model.addAttribute("paymentList", paymentList);
+                model.addAttribute("nameCompany", company.getNameCompany());
+                model.addAttribute("month",paymentService.getNameMonthByDate(date));
+                model.addAttribute("sumPayment",paymentService.sumPayment(paymentList));
+            }
+
+            return "/admincontroller/payment/paymentshow";
+        }else {
+            return "redirect:../../login";
+        }
     }
 
-    @RequestMapping(value="admincontroller/payment/payment", method = RequestMethod.POST)
-    public String ssssas(){
-        return "redirect:../../login";
+    @RequestMapping(value = "/admincontroller/payment/paymentshow", method = RequestMethod.POST, params = "show=POKAŻ WPŁATY")
+    public String showPayment(@RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
+                              @RequestParam("choosecompany") int idCompany,Model model){
+        if (sessionObject.getEmployee() != null) {
+
+            this.idPreschoolerChoose=idPreschooler;
+            this.monthChoose=month;
+            this.idCompanyChoose=idCompany;
+
+            Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
+            Company company = companyService.getCompanyById(idCompany);
+            model.addAttribute("nameCompany", company.getNameCompany());
+
+            model.addAttribute("nameSurname", preschooler.getName()+" "+preschooler.getSurname());
+
+            model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("companyList", companyService.getListCompany());
+            model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
+
+            List<Payment> paymentList = paymentService.getListPayment(idPreschooler,month, idCompany);
+            model.addAttribute("paymentList", paymentList);
+            model.addAttribute("month",month);
+            model.addAttribute("sumPayment",paymentService.sumPayment(paymentList));
+
+            return "/admincontroller/payment/paymentshow";
+        }else {
+            return "redirect:../../login";
+        }
     }
+
+    @RequestMapping(value = "/admincontroller/payment/paymentshow/{what}/{id}", method = RequestMethod.GET)
+    public String showEditPayment(@PathVariable String what, @PathVariable int id, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            if (what.equals("E")) {
+                sessionObject.setSendData(id);
+                return "redirect:../../../../admincontroller/payment/paymentE";
+            } else {
+                if (what.equals("D")){
+                    sessionObject.setSendData(id);
+                    return "redirect:../../../../admincontroller/payment/paymentD";
+                }else{
+                    return "redirect:../../../../admincontroller/payment/paymentshow";
+                }
+            }
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/payment/paymentE",method = RequestMethod.GET)
+    public String editPayment(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
+            Preschooler preschooler = preschoolerService.getPreschoolerById(this.idPreschoolerChoose);
+
+            model.addAttribute("payment",paymentService.getPaymentById(sessionObject.getSendData()));
+
+            model.addAttribute("companyList",companyService.getListCompany());
+            model.addAttribute("nameCompany",companyService.getCompanyById(this.idCompanyChoose).getNameCompany());
+
+            model.addAttribute("messageOK","Edytujesz dane przedszkolaka: "+
+                    preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase());
+
+            return "/admincontroller/payment/paymentE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/payment/paymentE", method = RequestMethod.GET,
+            params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
+    public String returnPaymentShowNoSave(Model model){
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            return "redirect:../../admincontroller/payment/paymentshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/payment/paymentE", method = RequestMethod.POST,
+            params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
+    public String returnPaymentShowNoSave(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/payment/paymentshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/payment/paymentE", method = RequestMethod.POST,
+            params = "save=ZAPISZ ZMIANY")
+    public String returnPaymentShowSave(@RequestParam("name")String name, @RequestParam("payment")String pay,
+                                        @RequestParam("date")String date, @RequestParam("choosecompany") int idCompany){
+        if (sessionObject.getEmployee() != null) {
+                Payment payment = paymentService.getPaymentById(sessionObject.getSendData());
+                paymentService.savePaymentChange(payment, name, Double.parseDouble(pay), date,
+                                                                    companyService.getCompanyById(idCompany));
+            return "redirect:../../admincontroller/payment/paymentshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/payment/paymentD",method = RequestMethod.GET)
+    public String deletePayment(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
+            Preschooler preschooler = preschoolerService.getPreschoolerById(this.idPreschoolerChoose);
+
+            model.addAttribute("payment",paymentService.getPaymentById(sessionObject.getSendData()));
+
+            model.addAttribute("companyList",companyService.getListCompany());
+            model.addAttribute("nameCompany",companyService.getCompanyById(this.idCompanyChoose).getNameCompany());
+
+            model.addAttribute("message","Czy na pewno chcesz usuną włatę przedszkolaka: "+
+                    preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase()+"?");
+
+            return "/admincontroller/payment/paymentD";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/payment/paymentD", method = RequestMethod.GET,
+            params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
+    public String returnPaymentShowNoDelete(Model model){
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            return "redirect:../../admincontroller/payment/paymentshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/payment/paymentD", method = RequestMethod.POST,
+            params = "nosave=NIE")
+    public String returnPaymentShowNoDelete(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/payment/paymentshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/payment/paymentD", method = RequestMethod.POST,
+            params = "save=TAK")
+    public String returnPaymentShowDelete(){
+        if (sessionObject.getEmployee() != null) {
+            Payment payment = paymentService.getPaymentById(sessionObject.getSendData());
+            paymentService.deletePayment(payment);
+            return "redirect:../../admincontroller/payment/paymentshow";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
 
 }

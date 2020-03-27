@@ -43,6 +43,8 @@
         <mapping class="pl.camp.it.model.meals.PreschoolerSingleBoardInMonth"/>
         <mapping class="pl.camp.it.model.stay.Stay"/>
         <mapping class="pl.camp.it.model.stay.PreschoolerStayMonth"/>
+        <mapping class="pl.camp.it.model.payment.Payment"/>
+        <mapping class="pl.camp.it.model.company.Company"/>
 
     </session-factory>
 </hibernate-configuration>

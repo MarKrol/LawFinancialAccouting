@@ -57,10 +57,10 @@
                         </tr>
                         <tr>
                             <td><select required name="choosecompany" path="orderId" size="2" id="company">
-                                <option th:each="preschooler: ${preschoolerList}"
-                                        th:value="${preschooler.id}"
-                                        th:text="${preschooler.name+' '+preschooler.surname}"
-                                        th:selected="${preschooler.name+' '+preschooler.surname==nameSurname}">
+                                <option th:each="company: ${companyList}"
+                                        th:value="${company.id}"
+                                        th:text="${company.nameCompany}"
+                                        th:selected="${company.nameCompany==nameCompany}">
                                 </option>
                             </select></td>
                         </tr>
@@ -91,28 +91,43 @@
                                 <td th:text="${'Data:'}"></td>
                             </tr>
                             <tr>
-                                <td><input type="text" autocomplete="off" placeholder="nazwa" value="" id="namepayment" onkeyup="manage(this)" name="wplata"/></td>
-                                <td><input type="text" autocomplete="off" pattern="^\d+(\.\d{1,4})$" placeholder="kwota" id="pay" onkeyup="manage(this)" name="wplata"/></td>
-                                <td><input type="date" placeholder="data" onkeyup="manage(this)" name="wplata"  id="setDate"/></td>
-                                <td><input type="submit" value="DODAJ WPŁATĘ" id="addPay" disabled></td>
+                                <td><input type="text" autocomplete="off" placeholder="nazwa" value="" id="namepayment"
+                                           onkeyup="manage(this)" name="wplata"/></td>
+                                <td><input type="text" autocomplete="off" pattern="^\d+(\.\d{1,4})$" placeholder="kwota"
+                                           id="pay" onkeyup="manage(this)" name="wplata"/></td>
+                                <td><input type="date" onkeyup="manage(this)" name="date" id="setDate"/></td>
+                                <td><input type="submit" value="DODAJ WPŁATĘ" id="addPay" disabled name="addPay"></td>
                             </tr>
                         </table>
                     </fieldset>
                     <table border="1" rules="all" frame="void" style="margin-bottom: 40px">
                         <tr>
-                            <td colspan="4"><label><p class="name" th:text="${'HISTORIA WPŁAT - CENTRUM RODZINKI'}"></p></label></td>
+                            <th:block th:if="${nameCompany!=null}">
+                                <td colspan="4"><label><p class="name" th:text="${'HISTORIA WPŁAT - '+nameCompany}"></p></label></td>
+                            </th:block>
+                            <th:block th:unless="${nameCompany!=null}">
+                                <td colspan="4"><label><p class="name" th:text="${'HISTORIA WPŁAT'}"></p></label></td>
+                            </th:block>
                         </tr>
                         <tr style="background-color:#87CEFA; font-weight: bold">
-                            <td class="colTableName" style="width: 200px" th:text="${'NAZWA WPŁATY'}"></td>
-                            <td class="colTable" style="width: 150px" th:text="${'Kwota wpłaty [zł]'}"></td>
+                            <td class="colTableName" style="width: 200px" th:text="${'NAZWA'}"></td>
                             <td class="colTable" style="width: 150px" th:text="${'Data wpłaty'}"></td>
+                            <td class="colTable" style="width: 150px" th:text="${'Kwota wpłaty [zł]'}"></td>
                             <td class="colTable" style="width: 150px" th:text="${'Opcje'}"></td>
                         </tr>
-                        <tr>
-                            <td class="colTableName">dsads</td>
-                            <td class="colTable">dsda</td>
-                            <td class="colTable">dsdsa</td>
-                            <td class="colTable">sdads</td>
+                        <th:block th:each="payment: ${paymentList}">
+                            <tr>
+                                <td class="colTableName" th:text="${payment.name}"></td>
+                                <td class="colTable" th:text="${payment.localDate}"></td>
+                                <td class="colTable" th:text="${#numbers.formatDecimal((payment.payment),1, 2, 'POINT')}"></td>
+                                <td class="colTable"><a th:href=${'/admincontroller/payment/paymentshow/E/'+payment.id}>edytuj</a>
+                                    &nbsp|&nbsp<a th:href=${'/admincontroller/payment/paymentshow/D/'+payment.id}>usuń</a><br></td>
+                            </tr>
+                        </th:block>
+                        <tr style="background-color:#87CEFA; font-weight: bold">
+                            <td colspan="2" class="colTable" style="text-align: right" th:text="${'ŁĄCZNA MIESIĘCZNA KWOTA WPŁAT NA KONTO:'}"></td>
+                            <td class="colTable" th:text="${#numbers.formatDecimal((sumPayment),1, 2, 'POINT')+' zł'}"></td>
+                            <td></td>
                         </tr>
                     </table>
                 </div>
