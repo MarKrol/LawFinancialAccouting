@@ -151,4 +151,9 @@ public class PreschoolerActivityInMonthServiceImpl implements IPreschoolerActivi
 
         preschoolerActivityInMonthDAO.persistPreschoolerActivityInMonth(preschoolerActivityInMonth);
     }
+
+    @Override
+    public boolean isNameActivityPreschoolerInDB(String nameActivity) {
+        return this.preschoolerActivityInMonthDAO.isNameActivityPreschoolerInDB(nameActivity);
+    }
 }

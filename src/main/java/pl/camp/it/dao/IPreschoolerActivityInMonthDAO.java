@@ -10,4 +10,5 @@ public interface IPreschoolerActivityInMonthDAO {
     boolean isInDBActivity(int idPreschooler, String month);
     List<PreschoolerActivityInMonth> listPreschoolerActivityInMonth(int idPreschooler, String month);
     PreschoolerActivityInMonth getPreschoolerActivityMonthById(int id);
+    boolean isNameActivityPreschoolerInDB(String nameActivity);
 }

@@ -19,4 +19,5 @@ public interface IPreschoolerActivityInMonthService {
     PreschoolerActivityInMonth getPreschoolerActivityMonthById(int id);
     void saveEditSettlementActivityMonth(PreschoolerActivityInMonth preschoolerActivityInMonth,
                                          PreschoolerActivityInMonth preschoolerActivityInMonthEdit);
+    boolean isNameActivityPreschoolerInDB(String nameActivity);
 }

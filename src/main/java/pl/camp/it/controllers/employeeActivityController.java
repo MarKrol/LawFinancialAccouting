@@ -327,11 +327,44 @@ public class employeeActivityController {
             model.addAttribute("activity", activities);
             model.addAttribute("nameActivity",activities.getName());
             model.addAttribute("activityList",activityService.activitiesList());
-            model.addAttribute("message","Czy na pewno chcesz usunąć wybrany pobyt?");
+            model.addAttribute("message","Czy na pewno chcesz usunąć wybrane zajęcia?");
             return "/admincontroller/activity/activityD";
         }else {
             return "redirect:../../login";
         }
     }
 
+    @RequestMapping(value = "/admincontroller/activity/activityD",method = RequestMethod.POST,params = "nodelete=NIE")
+    public String noDeleteStay(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/activity/activityE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/activity/activityD",method = RequestMethod.POST,params = "delete=TAK")
+    public String yesDeleteStay(Model model){
+        if (sessionObject.getEmployee() != null) {
+            if (!preschoolerActivityInMonthService.isNameActivityPreschoolerInDB(activityService.getActivity(this.idActivityEdit).getName())) {
+                activityService.deleteActivity(activityService.getActivity(this.idActivityEdit));
+                return "redirect:../../admincontroller/activity/activityE";
+            }else{
+                model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                        sessionObject.getEmployee().getSurname());
+                Activities activities = activityService.getActivity(this.idActivityEdit);
+                model.addAttribute("activity", activities);
+                model.addAttribute("nameActivity",activities.getName());
+                model.addAttribute("activityList",activityService.activitiesList());
+
+                model.addAttribute("message","Nie można usunąć zajęć ponieważ są one już używane przez" +
+                        " program w innym miejscu. Usuń wszystkie przydzielone zajęcia o tej nazwie, a dopiero " +
+                        "uzyskasz możliwość usunięcia zajęć!");
+
+                return "/admincontroller/activity/activityD";
+            }
+        }else {
+            return "redirect:../../login";
+        }
+    }
 }

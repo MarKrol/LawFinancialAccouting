@@ -59,4 +59,20 @@ public class PreschoolerActivityInMonthDAOImpl implements IPreschoolerActivityIn
         session.close();
         return preschoolerActivityInMonth;
     }
+
+    @Override
+    public boolean isNameActivityPreschoolerInDB(String nameActivity) {
+        Session session = sessionFactory.openSession();
+        List<PreschoolerActivityInMonth> preschoolerActivityInMonthList = session.createQuery
+                ("FROM pl.camp.it.model.activities.PreschoolerActivityInMonth WHERE nameAcivity='"+nameActivity+"'"+
+                        "and quantity="+true, PreschoolerActivityInMonth.class).list();
+        session.close();
+        boolean inDB;
+        if (preschoolerActivityInMonthList.size()==0){
+            inDB=false;
+        }else {
+            inDB=true;
+        }
+        return inDB;
+    }
 }

@@ -10,4 +10,5 @@ public interface IActivityService {
     List<Activities> activitiesList();
     Activities getActivity(int idActivity);
     void saveChangeActivity(Activities activities, List<String> activityEditSData);
+    void deleteActivity(Activities activities);
 }

@@ -43,4 +43,10 @@ public class ActivityServiceImpl implements IActivityService {
         activities.setVAT(Integer.parseInt(activityEditSData.get(1)));
         this.activityDAO.persistActivity(activities);
     }
+
+    @Override
+    public void deleteActivity(Activities activities) {
+        activities.setQuantity(false);
+        this.activityDAO.persistActivity(activities);
+    }
 }
