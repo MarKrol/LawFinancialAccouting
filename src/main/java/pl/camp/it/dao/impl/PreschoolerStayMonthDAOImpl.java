@@ -80,4 +80,19 @@ public class PreschoolerStayMonthDAOImpl implements IPreschoolerStayMonthDAO {
         return preschoolerStayMonthList;
     }
 
+    @Override
+    public boolean isNameStayPreschoolerInDB(String nameStay) {
+        Session session=sessionFactory.openSession();
+        List<PreschoolerStayMonth> preschoolerStayMonth = session.createQuery
+                ("FROM pl.camp.it.model.stay.PreschoolerStayMonth WHERE name='"+nameStay.toUpperCase()+"'"+"and quantity="+true,
+                        PreschoolerStayMonth.class).list();
+        session.close();
+        boolean inDB;
+        if (preschoolerStayMonth.size()==0){
+            inDB=false;
+        }else{
+            inDB=true;
+        }
+        return inDB;
+    }
 }

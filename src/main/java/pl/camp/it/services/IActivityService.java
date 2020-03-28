@@ -9,4 +9,5 @@ public interface IActivityService {
     boolean isActivityInDB(String name);
     List<Activities> activitiesList();
     Activities getActivity(int idActivity);
+    void saveChangeActivity(Activities activities, List<String> activityEditSData);
 }

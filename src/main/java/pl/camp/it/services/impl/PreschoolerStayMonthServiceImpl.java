@@ -81,4 +81,9 @@ public class PreschoolerStayMonthServiceImpl implements IPreschoolerStayMonthSer
     public List<PreschoolerStayMonth> getPreschoolerStayMonthByIdPreschooler(int idPreschooler) {
         return this.preschoolerStayMonthDAO.getPreschoolerStayMonthByIdPreschooler(idPreschooler);
     }
+
+    @Override
+    public boolean isNameStayPreschoolerInDB(String nameStay) {
+        return this.preschoolerStayMonthDAO.isNameStayPreschoolerInDB(nameStay);
+    }
 }

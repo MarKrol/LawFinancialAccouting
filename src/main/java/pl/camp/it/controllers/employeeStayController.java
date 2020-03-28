@@ -151,7 +151,7 @@ public class employeeStayController {
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
-            model.addAttribute("listTypeOfStay", stayService.getListAllStay());
+            model.addAttribute("listTypeOfStay", stayService.getListStay());
             model.addAttribute("stayMonth", new PreschoolerStayMonth());
             return "/admincontroller/stay/staymonthE";
         } else {
@@ -175,11 +175,11 @@ public class employeeStayController {
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
-            model.addAttribute("listTypeOfStay", stayService.getListAllStay());
+            model.addAttribute("listTypeOfStay",stayService.getListStay());//stayService.getListAllStay()
             model.addAttribute("nameSurname",preschooler.getName()+" "+preschooler.getSurname());
             model.addAttribute("nameTypeOfStay", Integer.valueOf(idStayMonth));
 
-            Stay stay =stayService.getOldAndActualStayById(idStayMonth);
+            Stay stay =stayService.getStayById(idStayMonth);
 
             if (preschoolerStayMonthService.isPreschoolerStayMonthInDB(idPreschooler, month, stay.getName())){
                 model.addAttribute("stayMonth", preschoolerStayMonthService.preschoolerStayMonth(idPreschooler,month, stay.getName()));
@@ -213,7 +213,7 @@ public class employeeStayController {
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
-            model.addAttribute("listTypeOfStay", stayService.getListAllStay());
+            model.addAttribute("listTypeOfStay", stayService.getListStay());
             model.addAttribute("stayMonth", new PreschoolerStayMonth());
 
             if (idPreschooler!=this.idPreschoolerEditSave || !month.equals(this.monthEditSave) || idStayMonth!=this.idStayMonthEditSave){
@@ -327,10 +327,25 @@ public class employeeStayController {
     }
 
     @RequestMapping(value = "admincontroller/stay/stayD",method = RequestMethod.POST,params = "delete=TAK")
-    public String yesDeleteStay(){
+    public String yesDeleteStay(Model model){
         if (sessionObject.getEmployee() != null) {
-            stayService.deleteStay(stayService.getStayById(this.chooseStay));
-            return "redirect:../../admincontroller/stay/stayE";
+            if (!preschoolerStayMonthService.isNameStayPreschoolerInDB(stayService.getStayById(this.chooseStay).getName())) {
+                stayService.deleteStay(stayService.getStayById(this.chooseStay));
+                return "redirect:../../admincontroller/stay/stayE";
+            }else{
+                model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                        sessionObject.getEmployee().getSurname());
+                Stay stay=stayService.getStayById(this.chooseStay);
+                model.addAttribute("stay", stay);
+                model.addAttribute("nameStay",stay.getName());
+                model.addAttribute("stayList",stayService.getListStay());
+
+                model.addAttribute("message","Nie można usunąć pobytu ponieważ jest on już używany przez" +
+                        " program w innym miejscu. Usuń wszystkie przydzielone pobyty o tej nazwie, a dopiero " +
+                        "uzyskasz możliwość usunięcia pobytu!");
+
+                return "admincontroller/stay/stayD";
+            }
         }else {
             return "redirect:../../login";
         }

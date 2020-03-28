@@ -17,4 +17,5 @@ public interface IPreschoolerStayMonthService {
     void saveEditSettlementStayMonth(PreschoolerStayMonth preschoolerStayMonth,
                                      PreschoolerStayMonth preschoolerStayMonthEdit);
     List<PreschoolerStayMonth> getPreschoolerStayMonthByIdPreschooler(int idPreschooler);
+    boolean isNameStayPreschoolerInDB(String nameStay);
 }

@@ -11,4 +11,5 @@ public interface IPreschoolerStayMonthDAO {
     List<PreschoolerStayMonth> listPreschoolerStayMonth(int idPreschooler, String month);
     PreschoolerStayMonth getPreschoolerStayMonthById(int id);
     List<PreschoolerStayMonth> getPreschoolerStayMonthByIdPreschooler(int idPreschooler);
+    boolean isNameStayPreschoolerInDB (String nameStay);
 }

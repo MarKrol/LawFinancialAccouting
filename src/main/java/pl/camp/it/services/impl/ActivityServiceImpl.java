@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.camp.it.dao.IActivityDAO;
 import pl.camp.it.model.activities.Activities;
+import pl.camp.it.model.stay.Stay;
 import pl.camp.it.services.IActivityService;
 
 import java.util.List;
@@ -34,5 +35,12 @@ public class ActivityServiceImpl implements IActivityService {
     @Override
     public Activities getActivity(int idActivity) {
         return this.activityDAO.getActivity(idActivity);
+    }
+
+    @Override
+    public void saveChangeActivity(Activities activities, List<String> activityEditSData) {
+        activities.setPriceNet(Double.parseDouble(activityEditSData.get(0)));
+        activities.setVAT(Integer.parseInt(activityEditSData.get(1)));
+        this.activityDAO.persistActivity(activities);
     }
 }

@@ -30,6 +30,7 @@ public class employeeActivityController {
     private int choose; //choose idGroup;
     private int idPreschoolerEdit=-1;
     private String monthPreviousEdit=null;
+    private int idActivityEdit;
 
 
     @Resource
@@ -251,4 +252,86 @@ public class employeeActivityController {
             return "redirect:../../login";
         }
     }
+
+    @RequestMapping(value = "/admincontroller/activity/activityE", method = RequestMethod.GET)
+    public String openPageActivityE(Model model){
+        if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("activityList", activityService.activitiesList());
+            model.addAttribute("activity", new Activities());
+            return "/admincontroller/activity/activityE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/activity/activityE", method = RequestMethod.POST, params = "edit=EDYTUJ ZAJĘCIA")
+    public String editActivityShow(@RequestParam("choose") int idActivity, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            this.idActivityEdit=idActivity;
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            Activities activities = activityService.getActivity(idActivityEdit);
+            model.addAttribute("activity", activities);
+            model.addAttribute("nameActivity",activities.getName());
+            model.addAttribute("activityList",activityService.activitiesList());
+            return "/admincontroller/activity/activityE";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/activity/activityE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
+    public String saveEditActivityShow(@RequestParam("data")List<String> activityEdit, @RequestParam("choose") int idActivity, Model model) {
+        if (sessionObject.getEmployee() != null) {
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("activity", new Activities());
+
+            if (this.idActivityEdit==idActivity) {
+                Activities activities = activityService.getActivity(idActivity);
+
+                activityService.saveChangeActivity(activities, activityEdit);
+
+                model.addAttribute("activityList", activityService.activitiesList());
+                model.addAttribute("nameActivity", activities.getName());
+                model.addAttribute("messageOK", "Zapisano zmiany w bazie dla edytowanego pobytu!");
+            } else{
+                model.addAttribute("message", "Dokunujesz zmian w wyedytowanym pobycie, " +
+                        "który jest inny niż zaznaczony! Edytuj pobyt jeszcze raz!");
+            }
+            return "/admincontroller/activity/activityE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/activity/activityE", method = RequestMethod.POST, params = "delete=USUŃ ZAJĘCIA")
+    public String deleteStayShow(@RequestParam("choose") int idActivity, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            this.idActivityEdit=idActivity;
+            return "redirect:../../admincontroller/activity/activityD";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/activity/activityD",method = RequestMethod.GET)
+    public String confirmDeleteStay(Model model){
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            Activities activities = activityService.getActivity(this.idActivityEdit);
+            model.addAttribute("activity", activities);
+            model.addAttribute("nameActivity",activities.getName());
+            model.addAttribute("activityList",activityService.activitiesList());
+            model.addAttribute("message","Czy na pewno chcesz usunąć wybrany pobyt?");
+            return "/admincontroller/activity/activityD";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
 }
