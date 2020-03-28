@@ -10,4 +10,6 @@ public interface ISingleBoardPriceService {
     boolean isSingleMealInDB(String name);
     List<SingleBoardPrice> getListSingleMeal();
     SingleBoardPrice getNameSingleMealById(int id);
+    void saveChangeSingleMeal(SingleBoardPrice singleBoardPrice, List<String> singleEdit);
+    void deleteSingleMeal(SingleBoardPrice singleBoardPrice);
 }

@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import pl.camp.it.dao.IPreschoolerSingleBoardInMonthDAO;
+import pl.camp.it.model.activities.PreschoolerActivityInMonth;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 
 import java.util.List;
@@ -68,5 +69,21 @@ public class PreschoolerSingleBoardInMonthDAOImpl implements IPreschoolerSingleB
                         PreschoolerSingleBoardInMonth.class).uniqueResult();
         session.close();
         return preschoolerSingleBoardInMonth;
+    }
+
+    @Override
+    public boolean isNameSingleMealPreschoolerInDB(String nameSingleMeal) {
+        Session session = sessionFactory.openSession();
+        List<PreschoolerSingleBoardInMonth> preschoolerSingleBoardInMonthList = session.createQuery
+                ("FROM pl.camp.it.model.meals.PreschoolerSingleBoardInMonth WHERE name='"+nameSingleMeal+"'"+
+                        "and quantity="+true, PreschoolerSingleBoardInMonth.class).list();
+        session.close();
+        boolean inDB;
+        if (preschoolerSingleBoardInMonthList.size()==0){
+            inDB=false;
+        }else {
+            inDB=true;
+        }
+        return inDB;
     }
 }

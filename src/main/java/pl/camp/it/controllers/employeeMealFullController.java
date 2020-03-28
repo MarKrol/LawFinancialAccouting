@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.camp.it.model.meals.FullBoardPrice;
 import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
+import pl.camp.it.model.meals.SingleBoardPrice;
 import pl.camp.it.model.month.Month;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.services.*;
@@ -21,6 +23,7 @@ public class employeeMealFullController {
     private int choose; //id group;
     private int idPreschoolerEditSave;
     private String monthEditSave;
+    private int idFullMealEdit;
 
     @Resource
     SessionObject sessionObject;
@@ -272,4 +275,35 @@ public class employeeMealFullController {
             return "redirect:../../login";
         }
     }
+
+    @RequestMapping(value = "admincontroller/meals/fullE", method = RequestMethod.GET)
+    public String editFullMealPage(Model model){
+        if (sessionObject.getEmployee() != null) {
+            this.idFullMealEdit=-1;
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("full", new FullBoardPrice());
+            model.addAttribute("fullList",fullBoardPriceService.getListFullMeal());
+            return "/admincontroller/meals/fullE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/meals/fullE", method = RequestMethod.POST, params = "edit=EDYTUJ DIETĘ")
+    public String editFullMealShow(@RequestParam("choose") int idFullMeal, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            this.idFullMealEdit=idFullMeal;
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            FullBoardPrice fullBoardPrice= fullBoardPriceService.getFullBoardPriceById(idFullMeal);
+            model.addAttribute("full", fullBoardPrice);
+            model.addAttribute("nameFull",fullBoardPrice.getName());
+            model.addAttribute("fullList",fullBoardPriceService.getListFullMeal());
+            return "admincontroller/meals/fullE";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
 }

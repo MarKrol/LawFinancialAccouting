@@ -11,6 +11,7 @@ import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.meals.SingleBoardPrice;
 import pl.camp.it.model.month.Month;
 import pl.camp.it.model.preschooler.Preschooler;
+import pl.camp.it.model.stay.Stay;
 import pl.camp.it.services.IPreschoolGroupService;
 import pl.camp.it.services.IPreschoolerService;
 import pl.camp.it.services.IPreschoolerSingleBoardInMonthService;
@@ -18,6 +19,7 @@ import pl.camp.it.services.ISingleBoardPriceService;
 import pl.camp.it.session.SessionObject;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
 public class employeeMealSingleController {
@@ -195,7 +197,7 @@ public class employeeMealSingleController {
                 model.addAttribute("nameSurname","");
                 model.addAttribute("month","");
                 model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
-                model.addAttribute("message", "Brak danych zadanych ustawień dla przedszkolaka: " +
+                model.addAttribute("message", "Brak danych dla zadanych ustawień dla przedszkolaka: " +
                         " " + preschooler.getName() + " " + preschooler.getSurname() + " w miesiącu " + month.toUpperCase() + ".");
             }
             return "/admincontroller/meals/singlemonthE";
@@ -248,4 +250,121 @@ public class employeeMealSingleController {
             return "redirect:../../login";
         }
     }
+
+    @RequestMapping(value = "admincontroller/meals/singleE", method = RequestMethod.GET)
+    public String editSingleMealPage(Model model){
+        if (sessionObject.getEmployee() != null) {
+            this.idSingleMealEditSave=-1;
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("single", new SingleBoardPrice());
+            model.addAttribute("singleList",singleBoardPriceService.getListSingleMeal());
+            return "/admincontroller/meals/singleE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/meals/singleE", method = RequestMethod.POST, params = "edit=EDYTUJ POSIŁEK")
+    public String editSingleMealShow(@RequestParam("choose") int idSingleMeal, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            this.idSingleMealEditSave=idSingleMeal;
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            SingleBoardPrice singleBoardPrice = singleBoardPriceService.getNameSingleMealById(idSingleMeal);
+            model.addAttribute("single", singleBoardPrice);
+            model.addAttribute("nameSingle",singleBoardPrice.getName());
+            model.addAttribute("singleList",singleBoardPriceService.getListSingleMeal());
+            return "admincontroller/meals/singleE";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/meals/singleE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
+    public String saveEditSingleMealShow(@RequestParam("data") List<String> singleEdit, @RequestParam("choose") int idSingleEdit, Model model) {
+        if (sessionObject.getEmployee() != null) {
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("single", new SingleBoardPrice());
+
+            if (this.idSingleMealEditSave==idSingleEdit) {
+                SingleBoardPrice singleBoardPrice = singleBoardPriceService.getNameSingleMealById(idSingleEdit);
+                singleBoardPriceService.saveChangeSingleMeal(singleBoardPrice, singleEdit);
+                model.addAttribute("singleList", singleBoardPriceService.getListSingleMeal());
+                model.addAttribute("nameSingle", singleBoardPrice.getName());
+                model.addAttribute("messageOK", "Zapisano zmiany w bazie dla edytowanego pobytu!");
+            } else{
+                model.addAttribute("message", "Dokunujesz zmian w wyedytowanym posiłku, " +
+                        "który jest inny niż zaznaczony! Edytuj pobyt jeszcze raz!");
+            }
+            return "admincontroller/meals/singleE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/meals/singleE", method = RequestMethod.POST, params = "delete=USUŃ POSIŁEK")
+    public String deleteSingleMealShow(@RequestParam("choose") int idSingleMeal, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            this.idSingleMealEditSave=idSingleMeal;
+            return "redirect:../../admincontroller/meals/singleD";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/meals/singleD",method = RequestMethod.GET)
+    public String confirmDeleteStay(Model model){
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            SingleBoardPrice singleBoardPrice = singleBoardPriceService.getNameSingleMealById(this.idSingleMealEditSave);
+            model.addAttribute("single", singleBoardPrice);
+            model.addAttribute("nameSingle",singleBoardPrice.getName());
+            model.addAttribute("singleList",singleBoardPriceService.getListSingleMeal());
+            model.addAttribute("message","Czy na pewno chcesz usunąć wybrany pobyt?");
+            return "admincontroller/meals/singleD";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/meals/singleD",method = RequestMethod.POST,params = "nodelete=NIE")
+    public String noDeleteSingleMeal(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/meals/singleE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/meals/singleD",method = RequestMethod.POST,params = "delete=TAK")
+    public String yesDeleteSingleMeal(Model model){
+        if (sessionObject.getEmployee() != null) {
+            if (!preschoolerSingleBoardInMonthService.isNameSingleMealPreschoolerInDB
+                    (singleBoardPriceService.getNameSingleMealById(this.idSingleMealEditSave).getName())) {
+                singleBoardPriceService.deleteSingleMeal(singleBoardPriceService.getNameSingleMealById(this.idSingleMealEditSave));
+                return "redirect:../../admincontroller/meals/singleE";
+            }else{
+                model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                        sessionObject.getEmployee().getSurname());
+                SingleBoardPrice singleBoardPrice = singleBoardPriceService.getNameSingleMealById(this.idSingleMealEditSave);
+                model.addAttribute("single", singleBoardPrice);
+                model.addAttribute("nameSingle",singleBoardPrice.getName());
+                model.addAttribute("singleList",singleBoardPriceService.getListSingleMeal());
+
+                model.addAttribute("message","Nie można usunąć posiłku ponieważ jest on już używany przez" +
+                        " program w innym miejscu. Usuń wszystkie przydzielone posiłki o tej nazwie, a dopiero " +
+                        "uzyskasz możliwość usunięcia pobytu!");
+
+                return "admincontroller/meals/singleD";
+            }
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+
 }

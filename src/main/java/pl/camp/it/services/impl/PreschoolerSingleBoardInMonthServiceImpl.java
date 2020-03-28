@@ -83,4 +83,9 @@ public class PreschoolerSingleBoardInMonthServiceImpl implements IPreschoolerSin
 
         preschoolerSingleBoardInMonthDAO.persistPreschoolerSingleBoardInMonthDAO(preschoolerSingleBoardInMonth);
     }
+
+    @Override
+    public boolean isNameSingleMealPreschoolerInDB(String nameSingleMeal) {
+        return this.preschoolerSingleBoardInMonthDAO.isNameSingleMealPreschoolerInDB(nameSingleMeal);
+    }
 }

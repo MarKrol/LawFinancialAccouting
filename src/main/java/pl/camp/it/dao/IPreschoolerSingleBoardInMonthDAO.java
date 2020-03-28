@@ -10,4 +10,5 @@ public interface IPreschoolerSingleBoardInMonthDAO{
     PreschoolerSingleBoardInMonth preschoolerSingleMealMonthInDB(int idPreschooler, String month, String name);
     List<PreschoolerSingleBoardInMonth> listPreschoolerSingleMealMonthInDB(int idPreschooler, String month);
     PreschoolerSingleBoardInMonth getPreschoolerSingleBoardMonthById(int id);
+    boolean isNameSingleMealPreschoolerInDB(String nameSingleMeal);
 }
