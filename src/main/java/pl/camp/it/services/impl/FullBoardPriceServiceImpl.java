@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.camp.it.dao.IFullBoardPriceDAO;
 import pl.camp.it.model.meals.FullBoardPrice;
+import pl.camp.it.model.meals.SingleBoardPrice;
 import pl.camp.it.services.IFullBoardPriceService;
 
 import java.time.LocalDate;
@@ -41,5 +42,22 @@ public class FullBoardPriceServiceImpl implements IFullBoardPriceService {
     @Override
     public int getIdFullBoardPriceByName(String name) {
         return this.fullBoardPriceDAO.getIdFullBoardPriceByName(name);
+    }
+
+    @Override
+    public void saveChangeFullMeal(FullBoardPrice fullBoardPrice, List<String> fullEdit) {
+        fullBoardPrice.setFirstBreakfastPriceNet(Double.parseDouble(fullEdit.get(0)));
+        fullBoardPrice.setSecondBreakfastPriceNet(Double.parseDouble(fullEdit.get(1)));
+        fullBoardPrice.setDinnerPriceNet(Double.parseDouble(fullEdit.get(2)));
+        fullBoardPrice.setTeaPriceNet(Double.parseDouble(fullEdit.get(3)));
+        fullBoardPrice.setVAT(Integer.parseInt(fullEdit.get(4)));
+        this.fullBoardPriceDAO.persistFullBoardPrice(fullBoardPrice);
+    }
+
+    @Override
+    public void deleteFullMeal(FullBoardPrice fullBoardPrice) {
+        fullBoardPrice.setLocalDateDeleteFromDB(LocalDate.now());
+        fullBoardPrice.setQuantity(false);
+        this.fullBoardPriceDAO.persistFullBoardPrice(fullBoardPrice);
     }
 }

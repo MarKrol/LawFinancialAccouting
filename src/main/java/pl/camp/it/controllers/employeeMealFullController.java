@@ -16,6 +16,7 @@ import pl.camp.it.services.*;
 import pl.camp.it.session.SessionObject;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
 public class employeeMealFullController {
@@ -306,4 +307,88 @@ public class employeeMealFullController {
         }
     }
 
+    @RequestMapping(value = "admincontroller/meals/fullE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
+    public String saveEditFullMealShow(@RequestParam("data") List<String> fullEdit, @RequestParam("choose") int idFullEdit, Model model) {
+        if (sessionObject.getEmployee() != null) {
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("full", new FullBoardPrice());
+
+            if (this.idFullMealEdit==idFullMealEdit) {
+                FullBoardPrice fullBoardPrice= fullBoardPriceService.getFullBoardPriceById(idFullEdit);
+                fullBoardPriceService.saveChangeFullMeal(fullBoardPrice, fullEdit);
+                model.addAttribute("fullList", fullBoardPriceService.getListFullMeal());
+                model.addAttribute("nameFull", fullBoardPrice.getName());
+                model.addAttribute("messageOK", "Zapisano zmiany w bazie dla edytowanego pobytu!");
+            } else{
+                model.addAttribute("message", "Dokunujesz zmian w wyedytowanym posiłku, " +
+                        "który jest inny niż zaznaczony! Edytuj pobyt jeszcze raz!");
+            }
+            return "admincontroller/meals/fullE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/meals/fullE", method = RequestMethod.POST, params = "delete=USUŃ DIETĘ")
+    public String deleteSingleMealShow(@RequestParam("choose") int idFullMeal, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            this.idFullMealEdit=idFullMeal;
+            return "redirect:../../admincontroller/meals/fullD";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/meals/fullD",method = RequestMethod.GET)
+    public String confirmDeleteFullMeal(Model model){
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            FullBoardPrice fullBoardPrice= fullBoardPriceService.getFullBoardPriceById(this.idFullMealEdit);
+            model.addAttribute("full", fullBoardPrice);
+            model.addAttribute("nameFull",fullBoardPrice.getName());
+            model.addAttribute("fullList",fullBoardPriceService.getListFullMeal());
+            model.addAttribute("message","Czy na pewno chcesz usunąć wybraną dietę?");
+            return "admincontroller/meals/fullD";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/meals/fullD",method = RequestMethod.POST,params = "nodelete=NIE")
+    public String noDeleteFullMeal(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/meals/fullE";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/meals/fullD",method = RequestMethod.POST,params = "delete=TAK")
+    public String yesDeleteSingleMeal(Model model){
+        if (sessionObject.getEmployee() != null) {
+            if (!preschoolerFullBoardInMonthService.isNameFullMealPreschoolerInDB
+                    (fullBoardPriceService.getFullBoardPriceById(this.idFullMealEdit).getName())) {
+                fullBoardPriceService.deleteFullMeal(fullBoardPriceService.getFullBoardPriceById(this.idFullMealEdit));
+                return "redirect:../../admincontroller/meals/fullE";
+            }else{
+                model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                        sessionObject.getEmployee().getSurname());
+                FullBoardPrice fullBoardPrice= fullBoardPriceService.getFullBoardPriceById(this.idFullMealEdit);
+                model.addAttribute("full", fullBoardPrice);
+                model.addAttribute("nameFull",fullBoardPrice.getName());
+                model.addAttribute("fullList",fullBoardPriceService.getListFullMeal());
+
+                model.addAttribute("message","Nie można usunąć diety ponieważ jest on już używany przez" +
+                        " program w innym miejscu. Usuń wszystkie przydzielone diety o tej nazwie, a dopiero " +
+                        "uzyskasz możliwość usunięcia diety!");
+
+                return "admincontroller/meals/fullD";
+            }
+        }else {
+            return "redirect:../../login";
+        }
+    }
 }

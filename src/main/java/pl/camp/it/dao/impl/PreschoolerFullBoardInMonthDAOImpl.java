@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import pl.camp.it.dao.IPreschoolerFullBoardInMonthDAO;
 import pl.camp.it.model.meals.FullBoardPrice;
 import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
+import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 
 import java.util.List;
 
@@ -63,5 +64,21 @@ public class PreschoolerFullBoardInMonthDAOImpl implements IPreschoolerFullBoard
                         "and quantity="+true,PreschoolerFullBoardInMonth.class).uniqueResult();
         session.close();
         return preschoolerFullBoardInMonth;
+    }
+
+    @Override
+    public boolean isNameFullMealPreschoolerInDB(String nameFullMeal) {
+        Session session = sessionFactory.openSession();
+        List<PreschoolerFullBoardInMonth> preschoolerFullBoardInMonthList = session.createQuery
+                ("FROM pl.camp.it.model.meals.PreschoolerFullBoardInMonth WHERE nameDiet='"+nameFullMeal+"'"+
+                        "and quantity="+true, PreschoolerFullBoardInMonth.class).list();
+        session.close();
+        boolean inDB;
+        if (preschoolerFullBoardInMonthList.size()==0){
+            inDB=false;
+        }else {
+            inDB=true;
+        }
+        return inDB;
     }
 }

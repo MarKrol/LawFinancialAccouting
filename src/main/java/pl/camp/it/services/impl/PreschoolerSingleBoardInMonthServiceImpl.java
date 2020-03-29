@@ -88,4 +88,6 @@ public class PreschoolerSingleBoardInMonthServiceImpl implements IPreschoolerSin
     public boolean isNameSingleMealPreschoolerInDB(String nameSingleMeal) {
         return this.preschoolerSingleBoardInMonthDAO.isNameSingleMealPreschoolerInDB(nameSingleMeal);
     }
+
+
 }

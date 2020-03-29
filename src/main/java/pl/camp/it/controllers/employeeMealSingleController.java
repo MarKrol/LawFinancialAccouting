@@ -316,7 +316,7 @@ public class employeeMealSingleController {
     }
 
     @RequestMapping(value = "admincontroller/meals/singleD",method = RequestMethod.GET)
-    public String confirmDeleteStay(Model model){
+    public String confirmDeleteSingleMeal(Model model){
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -357,7 +357,7 @@ public class employeeMealSingleController {
 
                 model.addAttribute("message","Nie można usunąć posiłku ponieważ jest on już używany przez" +
                         " program w innym miejscu. Usuń wszystkie przydzielone posiłki o tej nazwie, a dopiero " +
-                        "uzyskasz możliwość usunięcia pobytu!");
+                        "uzyskasz możliwość usunięcia posiłku!");
 
                 return "admincontroller/meals/singleD";
             }
@@ -365,6 +365,4 @@ public class employeeMealSingleController {
             return "redirect:../../login";
         }
     }
-
-
 }

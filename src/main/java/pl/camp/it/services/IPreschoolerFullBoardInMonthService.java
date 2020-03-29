@@ -12,5 +12,6 @@ public interface IPreschoolerFullBoardInMonthService {
                                                    PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit);
     void saveEditSettlementPreschoolerFullBoardInMonth(PreschoolerFullBoardInMonth preschoolerFullBoardInMonth,
                                                    PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit);
+    boolean isNameFullMealPreschoolerInDB(String nameFullMeal);
 
 }

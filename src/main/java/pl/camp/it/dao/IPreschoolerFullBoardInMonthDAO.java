@@ -10,4 +10,5 @@ public interface IPreschoolerFullBoardInMonthDAO {
     String getNameDietByIdPreschoolerFromFullBoardInMonth(int idPreschooler);
     boolean isMonthPreschoolerFullBoardInMonthInDB(int idPreschooler, String month);
     PreschoolerFullBoardInMonth getPreschoolerFullBoardInMonth(int idPreschooler, String month);
+    boolean isNameFullMealPreschoolerInDB(String nameFullMeal);
 }

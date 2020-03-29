@@ -81,4 +81,9 @@ public class PreschoolerFullBoardInMonthServiceImpl implements IPreschoolerFullB
 
         this.preschoolerFullBoardInMonthDAO.persistPreschoolerFullBoardInMonth(preschoolerFullBoardInMonth);
     }
+
+    @Override
+    public boolean isNameFullMealPreschoolerInDB(String nameFullMeal) {
+        return this.preschoolerFullBoardInMonthDAO.isNameFullMealPreschoolerInDB(nameFullMeal);
+    }
 }
