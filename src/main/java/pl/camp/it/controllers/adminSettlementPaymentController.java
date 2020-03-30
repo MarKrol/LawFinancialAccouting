@@ -462,7 +462,6 @@ public class adminSettlementPaymentController {
         if (sessionObject.getEmployee() != null) {
 
             this.idPreschoolerChoose=idPreschooler;
-            this.monthChoose=paymentService.getNameMonthByDate(date);
             this.idCompanyChoose=idCompany;
 
             model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -482,6 +481,7 @@ public class adminSettlementPaymentController {
                 model.addAttribute("sumPayment", 0.00);
                 model.addAttribute("message","Właty nie dodano do bazy. Ustaw datę wpłaty, aby dodać ją do bazy!");
             }else {
+                this.monthChoose=paymentService.getNameMonthByDate(date);
                 paymentService.addPaymentToDataBase(nameAndPayment, date, preschooler, company);
 
                 List<Payment> paymentList = paymentService.getListPayment

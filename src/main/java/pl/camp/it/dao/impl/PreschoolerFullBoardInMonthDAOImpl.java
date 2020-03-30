@@ -81,4 +81,14 @@ public class PreschoolerFullBoardInMonthDAOImpl implements IPreschoolerFullBoard
         }
         return inDB;
     }
+
+    @Override
+    public PreschoolerFullBoardInMonth getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(int id) {
+        Session session = sessionFactory.openSession();
+        PreschoolerFullBoardInMonth preschoolerFullBoardInMonth = session.createQuery
+                ("FROM pl.camp.it.model.meals.PreschoolerFullBoardInMonth WHERE id="
+                        +id+" and quantity="+true, PreschoolerFullBoardInMonth.class).uniqueResult();
+        session.close();
+        return preschoolerFullBoardInMonth;
+    }
 }

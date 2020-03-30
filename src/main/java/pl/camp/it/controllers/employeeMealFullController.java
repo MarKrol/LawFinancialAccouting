@@ -3,10 +3,7 @@ package pl.camp.it.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.camp.it.model.meals.FullBoardPrice;
 import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
 import pl.camp.it.model.meals.SingleBoardPrice;
@@ -21,10 +18,12 @@ import java.util.List;
 @Controller
 public class employeeMealFullController {
 
-    private int choose; //id group;
+    private int choose=-1; //id group;
     private int idPreschoolerEditSave;
-    private String monthEditSave;
+    private String monthEditSave=null;
     private int idFullMealEdit;
+    private int tempChoose;
+    private String tempNameMonth;
 
     @Resource
     SessionObject sessionObject;
@@ -251,7 +250,7 @@ public class employeeMealFullController {
 
                         preschoolerFullBoardInMonthService.editAndPersistPreschoolerFullBoardInMonth
                                 (preschoolerFullBoardInMonthService.getPreschoolerFullBoardInMonth(idPreschooler, month),
-                                        preschoolerFullBoardInMonthEdit);
+                                        preschoolerFullBoardInMonthEdit,fullBoardPriceService.getFullBoardPriceById(idDiet).getName()); //change
                         model.addAttribute("messageOK", "Zaktualizowano dane w bazie" +
                                 " dla przedszkolaka: " + " " + preschooler.getName() + " " + preschooler.getSurname()
                                 + " za miesiąc " + month.toUpperCase() + ".");
@@ -388,6 +387,165 @@ public class employeeMealFullController {
                 return "admincontroller/meals/fullD";
             }
         }else {
+            return "redirect:../../login";
+        }
+    }
+
+
+    @RequestMapping(value = "/admincontroller/meals/fullmonthVD", method = RequestMethod.GET)
+    public String showViewFullMeal(Model model){
+        if (sessionObject.getEmployee() != null) {
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+
+            if (this.choose!=-1 && this.monthEditSave!=null) {
+                model.addAttribute("fullMealAllPreschoolers",
+                        preschoolerFullBoardInMonthService.getAllPreschoolerListByIdPreschoolerByMonth
+                                (preschoolerService.getPreschoolerList(this.choose), this.monthEditSave));
+                model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
+                model.addAttribute("month", this.monthEditSave);
+                this.choose=-1;
+                this.monthEditSave=null;
+            }
+            return "/admincontroller/meals/fullmonthVD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/meals/fullmonthVD", method = RequestMethod.POST)
+    public String showViewFullMealAllPreschooler(@RequestParam("choose1") String nameMonth,
+                                                 @RequestParam("choose") int idGroup,  Model model){
+        if (sessionObject.getEmployee() != null) {
+            this.monthEditSave=nameMonth;   this.tempNameMonth=nameMonth;
+            this.choose=idGroup;            this.tempChoose =idGroup;
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("fullMealAllPreschoolers",
+                    preschoolerFullBoardInMonthService.getAllPreschoolerListByIdPreschoolerByMonth
+                            (preschoolerService.getPreschoolerList(idGroup),nameMonth));
+            model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(idGroup));
+            model.addAttribute("month",nameMonth);
+            return "/admincontroller/meals/fullmonthVD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/fullmonthVD/{id}", method = RequestMethod.GET)
+    public String ShowEditFullMealPreschooler(@PathVariable String id, Model model){
+        if (sessionObject.getEmployee() != null) {
+                this.choose=this.tempChoose;
+                this.monthEditSave=this.tempNameMonth;
+                sessionObject.setSendData(Integer.parseInt(id));
+            return "redirect:../../../admincontroller/meals/fullmonthVE";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/fullmonthVE", method = RequestMethod.GET)
+    public String editFullMealPreschooler(Model model){
+        if (sessionObject.getEmployee() != null) {
+            PreschoolerFullBoardInMonth preschoolerFullBoardInMonth=
+                    preschoolerFullBoardInMonthService.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(sessionObject.getSendData());
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("month",this.monthEditSave);
+            model.addAttribute("preschooler",
+                    preschoolerFullBoardInMonth.getPreschooler().getSurname()+" "+preschoolerFullBoardInMonth.getPreschooler().getName());
+            model.addAttribute("fullMeal",preschoolerFullBoardInMonth);
+            model.addAttribute("listFullMeal",fullBoardPriceService.getListFullMeal());
+            model.addAttribute("dietEdit",preschoolerFullBoardInMonth.getNameDiet());
+            model.addAttribute("fullMealPreschooler", new PreschoolerFullBoardInMonth());
+            return "/admincontroller/meals/fullmonthVE";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/fullmonthVE", method = RequestMethod.POST, params = "return=POWRÓT DO PODGLĄDU")
+    public String noSaveChangeFullMealEditPOT(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/meals/fullmonthVD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/fullmonthVE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
+    public String saveChangeFullMealEditPOST(@ModelAttribute PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit,
+                                             @RequestParam("choose2") String nameDiet){
+        if (sessionObject.getEmployee() != null) {
+            preschoolerFullBoardInMonthService.editAndPersistPreschoolerFullBoardInMonth
+                    (preschoolerFullBoardInMonthService.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(sessionObject.getSendData())
+                            ,preschoolerFullBoardInMonthEdit,nameDiet);
+            return "redirect:../../admincontroller/meals/fullmonthVD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/fullmonthVD/D/{id}", method = RequestMethod.GET)
+    public String showDeleteFullMealPreschooler(@PathVariable String id, Model model){
+        if (sessionObject.getEmployee() != null) {
+            this.choose=this.tempChoose;
+            this.monthEditSave=this.tempNameMonth;
+            sessionObject.setSendData(Integer.parseInt(id));
+            return "redirect:../../../../admincontroller/meals/fullmonthVDD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/fullmonthVDD", method = RequestMethod.GET)
+    public String deleteFullMealPreschooler(Model model){
+        if (sessionObject.getEmployee() != null) {
+            PreschoolerFullBoardInMonth preschoolerFullBoardInMonth=
+                    preschoolerFullBoardInMonthService.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(sessionObject.getSendData());
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("month",this.monthEditSave);
+            model.addAttribute("preschooler",
+                    preschoolerFullBoardInMonth.getPreschooler().getSurname()+" "+preschoolerFullBoardInMonth.getPreschooler().getName());
+            model.addAttribute("fullMeal",preschoolerFullBoardInMonth);
+            model.addAttribute("listFullMeal",fullBoardPriceService.getListFullMeal());
+            model.addAttribute("dietEdit",preschoolerFullBoardInMonth.getNameDiet());
+            model.addAttribute("fullMealPreschooler", new PreschoolerFullBoardInMonth());
+            model.addAttribute("message","Czy na pewno chcesz usunąć wybrane dane?");
+            return "/admincontroller/meals/fullmonthVDD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/fullmonthVDD", method = RequestMethod.POST, params = "noDelete=NIE")
+    public String noDeleteFullMealEditPOT(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/meals/fullmonthVD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/fullmonthVDD", method = RequestMethod.POST, params = "delete=TAK")
+    public String deleteFullMealEditPOST(){
+        if (sessionObject.getEmployee() != null) {
+            preschoolerFullBoardInMonthService.
+                    deleteFullMealPreschoolInMonthByIdPreschoolerFullMealBoardPrice(sessionObject.getSendData());
+            return "redirect:../../admincontroller/meals/fullmonthVD";
+        }else{
             return "redirect:../../login";
         }
     }

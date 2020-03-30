@@ -6,8 +6,12 @@ import pl.camp.it.dao.IFullBoardPriceDAO;
 import pl.camp.it.dao.IPreschoolerFullBoardInMonthDAO;
 import pl.camp.it.model.meals.FullBoardPrice;
 import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
+import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.services.IPreschoolerFullBoardInMonthService;
 import pl.camp.it.services.IPreschoolerService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PreschoolerFullBoardInMonthServiceImpl implements IPreschoolerFullBoardInMonthService {
@@ -55,8 +59,10 @@ public class PreschoolerFullBoardInMonthServiceImpl implements IPreschoolerFullB
 
     @Override
     public void editAndPersistPreschoolerFullBoardInMonth(PreschoolerFullBoardInMonth preschoolerFullBoardInMonth,
-                                                          PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit) {
+                                                          PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit,
+                                                          String nameDiet) { //change
 
+        preschoolerFullBoardInMonth.setNameDiet(nameDiet);
         preschoolerFullBoardInMonth.setNumberFirstBreakfast(preschoolerFullBoardInMonthEdit.getNumberFirstBreakfast());
         preschoolerFullBoardInMonth.setNumberSecondBreakfast(preschoolerFullBoardInMonthEdit.getNumberSecondBreakfast());
         preschoolerFullBoardInMonth.setNumberDinner(preschoolerFullBoardInMonthEdit.getNumberDinner());
@@ -85,5 +91,30 @@ public class PreschoolerFullBoardInMonthServiceImpl implements IPreschoolerFullB
     @Override
     public boolean isNameFullMealPreschoolerInDB(String nameFullMeal) {
         return this.preschoolerFullBoardInMonthDAO.isNameFullMealPreschoolerInDB(nameFullMeal);
+    }
+
+    @Override
+    public List<PreschoolerFullBoardInMonth> getAllPreschoolerListByIdPreschoolerByMonth(List<Preschooler> preschoolerList, String month) {
+        List<PreschoolerFullBoardInMonth> preschoolerFullBoardInMonthList = new ArrayList<>();
+        for(Preschooler preschooler: preschoolerList){
+            PreschoolerFullBoardInMonth temp;
+            if ((temp=preschoolerFullBoardInMonthDAO.getPreschoolerFullBoardInMonth(preschooler.getId(),month))!=null) {
+                preschoolerFullBoardInMonthList.add(temp);
+            }
+        }
+        return preschoolerFullBoardInMonthList;
+    }
+
+    @Override
+    public PreschoolerFullBoardInMonth getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(int id) {
+        return this.preschoolerFullBoardInMonthDAO.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(id);
+    }
+
+    @Override
+    public void deleteFullMealPreschoolInMonthByIdPreschoolerFullMealBoardPrice(int idPreschoolerFullMealBoardPrice) {
+        PreschoolerFullBoardInMonth preschoolerFullBoardInMonth =
+                preschoolerFullBoardInMonthDAO.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(idPreschoolerFullMealBoardPrice);
+        preschoolerFullBoardInMonth.setQuantity(false);
+        this.preschoolerFullBoardInMonthDAO.persistPreschoolerFullBoardInMonth(preschoolerFullBoardInMonth);
     }
 }
