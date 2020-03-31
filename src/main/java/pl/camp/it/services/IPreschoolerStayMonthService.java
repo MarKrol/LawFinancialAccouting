@@ -1,5 +1,6 @@
 package pl.camp.it.services;
 
+import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.model.stay.PreschoolerStayMonth;
 import pl.camp.it.model.stay.Stay;
@@ -18,4 +19,7 @@ public interface IPreschoolerStayMonthService {
                                      PreschoolerStayMonth preschoolerStayMonthEdit);
     List<PreschoolerStayMonth> getPreschoolerStayMonthByIdPreschooler(int idPreschooler);
     boolean isNameStayPreschoolerInDB(String nameStay);
+    List<PreschoolerStayMonth> getAllPreschoolerListByIdPreschoolerByMonth
+                                                (List<Preschooler> preschoolerList, String month, String nameStay);
+    void deleteStayPreschoolInMonthByIdPreschoolerStayBoardPrice(int idPreschoolerStayBoardPrice);
 }

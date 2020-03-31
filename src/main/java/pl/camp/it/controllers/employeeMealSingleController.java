@@ -368,7 +368,7 @@ public class employeeMealSingleController {
     }
 
     @RequestMapping(value = "/admincontroller/meals/singlemonthVD", method = RequestMethod.GET)
-    public String showViewSingleMeal(Model model){
+    public String showViewStay(Model model){
         if (sessionObject.getEmployee() != null) {
 
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -411,7 +411,7 @@ public class employeeMealSingleController {
     }
 
     @RequestMapping(value ="/admincontroller/meals/singlemonthVD/{id}", method = RequestMethod.GET)
-    public String ShowEditFullMealPreschooler(@PathVariable String id, Model model){
+    public String ShowEditSingleMealPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
             this.choose=this.tempChoose;
             this.monthEditSave=this.tempNameMonth;

@@ -9,6 +9,7 @@ import pl.camp.it.model.stay.PreschoolerStayMonth;
 import pl.camp.it.model.stay.Stay;
 import pl.camp.it.services.IPreschoolerStayMonthService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -85,5 +86,26 @@ public class PreschoolerStayMonthServiceImpl implements IPreschoolerStayMonthSer
     @Override
     public boolean isNameStayPreschoolerInDB(String nameStay) {
         return this.preschoolerStayMonthDAO.isNameStayPreschoolerInDB(nameStay);
+    }
+
+    @Override
+    public List<PreschoolerStayMonth> getAllPreschoolerListByIdPreschoolerByMonth
+            (List<Preschooler> preschoolerList, String month, String nameStay) {
+        List<PreschoolerStayMonth> preschoolerStayMonthList = new ArrayList<>();
+        for(Preschooler preschooler: preschoolerList){
+            PreschoolerStayMonth temp;
+            if ((temp=preschoolerStayMonthDAO.preschoolerStayMonth(preschooler.getId(),month, nameStay))!=null) {
+                preschoolerStayMonthList.add(temp);
+            }
+        }
+        return preschoolerStayMonthList;
+    }
+
+    @Override
+    public void deleteStayPreschoolInMonthByIdPreschoolerStayBoardPrice(int idPreschoolerStayBoardPrice) {
+        PreschoolerStayMonth preschoolerStayMonth=
+                preschoolerStayMonthDAO.getPreschoolerStayMonthById(idPreschoolerStayBoardPrice);
+        preschoolerStayMonth.setQuantity(false);
+        this.preschoolerStayMonthDAO.persistPreschoolerStayMonth(preschoolerStayMonth);
     }
 }
