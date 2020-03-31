@@ -3,11 +3,13 @@ package pl.camp.it.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.camp.it.dao.IPreschoolerSingleBoardInMonthDAO;
+import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.meals.SingleBoardPrice;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.services.IPreschoolerSingleBoardInMonthService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -89,5 +91,24 @@ public class PreschoolerSingleBoardInMonthServiceImpl implements IPreschoolerSin
         return this.preschoolerSingleBoardInMonthDAO.isNameSingleMealPreschoolerInDB(nameSingleMeal);
     }
 
+    @Override
+    public List<PreschoolerSingleBoardInMonth> getAllPreschoolerListByIdPreschoolerByMonth
+                                                    (List<Preschooler> preschoolerList, String month, String nameSingleMeal) {
+        List<PreschoolerSingleBoardInMonth> preschoolerSingleBoardInMonthList = new ArrayList<>();
+        for(Preschooler preschooler: preschoolerList){
+            PreschoolerSingleBoardInMonth temp;
+            if ((temp=preschoolerSingleBoardInMonthDAO.getPreschoolerSingleMealMonthInDB(preschooler.getId(),month, nameSingleMeal))!=null) {
+                preschoolerSingleBoardInMonthList.add(temp);
+            }
+        }
+        return preschoolerSingleBoardInMonthList;
+    }
 
+    @Override
+    public void deleteSingleMealPreschoolInMonthByIdPreschoolerSingleMealBoardPrice(int idPreschoolerSingleMealBoardPrice) {
+        PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth=
+                preschoolerSingleBoardInMonthDAO.getPreschoolerSingleBoardMonthById(idPreschoolerSingleMealBoardPrice);
+        preschoolerSingleBoardInMonth.setQuantity(false);
+        this.preschoolerSingleBoardInMonthDAO.persistPreschoolerSingleBoardInMonthDAO(preschoolerSingleBoardInMonth);
+    }
 }

@@ -86,4 +86,15 @@ public class PreschoolerSingleBoardInMonthDAOImpl implements IPreschoolerSingleB
         }
         return inDB;
     }
+
+    @Override
+    public PreschoolerSingleBoardInMonth getPreschoolerSingleMealMonthInDB(int idPreschooler, String month, String name) {
+        Session session = sessionFactory.openSession();
+        PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth =session.createQuery
+                ("FROM pl.camp.it.model.meals.PreschoolerSingleBoardInMonth WHERE preschoolerId="+idPreschooler+
+                                "and month='"+month.toUpperCase()+"'"+"and name='"+name.toUpperCase()+"'"+"and quantity="+true,
+                        PreschoolerSingleBoardInMonth.class).uniqueResult();
+        session.close();
+        return preschoolerSingleBoardInMonth;
+    }
 }

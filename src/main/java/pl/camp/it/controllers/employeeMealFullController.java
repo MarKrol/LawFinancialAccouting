@@ -422,16 +422,16 @@ public class employeeMealFullController {
         if (sessionObject.getEmployee() != null) {
             this.monthEditSave=nameMonth;   this.tempNameMonth=nameMonth;
             this.choose=idGroup;            this.tempChoose =idGroup;
-            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
-                    sessionObject.getEmployee().getSurname());
-            model.addAttribute("listMonth", Month.getMonth());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
-            model.addAttribute("fullMealAllPreschoolers",
-                    preschoolerFullBoardInMonthService.getAllPreschoolerListByIdPreschoolerByMonth
-                            (preschoolerService.getPreschoolerList(idGroup),nameMonth));
-            model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(idGroup));
-            model.addAttribute("month",nameMonth);
-            return "/admincontroller/meals/fullmonthVD";
+//            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+//                    sessionObject.getEmployee().getSurname());
+//            model.addAttribute("listMonth", Month.getMonth());
+//            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+//            model.addAttribute("fullMealAllPreschoolers",
+//                    preschoolerFullBoardInMonthService.getAllPreschoolerListByIdPreschoolerByMonth
+//                            (preschoolerService.getPreschoolerList(idGroup),nameMonth));
+//            model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(idGroup));
+//            model.addAttribute("month",nameMonth);
+            return "redirect:../../admincontroller/meals/fullmonthVD";
         }else{
             return "redirect:../../login";
         }

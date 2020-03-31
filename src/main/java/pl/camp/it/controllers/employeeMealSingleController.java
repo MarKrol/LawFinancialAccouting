@@ -3,10 +3,8 @@ package pl.camp.it.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.meals.SingleBoardPrice;
 import pl.camp.it.model.month.Month;
@@ -28,6 +26,9 @@ public class employeeMealSingleController {
     private int idPreschoolerEditSave;
     private String monthEditSave;
     private int idSingleMealEditSave;
+    private int tempChoose;
+    private String tempNameMonth;
+    private int tempSingleMealEditSave;
 
     @Resource
     SessionObject sessionObject;
@@ -365,4 +366,158 @@ public class employeeMealSingleController {
             return "redirect:../../login";
         }
     }
+
+    @RequestMapping(value = "/admincontroller/meals/singlemonthVD", method = RequestMethod.GET)
+    public String showViewSingleMeal(Model model){
+        if (sessionObject.getEmployee() != null) {
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listSingleMeal",singleBoardPriceService.getListSingleMeal());
+
+            if (this.choose!=-1 && this.monthEditSave!=null && this.idSingleMealEditSave!=-1) {
+                model.addAttribute("singleMealAllPreschoolers",
+                        preschoolerSingleBoardInMonthService.getAllPreschoolerListByIdPreschoolerByMonth
+                                (preschoolerService.getPreschoolerList(this.choose),this.monthEditSave,
+                                        singleBoardPriceService.getNameSingleMealById(this.idSingleMealEditSave).getName()));
+                model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
+                model.addAttribute("month", this.monthEditSave);
+                model.addAttribute("nameSingleMeal", singleBoardPriceService.getNameSingleMealById(this.idSingleMealEditSave).getName());
+                this.choose=-1;
+                this.monthEditSave=null;
+                this.idSingleMealEditSave=-1;
+            }
+            return "/admincontroller/meals/singlemonthVD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "/admincontroller/meals/singlemonthVD", method = RequestMethod.POST)
+    public String showViewSingleMealAllPreschooler(@RequestParam("choose1") String nameMonth,
+                                                   @RequestParam("choose2") int idSingleMeal,
+                                                   @RequestParam("choose") int idGroup,  Model model){
+        if (sessionObject.getEmployee() != null) {
+            this.monthEditSave=nameMonth;                this.tempNameMonth=nameMonth;
+            this.choose=idGroup;                         this.tempChoose =idGroup;
+            this.idSingleMealEditSave= idSingleMeal;     this.tempSingleMealEditSave=idSingleMeal;
+
+            return "redirect:../../admincontroller/meals/singlemonthVD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/singlemonthVD/{id}", method = RequestMethod.GET)
+    public String ShowEditFullMealPreschooler(@PathVariable String id, Model model){
+        if (sessionObject.getEmployee() != null) {
+            this.choose=this.tempChoose;
+            this.monthEditSave=this.tempNameMonth;
+            this.idSingleMealEditSave=this.tempSingleMealEditSave;
+            sessionObject.setSendData(Integer.parseInt(id));
+            return "redirect:../../../admincontroller/meals/singlemonthVE";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/singlemonthVE", method = RequestMethod.GET)
+    public String editSingleMealPreschooler(Model model){
+        if (sessionObject.getEmployee() != null) {
+            PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth=
+                    preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(sessionObject.getSendData());
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("month",this.monthEditSave);
+            model.addAttribute("preschooler",
+                    preschoolerSingleBoardInMonth.getPreschooler().getSurname()+" "+preschoolerSingleBoardInMonth.getPreschooler().getName());
+            model.addAttribute("singleMeal",preschoolerSingleBoardInMonth);
+            model.addAttribute("singleMealPreschooler", new PreschoolerSingleBoardInMonth());
+            return "/admincontroller/meals/singlemonthVE";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/singlemonthVE", method = RequestMethod.POST, params = "return=POWRÓT DO PODGLĄDU")
+    public String noSaveChangeSingleMealEditPOT(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/meals/singlemonthVD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/singlemonthVE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
+    public String saveChangeSingleMealEditPOST(@ModelAttribute PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonthEdit){
+        if (sessionObject.getEmployee() != null) {
+            preschoolerSingleBoardInMonthService.saveSingleMealAfterChange
+                    (preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(sessionObject.getSendData())
+                                                                                    ,preschoolerSingleBoardInMonthEdit);
+            return "redirect:../../admincontroller/meals/singlemonthVD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/singlemonthVD/D/{id}", method = RequestMethod.GET)
+    public String showDeleteFullMealPreschooler(@PathVariable String id, Model model){
+        if (sessionObject.getEmployee() != null) {
+            this.choose=this.tempChoose;
+            this.monthEditSave=this.tempNameMonth;
+            this.idSingleMealEditSave=this.tempSingleMealEditSave;
+            sessionObject.setSendData(Integer.parseInt(id));
+            return "redirect:../../../../admincontroller/meals/singlemonthVDD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/singlemonthVDD", method = RequestMethod.GET)
+    public String deleteFullMealPreschooler(Model model){
+        if (sessionObject.getEmployee() != null) {
+            PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth=
+                    preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(sessionObject.getSendData());
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
+            model.addAttribute("listMonth", Month.getMonth());
+            model.addAttribute("month",this.monthEditSave);
+            model.addAttribute("preschooler",
+                    preschoolerSingleBoardInMonth.getPreschooler().getSurname()+" "+preschoolerSingleBoardInMonth.getPreschooler().getName());
+            model.addAttribute("singleMeal",preschoolerSingleBoardInMonth);
+            model.addAttribute("singleMealPreschooler", new PreschoolerSingleBoardInMonth());
+            model.addAttribute("message","Czy na pewno chcesz usunąć wybrane dane?");
+            return "/admincontroller/meals/singlemonthVDD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/singlemonthVDD", method = RequestMethod.POST, params = "noDelete=NIE")
+    public String noDeleteSingleMealEditPOT(){
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/meals/singlemonthVD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value ="/admincontroller/meals/singlemonthVDD", method = RequestMethod.POST, params = "delete=TAK")
+    public String deleteSingleMealEditPOST(){
+        if (sessionObject.getEmployee() != null) {
+            preschoolerSingleBoardInMonthService.deleteSingleMealPreschoolInMonthByIdPreschoolerSingleMealBoardPrice
+                    (sessionObject.getSendData());
+            return "redirect:../../admincontroller/meals/singlemonthVD";
+        }else{
+            return "redirect:../../login";
+        }
+    }
+
 }
