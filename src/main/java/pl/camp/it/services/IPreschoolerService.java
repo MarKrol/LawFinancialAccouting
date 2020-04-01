@@ -10,4 +10,6 @@ public interface IPreschoolerService {
     Preschooler setPreschoolerAndAddPreschoolGroupToPreschooler(Preschooler preschooler, String nameGroup);
     List<Preschooler> getPreschoolerList(int idGroup);
     Preschooler getPreschoolerById(int id);
+    void saveChangePreschooler(Preschooler preschooler, Preschooler preschoolerEdit);
+    void deletePreschooler(Preschooler preschooler, PreschoolGroup preschoolGroup);
 }

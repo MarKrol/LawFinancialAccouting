@@ -45,4 +45,9 @@ public class PreschoolGroupServiceImpl implements IPreschoolGroupService {
     public String getNameGroupPreschoolById(int idGroup) {
         return this.preschoolerGroupDAO.getPreschoolGroupById(idGroup).getNameGroup();
     }
+
+    @Override
+    public PreschoolGroup getPreschoolerGroupByName(String nameGroup) {
+        return this.preschoolerGroupDAO.getPreschoolGroup(nameGroup);
+    }
 }

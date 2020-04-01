@@ -44,4 +44,18 @@ public class PreschoolerServiceImpl implements IPreschoolerService {
     public Preschooler getPreschoolerById(int id) {
         return this.preschoolerDAO.getPreschoolerById(id);
     }
+
+    @Override
+    public void saveChangePreschooler(Preschooler preschooler, Preschooler preschoolerEdit) {
+        preschooler.setName(preschoolerEdit.getName().toUpperCase());
+        preschooler.setSurname(preschoolerEdit.getSurname().toUpperCase());
+        preschooler.setPreschoolGroup(preschoolerEdit.getPreschoolGroup());
+        this.preschoolerDAO.persistPreschooler(preschooler);
+    }
+
+    @Override
+    public void deletePreschooler(Preschooler preschooler, PreschoolGroup preschoolGroup) {
+        preschooler.setPreschoolGroup(preschoolGroup);
+        this.preschoolerDAO.persistPreschooler(preschooler);
+    }
 }

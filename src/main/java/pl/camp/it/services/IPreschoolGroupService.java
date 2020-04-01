@@ -13,5 +13,5 @@ public interface IPreschoolGroupService {
     List<PreschoolGroup> getListPreschoolerGroup();
     void setPreschoolGroupAndAddEmployeeToGroup(String nameGroup, Employee employee);
     String getNameGroupPreschoolById(int idGroup);
-
+    PreschoolGroup getPreschoolerGroupByName(String nameGroup);
 }
