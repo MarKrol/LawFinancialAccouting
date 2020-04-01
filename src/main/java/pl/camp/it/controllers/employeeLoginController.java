@@ -27,7 +27,7 @@ public class employeeLoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login1(Model model){
         sessionObject.setEmployee(null);
         sessionObject.setLogged(false);
@@ -96,7 +96,7 @@ public class employeeLoginController {
         }
     }
 
-    @RequestMapping(value = "/passchange", method = RequestMethod.POST)
+    @RequestMapping(value = "passchange", method = RequestMethod.POST)
     public String passChange(@ModelAttribute EmployeeLogin employeeLogin,
                              @RequestParam String newPass, @RequestParam String repeatNewPass, Model model){
         if (sessionObject.getEmployee()!=null) {

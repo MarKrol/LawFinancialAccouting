@@ -37,20 +37,20 @@ public class employeeMealFullController {
     @Autowired
     IPreschoolerFullBoardInMonthService preschoolerFullBoardInMonthService;
 
-    @RequestMapping(value = "/admincontroller/meals/fullselectgroup", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/meals/fullselectgroup", method = RequestMethod.GET)
     public String addFullSelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
             model.addAttribute("fullMeal", new PreschoolerFullBoardInMonth());
-            return "/admincontroller/meals/fullselectgroup";
+            return "admincontroller/meals/fullselectgroup";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/fullselectgroup", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/meals/fullselectgroup", method = RequestMethod.POST)
     public String addFullSelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -62,7 +62,7 @@ public class employeeMealFullController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/fullmonth", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/meals/fullmonth", method = RequestMethod.GET)
     public String addFullMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -72,13 +72,13 @@ public class employeeMealFullController {
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
             model.addAttribute("listFullMeal", fullBoardPriceService.getListFullMeal());
             model.addAttribute("fullMeal", new PreschoolerFullBoardInMonth());
-            return "/admincontroller/meals/fullmonth";
+            return "admincontroller/meals/fullmonth";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/fullmonth", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/meals/fullmonth", method = RequestMethod.POST)
     public String addFullMonthToDB(@ModelAttribute PreschoolerFullBoardInMonth preschoolerFullBoardInMonth,
                                    @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                    @RequestParam("choose2") int idDiet, Model model){
@@ -131,27 +131,27 @@ public class employeeMealFullController {
                 model.addAttribute("fullMeal",new PreschoolerFullBoardInMonth());
                 model.addAttribute("message", "Rozliczenie za dany miesiąc dla przedszkolaka: " +
                         preschooler.getName()+" "+preschooler.getSurname()+" jest już w bazie! Aby dokonać zmian dokonaj edycji!");
-                return "/admincontroller/meals/fullmonth";
+                return "admincontroller/meals/fullmonth";
             }
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/fullselectgroupE", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/meals/fullselectgroupE", method = RequestMethod.GET)
     public String loadFullMealSelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
             model.addAttribute("fullMeal", new PreschoolerFullBoardInMonth());
-            return "/admincontroller/meals/fullselectgroupE";
+            return "admincontroller/meals/fullselectgroupE";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/fullselectgroupE", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/meals/fullselectgroupE", method = RequestMethod.POST)
     public String loadFullSelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -163,7 +163,7 @@ public class employeeMealFullController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/fullmonthE", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/meals/fullmonthE", method = RequestMethod.GET)
     public String editFullMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -173,13 +173,13 @@ public class employeeMealFullController {
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
             model.addAttribute("listFullMeal", fullBoardPriceService.getListFullMeal());
             model.addAttribute("fullMeal", new PreschoolerFullBoardInMonth());
-            return "/admincontroller/meals/fullmonthE";
+            return "admincontroller/meals/fullmonthE";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/fullmonthE", method = RequestMethod.POST, params = "edit=EDYTUJ DANE")
+    @RequestMapping(value = "admincontroller/meals/fullmonthE", method = RequestMethod.POST, params = "edit=EDYTUJ DANE")
     public String editToSaveFullMonth(@ModelAttribute PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit,
                                       @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                       Model model){
@@ -216,13 +216,13 @@ public class employeeMealFullController {
                 model.addAttribute("message", "Brak danych dla przedszkolaka: " +
                         " " + preschooler.getName() + " " + preschooler.getSurname() + " w miesiącu " + month.toUpperCase() + ".");
             }
-            return "/admincontroller/meals/fullmonthE";
+            return "admincontroller/meals/fullmonthE";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/fullmonthE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
+    @RequestMapping(value = "admincontroller/meals/fullmonthE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
     public String saveFullMonth(@ModelAttribute PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit,
                                       @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                       @RequestParam("choose2") int idDiet, Model model){
@@ -284,7 +284,7 @@ public class employeeMealFullController {
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("full", new FullBoardPrice());
             model.addAttribute("fullList",fullBoardPriceService.getListFullMeal());
-            return "/admincontroller/meals/fullE";
+            return "admincontroller/meals/fullE";
         }else {
             return "redirect:../../login";
         }
@@ -392,7 +392,7 @@ public class employeeMealFullController {
     }
 
 
-    @RequestMapping(value = "/admincontroller/meals/fullmonthVD", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/meals/fullmonthVD", method = RequestMethod.GET)
     public String showViewFullMeal(Model model){
         if (sessionObject.getEmployee() != null) {
 
@@ -410,13 +410,13 @@ public class employeeMealFullController {
                 this.choose=-1;
                 this.monthEditSave=null;
             }
-            return "/admincontroller/meals/fullmonthVD";
+            return "admincontroller/meals/fullmonthVD";
         }else{
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/fullmonthVD", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/meals/fullmonthVD", method = RequestMethod.POST)
     public String showViewFullMealAllPreschooler(@RequestParam("choose1") String nameMonth,
                                                  @RequestParam("choose") int idGroup,  Model model){
         if (sessionObject.getEmployee() != null) {
@@ -437,7 +437,7 @@ public class employeeMealFullController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/fullmonthVD/{id}", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/meals/fullmonthVD/{id}", method = RequestMethod.GET)
     public String ShowEditFullMealPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
                 this.choose=this.tempChoose;
@@ -449,7 +449,7 @@ public class employeeMealFullController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/fullmonthVE", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/meals/fullmonthVE", method = RequestMethod.GET)
     public String editFullMealPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
             PreschoolerFullBoardInMonth preschoolerFullBoardInMonth=
@@ -466,13 +466,13 @@ public class employeeMealFullController {
             model.addAttribute("listFullMeal",fullBoardPriceService.getListFullMeal());
             model.addAttribute("dietEdit",preschoolerFullBoardInMonth.getNameDiet());
             model.addAttribute("fullMealPreschooler", new PreschoolerFullBoardInMonth());
-            return "/admincontroller/meals/fullmonthVE";
+            return "admincontroller/meals/fullmonthVE";
         }else{
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/fullmonthVE", method = RequestMethod.POST, params = "return=POWRÓT DO PODGLĄDU")
+    @RequestMapping(value ="admincontroller/meals/fullmonthVE", method = RequestMethod.POST, params = "return=POWRÓT DO PODGLĄDU")
     public String noSaveChangeFullMealEditPOT(){
         if (sessionObject.getEmployee() != null) {
             return "redirect:../../admincontroller/meals/fullmonthVD";
@@ -481,7 +481,7 @@ public class employeeMealFullController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/fullmonthVE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
+    @RequestMapping(value ="admincontroller/meals/fullmonthVE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
     public String saveChangeFullMealEditPOST(@ModelAttribute PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit,
                                              @RequestParam("choose2") String nameDiet){
         if (sessionObject.getEmployee() != null) {
@@ -494,7 +494,7 @@ public class employeeMealFullController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/fullmonthVD/D/{id}", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/meals/fullmonthVD/D/{id}", method = RequestMethod.GET)
     public String showDeleteFullMealPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
             this.choose=this.tempChoose;
@@ -506,7 +506,7 @@ public class employeeMealFullController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/fullmonthVDD", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/meals/fullmonthVDD", method = RequestMethod.GET)
     public String deleteFullMealPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
             PreschoolerFullBoardInMonth preschoolerFullBoardInMonth=
@@ -524,13 +524,13 @@ public class employeeMealFullController {
             model.addAttribute("dietEdit",preschoolerFullBoardInMonth.getNameDiet());
             model.addAttribute("fullMealPreschooler", new PreschoolerFullBoardInMonth());
             model.addAttribute("message","Czy na pewno chcesz usunąć wybrane dane?");
-            return "/admincontroller/meals/fullmonthVDD";
+            return "admincontroller/meals/fullmonthVDD";
         }else{
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/fullmonthVDD", method = RequestMethod.POST, params = "noDelete=NIE")
+    @RequestMapping(value ="admincontroller/meals/fullmonthVDD", method = RequestMethod.POST, params = "noDelete=NIE")
     public String noDeleteFullMealEditPOT(){
         if (sessionObject.getEmployee() != null) {
             return "redirect:../../admincontroller/meals/fullmonthVD";
@@ -539,7 +539,7 @@ public class employeeMealFullController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/fullmonthVDD", method = RequestMethod.POST, params = "delete=TAK")
+    @RequestMapping(value ="admincontroller/meals/fullmonthVDD", method = RequestMethod.POST, params = "delete=TAK")
     public String deleteFullMealEditPOST(){
         if (sessionObject.getEmployee() != null) {
             preschoolerFullBoardInMonthService.

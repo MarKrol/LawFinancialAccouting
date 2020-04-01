@@ -43,20 +43,20 @@ public class employeeStayController {
     @Autowired
     IPreschoolerStayMonthService preschoolerStayMonthService;
 
-    @RequestMapping(value = "/admincontroller/stay/stayselectgroup", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/stay/stayselectgroup", method = RequestMethod.GET)
     public String addStaySelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
             model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
-            return "/admincontroller/stay/stayselectgroup";
+            return "admincontroller/stay/stayselectgroup";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/stay/stayselectgroup", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/stay/stayselectgroup", method = RequestMethod.POST)
     public String addStaySelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -68,7 +68,7 @@ public class employeeStayController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/stay/staymonth", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/stay/staymonth", method = RequestMethod.GET)
     public String addStayMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -78,13 +78,13 @@ public class employeeStayController {
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
             model.addAttribute("listTypeOfStay", stayService.getListStay());
             model.addAttribute("stayMonth", new PreschoolerStayMonth());
-            return "/admincontroller/stay/staymonth";
+            return "admincontroller/stay/staymonth";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/stay/staymonth", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/stay/staymonth", method = RequestMethod.POST)
     public String saveStayMonthInDB(@ModelAttribute PreschoolerStayMonth preschoolerStayMonth,
                                     @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                     @RequestParam("choose2") int idStay, Model model){
@@ -112,26 +112,26 @@ public class employeeStayController {
                 model.addAttribute("messageOK", "Dodano rozliczenie godzin do bazy dla przedszkolaka: " +
                         preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+ month.toUpperCase()+".");
             }
-            return "/admincontroller/stay/staymonth";
+            return "admincontroller/stay/staymonth";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/stay/stayselectgroupE", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/stay/stayselectgroupE", method = RequestMethod.GET)
     public String addStaySelectGroupE(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
             model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
-            return "/admincontroller/stay/stayselectgroupE";
+            return "admincontroller/stay/stayselectgroupE";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/stay/stayselectgroupE", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/stay/stayselectgroupE", method = RequestMethod.POST)
     public String addStaySelectGroupChooseE(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -143,7 +143,7 @@ public class employeeStayController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/stay/staymonthE", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/stay/staymonthE", method = RequestMethod.GET)
     public String addStayMonthE(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -153,13 +153,13 @@ public class employeeStayController {
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
             model.addAttribute("listTypeOfStay", stayService.getListStay());
             model.addAttribute("stayMonth", new PreschoolerStayMonth());
-            return "/admincontroller/stay/staymonthE";
+            return "admincontroller/stay/staymonthE";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/stay/staymonthE", method = RequestMethod.POST,params = "edit=EDYTUJ DANE")
+    @RequestMapping(value ="admincontroller/stay/staymonthE", method = RequestMethod.POST,params = "edit=EDYTUJ DANE")
     public String editDataToSaveStayMonth(@RequestParam("choose") int idPreschooler,
                                           @RequestParam("choose1") String month,
                                           @RequestParam("choose2") int idStayMonth, Model model) {
@@ -194,13 +194,13 @@ public class employeeStayController {
                 model.addAttribute("message", "Brak danych zadanych ustawień dla przedszkolaka: " +
                         " " + preschooler.getName() + " " + preschooler.getSurname() + " w miesiącu " + month.toUpperCase() + ".");
             }
-            return "/admincontroller/stay/staymonthE";
+            return "admincontroller/stay/staymonthE";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/stay/staymonthE", method = RequestMethod.POST,params = "save=ZAPISZ DANE")
+    @RequestMapping(value ="admincontroller/stay/staymonthE", method = RequestMethod.POST,params = "save=ZAPISZ DANE")
     public String saveDataStayMonthEdit(@ModelAttribute PreschoolerStayMonth preschoolerStayMonthEdit,
                                         @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                           @RequestParam("choose2") int idStayMonth, Model model) {
@@ -231,7 +231,7 @@ public class employeeStayController {
                         + " za miesiąc " + month.toUpperCase() + ".");
 
             }
-            return "/admincontroller/stay/staymonthE";
+            return "admincontroller/stay/staymonthE";
         } else {
             return "redirect:../../login";
         }
@@ -245,7 +245,7 @@ public class employeeStayController {
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("stay", new Stay());
             model.addAttribute("stayList",stayService.getListStay());
-            return "/admincontroller/stay/stayE";
+            return "admincontroller/stay/stayE";
         }else {
             return "redirect:../../login";
         }
@@ -261,7 +261,7 @@ public class employeeStayController {
             model.addAttribute("stay", stay);
             model.addAttribute("nameStay",stay.getName());
             model.addAttribute("stayList",stayService.getListStay());
-            return "/admincontroller/stay/stayE";
+            return "admincontroller/stay/stayE";
         } else {
             return "redirect:../../login";
         }
@@ -285,7 +285,7 @@ public class employeeStayController {
                 model.addAttribute("message", "Dokunujesz zmian w wyedytowanym pobycie, " +
                         "który jest inny niż zaznaczony! Edytuj pobyt jeszcze raz!");
             }
-            return "/admincontroller/stay/stayE";
+            return "admincontroller/stay/stayE";
         }else {
             return "redirect:../../login";
         }
@@ -351,7 +351,7 @@ public class employeeStayController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/stay/staymonthVD", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/stay/staymonthVD", method = RequestMethod.GET)
     public String showViewSingleMeal(Model model){
         if (sessionObject.getEmployee() != null) {
 
@@ -374,13 +374,13 @@ public class employeeStayController {
                 this.monthEditSave = null;
                 this.idStayMonthEditSave = -1;
             }
-            return "/admincontroller/stay/staymonthVD";
+            return "admincontroller/stay/staymonthVD";
         }else{
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/stay/staymonthVD", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/stay/staymonthVD", method = RequestMethod.POST)
     public String showViewStayAllPreschooler(@RequestParam("choose1") String nameMonth,
                                                    @RequestParam("choose2") int idStay,
                                                    @RequestParam("choose") int idGroup,  Model model) {
@@ -398,7 +398,7 @@ public class employeeStayController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/stay/staymonthVD/{id}", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/stay/staymonthVD/{id}", method = RequestMethod.GET)
     public String ShowEditStayPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
             this.choose=this.tempChoose;
@@ -411,7 +411,7 @@ public class employeeStayController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/stay/staymonthVE", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/stay/staymonthVE", method = RequestMethod.GET)
     public String editStayPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
             PreschoolerStayMonth preschoolerStayMonth=
@@ -426,13 +426,13 @@ public class employeeStayController {
                     preschoolerStayMonth.getPreschooler().getSurname()+" "+preschoolerStayMonth.getPreschooler().getName());
             model.addAttribute("stay",preschoolerStayMonth);
             model.addAttribute("stayPreschooler", new PreschoolerStayMonth());
-            return "/admincontroller/stay/staymonthVE";
+            return "admincontroller/stay/staymonthVE";
         }else{
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/stay/staymonthVE", method = RequestMethod.POST, params = "return=POWRÓT DO PODGLĄDU")
+    @RequestMapping(value ="admincontroller/stay/staymonthVE", method = RequestMethod.POST, params = "return=POWRÓT DO PODGLĄDU")
     public String noSaveChangeStayEditPOT(){
         if (sessionObject.getEmployee() != null) {
             return "redirect:../../admincontroller/stay/staymonthVD";
@@ -441,7 +441,7 @@ public class employeeStayController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/stay/staymonthVE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
+    @RequestMapping(value ="admincontroller/stay/staymonthVE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
     public String saveChangeStayEditPOST(@ModelAttribute PreschoolerStayMonth preschoolerStayMonthEdit){
         if (sessionObject.getEmployee() != null) {
             preschoolerStayMonthService.saveChangeStayMonth(preschoolerStayMonthService.
@@ -452,7 +452,7 @@ public class employeeStayController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/stay/staymonthVD/D/{id}", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/stay/staymonthVD/D/{id}", method = RequestMethod.GET)
     public String showDeleteFullMealPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
             this.choose=this.tempChoose;
@@ -465,7 +465,7 @@ public class employeeStayController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/stay/staymonthVDD", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/stay/staymonthVDD", method = RequestMethod.GET)
     public String deleteStayPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
             PreschoolerStayMonth preschoolerStayMonth=
@@ -481,13 +481,13 @@ public class employeeStayController {
             model.addAttribute("stay",preschoolerStayMonth);
             model.addAttribute("stayPreschooler", new PreschoolerStayMonth());
             model.addAttribute("message","Czy na pewno chcesz usunąć wybrane dane?");
-            return "/admincontroller/stay/staymonthVDD";
+            return "admincontroller/stay/staymonthVDD";
         }else{
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/stay/staymonthVDD", method = RequestMethod.POST, params = "noDelete=NIE")
+    @RequestMapping(value ="admincontroller/stay/staymonthVDD", method = RequestMethod.POST, params = "noDelete=NIE")
     public String noDeleteStayEditPOT(){
         if (sessionObject.getEmployee() != null) {
             return "redirect:../../admincontroller/stay/staymonthVD";
@@ -496,7 +496,7 @@ public class employeeStayController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/stay/staymonthVDD", method = RequestMethod.POST, params = "delete=TAK")
+    @RequestMapping(value ="admincontroller/stay/staymonthVDD", method = RequestMethod.POST, params = "delete=TAK")
     public String deleteStayEditPOST(){
         if (sessionObject.getEmployee() != null) {
             preschoolerStayMonthService.deleteStayPreschoolInMonthByIdPreschoolerStayBoardPrice(sessionObject.getSendData());

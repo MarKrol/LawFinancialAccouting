@@ -41,20 +41,20 @@ public class employeeMealSingleController {
     @Autowired
     IPreschoolerSingleBoardInMonthService preschoolerSingleBoardInMonthService;
 
-    @RequestMapping(value = "/admincontroller/meals/singleselectgroup", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/meals/singleselectgroup", method = RequestMethod.GET)
     public String addSingleSelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
             model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
-            return "/admincontroller/meals/singleselectgroup";
+            return "admincontroller/meals/singleselectgroup";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/singleselectgroup", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/meals/singleselectgroup", method = RequestMethod.POST)
     public String addSingleSelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -66,7 +66,7 @@ public class employeeMealSingleController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/singlemonth", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/meals/singlemonth", method = RequestMethod.GET)
     public String addSingleMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -77,13 +77,13 @@ public class employeeMealSingleController {
             model.addAttribute("listSingleMeal", singleBoardPriceService.getListSingleMeal());
             model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
             model.addAttribute("nameSingle","");
-            return "/admincontroller/meals/singlemonth";
+            return "admincontroller/meals/singlemonth";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/singlemonth", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/meals/singlemonth", method = RequestMethod.POST)
     public String saveSingleMonthInDB(@ModelAttribute PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth,
                                       @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                       @RequestParam("choose2") int idSingleEat, Model model){
@@ -113,26 +113,26 @@ public class employeeMealSingleController {
                 model.addAttribute("messageOK", "Dodano rozliczenie do bazy dla przedszkolaka: " +
                         preschooler.getName()+" "+preschooler.getSurname()+".");
             }
-            return "/admincontroller/meals/singlemonth";
+            return "admincontroller/meals/singlemonth";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/singleselectgroupE", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/meals/singleselectgroupE", method = RequestMethod.GET)
     public String addSingleSelectGroupE(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
             model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
-            return "/admincontroller/meals/singleselectgroupE";
+            return "admincontroller/meals/singleselectgroupE";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/singleselectgroupE", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/meals/singleselectgroupE", method = RequestMethod.POST)
     public String addSingleSelectGroupChooseE(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -144,7 +144,7 @@ public class employeeMealSingleController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/singlemonthE", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/meals/singlemonthE", method = RequestMethod.GET)
     public String addSingleMonthE(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -157,13 +157,13 @@ public class employeeMealSingleController {
             model.addAttribute("nameSingle","");
             model.addAttribute("nameSurname","");
             model.addAttribute("month","");
-            return "/admincontroller/meals/singlemonthE";
+            return "admincontroller/meals/singlemonthE";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/singlemonthE", method = RequestMethod.POST,params = "edit=EDYTUJ DANE")
+    @RequestMapping(value ="admincontroller/meals/singlemonthE", method = RequestMethod.POST,params = "edit=EDYTUJ DANE")
     public String editDataToSaveSingleMealMonth(@RequestParam("choose") int idPreschooler,
                                                 @RequestParam("choose1") String month,
                                                 @RequestParam("choose2") int idSingleMeal, Model model) {
@@ -201,14 +201,14 @@ public class employeeMealSingleController {
                 model.addAttribute("message", "Brak danych dla zadanych ustawień dla przedszkolaka: " +
                         " " + preschooler.getName() + " " + preschooler.getSurname() + " w miesiącu " + month.toUpperCase() + ".");
             }
-            return "/admincontroller/meals/singlemonthE";
+            return "admincontroller/meals/singlemonthE";
 
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/singlemonthE", method = RequestMethod.POST,params = "save=ZAPISZ DANE")
+    @RequestMapping(value ="admincontroller/meals/singlemonthE", method = RequestMethod.POST,params = "save=ZAPISZ DANE")
     public String saveChangeDataSingleMealMonth(@ModelAttribute PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonthEdit,
                                                 @RequestParam("choose") int idPreschooler,
                                                 @RequestParam("choose1") String month,
@@ -246,7 +246,7 @@ public class employeeMealSingleController {
                         + " za miesiąc " + month.toUpperCase() + ".");
 
             }
-            return "/admincontroller/meals/singlemonthE";
+            return "admincontroller/meals/singlemonthE";
         } else {
             return "redirect:../../login";
         }
@@ -260,7 +260,7 @@ public class employeeMealSingleController {
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("single", new SingleBoardPrice());
             model.addAttribute("singleList",singleBoardPriceService.getListSingleMeal());
-            return "/admincontroller/meals/singleE";
+            return "admincontroller/meals/singleE";
         }else {
             return "redirect:../../login";
         }
@@ -367,7 +367,7 @@ public class employeeMealSingleController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/singlemonthVD", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/meals/singlemonthVD", method = RequestMethod.GET)
     public String showViewStay(Model model){
         if (sessionObject.getEmployee() != null) {
 
@@ -389,13 +389,13 @@ public class employeeMealSingleController {
                 this.monthEditSave=null;
                 this.idSingleMealEditSave=-1;
             }
-            return "/admincontroller/meals/singlemonthVD";
+            return "admincontroller/meals/singlemonthVD";
         }else{
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/meals/singlemonthVD", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/meals/singlemonthVD", method = RequestMethod.POST)
     public String showViewSingleMealAllPreschooler(@RequestParam("choose1") String nameMonth,
                                                    @RequestParam("choose2") int idSingleMeal,
                                                    @RequestParam("choose") int idGroup,  Model model){
@@ -410,7 +410,7 @@ public class employeeMealSingleController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/singlemonthVD/{id}", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/meals/singlemonthVD/{id}", method = RequestMethod.GET)
     public String ShowEditSingleMealPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
             this.choose=this.tempChoose;
@@ -423,7 +423,7 @@ public class employeeMealSingleController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/singlemonthVE", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/meals/singlemonthVE", method = RequestMethod.GET)
     public String editSingleMealPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
             PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth=
@@ -438,13 +438,13 @@ public class employeeMealSingleController {
                     preschoolerSingleBoardInMonth.getPreschooler().getSurname()+" "+preschoolerSingleBoardInMonth.getPreschooler().getName());
             model.addAttribute("singleMeal",preschoolerSingleBoardInMonth);
             model.addAttribute("singleMealPreschooler", new PreschoolerSingleBoardInMonth());
-            return "/admincontroller/meals/singlemonthVE";
+            return "admincontroller/meals/singlemonthVE";
         }else{
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/singlemonthVE", method = RequestMethod.POST, params = "return=POWRÓT DO PODGLĄDU")
+    @RequestMapping(value ="admincontroller/meals/singlemonthVE", method = RequestMethod.POST, params = "return=POWRÓT DO PODGLĄDU")
     public String noSaveChangeSingleMealEditPOT(){
         if (sessionObject.getEmployee() != null) {
             return "redirect:../../admincontroller/meals/singlemonthVD";
@@ -453,7 +453,7 @@ public class employeeMealSingleController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/singlemonthVE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
+    @RequestMapping(value ="admincontroller/meals/singlemonthVE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
     public String saveChangeSingleMealEditPOST(@ModelAttribute PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonthEdit){
         if (sessionObject.getEmployee() != null) {
             preschoolerSingleBoardInMonthService.saveSingleMealAfterChange
@@ -465,7 +465,7 @@ public class employeeMealSingleController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/singlemonthVD/D/{id}", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/meals/singlemonthVD/D/{id}", method = RequestMethod.GET)
     public String showDeleteFullMealPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
             this.choose=this.tempChoose;
@@ -478,7 +478,7 @@ public class employeeMealSingleController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/singlemonthVDD", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/meals/singlemonthVDD", method = RequestMethod.GET)
     public String deleteFullMealPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
             PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth=
@@ -494,13 +494,13 @@ public class employeeMealSingleController {
             model.addAttribute("singleMeal",preschoolerSingleBoardInMonth);
             model.addAttribute("singleMealPreschooler", new PreschoolerSingleBoardInMonth());
             model.addAttribute("message","Czy na pewno chcesz usunąć wybrane dane?");
-            return "/admincontroller/meals/singlemonthVDD";
+            return "admincontroller/meals/singlemonthVDD";
         }else{
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/singlemonthVDD", method = RequestMethod.POST, params = "noDelete=NIE")
+    @RequestMapping(value ="admincontroller/meals/singlemonthVDD", method = RequestMethod.POST, params = "noDelete=NIE")
     public String noDeleteSingleMealEditPOT(){
         if (sessionObject.getEmployee() != null) {
             return "redirect:../../admincontroller/meals/singlemonthVD";
@@ -509,7 +509,7 @@ public class employeeMealSingleController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/singlemonthVDD", method = RequestMethod.POST, params = "delete=TAK")
+    @RequestMapping(value ="admincontroller/meals/singlemonthVDD", method = RequestMethod.POST, params = "delete=TAK")
     public String deleteSingleMealEditPOST(){
         if (sessionObject.getEmployee() != null) {
             preschoolerSingleBoardInMonthService.deleteSingleMealPreschoolInMonthByIdPreschoolerSingleMealBoardPrice

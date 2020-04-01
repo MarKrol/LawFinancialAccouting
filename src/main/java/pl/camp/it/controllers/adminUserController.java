@@ -132,7 +132,7 @@ public class adminUserController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/employee/statement", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/employee/statement", method = RequestMethod.GET)
     public String statementEmployee(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -143,7 +143,7 @@ public class adminUserController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/grouppreschooler/statement", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/grouppreschooler/statement", method = RequestMethod.GET)
     public String statementPreschoolGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -200,7 +200,7 @@ public class adminUserController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/preschooler/preschoolerE/{idPreschooler}", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/preschooler/preschoolerE/{idPreschooler}", method = RequestMethod.GET)
     public String openPageEditPreschooler(@PathVariable String idPreschooler, Model model){
         if (sessionObject.getEmployee()!=null) {
             this.idGroupEdit=preschoolerService.getPreschoolerById(Integer.parseInt(idPreschooler)).getPreschoolGroup().getId();
@@ -212,7 +212,7 @@ public class adminUserController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/preschooler/preschoolerE", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/preschooler/preschoolerE", method = RequestMethod.GET)
     public String editPreschooler(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -221,13 +221,13 @@ public class adminUserController {
             model.addAttribute("preschooler", preschoolerService.getPreschoolerById(sessionObject.getSendData()));
             model.addAttribute("listGroupPreschool", preschoolGroupService.getListPreschoolerGroup());
             model.addAttribute("nameGroup",this.nameGroup);
-            return "/admincontroller/preschooler/preschoolerE";
+            return "admincontroller/preschooler/preschoolerE";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/preschooler/preschoolerE", method = RequestMethod.POST, params = "return=NIE ZAPISUJ ZMIAN")
+    @RequestMapping(value ="admincontroller/preschooler/preschoolerE", method = RequestMethod.POST, params = "return=NIE ZAPISUJ ZMIAN")
     public String noSaveChangePreschoolerEditPOT(){
         if (sessionObject.getEmployee() != null) {
             return "redirect:../../admincontroller/preschooler/preschoolerVED";
@@ -236,7 +236,7 @@ public class adminUserController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/preschooler/preschoolerE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
+    @RequestMapping(value ="admincontroller/preschooler/preschoolerE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
     public String saveChangePreschoolerEditPOT(@ModelAttribute Preschooler preschoolerEdit,
                                                @RequestParam("chooseGroupPreschool") int idGroup){
         if (sessionObject.getEmployee() != null) {
@@ -250,7 +250,7 @@ public class adminUserController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/preschooler/preschoolerD/{idPreschooler}", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/preschooler/preschoolerD/{idPreschooler}", method = RequestMethod.GET)
     public String openPageDeletePreschooler(@PathVariable String idPreschooler, Model model){
         if (sessionObject.getEmployee()!=null) {
             this.idGroupEdit=preschoolerService.getPreschoolerById(Integer.parseInt(idPreschooler)).getPreschoolGroup().getId();
@@ -262,7 +262,7 @@ public class adminUserController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/preschooler/preschoolerD", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/preschooler/preschoolerD", method = RequestMethod.GET)
     public String deletePreschooler(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -272,13 +272,13 @@ public class adminUserController {
             model.addAttribute("listGroupPreschool", preschoolGroupService.getListPreschoolerGroup());
             model.addAttribute("nameGroup",this.nameGroup);
             model.addAttribute("message", "Czy na pewno chcesz usunąć dane?");
-            return "/admincontroller/preschooler/preschoolerD";
+            return "admincontroller/preschooler/preschoolerD";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value ="/admincontroller/preschooler/preschoolerD", method = RequestMethod.POST, params = "noDelete=NIE")
+    @RequestMapping(value ="admincontroller/preschooler/preschoolerD", method = RequestMethod.POST, params = "noDelete=NIE")
     public String noDeletePreschoolerEditPOT(){
         if (sessionObject.getEmployee() != null) {
             return "redirect:../../admincontroller/preschooler/preschoolerVED";
@@ -287,7 +287,7 @@ public class adminUserController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/preschooler/preschoolerD", method = RequestMethod.POST, params = "delete=TAK")
+    @RequestMapping(value ="admincontroller/preschooler/preschoolerD", method = RequestMethod.POST, params = "delete=TAK")
     public String deletePreschoolerEditPOT(){
         if (sessionObject.getEmployee() != null) {
             preschoolerService.deletePreschooler(preschoolerService.getPreschoolerById(sessionObject.getSendData()),
@@ -298,7 +298,7 @@ public class adminUserController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/preschooler/preschoolerAP/{idPreschooler}", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/preschooler/preschoolerAP/{idPreschooler}", method = RequestMethod.GET)
     public String openPageToAddParent(@PathVariable String idPreschooler, Model model){
         if (sessionObject.getEmployee()!=null) {
             this.idGroupEdit=preschoolerService.getPreschoolerById(Integer.parseInt(idPreschooler)).getPreschoolGroup().getId();
@@ -310,7 +310,7 @@ public class adminUserController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/preschooler/preschoolerAP", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/preschooler/preschoolerAP", method = RequestMethod.GET)
     private String openPageToAddParent(Model model){
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -320,7 +320,7 @@ public class adminUserController {
             model.addAttribute("preschooler", preschooler.getSurname()+" "+preschooler.getName());
             model.addAttribute("group", this.nameGroup);
             model.addAttribute("parent", new Parent());
-            return "/admincontroller/preschooler/preschoolerAP";
+            return "admincontroller/preschooler/preschoolerAP";
         }else {
             return "redirect:../../login";
         }

@@ -48,19 +48,19 @@ public class adminSettlementPaymentController {
     @Autowired
     IPaymentService paymentService;
 
-    @RequestMapping(value = "/admincontroller/settlement/selectgroup", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/settlement/selectgroup", method = RequestMethod.GET)
     public String settlementSelectGroup(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
-            return "/admincontroller/settlement/selectgroup";
+            return "admincontroller/settlement/selectgroup";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/selectgroup", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/settlement/selectgroup", method = RequestMethod.POST)
     public String settlementSelectGroupChoose(@RequestParam int choose, Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -72,7 +72,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlement", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/settlement/settlement", method = RequestMethod.GET)
     public String settlementChoose(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -80,13 +80,13 @@ public class adminSettlementPaymentController {
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
-            return "/admincontroller/settlement/settlement";
+            return "admincontroller/settlement/settlement";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementshow", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/settlement/settlementshow", method = RequestMethod.GET)
     public String settlementShow(Model model) {
         if (sessionObject.getEmployee() != null) {
 
@@ -121,13 +121,13 @@ public class adminSettlementPaymentController {
                                     preschoolerActivityInMonthService.activityMonthToPay(preschoolerActivityInMonthList));
 
 
-            return "/admincontroller/settlement/settlementshow";
+            return "admincontroller/settlement/settlementshow";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlement", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/settlement/settlement", method = RequestMethod.POST)
     public String settlementShowPOST(@RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                      Model model) {
         if (sessionObject.getEmployee() != null) {
@@ -139,7 +139,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementshow", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/settlement/settlementshow", method = RequestMethod.POST)
     public String settlementShowPOSTShow(@RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                      Model model) {
         if (sessionObject.getEmployee() != null) {
@@ -151,7 +151,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementshow/{what}/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/settlement/settlementshow/{what}/{id}", method = RequestMethod.GET)
     public String showEditSettlementFullMeal(@PathVariable String what, @PathVariable int id, Model model) {
         if (sessionObject.getEmployee() != null) {
             if (what.equals("M")) {
@@ -179,7 +179,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementE",method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/settlement/settlementE",method = RequestMethod.GET)
     public String editSettlementFullMeal(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -193,13 +193,13 @@ public class adminSettlementPaymentController {
             model.addAttribute("messageOK","Edytujesz dane przedszkolaka: "+
                     preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase());
 
-            return "/admincontroller/settlement/settlementE";
+            return "admincontroller/settlement/settlementE";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementE", method = RequestMethod.GET,
+    @RequestMapping(value = "admincontroller/settlement/settlementE", method = RequestMethod.GET,
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
@@ -211,7 +211,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementE", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/settlement/settlementE", method = RequestMethod.POST,
                                                                             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementShowNoSave(){
         if (sessionObject.getEmployee() != null) {
@@ -221,7 +221,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementE", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/settlement/settlementE", method = RequestMethod.POST,
                                                                                         params = "save=ZAPISZ ZMIANY")
     public String returnSettlementShowSave(@ModelAttribute PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit){
         if (sessionObject.getEmployee() != null) {
@@ -234,7 +234,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementSingleE",method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/settlement/settlementSingleE",method = RequestMethod.GET)
     public String editSettlementSingleMeal(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -248,13 +248,13 @@ public class adminSettlementPaymentController {
             model.addAttribute("messageOK","Edytujesz dane przedszkolaka: "+
                     preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase());
 
-            return "/admincontroller/settlement/settlementSingleE";
+            return "admincontroller/settlement/settlementSingleE";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementSingleE", method = RequestMethod.GET,
+    @RequestMapping(value = "admincontroller/settlement/settlementSingleE", method = RequestMethod.GET,
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementSingleShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
@@ -266,7 +266,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementSingleE", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/settlement/settlementSingleE", method = RequestMethod.POST,
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementSingleShowNoSave(){
         if (sessionObject.getEmployee() != null) {
@@ -276,7 +276,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementSingleE", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/settlement/settlementSingleE", method = RequestMethod.POST,
             params = "save=ZAPISZ ZMIANY")
     public String returnSettlementSingleShowSave(@ModelAttribute PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonthEdit){
         if (sessionObject.getEmployee() != null) {
@@ -289,7 +289,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementStayE",method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/settlement/settlementStayE",method = RequestMethod.GET)
     public String editSettlementStay(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -303,13 +303,13 @@ public class adminSettlementPaymentController {
             model.addAttribute("messageOK","Edytujesz dane przedszkolaka: "+
                     preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase());
 
-            return "/admincontroller/settlement/settlementStayE";
+            return "admincontroller/settlement/settlementStayE";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementStayE", method = RequestMethod.GET,
+    @RequestMapping(value = "admincontroller/settlement/settlementStayE", method = RequestMethod.GET,
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementStayShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
@@ -321,7 +321,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementStayE", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/settlement/settlementStayE", method = RequestMethod.POST,
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementStayShowNoSave(){
         if (sessionObject.getEmployee() != null) {
@@ -331,7 +331,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementStayE", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/settlement/settlementStayE", method = RequestMethod.POST,
             params = "save=ZAPISZ ZMIANY")
     public String returnSettlementStayShowSave(@ModelAttribute PreschoolerStayMonth preschoolerStayMonthEdit){
         if (sessionObject.getEmployee() != null) {
@@ -343,7 +343,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementActivityE",method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/settlement/settlementActivityE",method = RequestMethod.GET)
     public String editSettlementActivity(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -357,13 +357,13 @@ public class adminSettlementPaymentController {
             model.addAttribute("messageOK","Edytujesz dane przedszkolaka: "+
                     preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase());
 
-            return "/admincontroller/settlement/settlementActivityE";
+            return "admincontroller/settlement/settlementActivityE";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementActivityE", method = RequestMethod.GET,
+    @RequestMapping(value = "admincontroller/settlement/settlementActivityE", method = RequestMethod.GET,
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementActivityShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
@@ -375,7 +375,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementActivityE", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/settlement/settlementActivityE", method = RequestMethod.POST,
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementActivityShowNoSave(){
         if (sessionObject.getEmployee() != null) {
@@ -385,7 +385,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/settlement/settlementActivityE", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/settlement/settlementActivityE", method = RequestMethod.POST,
             params = "save=ZAPISZ ZMIANY")
     public String returnSettlementActivityShowSave(@ModelAttribute PreschoolerActivityInMonth preschoolerActivityInMonthEdit){
         if (sessionObject.getEmployee() != null) {
@@ -399,19 +399,19 @@ public class adminSettlementPaymentController {
     }
 
 
-    @RequestMapping(value = "/admincontroller/payment/paymentselectgroup", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/payment/paymentselectgroup", method = RequestMethod.GET)
     public String paymentSelectGroup(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
-            return "/admincontroller/payment/paymentselectgroup";
+            return "admincontroller/payment/paymentselectgroup";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentselectgroup", method = RequestMethod.POST)
+    @RequestMapping(value = "admincontroller/payment/paymentselectgroup", method = RequestMethod.POST)
     public String paymentSelectGroupChoose(@RequestParam int choose, Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -426,7 +426,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentshow", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/payment/paymentshow", method = RequestMethod.GET)
     public String paymentChoose(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -449,13 +449,13 @@ public class adminSettlementPaymentController {
                 model.addAttribute("sumPayment",paymentService.sumPayment(paymentList));
             }
 
-            return "/admincontroller/payment/paymentshow";
+            return "admincontroller/payment/paymentshow";
         } else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentshow", method = RequestMethod.POST, params = "addPay=DODAJ WPŁATĘ")
+    @RequestMapping(value = "admincontroller/payment/paymentshow", method = RequestMethod.POST, params = "addPay=DODAJ WPŁATĘ")
     public String addPayment(@RequestParam("wplata") List<String> nameAndPayment,
                              @RequestParam("date") String date, @RequestParam("choose") int idPreschooler,
                              @RequestParam("choosecompany") int idCompany, Model model){
@@ -493,13 +493,13 @@ public class adminSettlementPaymentController {
                 model.addAttribute("sumPayment",paymentService.sumPayment(paymentList));
             }
 
-            return "/admincontroller/payment/paymentshow";
+            return "admincontroller/payment/paymentshow";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentshow", method = RequestMethod.POST, params = "show=POKAŻ WPŁATY")
+    @RequestMapping(value = "admincontroller/payment/paymentshow", method = RequestMethod.POST, params = "show=POKAŻ WPŁATY")
     public String showPayment(@RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                               @RequestParam("choosecompany") int idCompany,Model model){
         if (sessionObject.getEmployee() != null) {
@@ -526,13 +526,13 @@ public class adminSettlementPaymentController {
             model.addAttribute("month",month);
             model.addAttribute("sumPayment",paymentService.sumPayment(paymentList));
 
-            return "/admincontroller/payment/paymentshow";
+            return "admincontroller/payment/paymentshow";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentshow/{what}/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/payment/paymentshow/{what}/{id}", method = RequestMethod.GET)
     public String showEditPayment(@PathVariable String what, @PathVariable int id, Model model) {
         if (sessionObject.getEmployee() != null) {
             if (what.equals("E")) {
@@ -551,7 +551,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentE",method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/payment/paymentE",method = RequestMethod.GET)
     public String editPayment(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -567,13 +567,13 @@ public class adminSettlementPaymentController {
             model.addAttribute("messageOK","Edytujesz dane przedszkolaka: "+
                     preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase());
 
-            return "/admincontroller/payment/paymentE";
+            return "admincontroller/payment/paymentE";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentE", method = RequestMethod.GET,
+    @RequestMapping(value = "admincontroller/payment/paymentE", method = RequestMethod.GET,
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnPaymentShowNoSave(Model model){
         if (sessionObject.getEmployee() != null) {
@@ -585,7 +585,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentE", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/payment/paymentE", method = RequestMethod.POST,
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnPaymentShowNoSave(){
         if (sessionObject.getEmployee() != null) {
@@ -595,7 +595,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentE", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/payment/paymentE", method = RequestMethod.POST,
             params = "save=ZAPISZ ZMIANY")
     public String returnPaymentShowSave(@RequestParam("name")String name, @RequestParam("payment")String pay,
                                         @RequestParam("date")String date, @RequestParam("choosecompany") int idCompany){
@@ -609,7 +609,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentD",method = RequestMethod.GET)
+    @RequestMapping(value = "admincontroller/payment/paymentD",method = RequestMethod.GET)
     public String deletePayment(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -625,13 +625,13 @@ public class adminSettlementPaymentController {
             model.addAttribute("message","Czy na pewno chcesz usuną włatę przedszkolaka: "+
                     preschooler.getName()+" "+preschooler.getSurname()+" za miesiąc "+this.monthChoose.toUpperCase()+"?");
 
-            return "/admincontroller/payment/paymentD";
+            return "admincontroller/payment/paymentD";
         }else {
             return "redirect:../../login";
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentD", method = RequestMethod.GET,
+    @RequestMapping(value = "admincontroller/payment/paymentD", method = RequestMethod.GET,
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnPaymentShowNoDelete(Model model){
         if (sessionObject.getEmployee() != null) {
@@ -643,7 +643,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentD", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/payment/paymentD", method = RequestMethod.POST,
             params = "nosave=NIE")
     public String returnPaymentShowNoDelete(){
         if (sessionObject.getEmployee() != null) {
@@ -653,7 +653,7 @@ public class adminSettlementPaymentController {
         }
     }
 
-    @RequestMapping(value = "/admincontroller/payment/paymentD", method = RequestMethod.POST,
+    @RequestMapping(value = "admincontroller/payment/paymentD", method = RequestMethod.POST,
             params = "save=TAK")
     public String returnPaymentShowDelete(){
         if (sessionObject.getEmployee() != null) {

@@ -153,7 +153,7 @@ public class adminMealActivityStayController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/meals/statement", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/meals/statement", method = RequestMethod.GET)
     public String statementMeal(Model model){
         if (sessionObject.getEmployee()!=null){
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -164,7 +164,7 @@ public class adminMealActivityStayController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/activity/statementa", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/activity/statementa", method = RequestMethod.GET)
     public String statementActivity(Model model){
         if (sessionObject.getEmployee()!=null){
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -175,7 +175,7 @@ public class adminMealActivityStayController {
         }
     }
 
-    @RequestMapping(value ="/admincontroller/stay/statements", method = RequestMethod.GET)
+    @RequestMapping(value ="admincontroller/stay/statements", method = RequestMethod.GET)
     public String statementStay(Model model){
         if (sessionObject.getEmployee()!=null){
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
