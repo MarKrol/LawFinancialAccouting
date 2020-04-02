@@ -97,7 +97,7 @@ public class employeeMealFullController {
                     model.addAttribute("fullMeal",new PreschoolerFullBoardInMonth());
                     model.addAttribute("messageOK","Dodano dane do bazy dla przedszkolaka:" +
                                                     " "+preschooler.getName()+" "+preschooler.getSurname()+".");
-                    return "/admincontroller/meals/fullmonth";
+                    return "admincontroller/meals/fullmonth";
                 } else {
                     int idDiet1 = fullBoardPriceService.getIdFullBoardPriceByName(
                             preschoolerFullBoardInMonthService.getNameDietByIdPreschoolerFromFullBoardInMonth(idPreschooler));
@@ -111,7 +111,7 @@ public class employeeMealFullController {
                         model.addAttribute("fullMeal",new PreschoolerFullBoardInMonth());
                         model.addAttribute("messageOK","Dodano dane do bazy dla przedszkolaka:" +
                                 " "+preschooler.getName()+" "+preschooler.getSurname()+".");
-                        return "/admincontroller/meals/fullmonth";
+                        return "admincontroller/meals/fullmonth";
                     } else {
                         model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
                         model.addAttribute("listMonth", Month.getMonth());
@@ -120,7 +120,7 @@ public class employeeMealFullController {
                         model.addAttribute("fullMeal",new PreschoolerFullBoardInMonth());
                         model.addAttribute("message", "Brak w bazie przypisanej diety do " +
                                 "przedszkolaka: "+preschooler.getName()+" "+preschooler.getSurname() +"! Określ rodzaj diety!");
-                        return "/admincontroller/meals/fullmonth";
+                        return "admincontroller/meals/fullmonth";
                     }
                 }
             } else {

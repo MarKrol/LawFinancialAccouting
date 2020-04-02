@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LowFinancialAccounting</title>
+    <link rel="stylesheet" href="../../admincontroller/body/body.css">
+    <link rel="stylesheet" href="../../logout/logout.css">
+    <link rel="stylesheet" href="../../menu/topmenu.css">
+    <link rel="stylesheet" href="../../head/head.css">
+    <link rel="stylesheet" href="../../foot/foot.css">
+</head>
+
+<body>
+<div id="all">
+    <div id="signout">
+        <div th:replace="logout.html::logout"></div>
+    </div>
+    <div id="head">
+        <div th:replace="head/head.html::head"></div>
+    </div>
+    <div id="loginemployee">
+        <p th:text="${'Zalogowany pracownik: '+employeeLogged}"></p>
+    </div>
+    <div th:replace="menu/topmenu.html::topmenu"></div>
+    <div id="addfull">
+        <p class="label">Moduł zarządzania prawnym opiekunem</p>
+        <form action="../../admincontroller/preschooler/parent" method="post">
+            <label><p class="message" th:text="${message}"></p></label>
+            <label><p class="messageOK" th:text="${messageOK}"></p></label>
+
+            <div id="full">
+            <div style="float:left">
+            <table>
+                <tr>
+                    <td><label><p class="name" th:text="${'LISTA GRUP'}"></p></label></td>
+                </tr>
+                <tr>
+                    <td><select required name="choose" path="orderId" id="list0Activity">
+                        <option value="">Wybierz grupę</option>
+                        <option th:each="group: ${listPreschoolGroup}"
+                                th:value="${group.id}"
+                                th:text="${group.nameGroup}"
+                                th:selected="${group.nameGroup==nameGroup}">
+                        </option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="POKAŻ DANE" id="showSettlement" name="show"></td>
+                </tr>
+            </table>
+            </div>
+            <div>
+            <table border="1" rules="all" frame="void" style="margin-bottom: 40px">
+                <tr>
+                    <td colspan="4"><label><p class="name" th:text="${'LISTA PRZEDSZKOLAKÓW I ICH PRWNYCH OPIEKUNÓW'}"></p></label></td>
+                </tr>
+                <tr style="background-color:#87CEFA; font-weight: bold">
+                    <td class="colTable" th:text="${'Lp.'}"></td>
+                    <td class="colTableName" style="width: 210px" th:text="${'Nazwisko i imię'}"></td>
+                    <td class="colTable" style="width: 260px" th:text="${'Dane opiekuna prawnego'}"></td>
+                    <td class="colTable" style="width: 130px" th:text="${'Opcje'}"></td>
+                </tr>
+
+                <th:block th:each="preschooler, item: ${allPreschoolers}">
+                    <tr style="background-color:#F0F8FF;">
+                        <td class="colTable" th:text="${item.index+1}"></td>
+                        <td colspan="3" class="colTableName" th:text="${preschooler.surname+' '+preschooler.name}"></td>
+
+                    </tr>
+                    <th:block th:each="parent: ${allParents}">
+                        <th:block th:if="${parent.preschooler.id==preschooler.id}">
+                            <tr>
+                                <td colspan="2"></td>
+                                <td class="colTable" th:text="${parent.surname+' '+parent.name}"></td>
+                                <td class="colTable"><a th:href=${'/admincontroller/preschooler/parentE/'+parent.id}>edytuj</a>
+                                    &nbsp|&nbsp<a th:href=${'/admincontroller/preschooler/parentD/'+parent.id}>usuń</a></td>
+                            </tr>
+                        </th:block>
+                    </th:block>
+                </th:block>
+            </table>
+            </div>
+            </div>
+        </form>
+    </div>
+    <div id="footer" style="display: block; clear: left" >
+    <div th:replace="foot/foot.html::foot"></div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</body>
+</html>

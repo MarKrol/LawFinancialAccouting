@@ -11,6 +11,7 @@ import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.model.userLogin.EmployeeLogin;
 import pl.camp.it.model.userLogin.ParentLogin;
 
+import java.util.List;
 import java.util.Random;
 
 @Repository
@@ -33,6 +34,27 @@ public class ParentDAOImpl implements IParentDAO {
         session.beginTransaction();
         session.saveOrUpdate(parentLoginPass(preschooler));
         session.getTransaction().commit();
+    }
+
+
+    @Override
+    public List<Parent> getListParent(int idPreschooler) {
+        Session session = sessionFactory.openSession();
+        List<Parent> parentList=session.createQuery
+                ("FROM pl.camp.it.model.parent.Parent WHERE preschoolerId="+idPreschooler+" and quantity="+true,
+                        Parent.class).list();
+        session.close();
+        return parentList;
+    }
+
+    @Override
+    public Parent getParentById(int idParent) {
+        Session session = sessionFactory.openSession();
+        Parent parent =session.createQuery
+                ("FROM pl.camp.it.model.parent.Parent WHERE id="+idParent+" and quantity="+true,
+                        Parent.class).uniqueResult();
+        session.close();
+        return parent;
     }
 
     private ParentLogin parentLoginPass(Preschooler preschooler){

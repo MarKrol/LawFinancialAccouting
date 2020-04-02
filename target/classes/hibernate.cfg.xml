@@ -12,6 +12,10 @@
             com.mysql.cj.jdbc.Driver
         </property>
 
+
+        <property name="hibernate.connection.useUnicode">yes</property>
+        <property name="hibernate.connection.characterEncoding">UTF-8</property>
+
         <!-- Assume test is the database name -->
 
         <property name="hibernate.connection.url">
