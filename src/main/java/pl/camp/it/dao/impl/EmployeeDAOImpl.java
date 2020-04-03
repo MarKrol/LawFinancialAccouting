@@ -68,12 +68,24 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
         List<Employee> tempolary=new ArrayList<>();
         Session session=sessionFactory.openSession();
         List<Employee> employee = session.createQuery("FROM pl.camp.it.model.employee.Employee").list();
+        session.close();
         for (Employee tempEmploye : employee){
             if (tempEmploye.isQuantity() && tempEmploye.getRole().equals(EmployeeRole.TEACHER.toString())){
                 tempolary.add(tempEmploye);
             }
         }
         return tempolary;
+    }
+
+
+    @Override
+    public Employee getEmployeeByIdEmployee(int idEmployee) {
+        Session session=sessionFactory.openSession();
+        Employee employee = session.createQuery
+                ("FROM pl.camp.it.model.employee.Employee WHERE id="+ idEmployee+" and quantity="+true,
+                        Employee.class).uniqueResult();
+        session.close();
+        return employee;
     }
 
     @Override
@@ -86,6 +98,13 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
         return null;
     }
 
+    @Override
+    public List<Employee> getEmployees() {
+        Session session=sessionFactory.openSession();
+        List<Employee> employee = session.createQuery("FROM pl.camp.it.model.employee.Employee WHERE quantity="
+                +true, Employee.class).list();
+        return employee;
+    }
 
     private EmployeeLogin employeeLoginPass(Employee employee){
         EmployeeLogin tempEmployeeLoginPass = new EmployeeLogin();

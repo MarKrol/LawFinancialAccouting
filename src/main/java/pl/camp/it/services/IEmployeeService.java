@@ -18,4 +18,7 @@ public interface IEmployeeService {
     boolean oldPasswordsMatch (EmployeeLogin employeeLoginDB, EmployeeLogin employeeLoginForm);
     boolean newPasswordsMatch (String newPass, String repeatNewPass);
     String hashPassword (String pass);
+
+    Employee getEmployeeByIdEmployee(int idEmployee);
+    List<Employee> getEmployees();
 }

@@ -97,4 +97,14 @@ public class EmployeeServiceImpl implements IEmployeeService {
         }
         return employee;
     }
+
+    @Override
+    public Employee getEmployeeByIdEmployee(int idEmployee) {
+        return this.employeeDAO.getEmployeeByIdEmployee(idEmployee);
+    }
+
+    @Override
+    public List<Employee> getEmployees() {
+        return this.employeeDAO.getEmployees();
+    }
 }

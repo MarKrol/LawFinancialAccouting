@@ -12,6 +12,8 @@ public interface IEmployeeDAO {
     EmployeeLogin getEmployeeByLogin(String login);
     EmployeeLogin getEmployeeById(int id);
     void changePassEmployee(EmployeeLogin employeeLogin);
+    Employee getEmployeeByIdEmployee(int idEmployee);
+    List<Employee> getEmployees();
     Employee getEmployeeByName();
     Employee getEmployeeBySurname();
 }

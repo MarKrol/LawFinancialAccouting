@@ -11,4 +11,5 @@ public interface IPreschoolGroupDAO {
     List<PreschoolGroup> getListPreschoolerGroup();
     PreschoolGroup getPreschoolGroup(String nameGroup);
     PreschoolGroup getPreschoolGroupById(int id);
+    public PreschoolGroup getPreschoolGroupByIdEmployee(int idEmployee);
 }

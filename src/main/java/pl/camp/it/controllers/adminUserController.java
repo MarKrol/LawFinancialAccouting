@@ -12,6 +12,8 @@ import pl.camp.it.services.*;
 import pl.camp.it.session.SessionObject;
 
 import javax.annotation.Resource;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 
 @Controller
 public class adminUserController {
@@ -37,7 +39,8 @@ public class adminUserController {
             model.addAttribute("employee", new Employee());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            model.addAttribute("listPreschoolGroup",preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup",preschoolGroupService.getListPreschoolerGroupNoOneGroup
+                    (preschoolGroupService.getListPreschoolerGroup()));
             return "admincontroller/employee/addemployee";
         } else{
             return "redirect:../../login";
@@ -321,6 +324,19 @@ public class adminUserController {
             model.addAttribute("group", this.nameGroup);
             model.addAttribute("parent", new Parent());
             return "admincontroller/preschooler/preschoolerAP";
+        }else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/employee/employee",method = RequestMethod.GET)
+    public String openPageEmployye(Model model){
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("allEmployee", employeeService.getEmployees().stream().sorted
+                    (Comparator.comparing(Employee::getSurname)).collect(Collectors.toList()));
+            return "admincontroller/employee/employee";
         }else {
             return "redirect:../../login";
         }
