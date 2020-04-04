@@ -67,22 +67,32 @@
                         <th:block th:if="${employee.role.toString()=='SUPER_ADMIN'}">
                             <td style="color: #9900FF" class="colTableName" th:text="${employee.surname+' '+employee.name}"></td>
                             <td style="color: #9900FF" class="colTable" th:text="${employee.role.toString()}"></td>
+                            <td class="colTable"><a th:href=${'/admincontroller/employee/employeeE/'+employee.id}>edytuj</a>
+                                &nbsp|&nbsp<a th:href=${'/admincontroller/employee/employeeL/'+employee.id}>logowanie</a></td>
                         </th:block>
                         <th:block th:if="${employee.role.toString()=='ADMIN'}">
                             <td style="color: #0033CC" class="colTableName" th:text="${employee.surname+' '+employee.name}"></td>
                             <td style="color: #0033CC" class="colTable" th:text="${employee.role.toString()}"></td>
+                            <td class="colTable"><a th:href=${'/admincontroller/employee/employeeE/'+employee.id}>edytuj</a>
+                                <th:block th:if="${employeeLoggedId.toString()!=employee.id.toString()}">
+                                    &nbsp|&nbsp<a th:href=${'/admincontroller/employee/employeeD/'+employee.id}>usuń</a>
+                                </th:block>
+                                &nbsp|&nbsp<a th:href=${'/admincontroller/employee/employeeL/'+employee.id}>logowanie</a></td>
                         </th:block>
                         <th:block th:if="${employee.role.toString()=='TEACHER'}">
                             <td class="colTableName" th:text="${employee.surname+' '+employee.name}"></td>
                             <td class="colTable" th:text="${employee.role.toString()}"></td>
+                            <td class="colTable"><a th:href=${'/admincontroller/employee/employeeE/'+employee.id}>edytuj</a>
+                                &nbsp|&nbsp<a th:href=${'/admincontroller/employee/employeeD/'+employee.id}>usuń</a>
+                                &nbsp|&nbsp<a th:href=${'/admincontroller/employee/employeeL/'+employee.id}>logowanie</a></td>
                         </th:block>
-                        <th:block th:if="${employee.role.toString()=='ACCONT'}">
+                        <th:block th:if="${employee.role.toString()=='ACCOUNT'}">
                             <td style="color: #339933" class="colTableName" th:text="${employee.surname+' '+employee.name}"></td>
                             <td style="color: #339933" class="colTable" th:text="${employee.role.toString()}"></td>
+                            <td class="colTable"><a th:href=${'/admincontroller/employee/employeeE/'+employee.id}>edytuj</a>
+                                &nbsp|&nbsp<a th:href=${'/admincontroller/employee/employeeD/'+employee.id}>usuń</a>
+                                &nbsp|&nbsp<a th:href=${'/admincontroller/employee/employeeL/'+employee.id}>logowanie</a></td>
                         </th:block>
-                        <td class="colTable"><a th:href=${'/admincontroller/employee/employeeE/'+employee.id}>edytuj</a>
-                            &nbsp|&nbsp<a th:href=${'/admincontroller/employee/employeeD/'+employee.id}>usuń</a>
-                            &nbsp|&nbsp<a th:href=${'/admincontroller/employee/employeeL/'+employee.id}>logowanie</a></td>
                     </tr>
                 </th:block>
             </table>

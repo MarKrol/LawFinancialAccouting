@@ -8,6 +8,7 @@ import java.util.List;
 public interface IEmployeeService {
     void persistEmployee(Employee employee);
     void persistEmployeeLogin(Employee employee);
+    void persistEmployee(Employee employee, Employee employeeEdit);
     EmployeeLogin getEmployeeByLogin(String login);
     EmployeeLogin getEmployeeById(int id);
     void changePassEmployee(EmployeeLogin employeeLogin);
@@ -21,4 +22,7 @@ public interface IEmployeeService {
 
     Employee getEmployeeByIdEmployee(int idEmployee);
     List<Employee> getEmployees();
+    List<Employee> getEmployeesNoSuperAdmin();
+
+    void deleteEmployee(Employee employee);
 }

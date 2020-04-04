@@ -20,4 +20,6 @@ public interface IPreschoolGroupService {
     void saveChangePreschoolGroup(PreschoolGroup preschoolGroup, Employee employee);
     boolean isInDBNamePreschoolGroupNoGroupChange(int idGroupChange, String newNameGroup);
     void deletePreschoolGroup (PreschoolGroup preschoolGroup);
+    void persistPreschoolGroupAfterChangeEmployee(PreschoolGroup preschoolGroup, Employee employee);
+    void persistPreschoolGroupAfterChangeEmployeeNoTeacher(Employee employee);
 }

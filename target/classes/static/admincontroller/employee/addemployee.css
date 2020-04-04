@@ -51,7 +51,7 @@ table tr td > tr > td {
     font-family: Verdana, Helvetica, Arial, sans-serif;
 }
 
-#employee #saveemployee{
+#employee #saveemployee, #saveemployee1{
     margin-top:40px;
     margin-bottom:20px;
     width: 258px;

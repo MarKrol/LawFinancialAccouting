@@ -27,6 +27,27 @@ public class PreschoolGroupServiceImpl implements IPreschoolGroupService {
     }
 
     @Override
+    public void persistPreschoolGroupAfterChangeEmployee(PreschoolGroup preschoolGroup, Employee employee) {
+        PreschoolGroup preschoolGroupOldGroup = preschoolerGroupDAO.getPreschoolGroupByIdEmployee(employee.getId());
+        if (preschoolGroupOldGroup!=null) {
+            preschoolGroupOldGroup.setEmployee(null);
+            this.preschoolerGroupDAO.persistPreschoolGroup(preschoolGroupOldGroup);
+        }
+        preschoolGroup.setNameGroup(preschoolGroup.getNameGroup().toUpperCase());
+        preschoolGroup.setEmployee(employee);
+        this.preschoolerGroupDAO.persistPreschoolGroup(preschoolGroup);
+    }
+
+    @Override
+    public void persistPreschoolGroupAfterChangeEmployeeNoTeacher(Employee employee) {
+        PreschoolGroup preschoolGroupOldGroup = preschoolerGroupDAO.getPreschoolGroupByIdEmployee(employee.getId());
+        if (preschoolGroupOldGroup!=null) {
+            preschoolGroupOldGroup.setEmployee(null);
+            this.preschoolerGroupDAO.persistPreschoolGroup(preschoolGroupOldGroup);
+        }
+    }
+
+    @Override
     public boolean isPreschoolGroupInDB(String nameGroup) {
         return this.preschoolerGroupDAO.isPreschoolGroupInDB(nameGroup);
     }

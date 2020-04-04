@@ -36,6 +36,15 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
     }
 
     @Override
+    public void persistEmployeeLogin(EmployeeLogin employeeLogin) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(employeeLogin);
+        session.getTransaction().commit();
+    }
+
+
+    @Override
     public void changePassEmployee(EmployeeLogin employeeLogin) {
         Session session=sessionFactory.openSession();
         session.beginTransaction();
@@ -104,6 +113,11 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
         List<Employee> employee = session.createQuery("FROM pl.camp.it.model.employee.Employee WHERE quantity="
                 +true, Employee.class).list();
         return employee;
+    }
+
+    @Override
+    public EmployeeLogin returnEmployeeLoginNewPassAndLogin(Employee employee){
+        return employeeLoginPass(employee);
     }
 
     private EmployeeLogin employeeLoginPass(Employee employee){

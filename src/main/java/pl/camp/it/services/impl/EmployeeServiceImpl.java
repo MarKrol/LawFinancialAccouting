@@ -10,6 +10,7 @@ import pl.camp.it.model.userLogin.EmployeeLogin;
 import pl.camp.it.services.IEmployeeService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,7 +25,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         employee.setSurname(employee.getSurname().toUpperCase());
         employee.setLocalDateAddToDB(LocalDate.now());
         employee.setQuantity(true);
-        employee.setRole(employeeRole(employee).getRole().toUpperCase());
+        employee.setRole(employee.getRole().toUpperCase());
         this.employeeDAO.persistEmployee(employee);
     }
 
@@ -106,5 +107,36 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public List<Employee> getEmployees() {
         return this.employeeDAO.getEmployees();
+    }
+
+    @Override
+    public List<Employee> getEmployeesNoSuperAdmin() {
+        List<Employee> employeeList = new ArrayList<>();
+        for (Employee employee: this.employeeDAO.getEmployees()){
+            if (!employee.getRole().toString().equals("SUPER_ADMIN")){
+                employeeList.add(employee);
+            }
+        }
+        return  employeeList;
+    }
+
+    @Override
+    public void persistEmployee(Employee employee, Employee employeeEdit) {
+        employee.setName(employeeEdit.getName().toUpperCase());
+        employee.setSurname(employeeEdit.getSurname().toUpperCase());
+        employee.setRole(employeeEdit.getRole().toUpperCase());
+        this.employeeDAO.persistEmployee(employee);
+    }
+
+    @Override
+    public void deleteEmployee(Employee employee) {
+        employee.setQuantity(false);
+        employee.setLocalDateDeleteFromDB(LocalDate.now());
+        this.employeeDAO.persistEmployee(employee);
+        EmployeeLogin employeeLogin = this.employeeDAO.getEmployeeById(employee.getId());
+        EmployeeLogin employeeNewLoginPass=this.employeeDAO.returnEmployeeLoginNewPassAndLogin(employee);
+        employeeLogin.setPass(employeeNewLoginPass.getPass());
+        employeeLogin.setLogin(employeeNewLoginPass.getLogin());
+        this.employeeDAO.persistEmployeeLogin(employeeLogin);
     }
 }
