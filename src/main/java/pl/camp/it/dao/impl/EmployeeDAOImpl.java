@@ -8,6 +8,7 @@ import pl.camp.it.dao.IEmployeeDAO;
 import pl.camp.it.model.employee.Employee;
 import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.userLogin.EmployeeLogin;
+import pl.camp.it.session.SessionObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,15 @@ public class EmployeeDAOImpl implements IEmployeeDAO {
                 uniqueResult();
         session.close();
         return  employeeLogin;
+    }
+
+    @Override
+    public List<EmployeeLogin> getEmployeeLoginList() {
+        Session session=sessionFactory.openSession();
+        List<EmployeeLogin> employeeLoginList = session.createQuery
+                ("FROM pl.camp.it.model.userLogin.EmployeeLogin").getResultList();
+        session.close();
+        return employeeLoginList;
     }
 
     @Override

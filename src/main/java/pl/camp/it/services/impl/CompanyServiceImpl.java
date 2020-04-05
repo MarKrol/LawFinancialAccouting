@@ -20,6 +20,21 @@ public class CompanyServiceImpl implements ICompanyService {
     }
 
     @Override
+    public void saveChangeDataCompany(Company company, Company companyEdit) {
+        company.setAccountNumber(companyEdit.getAccountNumber());
+        company.setAddress(companyEdit.getAddress().toUpperCase());
+        company.setAddressWWWW(companyEdit.getAddressWWWW());
+        company.setCity(companyEdit.getCity().toUpperCase());
+        company.setNameCompany(companyEdit.getNameCompany().toUpperCase());
+        company.setEmail(companyEdit.getEmail());
+        company.setNameBank(companyEdit.getNameBank().toUpperCase());
+        company.setNIP(companyEdit.getNIP());
+        company.setPhone(companyEdit.getPhone());
+        company.setZip(companyEdit.getZip());
+        this.companyDAO.saveChangeDataCompany(company);
+    }
+
+    @Override
     public List<Company> getListCompany() {
         return this.companyDAO.getListCompany();
     }

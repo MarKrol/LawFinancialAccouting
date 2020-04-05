@@ -139,4 +139,52 @@ public class EmployeeServiceImpl implements IEmployeeService {
         employeeLogin.setLogin(employeeNewLoginPass.getLogin());
         this.employeeDAO.persistEmployeeLogin(employeeLogin);
     }
+
+    @Override
+    public EmployeeLogin returnPassOrStarsEmployee(EmployeeLogin employeeLogin) {
+        if (employeeLogin.getPass().length()==32){
+            employeeLogin.setPass("********");
+        }
+        return employeeLogin;
+    }
+
+    @Override
+    public EmployeeLogin genNewPassEmployee(Employee employee) {
+         return this.employeeDAO.returnEmployeeLoginNewPassAndLogin(employee);
+    }
+
+    @Override
+    public String saveNewLogin(Employee employee, String newlogin){
+        if (loginHasGotWhiteChar(newlogin)){
+            return "Zmiany nie są możliwe ponieważ login zawiera białe znaki!";
+        } else{
+            if(newLoginIsInDB(employee, newlogin)){
+                return "Zmiany nie są możliwe ponieważ podany login jest już w bazie!";
+            }else{
+                return null;
+            }
+        }
+    }
+
+    private boolean newLoginIsInDB(Employee employee, String login){
+        boolean loginInDB=false;
+        for (EmployeeLogin employeeLogin: this.employeeDAO.getEmployeeLoginList()){
+            if (employeeLogin.getLogin().equals(login) && employee.getId()!=employeeLogin.getEmployee().getId()){
+                loginInDB=true;
+                break;
+            }
+        }
+        return loginInDB;
+    }
+
+    private boolean loginHasGotWhiteChar(String login){
+        boolean whiteChar=false;
+        for(int i=0; i<=login.length()-1;i++){
+            if (login.charAt(i)==' '){
+                whiteChar=true;
+                break;
+            }
+        }
+        return whiteChar;
+    }
 }

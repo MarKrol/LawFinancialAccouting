@@ -126,4 +126,50 @@ public class employeeLoginController {
             return "redirect:login";
         }
     }
+
+    @RequestMapping(value = "admincontroller/employee/employeeL/{idEmployee}", method = RequestMethod.GET)
+    public String openPagChangePassEmployee(@PathVariable String idEmployee) {
+        if (sessionObject.getEmployee() != null) {
+            sessionObject.setSendData(Integer.parseInt(idEmployee));
+            return "redirect:../../../admincontroller/employee/employeeL";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/employee/employeeL", method = RequestMethod.GET)
+    public String pageChangePassEmployee(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("employeeLoginPass",
+                    employeeService.returnPassOrStarsEmployee(employeeService.getEmployeeById(sessionObject.getSendData())));
+            return "admincontroller/employee/employeeL";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/employee/employeeL", method = RequestMethod.POST, params = "return=POWRÓT")
+    public String noChangePassEmployee() {
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/employee/employee";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/employee/employeeL", method = RequestMethod.POST,
+                                                                                params = "generatePass=GENERUJ HASŁO")
+    public String changePassEmployee() {
+        if (sessionObject.getEmployee() != null) {
+            EmployeeLogin employeeLoginPass= employeeService.getEmployeeById(sessionObject.getSendData());
+            employeeLoginPass.setPass
+                    (employeeService.genNewPassEmployee(employeeService.getEmployeeByIdEmployee(sessionObject.getSendData())).getPass());
+            employeeService.changePassEmployee(employeeLoginPass);
+            return "redirect:../../admincontroller/employee/employeeL";
+        } else {
+            return "redirect:../../login";
+        }
+    }
 }

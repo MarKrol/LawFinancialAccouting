@@ -25,4 +25,8 @@ public interface IEmployeeService {
     List<Employee> getEmployeesNoSuperAdmin();
 
     void deleteEmployee(Employee employee);
+
+    EmployeeLogin returnPassOrStarsEmployee(EmployeeLogin employeeLogin);
+    EmployeeLogin genNewPassEmployee(Employee employee);
+    String saveNewLogin(Employee employee, String newlogin);
 }

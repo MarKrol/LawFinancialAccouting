@@ -2,29 +2,111 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3598b4e1-9580-42b9-8717-3e68b07d16b5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/employee/employeeD.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/employee/employeeE.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminCompanyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/company/company.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/employee/aboutMe.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/employee/aboutMeE.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/employee/employeeL.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminSettlementPaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminSettlementPaymentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/employeeLoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/employeeLoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/IEmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/IEmployeeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/impl/EmployeeDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/impl/EmployeeDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/ICompanyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/ICompanyService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IEmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IEmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPreschoolGroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPreschoolGroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/CompanyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/CompanyServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/EmployeeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/EmployeeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PreschoolGroupServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PreschoolGroupServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/admincontroller/employee/addemployee.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/admincontroller/employee/addemployee.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/employee/addemployee.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/employee/addemployee.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/employee/employee.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/employee/employee.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/settlement/settlementshow.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/settlement/settlementshow.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/stay/staymonthVD.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/stay/staymonthVD.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/menu/topmenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/menu/topmenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/LowFinancialAccounting-1.0-SNAPSHOT-spring-boot.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/LowFinancialAccounting-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/LowFinancialAccounting-1.0-SNAPSHOT.jar.original" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminMealActivityStayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminMealActivityStayController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminSettlementPaymentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminSettlementPaymentController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminUserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminUserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeActivityController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeActivityController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeLoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeLoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeMealFullController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeMealFullController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeMealSingleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeMealSingleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeParentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeParentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeStayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/employeeStayController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IActivityDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IActivityDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/ICompanyDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/ICompanyDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IEmployeeDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IEmployeeDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IFullBoardPriceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IFullBoardPriceDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IParentDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IParentDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPaymentDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPaymentDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerActivityInMonthDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerActivityInMonthDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerFullBoardInMonthDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerFullBoardInMonthDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerSingleBoardInMonthDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerSingleBoardInMonthDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerStayMonthDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IPreschoolerStayMonthDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/ISingleBoardPriceDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/ISingleBoardPriceDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IStayDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/IStayDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/ActivityDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/ActivityDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/CompanyDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/CompanyDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/EmployeeDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/EmployeeDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/FullBoardPriceDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/FullBoardPriceDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/ParentDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/ParentDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PaymentDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PaymentDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PreschoolerActivityInMonthDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PreschoolerActivityInMonthDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PreschoolerDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PreschoolerDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PreschoolerFullBoardInMonthDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PreschoolerFullBoardInMonthDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PreschoolerSingleBoardInMonthDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PreschoolerSingleBoardInMonthDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PreschoolerStayMonthDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/PreschoolerStayMonthDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/SingleBoardPriceDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/SingleBoardPriceDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/StayDAOImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/dao/impl/StayDAOImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/activities/Activities.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/activities/Activities.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/activities/PreschoolerActivityInMonth.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/activities/PreschoolerActivityInMonth.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/company/Company.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/company/Company.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/employee/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/employee/Employee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/employee/EmployeeRole.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/employee/EmployeeRole.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/meals/FullBoardPrice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/meals/FullBoardPrice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/meals/PreschoolerFullBoardInMonth.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/meals/PreschoolerFullBoardInMonth.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/meals/PreschoolerSingleBoardInMonth.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/meals/PreschoolerSingleBoardInMonth.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/meals/SingleBoardPrice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/meals/SingleBoardPrice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/parent/Parent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/parent/Parent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/payment/Payment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/payment/Payment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/preschoolGroup/PreschoolGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/preschoolGroup/PreschoolGroup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/preschooler/Preschooler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/preschooler/Preschooler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/stay/PreschoolerStayMonth.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/stay/PreschoolerStayMonth.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/stay/Stay.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/stay/Stay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/userLogin/EmployeeLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/userLogin/EmployeeLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/model/userLogin/ParentLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/model/userLogin/ParentLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IActivityService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IActivityService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/ICompanyService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/ICompanyService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IEmployeeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IEmployeeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolGroupService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolGroupService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IFullBoardPriceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IFullBoardPriceService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IParentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IParentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPaymentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPaymentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerActivityInMonthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerActivityInMonthService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerFullBoardInMonthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerFullBoardInMonthService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerSingleBoardInMonthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerSingleBoardInMonthService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerStayMonthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPreschoolerStayMonthService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/ISingleBoardPriceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/ISingleBoardPriceService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IStayService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IStayService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/ActivityServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/ActivityServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/CompanyServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/CompanyServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/EmployeeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/EmployeeServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolGroupServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolGroupServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/FullBoardPriceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/FullBoardPriceServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/IStayServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/IStayServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/ParentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/ParentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PaymentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PaymentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerActivityInMonthServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerActivityInMonthServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerFullBoardInMonthServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerFullBoardInMonthServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerSingleBoardInMonthServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerSingleBoardInMonthServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerStayMonthServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PreschoolerStayMonthServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/SingleBoardPriceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/SingleBoardPriceServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/session/SessionObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/session/SessionObject.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/admincontroller/employee/addemployee.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/admincontroller/employee/addemployee.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admincontroller/employee/addemployee.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admincontroller/employee/addemployee.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admincontroller/employee/employee.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admincontroller/employee/employee.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/menu/topmenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/menu/topmenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +142,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/admincontroller/employee" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/admincontroller/company" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -68,19 +150,19 @@
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\company" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\employee" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\grouppreschooler" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\preschooler" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\stay" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\stay" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\activity" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\admincontroller\employee" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\head\png" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\login" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\employee" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\grouppreschooler" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\preschooler" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\stay" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\meals" />
     </key>
   </component>
   <component name="RunManager">
@@ -133,10 +215,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1582540910489" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1586029926965">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1586126951980">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586029926965" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586126951980" />
     <state x="669" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584544975992">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -149,38 +231,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585035310741" />
-    <state width="1877" height="227" key="GridCell.Tab.0.bottom" timestamp="1586033170598">
+    <state width="1877" height="227" key="GridCell.Tab.0.bottom" timestamp="1586128435218">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586033170598" />
-    <state width="1877" height="227" key="GridCell.Tab.0.center" timestamp="1586033170598">
+    <state width="1877" height="227" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586128435218" />
+    <state width="1877" height="227" key="GridCell.Tab.0.center" timestamp="1586128435218">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586033170598" />
-    <state width="1877" height="227" key="GridCell.Tab.0.left" timestamp="1586033170598">
+    <state width="1877" height="227" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586128435218" />
+    <state width="1877" height="227" key="GridCell.Tab.0.left" timestamp="1586128435217">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586033170598" />
-    <state width="1877" height="227" key="GridCell.Tab.0.right" timestamp="1586033170598">
+    <state width="1877" height="227" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586128435217" />
+    <state width="1877" height="227" key="GridCell.Tab.0.right" timestamp="1586128435218">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586033170598" />
-    <state width="1877" height="227" key="GridCell.Tab.1.bottom" timestamp="1586033170598">
+    <state width="1877" height="227" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586128435218" />
+    <state width="1877" height="227" key="GridCell.Tab.1.bottom" timestamp="1586128435126">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586033170598" />
-    <state width="1877" height="227" key="GridCell.Tab.1.center" timestamp="1586033170598">
+    <state width="1877" height="227" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1586128435126" />
+    <state width="1877" height="227" key="GridCell.Tab.1.center" timestamp="1586128435126">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586033170598" />
-    <state width="1877" height="227" key="GridCell.Tab.1.left" timestamp="1586033170598">
+    <state width="1877" height="227" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1586128435126" />
+    <state width="1877" height="227" key="GridCell.Tab.1.left" timestamp="1586128435126">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586033170598" />
-    <state width="1877" height="227" key="GridCell.Tab.1.right" timestamp="1586033170598">
+    <state width="1877" height="227" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1586128435126" />
+    <state width="1877" height="227" key="GridCell.Tab.1.right" timestamp="1586128435126">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586033170598" />
+    <state width="1877" height="227" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1586128435126" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1585565433546">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -193,6 +275,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1583501552348" />
+    <state x="609" y="134" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586124240983">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="609" y="134" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1586124240983" />
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585756287348">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -218,7 +304,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/LowFinancialAccounting$App.ic" NAME="App Coverage Results" MODIFIED="1585927283910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/LowFinancialAccounting$App.ic" NAME="App Coverage Results" MODIFIED="1586124275788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>pl.camp.it.*</FILTER>
     </SUITE>
   </component>

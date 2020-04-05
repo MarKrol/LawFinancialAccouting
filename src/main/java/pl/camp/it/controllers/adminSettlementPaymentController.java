@@ -120,7 +120,8 @@ public class adminSettlementPaymentController {
             model.addAttribute("activityToPay",
                                     preschoolerActivityInMonthService.activityMonthToPay(preschoolerActivityInMonthList));
 
-
+            model.addAttribute("company1", companyService.getListCompany().get(0));
+            model.addAttribute("company2", companyService.getListCompany().get(1));
             return "admincontroller/settlement/settlementshow";
         } else {
             return "redirect:../../login";

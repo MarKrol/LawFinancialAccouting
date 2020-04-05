@@ -16,6 +16,7 @@ public interface IEmployeeDAO {
     List<Employee> getEmployees();
     EmployeeLogin returnEmployeeLoginNewPassAndLogin(Employee employee);
     void persistEmployeeLogin(EmployeeLogin employeeLogin);
+    List<EmployeeLogin> getEmployeeLoginList();
     Employee getEmployeeByName();
     Employee getEmployeeBySurname();
 }

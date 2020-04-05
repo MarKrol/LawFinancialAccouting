@@ -9,6 +9,7 @@ import pl.camp.it.model.employee.Employee;
 import pl.camp.it.model.parent.Parent;
 import pl.camp.it.model.preschoolGroup.PreschoolGroup;
 import pl.camp.it.model.preschooler.Preschooler;
+import pl.camp.it.model.userLogin.EmployeeLogin;
 import pl.camp.it.services.*;
 import pl.camp.it.session.SessionObject;
 
@@ -335,7 +336,7 @@ public class adminUserController {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            model.addAttribute("employeeLoggedId",sessionObject.getEmployee().getId());
+            model.addAttribute("employeeLoggedId", sessionObject.getEmployee().getId());
             if (sessionObject.getEmployee().getRole().toString().equals("SUPER_ADMIN")) {
                 model.addAttribute("allEmployee", employeeService.getEmployees().stream().sorted
                         (Comparator.comparing(Employee::getSurname)).collect(Collectors.toList()));
@@ -363,14 +364,14 @@ public class adminUserController {
     public String openedPageEditEmployee(Model model) {
         if (sessionObject.getEmployee() != null) {
             Employee employee = employeeService.getEmployeeByIdEmployee(sessionObject.getSendData());
-            PreschoolGroup preschoolGroup=preschoolGroupService.getPreschoolGroupByIdEmployee(employee.getId());
+            PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolGroupByIdEmployee(employee.getId());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("employee", employee);
             model.addAttribute("listPreschoolGroup",
                     preschoolGroupService.getListPreschoolerGroupNoOneGroup(preschoolGroupService.getListPreschoolerGroup()));
 
-            if (employee.getRole().equals("TEACHER")&& preschoolGroup!=null) {
+            if (employee.getRole().equals("TEACHER") && preschoolGroup != null) {
                 model.addAttribute("nameGroup", preschoolGroupService.getPreschoolGroupByIdEmployee
                         (sessionObject.getSendData()).getNameGroup());
             }
@@ -391,32 +392,32 @@ public class adminUserController {
 
     @RequestMapping(value = "admincontroller/employee/employeeE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
     public String saveEditEmployeePOST(@ModelAttribute Employee employeeEdit,
-                                       @RequestParam(name="choose", required =false)String nameGroup, Model model) {
+                                       @RequestParam(name = "choose", required = false) String nameGroup, Model model) {
         if (sessionObject.getEmployee() != null) {
             Employee employee = employeeService.getEmployeeByIdEmployee(sessionObject.getSendData());
-            if (employeeEdit.getRole()!=null && employeeEdit.getRole().equals("teacher")){
+            if (employeeEdit.getRole() != null && employeeEdit.getRole().equals("teacher")) {
                 if (nameGroup.equals("")) {
                     model.addAttribute("message", "Wybierz grupę przedszkolną!");
-                    PreschoolGroup preschoolGroup=preschoolGroupService.getPreschoolGroupByIdEmployee(employee.getId());
+                    PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolGroupByIdEmployee(employee.getId());
                     model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                             sessionObject.getEmployee().getSurname());
                     model.addAttribute("employee", employee);
                     model.addAttribute("listPreschoolGroup",
                             preschoolGroupService.getListPreschoolerGroupNoOneGroup(preschoolGroupService.getListPreschoolerGroup()));
-                    if (employee.getRole().equals("TEACHER") && preschoolGroup!=null) {
+                    if (employee.getRole().equals("TEACHER") && preschoolGroup != null) {
                         model.addAttribute("nameGroup", preschoolGroupService.getPreschoolGroupByIdEmployee
                                 (sessionObject.getSendData()).getNameGroup());
                     }
                     return "admincontroller/employee/employeeE";
-                } else{
+                } else {
                     employeeService.persistEmployee(employee, employeeEdit);
                     preschoolGroupService.persistPreschoolGroupAfterChangeEmployee
-                                                (preschoolGroupService.getPreschoolerGroupByName(nameGroup), employee);
+                            (preschoolGroupService.getPreschoolerGroupByName(nameGroup), employee);
                     sessionObject.setEmployee(employeeService.getEmployeeByIdEmployee(sessionObject.getEmployee().getId()));
                     return "redirect:../../admincontroller/employee/employee";
                 }
-            }else{
-                if (employeeEdit.getRole()==null){
+            } else {
+                if (employeeEdit.getRole() == null) {
                     employeeEdit.setRole("SUPER_ADMIN");
                 }
                 employeeService.persistEmployee(employee, employeeEdit);
@@ -443,14 +444,14 @@ public class adminUserController {
     public String openedPageDeleteEmployee(Model model) {
         if (sessionObject.getEmployee() != null) {
             Employee employee = employeeService.getEmployeeByIdEmployee(sessionObject.getSendData());
-            PreschoolGroup preschoolGroup=preschoolGroupService.getPreschoolGroupByIdEmployee(employee.getId());
+            PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolGroupByIdEmployee(employee.getId());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("employee", employee);
             model.addAttribute("listPreschoolGroup",
                     preschoolGroupService.getListPreschoolerGroupNoOneGroup(preschoolGroupService.getListPreschoolerGroup()));
 
-            if (employee.getRole().equals("TEACHER")&& preschoolGroup!=null) {
+            if (employee.getRole().equals("TEACHER") && preschoolGroup != null) {
                 model.addAttribute("nameGroup", preschoolGroupService.getPreschoolGroupByIdEmployee
                         (sessionObject.getSendData()).getNameGroup());
             }
@@ -477,7 +478,7 @@ public class adminUserController {
             if (employee.getRole().equals("TEACHER")) {
                 employeeService.deleteEmployee(employee);
                 preschoolGroupService.persistPreschoolGroupAfterChangeEmployeeNoTeacher(employee);
-            } else{
+            } else {
                 employeeService.deleteEmployee(employee);
             }
             return "redirect:../../admincontroller/employee/employee";
@@ -485,4 +486,67 @@ public class adminUserController {
             return "redirect:../../login";
         }
     }
+
+    @RequestMapping(value = "admincontroller/employee/aboutMe", method = RequestMethod.GET)
+    public String openAboutMe(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            Employee employee = sessionObject.getEmployee();
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("employee", employee);
+            model.addAttribute("employeeLogin", employeeService.getEmployeeById(employee.getId()));
+            return "admincontroller/employee/aboutMe";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/employee/aboutMeE", method = RequestMethod.GET)
+    public String openAboutMeEdit(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            Employee employee = sessionObject.getEmployee();
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("employee", employee);
+            model.addAttribute("employeeLogin", employeeService.getEmployeeById(employee.getId()));
+            return "admincontroller/employee/aboutMeE";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/employee/aboutMeE", method = RequestMethod.POST, params = "return=NIE ZAPISUJ ZMIAN")
+    public String aboutMeEditExit(Model model) {
+        if (sessionObject.getEmployee() != null) {
+            return "redirect:../../admincontroller/employee/aboutMe";
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
+    @RequestMapping(value = "admincontroller/employee/aboutMeE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
+    public String aboutMeEditSave(@ModelAttribute EmployeeLogin employeeLoginEdit, Model model) {
+        if (sessionObject.getEmployee() != null) {
+            String saveLogin=employeeService.saveNewLogin(employeeService.getEmployeeByIdEmployee(sessionObject.getEmployee().getId()),
+                    employeeLoginEdit.getLogin());
+            if(saveLogin==null){
+                EmployeeLogin employeeLogin=employeeService.getEmployeeById(sessionObject.getEmployee().getId());
+                employeeLogin.setLogin(employeeLoginEdit.getLogin());
+                employeeService.changePassEmployee(employeeLogin);
+                return "redirect:../../admincontroller/employee/aboutMe";
+            } else{
+                Employee employee = sessionObject.getEmployee();
+                model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                        sessionObject.getEmployee().getSurname());
+                model.addAttribute("employee", employee);
+                model.addAttribute("employeeLogin", employeeService.getEmployeeById(employee.getId()));
+
+                model.addAttribute("message", saveLogin);
+                return "admincontroller/employee/aboutMeE";
+            }
+        } else {
+            return "redirect:../../login";
+        }
+    }
+
 }
