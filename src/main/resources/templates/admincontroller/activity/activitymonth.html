@@ -50,9 +50,9 @@
                 <tr>
                     <td style="width:200px"><label><p class="name" th:text="${'NAZWA ZAJĘĆ:'}"></p></label></td>
                     <td>
-                        <label><p class="name" th:text="${'Miesiąc rozpoczęcia zajęć przez dziecko: '}"></p></label>
+                        <label><p class="name" th:text="${'Miesiąc uczęszczania na zajęcia: '}"></p></label>
                         <select required name="choose1" path="orderId" id="list00">
-                        <option value="">Wybierz miesiąc pierwszych zajęć</option>
+                        <option value="">Wybierz miesiąć uczęszczania na zajęcia</option>
                         <option th:each="listMonth:${listMonth}"
                                 th:value="${listMonth}"
                                 th:text="${listMonth}"

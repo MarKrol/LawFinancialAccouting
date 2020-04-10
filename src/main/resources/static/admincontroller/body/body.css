@@ -26,6 +26,22 @@ table tr td > tr > td {
     text-decoration: underline;
 }
 
+#full label p.listP {
+    margin-left:20px;
+    padding-top:5px;
+    font-size: 13px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    text-decoration: underline;
+}
+
+#full label p.listPP {
+    margin-left:20px;
+    padding-top:5px;
+    font-size: 12px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    text-decoration: none;
+}
+
 #full input.name{
     margin-top:10px;
     width: 320px;

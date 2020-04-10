@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LowFinancialAccounting</title>
+    <link rel="stylesheet" href="../../admincontroller/body/body.css">
+    <link rel="stylesheet" href="../../admincontroller/copy/copy.css">
+    <link rel="stylesheet" href="../../logout/logout.css">
+    <link rel="stylesheet" href="../../menu/topmenu.css">
+    <link rel="stylesheet" href="../../head/head.css">
+    <link rel="stylesheet" href="../../foot/foot.css">
+</head>
+
+<body>
+<div id="all">
+    <div id="signout">
+        <div th:replace="logout.html::logout"></div>
+    </div>
+    <div id="head">
+        <div th:replace="head/head.html::head"></div>
+    </div>
+    <div id="loginemployee">
+        <p th:text="${'Zalogowany pracownik: '+employeeLogged}"></p>
+    </div>
+    <div th:replace="menu/topmenu.html::topmenu"></div>
+    <div id="addfull">
+
+        <p class="label">Moduł kopiowania danych dla grupy przedszkolnej</p>
+            <label><p class="message" th:text="${message}"></p></label>
+            <label><p class="messageOK" th:text="${messageOK}"></p></label>
+
+            <div id="full">
+            <div id="tabs" style="float:none">
+
+                <br/>
+                <p style="font-weight: normal; margin-left: 300px;" class="label"><u>WYBIERZ RODZAJ KOPIOWANIA DANYCH DLA GRUPY</u></p>
+
+                <div class="tab" style="float:right">
+                    <button class="tablinks" onclick="openCity(event, 'fullMeal')">DIETY</button>
+                    <button class="tablinks" onclick="openCity(event, 'singleMeal')">POSIŁKI</button>
+                    <button class="tablinks" onclick="openCity(event, 'activity')">ZAJĘCIA</button>
+                    <button class="tablinks" onclick="openCity(event, 'stay')">POBYT/WYJŚCIA</button>
+                </div>
+                <form action="../../admincontroller/copy/copyForGroup" method="post">
+
+                    <div style="float: left; margin-top: -4.8em;">
+                            <table>
+                                <tr>
+                                    <td><label><p style=" font-size: 13px;" class="name" th:text="${'LISTA GRUP'}"></p></label></td>
+                                </tr>
+                                <tr>
+                                    <td><select required name="choose" path="orderId" id="list0Activity">
+                                        <option value="">Wybierz grupę</option>
+                                        <option th:each="group: ${listPreschoolGroup}"
+                                                th:value="${group.id}"
+                                                th:text="${group.nameGroup}"
+                                                th:selected="${group.nameGroup==nameGroup}">
+                                        </option>
+                                    </select></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="submit" value="KOPIUJ DANE" id="showSettlement" name="show" disabled
+                                    style="margin-bottom: 50px;"></td>
+                                </tr>
+                            </table>
+                    </div>
+
+                <div id="fullMeal" class="tabcontent" style=" margin-top:50px">
+                    <p></p>
+                    <p class="label">&nbsp&nbsp Moduł kopiowania przypisanych diet przedszkolaków całej wybranej grupy z
+                        poprzedniego miesiąca<br> &nbsp&nbsp na kolejny miesiąc. Kopiowane są wszyskie dane tzn. nazwa diety,
+                        ilość zjedzonych posiłków oraz <br> &nbsp&nbsp stawka diety naliczona w kopiowanym miesiącu.
+                        <br>&nbsp&nbsp Moduł nie nadpisuje zapisanych danych.</p>
+                    <table style="padding:left: 5px">
+                        <th:block th:each="month1, index: ${listMonth1}">
+                            <tr>
+                                <td style="width:255px"><label><p style="text-decoration: none" class="name" th:text="${month1+' -> '+listMonth2.get(index.index)}"></p></label></td>
+                                <td style="width:35px"><input style="margin-top: 15px" type="radio" class="activities" name="month" th:value="${month1+'<F>'+listMonth2.get(index.index)}"/></td>
+                            </tr>
+                        </th:block>
+                    </table>
+                </div>
+
+                <div id="singleMeal" class="tabcontent" style=" margin-top:50px">
+                    <p class="label">&nbsp&nbsp Moduł kopiowania przypisanych pojedynczych posiłków przedszkolaków całej wybranej grupy <br>
+                        &nbsp&nbsp z poprzedniego miesiąca na kolejny miesiąc. Kopiowane są wszyskie dane tzn. nazwy posiłków,
+                        <br> &nbsp&nbsp ilość zjedzonych posiłków oraz stawki posiłków naliczone w kopiowanym miesiącu.
+                        <br>&nbsp&nbsp Moduł nie nadpisuje zapisanych danych.</p>
+                    <table>
+                        <th:block th:each="month1, index: ${listMonth1}">
+                            <tr>
+                                <td style="width:255px"><label><p style="text-decoration: none" class="name" th:text="${month1+' -> '+listMonth2.get(index.index)}"></p></label></td>
+                                <td style="width:35px"><input style="margin-top: 15px" type="radio" class="activities" name="month" th:value="${month1+'<S>'+listMonth2.get(index.index)}"/></td>
+                            </tr>
+                        </th:block>
+                    </table>
+                </div>
+
+                <div id="activity" class="tabcontent" style=" margin-top:50px">
+                    <p class="label">&nbsp&nbsp Moduł kopiowania przypisanych zajęć dodatkowych przedszkolaków całej wybranej grupy <br>
+                        &nbsp&nbsp z poprzedniego miesiąca na kolejny miesiąc. Kopiowane są wszyskie dane tzn. nazwy zajęć,
+                        <br> &nbsp&nbsp oraz stawki za zajęcia naliczone w kopiowanym miesiącu.
+                        <br>&nbsp&nbsp Moduł nie nadpisuje zapisanych danych.</p>
+                    <table>
+                        <th:block th:each="month1, index: ${listMonth1}">
+                            <tr>
+                                <td style="width:255px"><label><p style="text-decoration: none" class="name" th:text="${month1+' -> '+listMonth2.get(index.index)}"></p></label></td>
+                                <td style="width:35px"><input style="margin-top: 15px" type="radio" class="activities" name="month" th:value="${month1+'<A>'+listMonth2.get(index.index)}"/></td>
+                            </tr>
+                        </th:block>
+                    </table>
+                </div>
+
+
+                <div id="stay" class="tabcontent" style=" margin-top:50px">
+                    <p class="label">&nbsp&nbsp Moduł kopiowania przypisanych pobytów/wyjść przedszkolaków całej wybranej grupy <br>
+                        &nbsp&nbsp z poprzedniego miesiąca na kolejny miesiąc. Kopiowane są wszyskie dane tzn. nazwy pobytów/wyjść,
+                        <br> &nbsp&nbsp ilość pobytów/wyjść oraz stawki pobytów/wyjść naliczone w kopiowanym miesiącu.
+                        <br>&nbsp&nbsp Moduł nie nadpisuje zapisanych danych.</p>
+                    <table>
+                        <th:block th:each="month1, index: ${listMonth1}">
+                            <tr>
+                                <td style="width:255px"><label><p style="text-decoration: none" class="name" th:text="${month1+' -> '+listMonth2.get(index.index)}"></p></label></td>
+                                <td style="width:35px"><input style="margin-top: 15px" type="radio" class="activities" name="month" th:value="${month1+'<E>'+listMonth2.get(index.index)}"/></td>
+                            </tr>
+                        </th:block>
+                    </table>
+                </div>
+                </form>
+            </div>
+            </div>
+
+    </div>
+    <div id="footer" style="display: block; clear: left" >
+    <div th:replace="foot/foot.html::foot"></div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+
+
+  var ele = document.getElementsByName("month");
+  for(var i=0;i<ele.length;i++)
+      ele[i].checked = false;
+
+  $('#showSettlement').prop('disabled', true);
+}
+</script>
+
+<script>
+  $( ".activities" ).on( "click", function() {
+  if($( ".activities:checked" ).length > 0)
+  {
+    $('#showSettlement').prop('disabled', false);
+  }
+  else
+  {
+    $('#showSettlement').prop('disabled', true);
+  }
+});
+</script>
+
+</body>
+</html>
