@@ -46,6 +46,13 @@
             <version>5.4.12.Final</version>
         </dependency>
 
+        <!-- PDF -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.10</version>
+        </dependency>
+
     </dependencies>
 
     <build>
