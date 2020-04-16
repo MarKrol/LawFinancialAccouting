@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LowFinancialAccounting</title>
+    <link rel="stylesheet" href="../../admincontroller/employee/addemployee.css">
+    <link rel="stylesheet" href="../../logout/logout.css">
+    <link rel="stylesheet" href="../../menu/topmenu.css">
+    <link rel="stylesheet" href="../../head/head.css">
+    <link rel="stylesheet" href="../../foot/foot.css">
+</head>
+
+<body onload="loadSend()">
+<div id="all">
+    <div id="signout">
+        <div th:replace="logout.html::logout"></div>
+    </div>
+    <div id="head">
+        <div th:replace="head/head.html::head"></div>
+    </div>
+    <div id="loginemployee">
+        <p th:text="${'Zalogowany pracownik: '+employeeLogged}"></p>
+    </div>
+    <div th:replace="menu/topmenu.html::topmenu"></div>
+    <div id="addemployee">
+        <p class="label">Moduł wysyłający rozliczenia na adresy e-mail</p>
+        <form action="../../admincontroller/email/send" method="post">
+        <table id="employee">
+            <tr>
+                <td><label><p class="userrole">Miesiąc rozliczenia: </p></label></td>
+                <td style="padding-left:1.5em;">
+                    <select style="width: 250px; margin-top:0.7em;" name="chooseMonth" path="orderId" class="listgroup">
+                        <option th:each="month:${listMonth}"
+                                th:value="${month}"
+                                th:text="${month}"
+                                th:selected=${month==monthName}>
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label><p class="userrole">Wyśli rozliczenie e-mailem: </p></label></td>
+                <td style="padding-left:1.5em;">
+                    <th:block th:if="${role=='preschooler'}">
+                    <input type="radio" name="role" class="role2" value="preschooler" onfocus="preschooler()"checked><label class="choose">przedszkolakowi/przedszkolakom</label>
+                    </th:block>
+                    <th:block th:unless="${role=='preschooler'}">
+                        <input type="radio" name="role" class="role2" value="preschooler" onfocus="preschooler()"><label class="choose">przedszkolakowi/przedszkolakom</label>
+                    </th:block>
+                    <th:block th:if="${role=='group'}">
+                        <input type="radio" name="role" class="role1" value="group" onfocus="group()"checked><label class="choose">grupie/grupom</label>
+                    </th:block>
+                    <th:block th:unless="${role=='group'}">
+                        <input type="radio" name="role" class="role1" value="group" onfocus="group()"><label class="choose">grupie/grupom</label>
+                    </th:block>
+                    <th:block th:if="${role=='all'}">
+                        <input type="radio" name="role" class="role" value="all" onfocus="allSend();"checked><label class="choose">wszystkim</label>
+                    </th:block>
+                    <th:block th:unless="${role=='all'}">
+                        <input type="radio" name="role" class="role" value="all" onfocus="allSend();"><label class="choose">wszystkim</label>
+                    </th:block>
+                </td>
+            </tr>
+        </table>
+            <div id="preschooler" style="margin-bottom: 2em;">
+                <div id="listgroup" style="float:left">
+                    <table id="showPreschooler">
+                        <tr>
+                            <td><label><p class="userrole">Lista grup: </p></label></td>
+                        </tr>
+                        <tr>
+                            <td><select style="width: 250px; margin-left:20px" name="choose" path="orderId" class="listgroup">
+                                <option th:each="listPreschoolGroup:${listPreschoolGroup}"
+                                        th:value="${listPreschoolGroup.id}"
+                                        th:text="${listPreschoolGroup.nameGroup}"
+                                        th:selected="${listPreschoolGroup.nameGroup==nameGroup}">
+                                </option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="submit" value="POKAŻ PRZEDSZKOLAKÓW" id="btnPreschooler" name="show">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="listpreschooler" style="margin-bottom: 1.5em;">
+                    <table id="showListPreschooler">
+                        <tr>
+                            <td><label><p style="margin-left:50px" class="userrole">Lista przedszkolaków: </p></label></td>
+                        </tr>
+                        <th:block th:each="preschooler:${listPreschooler}">
+                            <tr>
+                                <td style="width: 300px"><p th:text="${preschooler.surname+' '+preschooler.name}"/></td>
+                                <td><input name="idPreschooler" type="checkbox" th:value="${preschooler.id}"></td>
+                            </tr>
+                        </th:block>
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" value="WYŚLIJ ROZLICZENIE" id="btnSendPreschooler" name="btnSendPreschooler">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="group">
+                <table id="listSendGroup">
+                    <tr>
+                        <td><label><p class="userrole">Lista grup: </p></label></td>
+                    </tr>
+                    <th:block th:each="preschoolGroup:${listPreschoolGroup}">
+                        <tr>
+                            <td><p th:text="${preschoolGroup.nameGroup}"/></td>
+                            <td><input type="checkbox" th:value="${preschoolGroup.id}"></td>
+                        </tr>
+                    </th:block>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="WYŚLIJ ROZLICZENIE" id="btnSendGroup">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="allSend">
+                <input type="submit" value="WYŚLIJ ROZLICZENIE" id="btnSendAll">
+            </div>
+        </form>
+    </div>
+    <div th:replace="foot/foot.html::foot"></div>
+</div>
+</body>
+<script>
+    var role = "[[${role}]]";
+    var message = [[${number_message}]];
+
+    function loadSend(){
+        if (role=='preschooler'){
+            document.getElementById('preschooler').style.display='block';
+            document.getElementById('group').style.display='none';
+            document.getElementById('allSend').style.display='none';
+        };
+        if (role=='group'){
+            document.getElementById('preschooler').style.display='none';
+            document.getElementById('group').style.display='block';
+            document.getElementById('allSend').style.display='none';
+        };
+        if (role=='all'){
+            document.getElementById('preschooler').style.display='none';
+            document.getElementById('group').style.display='none';
+            document.getElementById('allSend').style.display='block';
+        };
+    }
+
+    function preschooler(){
+        document.getElementById('preschooler').style.display='block';
+        document.getElementById('group').style.display='none';
+        document.getElementById('allSend').style.display='none';
+    }
+        function group(){
+        document.getElementById('preschooler').style.display='none';
+        document.getElementById('group').style.display='block';
+        document.getElementById('allSend').style.display='none';
+    }
+        function allSend(){
+        document.getElementById('preschooler').style.display='none';
+        document.getElementById('group').style.display='none';
+        document.getElementById('allSend').style.display='block';
+    }
+
+     if (message==1){
+        document.getElementById('group').style.display='none';
+        document.getElementById('allSend').style.display='none';
+        alert("Rozliczenie nie może zostać przesłane ponieważ nie wybrano adresatów!");
+    }
+
+</script>
+</html>

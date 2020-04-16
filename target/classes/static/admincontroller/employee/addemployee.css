@@ -67,3 +67,59 @@ table tr td > tr > td {
     font-family: Verdana, Helvetica, Arial, sans-serif;
     color: red;
 }
+
+#showPreschooler #btnPreschooler{
+    margin-top:0.6em;
+    margin-bottom:1.1em;
+    margin-left:18px;
+    width: 253px;
+    height: 30px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#showListPreschooler #btnSendPreschooler{
+    margin-top:1em;
+    margin-bottom:0.5em;
+    margin-left:50px;
+    width: 253px;
+    height: 30px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#listSendGroup #btnSendGroup{
+    margin-top:1em;
+    margin-bottom:1em;
+    margin-left:20px;
+    width: 253px;
+    height: 30px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#btnSendAll{
+    margin-top:1em;
+    margin-bottom:1em;
+    margin-left:20px;
+    width: 253px;
+    height: 30px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#showListPreschooler p{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 50px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#listSendGroup p{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 20px;
+    font-size: 14px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+}
