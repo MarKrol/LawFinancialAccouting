@@ -2,24 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3598b4e1-9580-42b9-8717-3e68b07d16b5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/SimpleMailController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminSendEmailController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/IPDFDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/dao/impl/PDFDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/ISendMailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/SendMailServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/email/send.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/email/report.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/email/sending.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/SimpleMailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/SimpleMailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminSendEmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminSendEmailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPDFService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPDFService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPreschoolGroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPreschoolGroupService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PDFServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PDFServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PreschoolGroupServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PreschoolGroupServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/SendMailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/SendMailServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/admincontroller/employee/addemployee.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/admincontroller/employee/addemployee.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/menu/topmenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/menu/topmenu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/email/send.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/email/send.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/SimpleMailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/SimpleMailController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminSendEmailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminSendEmailController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPDFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPDFService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PDFServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PDFServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/SendMailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/SendMailServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/admincontroller/employee/addemployee.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/admincontroller/employee/addemployee.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/menu/topmenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/menu/topmenu.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,19 +63,19 @@
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\email" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\pass" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\copy" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\company" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\employee" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\images" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\logoKZ" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\stay" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\pass" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\email" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\copy" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\company" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\employee" />
     </key>
   </component>
   <component name="RunManager">
@@ -133,10 +133,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1582540910489" />
-    <state x="799" y="286" key="#com.intellij.ide.util.MemberChooser" timestamp="1587075753926">
+    <state x="799" y="286" key="#com.intellij.ide.util.MemberChooser" timestamp="1587240473548">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="799" y="286" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1587075753926" />
+    <state x="799" y="286" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1587240473548" />
     <state x="669" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584544975992">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -149,38 +149,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1586992563049" />
-    <state width="1877" height="227" key="GridCell.Tab.0.bottom" timestamp="1587077065111">
+    <state width="1877" height="314" key="GridCell.Tab.0.bottom" timestamp="1587244392514">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587077065111" />
-    <state width="1877" height="227" key="GridCell.Tab.0.center" timestamp="1587077065111">
+    <state width="1877" height="314" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392514" />
+    <state width="1877" height="314" key="GridCell.Tab.0.center" timestamp="1587244392514">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587077065111" />
-    <state width="1877" height="227" key="GridCell.Tab.0.left" timestamp="1587077065111">
+    <state width="1877" height="314" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392514" />
+    <state width="1877" height="314" key="GridCell.Tab.0.left" timestamp="1587244392514">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587077065111" />
-    <state width="1877" height="227" key="GridCell.Tab.0.right" timestamp="1587077065111">
+    <state width="1877" height="314" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392514" />
+    <state width="1877" height="314" key="GridCell.Tab.0.right" timestamp="1587244392514">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587077065111" />
-    <state width="1877" height="227" key="GridCell.Tab.1.bottom" timestamp="1587077202735">
+    <state width="1877" height="314" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392514" />
+    <state width="1877" height="314" key="GridCell.Tab.1.bottom" timestamp="1587244392435">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587077202735" />
-    <state width="1877" height="227" key="GridCell.Tab.1.center" timestamp="1587077202735">
+    <state width="1877" height="314" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392435" />
+    <state width="1877" height="314" key="GridCell.Tab.1.center" timestamp="1587244392435">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587077202735" />
-    <state width="1877" height="227" key="GridCell.Tab.1.left" timestamp="1587077202735">
+    <state width="1877" height="314" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392435" />
+    <state width="1877" height="314" key="GridCell.Tab.1.left" timestamp="1587244392435">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587077202735" />
-    <state width="1877" height="227" key="GridCell.Tab.1.right" timestamp="1587077202735">
+    <state width="1877" height="314" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392435" />
+    <state width="1877" height="314" key="GridCell.Tab.1.right" timestamp="1587244392435">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587077202735" />
+    <state width="1877" height="314" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392435" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1587041559598">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -232,7 +232,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/LowFinancialAccounting$App.ic" NAME="App Coverage Results" MODIFIED="1586993295928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/LowFinancialAccounting$App.ic" NAME="App Coverage Results" MODIFIED="1587221194310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>pl.camp.it.*</FILTER>
     </SUITE>
   </component>

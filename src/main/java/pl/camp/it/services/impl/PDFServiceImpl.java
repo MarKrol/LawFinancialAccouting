@@ -59,7 +59,7 @@ public class PDFServiceImpl implements IPDFService {
     }
 
     @Override
-    public void createSettlementPDF(Path tempDirectory, File filePDF, Integer idPreschooler){
+    public void createSettlementPDF(Path tempDirectory, File filePDF, Integer idPreschooler, String month){
         Document document = new Document();
         try{
             PdfWriter.getInstance(document, new FileOutputStream(filePDF));

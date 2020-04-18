@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LowFinancialAccounting</title>
+    <link rel="stylesheet" href="../../admincontroller/employee/addemployee.css">
+    <link rel="stylesheet" href="../../logout/logout.css">
+    <link rel="stylesheet" href="../../menu/topmenu.css">
+    <link rel="stylesheet" href="../../head/head.css">
+    <link rel="stylesheet" href="../../foot/foot.css">
+</head>
+
+<body>
+<div id="all">
+    <div id="signout">
+        <div th:replace="logout.html::logout"></div>
+    </div>
+    <div id="head">
+        <div th:replace="head/head.html::head"></div>
+    </div>
+    <div id="loginemployee">
+        <p th:text="${'Zalogowany pracownik: '+employeeLogged}"></p>
+    </div>
+    <div th:replace="menu/topmenu.html::topmenu"></div>
+    <div id="addemployee">
+        <p class="label">Moduł wysyłający rozliczenia na adresy e-mail</p>
+
+        <p class="report">Trwa wysyłanie emaili! Proszę czekać!</p>
+
+        <th:block th:if="${mailSending==true}">
+            <p class="report">Zakończono przesyłanie emaili.</p>
+            <a class="report" href="../../admincontroller/email/report">Raport z wysyłania emaili</a>
+        </th:block>
+
+    </div>
+    <div th:replace="foot/foot.html::foot"></div>
+</div>
+
+<script>
+    var send = [[${mailSending}]];
+
+    if (!send){
+        setTimeout(function() {
+        location.reload();
+        }, 5000);
+    };
+</script>
+
+</body>
+</html>

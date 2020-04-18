@@ -46,15 +46,15 @@ public class SendMailServiceImpl implements ISendMailService {
                 helper.addInline("identifier1234",getLogo());
                 helper.addAttachment("document.pdf", new FileSystemResource
                                                                 (new File(pathToFilePDF+"\\document.pdf")));
-                //sender.send(message);
-                return "Wysyłanie zakończone sukcesem!";
+                sender.send(message);
+                return "Email został wysłany na podany adres!";
             } catch (MessagingException e){
                 e.printStackTrace();
-                return "Wystąpił błąd podczas przsyłania. "+e.getMessage();
+                return "Wystąpił błąd podczas przsyłania!";
             }
         }catch (AddressException e){
             e.printStackTrace();
-            return "Błedny adres email adresata. "+e.getMessage();
+            return "Błędny adres email adresata!";
         }
     }
 

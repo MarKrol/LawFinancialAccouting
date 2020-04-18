@@ -22,4 +22,5 @@ public interface IPreschoolGroupService {
     void deletePreschoolGroup (PreschoolGroup preschoolGroup);
     void persistPreschoolGroupAfterChangeEmployee(PreschoolGroup preschoolGroup, Employee employee);
     void persistPreschoolGroupAfterChangeEmployeeNoTeacher(Employee employee);
+    List<PreschoolGroup> getListPreschoolGroup(List<Integer> idListGroup);
 }

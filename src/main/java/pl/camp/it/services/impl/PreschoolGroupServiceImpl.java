@@ -119,4 +119,13 @@ public class PreschoolGroupServiceImpl implements IPreschoolGroupService {
         preschoolGroup.setEmployee(null);
         this.preschoolerGroupDAO.persistPreschoolGroup(preschoolGroup);
     }
+
+    @Override
+    public List<PreschoolGroup> getListPreschoolGroup(List<Integer> idListGroup) {
+        List<PreschoolGroup> preschoolGroupList = new ArrayList<>();
+        for(Integer idGroup: idListGroup){
+            preschoolGroupList.add(preschoolerGroupDAO.getPreschoolGroupById(idGroup));
+        }
+        return preschoolGroupList;
+    }
 }

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LowFinancialAccounting</title>
+    <link rel="stylesheet" href="../../admincontroller/employee/addemployee.css">
+    <link rel="stylesheet" href="../../logout/logout.css">
+    <link rel="stylesheet" href="../../menu/topmenu.css">
+    <link rel="stylesheet" href="../../head/head.css">
+    <link rel="stylesheet" href="../../foot/foot.css">
+</head>
+
+<body>
+<div id="all">
+    <div id="signout">
+        <div th:replace="logout.html::logout"></div>
+    </div>
+    <div id="head">
+        <div th:replace="head/head.html::head"></div>
+    </div>
+    <div id="loginemployee">
+        <p th:text="${'Zalogowany pracownik: '+employeeLogged}"></p>
+    </div>
+    <div th:replace="menu/topmenu.html::topmenu"></div>
+    <div id="addemployee">
+        <p class="label">Raport z przesłanych emaili</p>
+
+    <table id="report">
+        <th:block th:each="group: ${listGroup}">
+            <tr style="background-color: #87CEFA; font-weight:bold">
+                <td colspan="3" th:text="'GRUPA: '+${group.nameGroup}">
+            </tr>
+            <tr style="background-color: #87CEFA">
+                <td style="width: 275px; font-weight:bold;">PRZEDSZKOLAK</td>
+                <td style="width: 275px; font-weight:bold;">OPIEKUN PRWANY</td>
+                <td style="width: 350px; font-weight:bold;">KOMUNIKAT</td>
+            </tr>
+            <th:block th:each="report, index : ${reportMap}" th:if="${report.key.preschoolGroup.id==group.id}">
+                <th:block th:if="((${index.index}+1) % 2 == 0)">
+                    <tr style="background-color: #FFFFFF">
+                        <td th:text="${report.key.surname+' '+report.key.name}"/>
+                        <th:block th:each="r: ${report.value}">
+                            <th:block th:if="${r.key==null}">
+                                <td th:text="${''}"/>
+                            </th:block>
+                            <th:block th:unless="${r.key==null}">
+                                <td th:text="${r.key.surname+' '+r.key.name}"/>
+                            </th:block>
+                            <td th:if="${r.value=='Email został wysłany na podany adres!'}" style="color: #00199E" th:text="${r.value}"/>
+                            <td th:unless="${r.value=='Email został wysłany na podany adres!'}" style="color: red" th:text="${r.value}"/>
+                        </th:block>
+                    </tr>
+                </th:block>
+
+                <th:block th:unless="((${index.index}+1) % 2 == 0)">
+                    <tr style="background-color: #FFFFFF">
+                        <td th:text="${report.key.surname+' '+report.key.name}"/>
+                        <th:block th:each="r: ${report.value}">
+                            <th:block th:if="${r.key==null}">
+                                <td th:text="${''}"/>
+                            </th:block>
+                            <th:block th:unless="${r.key==null}">
+                                <td th:text="${r.key.surname+' '+r.key.name}"/>
+                            </th:block>
+                            <td th:if="${r.value=='Email został wysłany na podany adres!'}" style="color: #00199E" th:text="${r.value}"/>
+                            <td th:unless="${r.value=='Email został wysłany na podany adres!'}" style="color: red" th:text="${r.value}"/>
+                        </th:block>
+                    </tr>
+                </th:block>
+            </th:block>
+        </th:block>
+    </table>
+
+    </div>
+    <div th:replace="foot/foot.html::foot"></div>
+</div>
+</body>
+</html>

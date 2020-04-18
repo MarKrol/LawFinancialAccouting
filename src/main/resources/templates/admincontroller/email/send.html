@@ -111,18 +111,18 @@
                     <th:block th:each="preschoolGroup:${listPreschoolGroup}">
                         <tr>
                             <td><p th:text="${preschoolGroup.nameGroup}"/></td>
-                            <td><input type="checkbox" th:value="${preschoolGroup.id}"></td>
+                            <td><input name="idGroup" type="checkbox" th:value="${preschoolGroup.id}"></td>
                         </tr>
                     </th:block>
                     <tr>
                         <td colspan="2">
-                            <input type="submit" value="WYŚLIJ ROZLICZENIE" id="btnSendGroup">
+                            <input type="submit" value="WYŚLIJ ROZLICZENIE" id="btnSendGroup" name="btnSendPreschoolGroup">
                         </td>
                     </tr>
                 </table>
             </div>
             <div id="allSend">
-                <input type="submit" value="WYŚLIJ ROZLICZENIE" id="btnSendAll">
+                <input type="submit" value="WYŚLIJ ROZLICZENIE" id="btnSendAll" name="btnSendAll">
             </div>
         </form>
     </div>
