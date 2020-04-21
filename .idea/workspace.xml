@@ -2,24 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3598b4e1-9580-42b9-8717-3e68b07d16b5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/email/report.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/email/sending.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/SimpleMailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/SimpleMailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminSendEmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminSendEmailController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPDFService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPDFService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPreschoolGroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPreschoolGroupService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PDFServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PDFServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PreschoolGroupServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PreschoolGroupServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/SendMailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/SendMailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/admincontroller/employee/addemployee.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/admincontroller/employee/addemployee.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/email/send.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/email/send.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/SimpleMailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/SimpleMailController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminSendEmailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminSendEmailController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPDFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPDFService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PDFServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PDFServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/SendMailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/SendMailServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/admincontroller/employee/addemployee.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/admincontroller/employee/addemployee.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,46 +132,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="483" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1583077612960" />
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1586992563049">
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1587484439092">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1586992563049" />
-    <state width="1877" height="314" key="GridCell.Tab.0.bottom" timestamp="1587244392514">
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587484439092" />
+    <state width="1877" height="314" key="GridCell.Tab.0.bottom" timestamp="1587488694754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392514" />
-    <state width="1877" height="314" key="GridCell.Tab.0.center" timestamp="1587244392514">
+    <state width="1877" height="314" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587488694754" />
+    <state width="1877" height="314" key="GridCell.Tab.0.center" timestamp="1587488694754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392514" />
-    <state width="1877" height="314" key="GridCell.Tab.0.left" timestamp="1587244392514">
+    <state width="1877" height="314" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587488694754" />
+    <state width="1877" height="314" key="GridCell.Tab.0.left" timestamp="1587488694754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392514" />
-    <state width="1877" height="314" key="GridCell.Tab.0.right" timestamp="1587244392514">
+    <state width="1877" height="314" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587488694754" />
+    <state width="1877" height="314" key="GridCell.Tab.0.right" timestamp="1587488694754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392514" />
-    <state width="1877" height="314" key="GridCell.Tab.1.bottom" timestamp="1587244392435">
+    <state width="1877" height="314" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587488694754" />
+    <state width="1877" height="314" key="GridCell.Tab.1.bottom" timestamp="1587488720711">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392435" />
-    <state width="1877" height="314" key="GridCell.Tab.1.center" timestamp="1587244392435">
+    <state width="1877" height="314" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587488720711" />
+    <state width="1877" height="314" key="GridCell.Tab.1.center" timestamp="1587488720711">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392435" />
-    <state width="1877" height="314" key="GridCell.Tab.1.left" timestamp="1587244392435">
+    <state width="1877" height="314" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587488720711" />
+    <state width="1877" height="314" key="GridCell.Tab.1.left" timestamp="1587488720711">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392435" />
-    <state width="1877" height="314" key="GridCell.Tab.1.right" timestamp="1587244392435">
+    <state width="1877" height="314" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587488720711" />
+    <state width="1877" height="314" key="GridCell.Tab.1.right" timestamp="1587488720711">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587244392435" />
-    <state x="461" y="162" key="SettingsEditor" timestamp="1587041559598">
+    <state width="1877" height="314" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587488720711" />
+    <state x="461" y="162" key="SettingsEditor" timestamp="1587450034458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587041559598" />
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1587450034458" />
     <state width="500" height="446" key="SwitcherDM" timestamp="1584716671158">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -201,18 +188,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="769" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1586990182647" />
-    <state x="342" y="221" key="new project wizard" timestamp="1586552491628">
+    <state x="342" y="221" key="new project wizard" timestamp="1587484442483">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="342" y="221" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1586552491628" />
+    <state x="342" y="221" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1587484442483" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1586631339699">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586631339699" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1587068084402">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1587486976773">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1587068084402" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1587486976773" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -222,12 +209,21 @@
           <line>18</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/SimpleMailController.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="dataToBeCopied" language="JAVA" />
         <watch expression="dataFromTheCopiedMonthS" language="JAVA" />
+        <watch expression="1+(Vat/100)" language="JAVA" />
+        <watch expression="Vat/100" language="JAVA" />
+        <watch expression="Double.parseDouble(vat/100)" language="JAVA" />
+        <watch expression="Double.valueOf(Vat)" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

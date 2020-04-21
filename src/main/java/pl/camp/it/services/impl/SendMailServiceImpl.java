@@ -46,7 +46,7 @@ public class SendMailServiceImpl implements ISendMailService {
                 helper.addInline("identifier1234",getLogo());
                 helper.addAttachment("document.pdf", new FileSystemResource
                                                                 (new File(pathToFilePDF+"\\document.pdf")));
-                sender.send(message);
+                //sender.send(message);
                 return "Email został wysłany na podany adres!";
             } catch (MessagingException e){
                 e.printStackTrace();
