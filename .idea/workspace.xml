@@ -2,8 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3598b4e1-9580-42b9-8717-3e68b07d16b5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminPrintController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admincontroller/print/print.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminGroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminGroupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminSendEmailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminSendEmailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminSettlementPaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminSettlementPaymentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/adminUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/model/payment/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/model/payment/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPDFService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPDFService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/IPaymentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PDFServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PDFServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PaymentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PaymentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/admincontroller/body/body.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/admincontroller/body/body.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/menu/topmenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/menu/topmenu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminGroupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminGroupController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminSendEmailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminSendEmailController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminSettlementPaymentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminSettlementPaymentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminUserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/controllers/adminUserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPDFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPDFService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPaymentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/IPaymentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PDFServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PDFServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PaymentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pl/camp/it/services/impl/PaymentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/menu/topmenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/menu/topmenu.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +60,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Decimal" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/admincontroller/print" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -47,19 +68,19 @@
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\email" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\pass" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\copy" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\company" />
-      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\employee" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\images" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\logoKZ" />
       <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\stay" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\print" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\email" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\static\pass" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\copy" />
+      <recent name="D:\PRACA DANE\ITCamp - Java\Maven\LowFinancialAccounting\src\main\resources\templates\admincontroller\company" />
     </key>
   </component>
   <component name="RunManager">
@@ -117,10 +138,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1582540910489" />
-    <state x="799" y="286" key="#com.intellij.ide.util.MemberChooser" timestamp="1587240473548">
+    <state x="799" y="286" key="#com.intellij.ide.util.MemberChooser" timestamp="1587666587068">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="799" y="286" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1587240473548" />
+    <state x="799" y="286" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1587666587068" />
     <state x="669" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584544975992">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -133,38 +154,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587495265950" />
-    <state width="1877" height="314" key="GridCell.Tab.0.bottom" timestamp="1587503782460">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1587680940497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587503782460" />
-    <state width="1877" height="314" key="GridCell.Tab.0.center" timestamp="1587503782460">
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587680940497" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1587680940497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587503782460" />
-    <state width="1877" height="314" key="GridCell.Tab.0.left" timestamp="1587503782460">
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587680940497" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1587680940497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587503782460" />
-    <state width="1877" height="314" key="GridCell.Tab.0.right" timestamp="1587503782460">
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587680940497" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1587680940497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587503782460" />
-    <state width="1877" height="314" key="GridCell.Tab.1.bottom" timestamp="1587503811130">
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587680940497" />
+    <state width="1877" height="314" key="GridCell.Tab.1.bottom" timestamp="1587680940482">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587503811130" />
-    <state width="1877" height="314" key="GridCell.Tab.1.center" timestamp="1587503811130">
+    <state width="1877" height="314" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587680940482" />
+    <state width="1877" height="314" key="GridCell.Tab.1.center" timestamp="1587680940482">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587503811130" />
-    <state width="1877" height="314" key="GridCell.Tab.1.left" timestamp="1587503811130">
+    <state width="1877" height="314" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587680940482" />
+    <state width="1877" height="314" key="GridCell.Tab.1.left" timestamp="1587680940482">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587503811130" />
-    <state width="1877" height="314" key="GridCell.Tab.1.right" timestamp="1587503811130">
+    <state width="1877" height="314" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587680940482" />
+    <state width="1877" height="314" key="GridCell.Tab.1.right" timestamp="1587680940482">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="314" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587503811130" />
+    <state width="1877" height="314" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587680940482" />
     <state x="461" y="162" key="SettingsEditor" timestamp="1587450034458">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -193,10 +214,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1587493783596" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1587486976773">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1587665757038">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1587486976773" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1587665757038" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -207,9 +228,9 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/pl/camp/it/controllers/SimpleMailController.java</url>
-          <line>76</line>
-          <option name="timeStamp" value="48" />
+          <url>file://$PROJECT_DIR$/src/main/java/pl/camp/it/services/impl/PaymentServiceImpl.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="113" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

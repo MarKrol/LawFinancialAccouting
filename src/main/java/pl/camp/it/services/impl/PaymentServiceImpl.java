@@ -2,6 +2,7 @@ package pl.camp.it.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.camp.it.dao.ICompanyDAO;
 import pl.camp.it.dao.IPaymentDAO;
 import pl.camp.it.model.company.Company;
 import pl.camp.it.model.payment.Payment;
@@ -12,16 +13,15 @@ import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @Service
 public class PaymentServiceImpl implements IPaymentService {
 
     @Autowired
     IPaymentDAO paymentDAO;
+    @Autowired
+    ICompanyDAO companyDAO;
 
     @Override
     public void persistPayment(Payment payment) {
@@ -67,9 +67,18 @@ public class PaymentServiceImpl implements IPaymentService {
         payment.setName(name);
         payment.setPayment(pay);
         payment.setLocalDate(LocalDate.parse(date));
-        payment.setNameMonth(getNameMonthByDate(date));
         payment.setCompany(company);
+        payment.setNameMonth(getNameMonthByDate(date));
         this.paymentDAO.persistPayment(payment);
+    }
+
+    @Override
+    public void savePaymentChangeCompany(Payment payment, String name, double pay, String date, Company company) {
+        List<String> namePayment = new ArrayList<>();
+        namePayment.add(name);
+        namePayment.add(String.valueOf(pay));
+        addPaymentToDataBase(namePayment,date,payment.getPreschooler(),company);
+        deletePayment(payment);
     }
 
     @Override

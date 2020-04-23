@@ -602,8 +602,13 @@ public class adminSettlementPaymentController {
                                         @RequestParam("date")String date, @RequestParam("choosecompany") int idCompany){
         if (sessionObject.getEmployee() != null) {
                 Payment payment = paymentService.getPaymentById(sessionObject.getSendData());
-                paymentService.savePaymentChange(payment, name, Double.parseDouble(pay), date,
-                                                                    companyService.getCompanyById(idCompany));
+                //if (payment.getCompany().getId()==idCompany) {
+                    paymentService.savePaymentChange(payment, name, Double.parseDouble(pay), date,
+                            companyService.getCompanyById(idCompany));
+                //} else {
+                //    paymentService.savePaymentChangeCompany(payment, name, Double.parseDouble(pay), date,
+                //            companyService.getCompanyById(idCompany));
+                //}
             return "redirect:../../admincontroller/payment/paymentshow";
         }else {
             return "redirect:../../login";

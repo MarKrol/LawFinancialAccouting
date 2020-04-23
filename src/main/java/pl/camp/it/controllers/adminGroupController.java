@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.camp.it.model.employee.Employee;
 import pl.camp.it.model.preschoolGroup.PreschoolGroup;
 import pl.camp.it.services.IEmployeeService;
 import pl.camp.it.services.IPreschoolGroupService;
@@ -14,7 +15,9 @@ import pl.camp.it.services.IPreschoolerService;
 import pl.camp.it.session.SessionObject;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -64,7 +67,22 @@ public class adminGroupController {
             model.addAttribute("listPreschoolGroup", preschoolGroup);
             model.addAttribute("nameGroup", preschoolGroup.getNameGroup());
             model.addAttribute("preschholerGroup", preschoolGroup);
-            model.addAttribute("allTeacher", employeeService.getListEmployeeTeacher());
+
+            List<Employee> teacherWithoutTutoring = new ArrayList<>();
+            for (Employee employee: employeeService.getListEmployeeTeacher()){
+                Boolean tutoring=false;
+                for(PreschoolGroup tempPG: preschoolGroupService.getListPreschoolerGroup()){
+                    if (tempPG.getEmployee()!=null && employee.getId()==tempPG.getEmployee().getId()){
+                        tutoring=true;
+                    }
+                }
+                if (!tutoring){
+                    teacherWithoutTutoring.add(employee);
+                }
+            }
+            model.addAttribute("allTeacher", teacherWithoutTutoring);
+
+            //model.addAttribute("allTeacher", employeeService.getListEmployeeTeacher());
             if (preschoolGroup.getEmployee()!=null) {
                 model.addAttribute("nameSurname", preschoolGroup.getEmployee().getSurname() + " "
                         + preschoolGroup.getEmployee().getName());
@@ -97,7 +115,22 @@ public class adminGroupController {
                 model.addAttribute("listPreschoolGroup", preschoolGroup);
                 model.addAttribute("nameGroup", preschoolGroup.getNameGroup());
                 model.addAttribute("preschholerGroup", preschoolGroup);
-                model.addAttribute("allTeacher", employeeService.getListEmployeeTeacher());
+
+                List<Employee> teacherWithoutTutoring = new ArrayList<>();
+                for (Employee employee: employeeService.getListEmployeeTeacher()){
+                    Boolean tutoring=false;
+                    for(PreschoolGroup tempPG: preschoolGroupService.getListPreschoolerGroup()){
+                        if (tempPG.getEmployee()!=null && employee.getId()==tempPG.getEmployee().getId()){
+                            tutoring=true;
+                        }
+                    }
+                    if (!tutoring){
+                        teacherWithoutTutoring.add(employee);
+                    }
+                }
+
+                model.addAttribute("allTeacher", teacherWithoutTutoring);
+                //model.addAttribute("allTeacher", employeeService.getListEmployeeTeacher());
                 if (preschoolGroup.getEmployee()!=null) {
                     model.addAttribute("nameSurname", preschoolGroup.getEmployee().getSurname() + " "
                             + preschoolGroup.getEmployee().getName());

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.camp.it.model.month.Month;
 import pl.camp.it.model.preschoolGroup.PreschoolGroup;
 import pl.camp.it.model.preschooler.Preschooler;
+import pl.camp.it.services.IPDFService;
 import pl.camp.it.services.IPreschoolGroupService;
 import pl.camp.it.services.IPreschoolerService;
 import pl.camp.it.session.SessionObject;
@@ -34,6 +35,8 @@ public class adminSendEmailController {
     IPreschoolerService preschoolerService;
     @Autowired
     SimpleMailController simpleMailController;
+    @Autowired
+    IPDFService pdf;
 
     @RequestMapping(value = "admincontroller/email/send", method = RequestMethod.GET)
     public String openPageSend(Model model) {
@@ -90,6 +93,7 @@ public class adminSendEmailController {
                 model.addAttribute("number_message",1);
                 return "admincontroller/email/send";
             } else{
+                this.pdf.setEmployee(sessionObject.getEmployee());
                 this.preschoolGroups.clear();
                 this.preschoolGroups.add(preschoolGroupService.getPreschoolerGroupByName(
                                                             preschoolGroupService.getNameGroupPreschoolById(idGroup)));
@@ -145,6 +149,7 @@ public class adminSendEmailController {
                 model.addAttribute("number_message",1);
                 return "admincontroller/email/send";
             } else{
+                this.pdf.setEmployee(sessionObject.getEmployee());
                 this.preschoolGroups.clear();
                 this.preschoolGroups=preschoolGroupService.getListPreschoolGroup(listIdGroup);
                 simpleMailController.threadSendMailAttachmentGroupOrAll(listIdGroup, month);
@@ -159,6 +164,7 @@ public class adminSendEmailController {
                                                                     params = "btnSendAll=WYŚLIJ ROZLICZENIE")
     public String sendSettlementPreschoolAll(@RequestParam("chooseMonth") String month, Model model){
         if (sessionObject.getEmployee() != null) {
+            this.pdf.setEmployee(sessionObject.getEmployee());
             this.preschoolGroups.clear();
             this.preschoolGroups=
                     preschoolGroupService.getListPreschoolerGroupNoOneGroup(preschoolGroupService.getListPreschoolerGroup());

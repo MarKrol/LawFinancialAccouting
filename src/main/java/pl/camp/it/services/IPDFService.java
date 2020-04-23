@@ -1,5 +1,8 @@
 package pl.camp.it.services;
 
+import com.itextpdf.text.Document;
+import pl.camp.it.model.employee.Employee;
+
 import java.io.File;
 import java.nio.file.Path;
 
@@ -11,4 +14,6 @@ public interface IPDFService {
     File createFilePDF(Path pathToFIle);
     void deleteTempDirectory(Path pathToDirectory);
     void deleteFilePDF(File file);
+    void setEmployee(Employee employee);
+    void writeSettlementToPrint(Document document, Integer idPreschooler, String month);
 }

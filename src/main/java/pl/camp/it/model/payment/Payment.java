@@ -23,7 +23,7 @@ public class Payment {
     @JoinColumn(name = "preschoolerId")
     Preschooler preschooler;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "companyId")
     Company company;
 

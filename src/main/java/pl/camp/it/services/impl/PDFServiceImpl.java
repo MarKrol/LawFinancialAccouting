@@ -12,12 +12,18 @@ import com.sun.org.apache.xpath.internal.res.XPATHErrorResources_zh_CN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.camp.it.dao.*;
+import pl.camp.it.model.activities.PreschoolerActivityInMonth;
+import pl.camp.it.model.employee.Employee;
 import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
+import pl.camp.it.model.month.Month;
+import pl.camp.it.model.payment.Payment;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.model.stay.PreschoolerStayMonth;
 import pl.camp.it.services.*;
+import pl.camp.it.session.SessionObject;
 
+import javax.annotation.Resource;
 import javax.print.Doc;
 import java.awt.*;
 import java.io.File;
@@ -35,6 +41,10 @@ import java.util.Locale;
 @Service
 public class PDFServiceImpl implements IPDFService {
 
+    private double toPayActivity;
+
+    public Employee employee;
+
     @Autowired
     IPDFDAO pdfdao;
     @Autowired
@@ -49,6 +59,25 @@ public class PDFServiceImpl implements IPDFService {
     IPreschoolerStayMonthDAO preschoolerStayMonthDAO;
     @Autowired
     IPreschoolerActivityInMonthDAO preschoolerActivityInMonthDAO;
+    @Autowired
+    IPaymentDAO paymentDAO;
+
+    public double getToPayActivity() {
+        return toPayActivity;
+    }
+
+    public void setToPayActivity(double toPayActivity) {
+        this.toPayActivity = toPayActivity;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    @Override
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
     @Override
     public String[] dataToFilePDFLoginAndPass(){
@@ -100,12 +129,25 @@ public class PDFServiceImpl implements IPDFService {
 
     // ------------------------------------------------------------------------------------------------------------//
 
+    @Override
+    public void writeSettlementToPrint(Document document, Integer idPreschooler, String month){
+        writeSettlementPDF(document,idPreschooler,month);
+    }
+
     private void writeSettlementPDF(Document document, Integer idPreschooler, String month){
         writeSettlementHeaderPDF(document, month);
         writeSettlementPreschoolerDataPDF(document, idPreschooler);
         writeSettlementMealsAndStay(document, idPreschooler, month);
         writeSettlementAllPay(document, idPreschooler, month);
         writeSettlementResumeInfo(document);
+
+        writeSettlementActivity(document, idPreschooler, month);
+        writeSettlementActivityAllPay(document, idPreschooler, month);
+        writeSettlementActivityResumeInfo(document);
+
+        writeShortenedBalanceCalculationsPayments(document, idPreschooler, month);
+
+        whoDoSettlement(document);
     }
 
     // -------------------------------------------------------------------------------------------------------//
@@ -227,7 +269,7 @@ public class PDFServiceImpl implements IPDFService {
             PdfPTable table = new PdfPTable(6);
             table.setWidths(new int[]{200, 40, 55, 75, 35, 75});
 
-            PdfPCell cell = new PdfPCell(new Paragraph("ROZLICZENIE MIESIĘCZNE: "+companyDAO.getCompanyById(0).getNameCompany(), fontBold));
+            PdfPCell cell = new PdfPCell(new Paragraph("ROZLICZENIE MIESIĘCZNE: "+companyDAO.getCompanyById(1).getNameCompany(), fontBold));
             cell.setColspan(6);
             cell.setBackgroundColor(myColor0);
 
@@ -564,12 +606,12 @@ public class PDFServiceImpl implements IPDFService {
             Font fontBold = new Font(helvetica, 8, Font.BOLD);
 
             String info = "Naliczoną powyżej kwotę należy wpłacić do 5 dnia każdego miesiąca, na poniższe konto "+
-                    companyDAO.getCompanyById(0).getNameCompany()+": ";
+                    companyDAO.getCompanyById(1).getNameCompany()+": ";
 
             PdfPTable table = new PdfPTable(1);
             PdfPCell cell1 = new PdfPCell(new Paragraph(info,fontBold));
-            PdfPCell cell2 = new PdfPCell(new Paragraph(companyDAO.getCompanyById(0).getNameBank()+": "+
-                    companyDAO.getCompanyById(0).getAccountNumber(),fontBold));
+            PdfPCell cell2 = new PdfPCell(new Paragraph(companyDAO.getCompanyById(1).getNameBank()+": "+
+                    companyDAO.getCompanyById(1).getAccountNumber(),fontBold));
 
             cell1.setBorder(Rectangle.NO_BORDER);
             cell2.setBorder(Rectangle.NO_BORDER);
@@ -583,6 +625,344 @@ public class PDFServiceImpl implements IPDFService {
             e.printStackTrace();
         }
     }
+
+    private void writeSettlementActivity(Document document, int idPreschooler, String month){
+
+        try{
+            BaseFont helvetica = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
+            Font font = new Font(helvetica, 8);
+            Font fontBold = new Font(helvetica, 8, Font.BOLD);
+
+            BaseColor myColor0 = new BaseColor(255, 221, 153);
+            BaseColor myColor1 = new BaseColor(255, 238, 204);
+
+            document.add(new Paragraph(" "));
+
+            PdfPTable table = new PdfPTable(6);
+            table.setWidths(new int[]{200, 40, 55, 75, 35, 75});
+
+            PdfPCell cell = new PdfPCell(new Paragraph("ROZLICZENIE MIESIĘCZNE: "+companyDAO.getCompanyById(2).getNameCompany(), fontBold));
+            cell.setColspan(6);
+            cell.setBackgroundColor(myColor0);
+
+            PdfPCell cell1 = new PdfPCell(new Paragraph("NAZWA",fontBold));
+            PdfPCell cell2 = new PdfPCell(new Paragraph("ILOŚĆ",fontBold));
+            PdfPCell cell3 = new PdfPCell(new Paragraph("CENA NETTO [ZŁ]",fontBold));
+            PdfPCell cell4 = new PdfPCell(new Paragraph("WARTOŚĆ NETTO [ZŁ]",fontBold));
+            PdfPCell cell5 = new PdfPCell(new Paragraph("VAT [%]",fontBold));
+            PdfPCell cell6 = new PdfPCell(new Paragraph("WARTOŚĆ BRUTTO [ZŁ]",fontBold));
+
+            cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell5.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell6.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            cell1.setBackgroundColor(myColor1);
+            cell2.setBackgroundColor(myColor1);
+            cell3.setBackgroundColor(myColor1);
+            cell4.setBackgroundColor(myColor1);
+            cell5.setBackgroundColor(myColor1);
+            cell6.setBackgroundColor(myColor1);
+
+            table.addCell(cell);
+            table.addCell(cell1);
+            table.addCell(cell2);
+            table.addCell(cell3);
+            table.addCell(cell4);
+            table.addCell(cell5);
+            table.addCell(cell6);
+
+            document.add(table);
+
+            addToPDFActivity(document, idPreschooler, month);
+
+        }catch (DocumentException | IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
+    private void addToPDFActivity(Document document, int idPreschooler, String month){
+        setToPayActivity(0.00);
+        try{
+            List<PreschoolerActivityInMonth> preschoolerActivityInMonthList = preschoolerActivityInMonthDAO.listPreschoolerActivityInMonth(idPreschooler, month);
+            if (preschoolerActivityInMonthList.size()!=0) {
+                double toPay=0.0;
+                BaseFont helvetica = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
+                Font font = new Font(helvetica, 8);
+                Font fontBold = new Font(helvetica, 8, Font.BOLD);
+
+                PdfPTable table = new PdfPTable(6);
+                table.setWidths(new int[]{200, 40, 55, 75, 35, 75});
+
+                for (PreschoolerActivityInMonth preschoolerActivityInMonth: preschoolerActivityInMonthList){
+                    PdfPCell cell11 = new PdfPCell(new Paragraph(preschoolerActivityInMonth.getNameAcivity(),font));
+                    PdfPCell cell12 = new PdfPCell(new Paragraph(String.valueOf(1),font));
+                    PdfPCell cell13 = new PdfPCell(new Paragraph(decimalTwoPalaces(preschoolerActivityInMonth.getPriceNet()),font));
+                    PdfPCell cell14 = new PdfPCell(new Paragraph(decimalTwoPalaces
+                            (1*preschoolerActivityInMonth.getPriceNet()),font));
+                    PdfPCell cell15 = new PdfPCell(new Paragraph(String.valueOf(preschoolerActivityInMonth.getVAT()),font));
+                    PdfPCell cell16 = new PdfPCell(new Paragraph(decimalTwoPalaces(toPay
+                            (1, preschoolerActivityInMonth.getVAT(), preschoolerActivityInMonth.getPriceNet())),font));
+
+                    toPay=toPay+toPay(1, preschoolerActivityInMonth.getVAT(), preschoolerActivityInMonth.getPriceNet());
+                    setToPayActivity(toPay);
+
+                    cell12.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell13.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell14.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell15.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    cell16.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+                    table.addCell(cell11);
+                    table.addCell(cell12);
+                    table.addCell(cell13);
+                    table.addCell(cell14);
+                    table.addCell(cell15);
+                    table.addCell(cell16);
+                }
+
+                PdfPCell cellSumText = new PdfPCell(new Paragraph("Do zapłaty:",fontBold));
+                cellSumText.setColspan(5);
+                cellSumText.setHorizontalAlignment(Element.ALIGN_RIGHT);
+
+                PdfPCell cellSumPay = new PdfPCell(new Paragraph(decimalTwoPalaces(toPay),fontBold));
+                cellSumPay.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+                BaseColor myColor1 = new BaseColor(255, 238, 204);
+                cellSumPay.setBackgroundColor(myColor1);
+                cellSumText.setBackgroundColor(myColor1);
+
+                table.addCell(cellSumText);
+                table.addCell(cellSumPay);
+
+                document.add(table);
+            }
+        }catch (DocumentException | IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
+    private void writeSettlementActivityAllPay(Document document, int idPreschooler, String month){
+        try {
+            double toPay=0.0;
+            BaseFont helvetica = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
+            Font fontBold = new Font(helvetica, 8, Font.BOLD);
+
+            PdfPTable table = new PdfPTable(6);
+            table.setWidths(new int[]{200, 40, 55, 75, 35, 75});
+
+            PdfPCell cellSumText = new PdfPCell(new Paragraph("Razem do zapłaty:", fontBold));
+            cellSumText.setColspan(5);
+            cellSumText.setHorizontalAlignment(Element.ALIGN_RIGHT);
+
+            if (preschoolerActivityInMonthDAO.listPreschoolerActivityInMonth(idPreschooler,month).size()!=0){
+                toPay=this.getToPayActivity();
+            } else {
+                toPay=0.0;
+            }
+
+            PdfPCell cellSumPay = new PdfPCell(new Paragraph(decimalTwoPalaces(toPay), fontBold));
+            cellSumPay.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            BaseColor myColor0 = new BaseColor(255, 221, 153);
+            cellSumPay.setBackgroundColor(myColor0);
+            cellSumText.setBackgroundColor(myColor0);
+
+            table.addCell(cellSumText);
+            table.addCell(cellSumPay);
+
+            document.add(table);
+        }catch(DocumentException | IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void writeSettlementActivityResumeInfo(Document document){
+        try{
+            BaseFont helvetica = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
+            Font fontBold = new Font(helvetica, 8, Font.BOLD);
+
+            String info = "Naliczoną powyżej kwotę należy wpłacić do 5 dnia każdego miesiąca, na poniższe konto "+
+                    companyDAO.getCompanyById(2).getNameCompany()+": ";
+
+            PdfPTable table = new PdfPTable(1);
+            PdfPCell cell1 = new PdfPCell(new Paragraph(info,fontBold));
+            PdfPCell cell2 = new PdfPCell(new Paragraph(companyDAO.getCompanyById(2).getNameBank()+": "+
+                    companyDAO.getCompanyById(2).getAccountNumber(),fontBold));
+
+            cell1.setBorder(Rectangle.NO_BORDER);
+            cell2.setBorder(Rectangle.NO_BORDER);
+
+            table.addCell(cell1);
+            table.addCell(cell2);
+
+            document.add(table);
+
+        }catch (DocumentException | IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void writeShortenedBalanceCalculationsPayments(Document document, int idPreschooler, String month){
+        try {
+            BaseFont helvetica = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
+            Font font = new Font(helvetica, 8);
+            Font fontBold = new Font(helvetica, 8, Font.BOLD);
+
+            //CR
+            BaseColor myColor0 = new BaseColor(153, 221, 255);
+            BaseColor myColor1 = new BaseColor(204, 238, 255);
+
+            //FP
+            BaseColor myColor2 = new BaseColor(255, 221, 153);
+            BaseColor myColor3 = new BaseColor(255, 238, 204);
+
+            BaseColor myColor4 = new BaseColor(163, 194, 194);
+
+
+            document.add(new Paragraph(" "));
+
+            PdfPTable table = new PdfPTable(8);
+            table.setWidths(new int[]{100, 80, 65, 65, 100, 80, 65,65});
+
+            PdfPCell cell = new PdfPCell(new Paragraph("SKRÓCONY MIESIĘCZNY WYKAZ NALICZEŃ I WPŁAT ZA POBYT DZIECKA W PRZEDSZKOLU",fontBold));
+            cell.setColspan(8);
+            cell.setBackgroundColor(myColor4);
+
+            PdfPCell cell0 = new PdfPCell(new Paragraph(companyDAO.getCompanyById(1).getNameCompany(), fontBold));
+            PdfPCell cell00 = new PdfPCell(new Paragraph(companyDAO.getCompanyById(2).getNameCompany(), fontBold));
+            cell0.setColspan(4);
+            cell0.setBackgroundColor(myColor0);
+            cell00.setColspan(4);
+            cell00.setBackgroundColor(myColor2);
+
+            PdfPCell cell1 = new PdfPCell(new Paragraph("MIESIĄC", fontBold));
+            PdfPCell cell2 = new PdfPCell(new Paragraph("NALICZENIA [ZŁ]", fontBold));
+            PdfPCell cell3 = new PdfPCell(new Paragraph("WPŁATY [ZŁ]", fontBold));
+            PdfPCell cell4 = new PdfPCell(new Paragraph("SALDO [ZŁ]*", fontBold));
+
+            PdfPCell cell5 = new PdfPCell(new Paragraph("MIESIĄC", fontBold));
+            PdfPCell cell6 = new PdfPCell(new Paragraph("NALICZENIA [ZŁ]", fontBold));
+            PdfPCell cell7 = new PdfPCell(new Paragraph("WPŁATY [ZŁ]", fontBold));
+            PdfPCell cell8 = new PdfPCell(new Paragraph("SALDO [ZŁ]*", fontBold));
+
+            cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell5.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell6.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell7.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell8.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+            cell1.setBackgroundColor(myColor1);
+            cell2.setBackgroundColor(myColor1);
+            cell3.setBackgroundColor(myColor1);
+            cell4.setBackgroundColor(myColor1);
+
+            cell5.setBackgroundColor(myColor3);
+            cell6.setBackgroundColor(myColor3);
+            cell7.setBackgroundColor(myColor3);
+            cell8.setBackgroundColor(myColor3);
+
+            table.addCell(cell);
+
+            table.addCell(cell0);
+            table.addCell(cell00);
+            table.addCell(cell1);
+            table.addCell(cell2);
+            table.addCell(cell3);
+            table.addCell(cell4);
+            table.addCell(cell5);
+            table.addCell(cell6);
+            table.addCell(cell7);
+            table.addCell(cell8);
+
+            for(String tempMonth: Month.getMonth_copy1()){
+                double calculation =0.0;  //First company
+                double payment = 0.0;
+                double calculation1 =0.0; //Second company
+                double payment1 = 0.0;
+
+                calculation = allMonthCalculation(idPreschooler, tempMonth);
+                calculation1= allMonthCalculation1(idPreschooler, tempMonth);
+                payment = allPaymentCompany(idPreschooler,tempMonth,1);
+                payment1= allPaymentCompany(idPreschooler,tempMonth,2);
+
+                PdfPCell cellNameMonth = new PdfPCell(new Paragraph(tempMonth,font));
+                PdfPCell cellCalculation = new PdfPCell(new Paragraph(decimalTwoPalaces(calculation), font));
+                PdfPCell cellPayment = new PdfPCell(new Paragraph(decimalTwoPalaces(payment), font));
+                PdfPCell cellBalance = new PdfPCell(new Paragraph(decimalTwoPalaces(payment-calculation),font));
+
+                PdfPCell cellNameMonth1 = new PdfPCell(new Paragraph(tempMonth,font));
+                PdfPCell cellCalculation1 = new PdfPCell(new Paragraph(decimalTwoPalaces(calculation1), font));
+                PdfPCell cellPayment1 = new PdfPCell(new Paragraph(decimalTwoPalaces(payment1), font));
+                PdfPCell cellBalance1 = new PdfPCell(new Paragraph(decimalTwoPalaces(payment1-calculation1),font));
+
+                cellCalculation.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellPayment.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellBalance.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+                cellCalculation1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellPayment1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cellBalance1.setHorizontalAlignment(Element.ALIGN_CENTER);
+
+                table.addCell(cellNameMonth);
+                table.addCell(cellCalculation);
+                table.addCell(cellPayment);
+                table.addCell(cellBalance);
+
+                table.addCell(cellNameMonth1);
+                table.addCell(cellCalculation1);
+                table.addCell(cellPayment1);
+                table.addCell(cellBalance1);
+
+            }
+
+            Font fontSmall = new Font(helvetica, 6);
+            PdfPCell cellInfo = new PdfPCell(new Paragraph("*dodania kwota salda oznacza nadpłatę, a ujemna zadłużenie.",fontSmall));
+            cellInfo.setColspan(8);
+            cellInfo.setBorder(Rectangle.NO_BORDER);
+
+            table.addCell(cellInfo);
+
+            document.add(table);
+
+        }catch (DocumentException | IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void whoDoSettlement(Document document){
+        try {
+            BaseFont helvetica = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED);
+            Font font = new Font(helvetica, 8);
+
+            Paragraph paragraph = new Paragraph("Imię i nazwisko osoby upoważnionej do wystawienia rozliczenia: "+
+                    this.employee.getName()+" "+this.employee.getSurname(),font);
+
+            document.add(new Paragraph(" "));
+
+            PdfPTable table = new PdfPTable(1);
+            PdfPCell cell = new PdfPCell(paragraph);
+            cell.setBorder(Rectangle.NO_BORDER);
+
+            table.addCell(cell);
+
+            document.add(table);
+
+        }catch(DocumentException | IOException e){
+            e.printStackTrace();
+        }
+    }
+
 
     private String decimalTwoPalaces(double value){
         DecimalFormat df = new DecimalFormat("#####0.00");
@@ -628,5 +1008,50 @@ public class PDFServiceImpl implements IPDFService {
             toPayTemp=toPayTemp+toPay(temp.getNumber(), temp.getVAT(),temp.getPriceNet());
         }
         return toPayTemp;
+    }
+
+    private double allToPayActivity(int idPreschooler, String month){
+        double toPayTemp=0.0;
+        List<PreschoolerActivityInMonth> pa =
+                preschoolerActivityInMonthDAO.listPreschoolerActivityInMonth(idPreschooler, month);
+        for (PreschoolerActivityInMonth temp: pa){
+            toPayTemp=toPayTemp+toPay(1, temp.getVAT(),temp.getPriceNet());
+        }
+        return toPayTemp;
+    }
+
+    private double allMonthCalculation(int idPreschooler, String month){ //first company
+        double calculationAll=0.0;
+
+        if (preschoolerFullBoardInMonthDAO.getPreschoolerFullBoardInMonth(idPreschooler, month)!=null){
+            calculationAll=calculationAll+allToPayFM(idPreschooler, month);
+        }
+
+        if (preschoolerSingleBoardInMonthDAO.listPreschoolerSingleMealMonthInDB(idPreschooler, month).size()!=0){
+            calculationAll=calculationAll+allToPaySM(idPreschooler, month);
+        }
+
+        if (preschoolerStayMonthDAO.listPreschoolerStayMonth(idPreschooler, month).size()!=0){
+            calculationAll=calculationAll+allToPayStay(idPreschooler, month);
+        }
+        return calculationAll;
+    }
+
+    private double allMonthCalculation1(int idPreschooler, String month) { //second company
+        double calculationAll = 0.0;
+        if (preschoolerActivityInMonthDAO.listPreschoolerActivityInMonth(idPreschooler, month).size()!=0){
+            calculationAll=calculationAll+allToPayActivity(idPreschooler, month);
+        }
+        return calculationAll;
+    }
+
+    private double allPaymentCompany(int idPreschooler, String month, int idCompany){
+        double payment =0.0;
+        if (paymentDAO.getListPayment(idPreschooler,month, idCompany).size()!=0){
+            for(Payment tempPayment: paymentDAO.getListPayment(idPreschooler,month, idCompany)){
+                payment=payment+tempPayment.getPayment();
+            }
+        }
+        return payment;
     }
 }

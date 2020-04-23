@@ -15,4 +15,6 @@ public interface IPaymentService {
     Payment getPaymentById(int id);
     void savePaymentChange(Payment payment, String name, double pay, String date, Company company);
     void deletePayment(Payment payment);
+    void savePaymentChangeCompany(Payment payment, String name, double pay, String date, Company company);
+
 }

@@ -356,7 +356,7 @@ public class adminUserController {
             sessionObject.setSendData(Integer.parseInt(idEmployee));
             return "redirect:../../../admincontroller/employee/employeeE";
         } else {
-            return "redirect:../../login";
+            return "redirect:../../../login";
         }
     }
 
