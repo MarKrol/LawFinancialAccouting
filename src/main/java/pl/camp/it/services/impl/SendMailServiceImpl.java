@@ -23,7 +23,7 @@ import com.itextpdf.text.Document;
 @Service
 public class SendMailServiceImpl implements ISendMailService {
 
-    private static final String addressFrom = "krol.martin@gmail.com";
+    private static final String addressFrom = "rozliczenie.kz@gmail.com";
     private static final String subjectMail = "Rozliczenie miesięczne - Karmelkowy Zakątek";
 
     @Autowired
@@ -75,7 +75,7 @@ public class SendMailServiceImpl implements ISendMailService {
     }
 
     private FileSystemResource getLogo(){
-        FileSystemResource res = new FileSystemResource(new File(".\\src\\main\\resources\\logo.png"));
+        FileSystemResource res = new FileSystemResource(new File("src\\main\\resources\\logo.png"));
         return res;
     }
 

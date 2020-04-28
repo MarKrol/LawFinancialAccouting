@@ -16,4 +16,8 @@ public interface IPDFService {
     void deleteFilePDF(File file);
     void setEmployee(Employee employee);
     void writeSettlementToPrint(Document document, Integer idPreschooler, String month);
+    String getDecimalTwoPalaces(double value);
+    double getAllMonthCalculation(int idPreschooler, String month);
+    double getAllPaymentCompany(int idPreschooler, String month, int idCompany);
+    double getAllMonthCalculation1(int idPreschooler, String month);
 }

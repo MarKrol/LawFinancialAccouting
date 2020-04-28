@@ -196,7 +196,7 @@ public class PDFServiceImpl implements IPDFService {
             PdfPTable table = new PdfPTable(2);
             table.setWidths(new int[]{100,400});
 
-            Image logo = Image.getInstance(".\\src\\main\\resources\\logo.png");
+            Image logo = Image.getInstance("src\\main\\resources\\logo.png");
             logo.scalePercent(29f);
 
             PdfPCell cell1 = new PdfPCell(logo);
@@ -975,6 +975,11 @@ public class PDFServiceImpl implements IPDFService {
         return df.format(value);
     }
 
+    @Override
+    public String getDecimalTwoPalaces(double value){
+        return decimalTwoPalaces(value);
+    }
+
     private double toPay(int number, int Vat, double priceNet){
         double x = number*priceNet*(1+Double.valueOf(Vat)/100);
         return x;
@@ -1037,12 +1042,22 @@ public class PDFServiceImpl implements IPDFService {
         return calculationAll;
     }
 
+    @Override
+    public double getAllMonthCalculation(int idPreschooler, String month){
+        return allMonthCalculation(idPreschooler, month);
+    }
+
     private double allMonthCalculation1(int idPreschooler, String month) { //second company
         double calculationAll = 0.0;
         if (preschoolerActivityInMonthDAO.listPreschoolerActivityInMonth(idPreschooler, month).size()!=0){
             calculationAll=calculationAll+allToPayActivity(idPreschooler, month);
         }
         return calculationAll;
+    }
+
+    @Override
+    public double getAllMonthCalculation1(int idPreschooler, String month) {
+        return allMonthCalculation1(idPreschooler,month);
     }
 
     private double allPaymentCompany(int idPreschooler, String month, int idCompany){
@@ -1053,5 +1068,9 @@ public class PDFServiceImpl implements IPDFService {
             }
         }
         return payment;
+    }
+
+    public double getAllPaymentCompany(int idPreschooler, String month, int idCompany){
+        return  allPaymentCompany(idPreschooler, month, idCompany);
     }
 }
