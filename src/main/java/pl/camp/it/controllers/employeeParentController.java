@@ -53,6 +53,7 @@ public class employeeParentController {
     @RequestMapping(value = "admincontroller/preschooler/parent", method = RequestMethod.GET)
     public String openListParentsPage(Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
@@ -95,6 +96,7 @@ public class employeeParentController {
         if (sessionObject.getEmployee()!=null) {
             Parent parent = parentService.getParentById(sessionObject.getSendData());
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("preschooler", parent.getPreschooler().getSurname()+" "+
@@ -143,6 +145,7 @@ public class employeeParentController {
         if (sessionObject.getEmployee()!=null) {
             Parent parent = parentService.getParentById(sessionObject.getSendData());
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("preschooler", parent.getPreschooler().getSurname()+" "+

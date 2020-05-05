@@ -40,6 +40,7 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullselectgroup", method = RequestMethod.GET)
     public String addFullSelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
@@ -53,6 +54,7 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullselectgroup", method = RequestMethod.POST)
     public String addFullSelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             this.choose = choose;
@@ -66,6 +68,7 @@ public class employeeMealFullController {
     public String addFullMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -83,6 +86,7 @@ public class employeeMealFullController {
                                    @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                    @RequestParam("choose2") int idDiet, Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
@@ -141,6 +145,7 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullselectgroupE", method = RequestMethod.GET)
     public String loadFullMealSelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
@@ -167,6 +172,7 @@ public class employeeMealFullController {
     public String editFullMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -184,6 +190,7 @@ public class employeeMealFullController {
                                       @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                       Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
@@ -228,6 +235,7 @@ public class employeeMealFullController {
                                       @RequestParam("choose2") int idDiet, Model model){
 
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 
@@ -280,6 +288,7 @@ public class employeeMealFullController {
     public String editFullMealPage(Model model){
         if (sessionObject.getEmployee() != null) {
             this.idFullMealEdit=-1;
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("full", new FullBoardPrice());
@@ -294,6 +303,7 @@ public class employeeMealFullController {
     public String editFullMealShow(@RequestParam("choose") int idFullMeal, Model model) {
         if (sessionObject.getEmployee() != null) {
             this.idFullMealEdit=idFullMeal;
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             FullBoardPrice fullBoardPrice= fullBoardPriceService.getFullBoardPriceById(idFullMeal);
@@ -310,6 +320,7 @@ public class employeeMealFullController {
     public String saveEditFullMealShow(@RequestParam("data") List<String> fullEdit, @RequestParam("choose") int idFullEdit, Model model) {
         if (sessionObject.getEmployee() != null) {
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("full", new FullBoardPrice());
@@ -343,6 +354,7 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullD",method = RequestMethod.GET)
     public String confirmDeleteFullMeal(Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             FullBoardPrice fullBoardPrice= fullBoardPriceService.getFullBoardPriceById(this.idFullMealEdit);
@@ -373,6 +385,7 @@ public class employeeMealFullController {
                 fullBoardPriceService.deleteFullMeal(fullBoardPriceService.getFullBoardPriceById(this.idFullMealEdit));
                 return "redirect:../../admincontroller/meals/fullE";
             }else{
+                model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
                 model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                         sessionObject.getEmployee().getSurname());
                 FullBoardPrice fullBoardPrice= fullBoardPriceService.getFullBoardPriceById(this.idFullMealEdit);
@@ -396,6 +409,7 @@ public class employeeMealFullController {
     public String showViewFullMeal(Model model){
         if (sessionObject.getEmployee() != null) {
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -455,6 +469,7 @@ public class employeeMealFullController {
             PreschoolerFullBoardInMonth preschoolerFullBoardInMonth=
                     preschoolerFullBoardInMonthService.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(sessionObject.getSendData());
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 
@@ -512,6 +527,7 @@ public class employeeMealFullController {
             PreschoolerFullBoardInMonth preschoolerFullBoardInMonth=
                     preschoolerFullBoardInMonthService.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(sessionObject.getSendData());
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 

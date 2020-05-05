@@ -37,6 +37,7 @@ public class adminMealActivityStayController {
     public String addFullMeal(Model model){
         if (sessionObject.getEmployee()!=null){
             model.addAttribute("fullMeal", new FullBoardPrice());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "admincontroller/meals/full";
@@ -51,6 +52,7 @@ public class adminMealActivityStayController {
             if (fullBoardPriceService.isFullMealInDB(fullBoardPrice.getName().toUpperCase())){
                 model.addAttribute("message","Wyżwienie o podanej nazwie istnieje już w bazie!");
                 model.addAttribute("fullMeal", new FullBoardPrice());
+                model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
                 model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                         sessionObject.getEmployee().getSurname());
                 return "admincontroller/meals/full";
@@ -67,6 +69,7 @@ public class adminMealActivityStayController {
     public String addSingleMeal(Model model){
         if (sessionObject.getEmployee()!=null){
             model.addAttribute("singleMeal", new SingleBoardPrice());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "admincontroller/meals/single";
@@ -80,6 +83,7 @@ public class adminMealActivityStayController {
         if (sessionObject.getEmployee()!=null){
             if (singleBoardPriceService.isSingleMealInDB(singleBoardPrice.getName().toUpperCase())){
                 model.addAttribute("message","Wyżwienie o podanej nazwie istnieje już w bazie!");
+                model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
                 model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                         sessionObject.getEmployee().getSurname());
                 model.addAttribute("singleMeal", new SingleBoardPrice());
@@ -97,6 +101,7 @@ public class adminMealActivityStayController {
     public String addActivity(Model model){
         if (sessionObject.getEmployee()!=null){
             model.addAttribute("activity", new Activities());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "admincontroller/activity/activity";
@@ -110,6 +115,7 @@ public class adminMealActivityStayController {
         if (sessionObject.getEmployee()!=null){
             if (activityService.isActivityInDB(activities.getName().toUpperCase())){
                 model.addAttribute("message","Zajęcia o podanej nazwie istnieją już w bazie!");
+                model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
                 model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                         sessionObject.getEmployee().getSurname());
                 model.addAttribute("activity", new Activities());
@@ -127,6 +133,7 @@ public class adminMealActivityStayController {
     public String addstay(Model model){
         if (sessionObject.getEmployee()!=null){
             model.addAttribute("stay", new Stay());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "admincontroller/stay/stay";
@@ -140,6 +147,7 @@ public class adminMealActivityStayController {
         if (sessionObject.getEmployee()!=null){
             if (stayService.isStayInDB(stay.getName().toUpperCase())){
                 model.addAttribute("message","Pobyt o podanej nazwie istniejw już w bazie!");
+                model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
                 model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                         sessionObject.getEmployee().getSurname());
                 model.addAttribute("stay", new Stay());
@@ -156,6 +164,7 @@ public class adminMealActivityStayController {
     @RequestMapping(value ="admincontroller/meals/statement", method = RequestMethod.GET)
     public String statementMeal(Model model){
         if (sessionObject.getEmployee()!=null){
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "admincontroller/meals/statement";
@@ -167,6 +176,7 @@ public class adminMealActivityStayController {
     @RequestMapping(value ="admincontroller/activity/statementa", method = RequestMethod.GET)
     public String statementActivity(Model model){
         if (sessionObject.getEmployee()!=null){
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "admincontroller/activity/statementa";
@@ -178,6 +188,7 @@ public class adminMealActivityStayController {
     @RequestMapping(value ="admincontroller/stay/statements", method = RequestMethod.GET)
     public String statementStay(Model model){
         if (sessionObject.getEmployee()!=null){
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "admincontroller/stay/statements";

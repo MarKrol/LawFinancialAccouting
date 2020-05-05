@@ -46,6 +46,7 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayselectgroup", method = RequestMethod.GET)
     public String addStaySelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
@@ -59,6 +60,7 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayselectgroup", method = RequestMethod.POST)
     public String addStaySelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             this.choose = choose;
@@ -72,6 +74,7 @@ public class employeeStayController {
     public String addStayMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -93,6 +96,7 @@ public class employeeStayController {
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
 
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", pl.camp.it.model.month.Month.getMonth());
@@ -121,6 +125,7 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayselectgroupE", method = RequestMethod.GET)
     public String addStaySelectGroupE(Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
@@ -134,6 +139,7 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayselectgroupE", method = RequestMethod.POST)
     public String addStaySelectGroupChooseE(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             this.choose = choose;
@@ -147,6 +153,7 @@ public class employeeStayController {
     public String addStayMonthE(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -171,6 +178,7 @@ public class employeeStayController {
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
 
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -209,6 +217,7 @@ public class employeeStayController {
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
 
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -241,6 +250,7 @@ public class employeeStayController {
     public String editStayPage(Model model){
         if (sessionObject.getEmployee() != null) {
             this.chooseStay=-1;
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("stay", new Stay());
@@ -255,6 +265,7 @@ public class employeeStayController {
     public String editStayShow(@RequestParam("choose") int idStay, Model model) {
         if (sessionObject.getEmployee() != null) {
             this.chooseStay=idStay;
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             Stay stay=stayService.getStayById(idStay);
@@ -271,6 +282,7 @@ public class employeeStayController {
     public String saveEditStayShow(@RequestParam("data")List<String> stayEdit, @RequestParam("choose") int idStay, Model model) {
         if (sessionObject.getEmployee() != null) {
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("stay", new Stay());
@@ -304,6 +316,7 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayD",method = RequestMethod.GET)
     public String confirmDeleteStay(Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             Stay stay=stayService.getStayById(this.chooseStay);
@@ -333,6 +346,7 @@ public class employeeStayController {
                 stayService.deleteStay(stayService.getStayById(this.chooseStay));
                 return "redirect:../../admincontroller/stay/stayE";
             }else{
+                model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
                 model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                         sessionObject.getEmployee().getSurname());
                 Stay stay=stayService.getStayById(this.chooseStay);
@@ -355,6 +369,7 @@ public class employeeStayController {
     public String showViewSingleMeal(Model model){
         if (sessionObject.getEmployee() != null) {
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -417,6 +432,7 @@ public class employeeStayController {
             PreschoolerStayMonth preschoolerStayMonth=
                     preschoolerStayMonthService.getPreschoolerStayMonthById(sessionObject.getSendData());
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 
@@ -471,6 +487,7 @@ public class employeeStayController {
             PreschoolerStayMonth preschoolerStayMonth=
                     preschoolerStayMonthService.getPreschoolerStayMonthById(sessionObject.getSendData());
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 

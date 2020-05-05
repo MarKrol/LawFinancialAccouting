@@ -44,6 +44,7 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleselectgroup", method = RequestMethod.GET)
     public String addSingleSelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
@@ -57,6 +58,7 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleselectgroup", method = RequestMethod.POST)
     public String addSingleSelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             this.choose = choose;
@@ -70,6 +72,7 @@ public class employeeMealSingleController {
     public String addSingleMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -92,6 +95,7 @@ public class employeeMealSingleController {
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
 
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", pl.camp.it.model.month.Month.getMonth());
@@ -122,6 +126,7 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleselectgroupE", method = RequestMethod.GET)
     public String addSingleSelectGroupE(Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
@@ -135,6 +140,7 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleselectgroupE", method = RequestMethod.POST)
     public String addSingleSelectGroupChooseE(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             this.choose = choose;
@@ -148,6 +154,7 @@ public class employeeMealSingleController {
     public String addSingleMonthE(Model model){
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -176,6 +183,7 @@ public class employeeMealSingleController {
             SingleBoardPrice singleBoardPrice = singleBoardPriceService.getNameSingleMealById(idSingleMeal);
 
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -220,6 +228,7 @@ public class employeeMealSingleController {
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("listMonth", Month.getMonth());
             model.addAttribute("preschoolerList", preschoolerService.getPreschoolerList(this.choose));
             model.addAttribute("listSingleMeal", singleBoardPriceService.getListSingleMeal());
@@ -256,6 +265,7 @@ public class employeeMealSingleController {
     public String editSingleMealPage(Model model){
         if (sessionObject.getEmployee() != null) {
             this.idSingleMealEditSave=-1;
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("single", new SingleBoardPrice());
@@ -272,6 +282,7 @@ public class employeeMealSingleController {
             this.idSingleMealEditSave=idSingleMeal;
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             SingleBoardPrice singleBoardPrice = singleBoardPriceService.getNameSingleMealById(idSingleMeal);
             model.addAttribute("single", singleBoardPrice);
             model.addAttribute("nameSingle",singleBoardPrice.getName());
@@ -286,6 +297,7 @@ public class employeeMealSingleController {
     public String saveEditSingleMealShow(@RequestParam("data") List<String> singleEdit, @RequestParam("choose") int idSingleEdit, Model model) {
         if (sessionObject.getEmployee() != null) {
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("single", new SingleBoardPrice());
@@ -319,6 +331,7 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleD",method = RequestMethod.GET)
     public String confirmDeleteSingleMeal(Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             SingleBoardPrice singleBoardPrice = singleBoardPriceService.getNameSingleMealById(this.idSingleMealEditSave);
@@ -349,6 +362,7 @@ public class employeeMealSingleController {
                 singleBoardPriceService.deleteSingleMeal(singleBoardPriceService.getNameSingleMealById(this.idSingleMealEditSave));
                 return "redirect:../../admincontroller/meals/singleE";
             }else{
+                model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
                 model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                         sessionObject.getEmployee().getSurname());
                 SingleBoardPrice singleBoardPrice = singleBoardPriceService.getNameSingleMealById(this.idSingleMealEditSave);
@@ -371,6 +385,7 @@ public class employeeMealSingleController {
     public String showViewStay(Model model){
         if (sessionObject.getEmployee() != null) {
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -429,6 +444,7 @@ public class employeeMealSingleController {
             PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth=
                     preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(sessionObject.getSendData());
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 
@@ -484,6 +500,7 @@ public class employeeMealSingleController {
             PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth=
                     preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(sessionObject.getSendData());
 
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 

@@ -10,7 +10,7 @@ public interface IPDFService {
 
     String[] dataToFilePDFLoginAndPass();
     Path createTempDirectory();
-    public void createSettlementPDF(Path tempDirectory, File filePDF, Integer idPreschooler, String month);
+    void createSettlementPDF(Path tempDirectory, File filePDF, Integer idPreschooler, String month);
     File createFilePDF(Path pathToFIle);
     void deleteTempDirectory(Path pathToDirectory);
     void deleteFilePDF(File file);

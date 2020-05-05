@@ -41,6 +41,7 @@ public class adminSendEmailController {
     @RequestMapping(value = "admincontroller/email/send", method = RequestMethod.GET)
     public String openPageSend(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth_copy1());
@@ -58,6 +59,7 @@ public class adminSendEmailController {
     public String openPageSendShowPreschooler(@RequestParam("choose") int idGroup, @RequestParam("chooseMonth") String month,
                                               @RequestParam("role") String role, Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth_copy1());
@@ -80,6 +82,7 @@ public class adminSendEmailController {
                                             @RequestParam(name = "idPreschooler", required = false) List<Integer> idPreschooler,
                                             @RequestParam("role") String role, Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             if (idPreschooler==null){
@@ -108,6 +111,7 @@ public class adminSendEmailController {
     @RequestMapping(value = "admincontroller/email/sending", method = RequestMethod.GET)
     public String afterSendSettlementPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("mailSending", simpleMailController.isMailSending());
@@ -121,6 +125,7 @@ public class adminSendEmailController {
     @RequestMapping(value = "admincontroller/email/report", method = RequestMethod.GET)
     public String reportSendMail(Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listGroup", this.preschoolGroups);
@@ -138,6 +143,7 @@ public class adminSendEmailController {
                                             @RequestParam(name="idGroup", required = false) List<Integer> listIdGroup,
                                             @RequestParam("role") String role, Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             if (listIdGroup==null){

@@ -52,6 +52,7 @@ public class employeeLoginController {
         if (sessionObject.getEmployee()!=null) {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             return "afterloggingin";
         } else{
             return "redirect:login";
@@ -152,6 +153,7 @@ public class employeeLoginController {
     @RequestMapping(value = "admincontroller/employee/employeeL", method = RequestMethod.GET)
     public String pageChangePassEmployee(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("employeeLoginPass",

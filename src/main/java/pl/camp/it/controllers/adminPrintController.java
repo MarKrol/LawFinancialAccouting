@@ -41,6 +41,7 @@ public class adminPrintController {
     @RequestMapping(value = "admincontroller/print/print", method = RequestMethod.GET)
     public String openPagePrint(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth_copy1());
@@ -54,6 +55,7 @@ public class adminPrintController {
     @RequestMapping(value = "admincontroller/print/print", method = RequestMethod.POST)
     public String printGroup(@RequestParam("chooseMonth") String month, @RequestParam("choose") int idGroup, Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth_copy1());

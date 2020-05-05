@@ -38,6 +38,7 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/group", method = RequestMethod.GET)
     public String showPageListGroup(Model model){
         if (sessionObject.getEmployee()!=null){
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroupNoOneGroup(
@@ -62,6 +63,7 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/groupE", method = RequestMethod.GET)
     public String openPageChangeGroupPreschooler(Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolerGroupByName
                                         (preschoolGroupService.getNameGroupPreschoolById(sessionObject.getSendData()));
             model.addAttribute("listPreschoolGroup", preschoolGroup);
@@ -106,6 +108,7 @@ public class adminGroupController {
     public String saveChangeGroupPreschooler(@RequestParam("nameGroup") String nameGroup,
                                              @RequestParam("choose2") int idEmployee, Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolerGroupByName
                     (preschoolGroupService.getNameGroupPreschoolById(sessionObject.getSendData()));
 
@@ -161,6 +164,7 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/groupD", method = RequestMethod.GET)
     public String openPageDeleteGroupPreschooler(Model model){
         if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolerGroupByName
                     (preschoolGroupService.getNameGroupPreschoolById(sessionObject.getSendData()));
             model.addAttribute("listPreschoolGroup", preschoolGroup);
@@ -190,6 +194,8 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/groupD", method = RequestMethod.POST, params = "delete=TAK")
     public String deleteGroupPreschooler(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
 
             if (preschoolerService.getPreschoolerList(sessionObject.getSendData()).size()==0) {
                 preschoolGroupService.deletePreschoolGroup(preschoolGroupService.getPreschoolerGroupByName

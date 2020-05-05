@@ -39,6 +39,7 @@ public class adminUserController {
     public String addEmployee(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("employee", new Employee());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroupNoOneGroup
@@ -52,6 +53,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/employee/addemployee", method = RequestMethod.POST)
     public String addEmployeeToDB(@ModelAttribute Employee employee, @RequestParam String choose, Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             if (employee.getRole().equals("teacher")) {
@@ -79,6 +81,7 @@ public class adminUserController {
     public String addgroup(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("preschoolGroup", new PreschoolGroup());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "admincontroller/grouppreschooler/addgroup";
@@ -90,6 +93,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/grouppreschooler/addgroup", method = RequestMethod.POST)
     public String addgroupaToDB(@ModelAttribute PreschoolGroup preschoolGroup, Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             if (!preschoolGroupService.isPreschoolGroupInDB(preschoolGroup.getNameGroup())) {
@@ -108,6 +112,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/preschooler/addpreschooler", method = RequestMethod.GET)
     public String addpreschooler(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("preschooler", new Preschooler());
@@ -140,6 +145,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/employee/statement", method = RequestMethod.GET)
     public String statementEmployee(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "admincontroller/employee/statement";
@@ -151,6 +157,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/grouppreschooler/statement", method = RequestMethod.GET)
     public String statementPreschoolGroup(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "admincontroller/grouppreschooler/statement";
@@ -162,6 +169,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/preschooler/statement", method = RequestMethod.GET)
     public String statementPreschooler(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "admincontroller/preschooler/statement";
@@ -173,6 +181,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/preschooler/preschoolerVED", method = RequestMethod.GET)
     public String openPageEditPreschooler(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
@@ -193,6 +202,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/preschooler/preschoolerVED", method = RequestMethod.POST)
     public String showPageEditGroupPreschooler(@RequestParam("choose") int idGroup, Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
@@ -220,6 +230,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/preschooler/preschoolerE", method = RequestMethod.GET)
     public String editPreschooler(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("preschooler", new Preschooler());
@@ -270,6 +281,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/preschooler/preschoolerD", method = RequestMethod.GET)
     public String deletePreschooler(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("preschooler", new Preschooler());
@@ -318,6 +330,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/preschooler/preschoolerAP", method = RequestMethod.GET)
     private String openPageToAddParent(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             Preschooler preschooler = preschoolerService.getPreschoolerById(sessionObject.getSendData());
@@ -334,6 +347,7 @@ public class adminUserController {
     @RequestMapping(value = "admincontroller/employee/employee", method = RequestMethod.GET)
     public String openPageEmployye(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("employeeLoggedId", sessionObject.getEmployee().getId());
@@ -365,6 +379,7 @@ public class adminUserController {
         if (sessionObject.getEmployee() != null) {
             Employee employee = employeeService.getEmployeeByIdEmployee(sessionObject.getSendData());
             PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolGroupByIdEmployee(employee.getId());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("employee", employee);
@@ -399,6 +414,7 @@ public class adminUserController {
                 if (nameGroup.equals("")) {
                     model.addAttribute("message", "Wybierz grupę przedszkolną!");
                     PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolGroupByIdEmployee(employee.getId());
+                    model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
                     model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                             sessionObject.getEmployee().getSurname());
                     model.addAttribute("employee", employee);
@@ -445,6 +461,7 @@ public class adminUserController {
         if (sessionObject.getEmployee() != null) {
             Employee employee = employeeService.getEmployeeByIdEmployee(sessionObject.getSendData());
             PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolGroupByIdEmployee(employee.getId());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("employee", employee);
@@ -491,6 +508,7 @@ public class adminUserController {
     public String openAboutMe(Model model) {
         if (sessionObject.getEmployee() != null) {
             Employee employee = sessionObject.getEmployee();
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("employee", employee);
@@ -505,6 +523,7 @@ public class adminUserController {
     public String openAboutMeEdit(Model model) {
         if (sessionObject.getEmployee() != null) {
             Employee employee = sessionObject.getEmployee();
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("employee", employee);

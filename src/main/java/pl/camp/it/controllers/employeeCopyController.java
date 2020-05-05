@@ -28,6 +28,7 @@ public class employeeCopyController {
     @RequestMapping(value = "admincontroller/copy/copyForGroup", method = RequestMethod.GET)
     public String openPageCopy(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("month", new String());
@@ -43,6 +44,7 @@ public class employeeCopyController {
     @RequestMapping(value = "admincontroller/copy/copyForGroupInfo", method = RequestMethod.GET)
     public String afterCopyInfo(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("howDataCopied", this.copyService.getHowDataCopied());

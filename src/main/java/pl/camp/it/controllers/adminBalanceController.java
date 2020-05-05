@@ -33,6 +33,7 @@ public class adminBalanceController {
     @RequestMapping(value = "admincontroller/balance/balance", method = RequestMethod.GET)
     public String openPageBalance(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth_copy1());
@@ -48,6 +49,7 @@ public class adminBalanceController {
     @RequestMapping(value = "admincontroller/balance/balance", method = RequestMethod.POST)
     public String openPageBalancePreschooler(@RequestParam("chooseMonth") String month, @RequestParam("choose") int idGroup, Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth_copy1());

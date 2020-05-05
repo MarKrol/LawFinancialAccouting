@@ -25,6 +25,7 @@ public class adminCompanyController {
     @RequestMapping(value = "admincontroller/company/company", method = RequestMethod.GET)
     public String openPageCompany(Model model){
         if (sessionObject.getEmployee()!=null){
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("companyE", new Company());
@@ -40,6 +41,7 @@ public class adminCompanyController {
     public String showCompany(@RequestParam("choose") int idCompany, Model model){
         if (sessionObject.getEmployee()!=null){
             Company company = companyService.getCompanyById(idCompany);
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("companyList", companyService.getListCompany());
@@ -57,6 +59,7 @@ public class adminCompanyController {
         if (sessionObject.getEmployee()!=null){
             Company company = companyService.getCompanyById(idCompany);
             companyService.saveChangeDataCompany(company, companyEdit);
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("companyList", companyService.getListCompany());

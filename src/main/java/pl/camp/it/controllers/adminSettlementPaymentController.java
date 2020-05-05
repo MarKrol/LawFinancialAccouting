@@ -51,6 +51,7 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/selectgroup", method = RequestMethod.GET)
     public String settlementSelectGroup(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
@@ -63,6 +64,7 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/selectgroup", method = RequestMethod.POST)
     public String settlementSelectGroupChoose(@RequestParam int choose, Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             this.choose = choose;
@@ -76,6 +78,7 @@ public class adminSettlementPaymentController {
     public String settlementChoose(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -95,6 +98,7 @@ public class adminSettlementPaymentController {
             model.addAttribute("nameSurname",preschooler.getName()+" "+preschooler.getSurname());
             model.addAttribute("month",this.monthChoose);
             model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -183,6 +187,7 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/settlementE",method = RequestMethod.GET)
     public String editSettlementFullMeal(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 
@@ -204,6 +209,7 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "redirect:../../admincontroller/settlement/settlementshow";
@@ -238,6 +244,7 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/settlementSingleE",method = RequestMethod.GET)
     public String editSettlementSingleMeal(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 
@@ -259,6 +266,7 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementSingleShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "redirect:../../admincontroller/settlement/settlementshow";
@@ -293,6 +301,7 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/settlementStayE",method = RequestMethod.GET)
     public String editSettlementStay(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 
@@ -314,6 +323,7 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementStayShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "redirect:../../admincontroller/settlement/settlementshow";
@@ -347,6 +357,7 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/settlementActivityE",method = RequestMethod.GET)
     public String editSettlementActivity(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 
@@ -368,6 +379,7 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementActivityShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "redirect:../../admincontroller/settlement/settlementshow";
@@ -403,6 +415,7 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/payment/paymentselectgroup", method = RequestMethod.GET)
     public String paymentSelectGroup(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
@@ -415,6 +428,7 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/payment/paymentselectgroup", method = RequestMethod.POST)
     public String paymentSelectGroupChoose(@RequestParam int choose, Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             this.choose = choose;
@@ -431,6 +445,7 @@ public class adminSettlementPaymentController {
     public String paymentChoose(Model model) {
         if (sessionObject.getEmployee() != null) {
             model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -466,6 +481,7 @@ public class adminSettlementPaymentController {
             this.idCompanyChoose=idCompany;
 
             model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -516,6 +532,7 @@ public class adminSettlementPaymentController {
             model.addAttribute("nameSurname", preschooler.getName()+" "+preschooler.getSurname());
 
             model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
@@ -555,6 +572,7 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/payment/paymentE",method = RequestMethod.GET)
     public String editPayment(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 
@@ -578,6 +596,7 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnPaymentShowNoSave(Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "redirect:../../admincontroller/payment/paymentshow";
@@ -618,6 +637,7 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/payment/paymentD",method = RequestMethod.GET)
     public String deletePayment(Model model) {
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
 
@@ -641,6 +661,7 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnPaymentShowNoDelete(Model model){
         if (sessionObject.getEmployee() != null) {
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             return "redirect:../../admincontroller/payment/paymentshow";

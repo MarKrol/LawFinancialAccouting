@@ -6,6 +6,7 @@
 </head>
 <body>
     <div id="topmenu" th:fragment="topmenu">
+        <th:block th:if="${userRoleAfterLogged=='ADMIN'} or ${userRoleAfterLogged=='SUPER_ADMIN'} ">
         <div id="intopmenu">
             <ul>
                 <li><a href="#">Pracownicy</a>
@@ -85,6 +86,175 @@
                 </li>
             </ul>
         </div>
+        </th:block>
+
+
+        <th:block th:if="${userRoleAfterLogged=='ACCOUNT'}">
+            <div id="intopmenuAccount">
+                <ul>
+                    <li><a href="#">Pracownicy</a>
+                        <ul>
+                            <li><a href="#">Dodaj pracownika</a></li>
+                            <li><a href="#">Moduł zarządzania pracownikami</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Grupy przedszkolne</a>
+                        <ul>
+                            <li><a href="#">Dodaj grupę przedszkolną</a></li>
+                            <li><a href="#">Moduł zarządzania grupami przedszkolnymi</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Przedszkolaki</a>
+                        <ul>
+                            <li><a href="#">Dodaj przedszkolaka</a></li>
+                            <li><a href="#">Moduł zarządzania przedszkolakiem</a></li>
+                            <li><a href="#">Moduł zarządzania dodanymi opiekunami prawnymi</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Wyżywienie</a>
+                        <ul>
+                            <li><a href="#">Dodaj dietę</a></li>
+                            <li><a href="#">Moduł zarządzania dodanymi dietami</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="#">Dodaj pojedynczy posiłek</a></li>
+                            <li><a href="#">Moduła zarządzania pojedynczymi posiłkami </a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="#">Liczba zjedzonych posiłków</a></li>
+                            <li><a href="#">Edycja zjedzonych posiłków</a></li>
+                            <li><a href="#">Podgląd/usunięcie liczby wprowadzonych posiłków</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="#">Liczba zjedzonych pojedynczych posiłków</a></li>
+                            <li><a href="#">Edycja zjedzonych pojedynczych posiłków</a></li>
+                            <li><a href="#">Podgląd/usunięcie liczby wprowadzonyh pojedynczych posiłków</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Zajęcia dodatkowe</a>
+                        <ul>
+                            <li><a href="#">Dodaj nowe zajęcia</a></li>
+                            <li><a href="#">Moduła zarządzania dodanymi zajęciami</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="#">Przydziel zajęcia przedszkolakowi</a></li>
+                            <li><a href="#">Zarządzaj przydzielonymi zajęciami</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Pobyt
+                    </a>
+                        <ul>
+                            <li><a href="#">Dodaj pobyt</a></li>
+                            <li><a href="#">Moduł zarządzania dodanym pobytem</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="#">Przypisz pobyt</a></li>
+                            <li><a href="#">Edytuj przypisany pobyt</a></li>
+                            <li><a href="#">Podgląd/usunięcie przypisanego pobytu</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Rozliczenie</a>
+                        <ul>
+                            <li><a href="#">Moduł zarządzania wpłatami</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="#">Pokaż naliczone opłaty przedszkolaka</a></li>
+                            <li><a href="../../admincontroller/balance/balance">Miesięczne saldo</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="#">Wyślij rozliczenie</a></li>
+                            <li><a href="../../admincontroller/print/print">Drukuj rozliczenie</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Inne</a>
+                        <ul>
+
+                            <li><a href="../../admincontroller/employee/aboutMe">Moje dane</a></li>
+                            <li><a href="#">Modyfikuj dane firmy</a></li>
+                            <li><a href="#">Moduł kopiowania danych dla grupy</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </th:block>
+
+
+        <th:block th:if="${userRoleAfterLogged=='TEACHER'}">
+            <div id="intopmenu2">
+                <ul>
+                    <li><a href="#">Pracownicy</a>
+                        <ul>
+                            <li><a href="#">Dodaj pracownika</a></li>
+                            <li><a href="#">Moduł zarządzania pracownikami</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Grupy przedszkolne</a>
+                        <ul>
+                            <li><a href="#">Dodaj grupę przedszkolną</a></li>
+                            <li><a href="#">Moduł zarządzania grupami przedszkolnymi</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Przedszkolaki</a>
+                        <ul>
+                            <li><a href="../../admincontroller/preschooler/addpreschooler">Dodaj przedszkolaka</a></li>
+                            <li><a href="../../admincontroller/preschooler/preschoolerVED">Moduł zarządzania przedszkolakiem</a></li>
+                            <li><a href="../../admincontroller/preschooler/parent">Moduł zarządzania dodanymi opiekunami prawnymi</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Wyżywienie</a>
+                        <ul>
+                            <li><a href="#">Dodaj dietę</a></li>
+                            <li><a href="#">Moduł zarządzania dodanymi dietami</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="#">Dodaj pojedynczy posiłek</a></li>
+                            <li><a href="#">Moduła zarządzania pojedynczymi posiłkami </a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="../../admincontroller/meals/fullselectgroup">Liczba zjedzonych posiłków</a></li>
+                            <li><a href="../../admincontroller/meals/fullselectgroupE">Edycja zjedzonych posiłków</a></li>
+                            <li><a href="../../admincontroller/meals/fullmonthVD">Podgląd/usunięcie liczby wprowadzonych posiłków</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="../../admincontroller/meals/singleselectgroup">Liczba zjedzonych pojedynczych posiłków</a></li>
+                            <li><a href="../../admincontroller/meals/singleselectgroupE">Edycja zjedzonych pojedynczych posiłków</a></li>
+                            <li><a href="../../admincontroller/meals/singlemonthVD">Podgląd/usunięcie liczby wprowadzonyh pojedynczych posiłków</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Zajęcia dodatkowe</a>
+                        <ul>
+                            <li><a href="#">Dodaj nowe zajęcia</a></li>
+                            <li><a href="#">Moduła zarządzania dodanymi zajęciami</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="../../admincontroller/activity/activityselectgroup">Przydziel zajęcia przedszkolakowi</a></li>
+                            <li><a href="../../admincontroller/activity/activityselectgroupE">Zarządzaj przydzielonymi zajęciami</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Pobyt
+                    </a>
+                        <ul>
+                            <li><a href="#">Dodaj pobyt</a></li>
+                            <li><a href="#">Moduł zarządzania dodanym pobytem</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="../../admincontroller/stay/stayselectgroup">Przypisz pobyt</a></li>
+                            <li><a href="../../admincontroller/stay/stayselectgroupE">Edytuj przypisany pobyt</a></li>
+                            <li><a href="../../admincontroller/stay/staymonthVD">Podgląd/usunięcie przypisanego pobytu</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Rozliczenie</a>
+                        <ul>
+                            <li><a href="#">Moduł zarządzania wpłatami</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="#">Pokaż naliczone opłaty przedszkolaka</a></li>
+                            <li><a href="#">Miesięczne saldo</a></li>
+                            <li><div style="width:215px; height:1px;border-bottom: 1px dashed blue"></div></li>
+                            <li><a href="#">Wyślij rozliczenie</a></li>
+                            <li><a href="#">Drukuj rozliczenie</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Inne</a>
+                        <ul>
+
+                            <li><a href="../../admincontroller/employee/aboutMe">Moje dane</a></li>
+                            <li><a href="#">Modyfikuj dane firmy</a></li>
+                            <li><a href="../../admincontroller/copy/copyForGroup">Moduł kopiowania danych dla grupy</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </th:block>
+
+
     </div>
 </body>
 </html>
