@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.camp.it.model.employee.Employee;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.userLogin.EmployeeLogin;
 import pl.camp.it.services.IEmployeeService;
 import pl.camp.it.services.IPDFService;
@@ -45,6 +46,18 @@ public class employeeLoginController {
         sessionObject.setLogged(false);
         model.addAttribute("employeeLogin", new EmployeeLogin());
         return "login";
+    }
+
+    @RequestMapping(value = "notauthorized", method = RequestMethod.GET)
+    public String notauthorized(Model model){
+        if (sessionObject.getEmployee()!=null) {
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+            model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
+            return "notauthorized";
+        } else{
+            return "redirect:login";
+        }
     }
 
     @RequestMapping(value = "afterloggingin", method = RequestMethod.GET)
@@ -143,6 +156,12 @@ public class employeeLoginController {
     @RequestMapping(value = "admincontroller/employee/employeeL/{idEmployee}", method = RequestMethod.GET)
     public String openPagChangePassEmployee(@PathVariable String idEmployee) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../../notauthorized";
+            }
+
             sessionObject.setSendData(Integer.parseInt(idEmployee));
             return "redirect:../../../admincontroller/employee/employeeL";
         } else {
@@ -153,6 +172,12 @@ public class employeeLoginController {
     @RequestMapping(value = "admincontroller/employee/employeeL", method = RequestMethod.GET)
     public String pageChangePassEmployee(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -167,6 +192,12 @@ public class employeeLoginController {
     @RequestMapping(value = "admincontroller/employee/employeeL", method = RequestMethod.POST, params = "return=POWRÓT")
     public String noChangePassEmployee() {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/employee/employee";
         } else {
             return "redirect:../../login";
@@ -177,6 +208,12 @@ public class employeeLoginController {
                                                                                 params = "generatePass=GENERUJ HASŁO")
     public String changePassEmployee() {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             EmployeeLogin employeeLoginPass= employeeService.getEmployeeById(sessionObject.getSendData());
             employeeLoginPass.setPass
                     (employeeService.genNewPassEmployee(employeeService.getEmployeeByIdEmployee(sessionObject.getSendData())).getPass());
@@ -189,7 +226,8 @@ public class employeeLoginController {
 
     @RequestMapping(value = "admincontroller/employee/pdf", method = RequestMethod.GET)
     protected void printLoginPassPDF(HttpServletResponse response){
-        if (sessionObject.getEmployee() != null) {
+        if (sessionObject.getEmployee() != null && (!sessionObject.getEmployee().getRole().equals("ACCOUNT") &&
+                !sessionObject.getEmployee().getRole().equals("TEACHER"))) {
             String[] data = pdfService.dataToFilePDFLoginAndPass();
             Document document = new Document();
             try{

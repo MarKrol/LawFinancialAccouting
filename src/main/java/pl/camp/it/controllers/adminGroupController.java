@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.camp.it.model.employee.Employee;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.preschoolGroup.PreschoolGroup;
 import pl.camp.it.services.IEmployeeService;
 import pl.camp.it.services.IPreschoolGroupService;
@@ -38,6 +39,12 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/group", method = RequestMethod.GET)
     public String showPageListGroup(Model model){
         if (sessionObject.getEmployee()!=null){
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -53,6 +60,12 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/groupE/{idGroup}", method = RequestMethod.GET)
     public String redirectPageChangeGroupPreschooler(@PathVariable String idGroup, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../../notauthorized";
+            }
+
             sessionObject.setSendData(Integer.parseInt(idGroup));
             return "redirect:../../../admincontroller/grouppreschooler/groupE";
         }else {
@@ -63,6 +76,15 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/groupE", method = RequestMethod.GET)
     public String openPageChangeGroupPreschooler(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolerGroupByName
                                         (preschoolGroupService.getNameGroupPreschoolById(sessionObject.getSendData()));
@@ -98,6 +120,12 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/groupE", method = RequestMethod.POST, params = "return=NIE ZAPISUJ DANYCH")
     public String noSaveChangeGroupPreschooler(){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/grouppreschooler/group";
         }else {
             return "redirect:../../login";
@@ -108,6 +136,12 @@ public class adminGroupController {
     public String saveChangeGroupPreschooler(@RequestParam("nameGroup") String nameGroup,
                                              @RequestParam("choose2") int idEmployee, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolerGroupByName
                     (preschoolGroupService.getNameGroupPreschoolById(sessionObject.getSendData()));
@@ -154,6 +188,12 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/groupD/{idGroup}", method = RequestMethod.GET)
     public String redirectPageDeleteGroupPreschooler(@PathVariable String idGroup, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../../notauthorized";
+            }
+
             sessionObject.setSendData(Integer.parseInt(idGroup));
             return "redirect:../../../admincontroller/grouppreschooler/groupD";
         }else {
@@ -164,6 +204,15 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/groupD", method = RequestMethod.GET)
     public String openPageDeleteGroupPreschooler(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
+            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
+                    sessionObject.getEmployee().getSurname());
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolerGroupByName
                     (preschoolGroupService.getNameGroupPreschoolById(sessionObject.getSendData()));
@@ -185,6 +234,12 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/groupD", method = RequestMethod.POST, params = "noDelete=NIE")
     public String noDeleteGroupPreschooler(){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/grouppreschooler/group";
         }else {
             return "redirect:../../login";
@@ -194,6 +249,11 @@ public class adminGroupController {
     @RequestMapping(value = "admincontroller/grouppreschooler/groupD", method = RequestMethod.POST, params = "delete=TAK")
     public String deleteGroupPreschooler(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
 
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
 

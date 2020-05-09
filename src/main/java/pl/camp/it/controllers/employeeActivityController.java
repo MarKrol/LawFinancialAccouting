@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.camp.it.model.activities.Activities;
 import pl.camp.it.model.activities.PreschoolerActivityInMonth;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.month.Month;
 import pl.camp.it.model.preschoolGroup.PreschoolGroup;
@@ -48,6 +49,11 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activityselectgroup", method = RequestMethod.GET)
     public String addStaySelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -62,6 +68,11 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activityselectgroup", method = RequestMethod.POST)
     public String addStaySelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -75,6 +86,11 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activitymonth", method = RequestMethod.GET)
     public String addStayMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -93,6 +109,11 @@ public class employeeActivityController {
                                    @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                    Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
 
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -123,6 +144,11 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activityselectgroupE", method = RequestMethod.GET)
     public String addStaySelectGroupE(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -137,6 +163,11 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activityselectgroupE", method = RequestMethod.POST)
     public String addStaySelectGroupChooseE(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -150,6 +181,11 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activitymonthE", method = RequestMethod.GET)
     public String addStayMonthE(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -168,6 +204,11 @@ public class employeeActivityController {
                                     Model model){
 
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             this.idPreschoolerEdit=idPreschooler;
             this.monthPreviousEdit=month;
 
@@ -216,6 +257,10 @@ public class employeeActivityController {
                                          Model model){
 
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
 
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
 
@@ -272,6 +317,12 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activityE", method = RequestMethod.GET)
     public String openPageActivityE(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -286,6 +337,12 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activityE", method = RequestMethod.POST, params = "edit=EDYTUJ ZAJĘCIA")
     public String editActivityShow(@RequestParam("choose") int idActivity, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.idActivityEdit=idActivity;
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -303,6 +360,11 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activityE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
     public String saveEditActivityShow(@RequestParam("data")List<String> activityEdit, @RequestParam("choose") int idActivity, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
 
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -330,6 +392,12 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activityE", method = RequestMethod.POST, params = "delete=USUŃ ZAJĘCIA")
     public String deleteStayShow(@RequestParam("choose") int idActivity, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.idActivityEdit=idActivity;
             return "redirect:../../admincontroller/activity/activityD";
         }else {
@@ -340,6 +408,12 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activityD",method = RequestMethod.GET)
     public String confirmDeleteStay(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -357,6 +431,12 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activityD",method = RequestMethod.POST,params = "nodelete=NIE")
     public String noDeleteStay(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/activity/activityE";
         }else {
             return "redirect:../../login";
@@ -366,6 +446,12 @@ public class employeeActivityController {
     @RequestMapping(value = "admincontroller/activity/activityD",method = RequestMethod.POST,params = "delete=TAK")
     public String yesDeleteStay(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             if (!preschoolerActivityInMonthService.isNameActivityPreschoolerInDB(activityService.getActivity(this.idActivityEdit).getName())) {
                 activityService.deleteActivity(activityService.getActivity(this.idActivityEdit));
                 return "redirect:../../admincontroller/activity/activityE";

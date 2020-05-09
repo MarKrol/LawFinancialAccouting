@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.month.Month;
 import pl.camp.it.services.ICopyService;
 import pl.camp.it.services.IPreschoolGroupService;
@@ -28,6 +29,11 @@ public class employeeCopyController {
     @RequestMapping(value = "admincontroller/copy/copyForGroup", method = RequestMethod.GET)
     public String openPageCopy(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -44,6 +50,11 @@ public class employeeCopyController {
     @RequestMapping(value = "admincontroller/copy/copyForGroupInfo", method = RequestMethod.GET)
     public String afterCopyInfo(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -78,6 +89,11 @@ public class employeeCopyController {
     public String copy(@RequestParam("choose") int idGroup, @RequestParam(name="month", required = false) String monthToMonth,
                        Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             this.copyService.copyDataToNextMonth(idGroup, monthToMonth);
             return "redirect:../../admincontroller/copy/copyForGroupInfo";
         } else {

@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.month.Month;
 import pl.camp.it.services.IBalanceService;
 import pl.camp.it.services.ICompanyService;
@@ -33,6 +34,11 @@ public class adminBalanceController {
     @RequestMapping(value = "admincontroller/balance/balance", method = RequestMethod.GET)
     public String openPageBalance(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -49,6 +55,11 @@ public class adminBalanceController {
     @RequestMapping(value = "admincontroller/balance/balance", method = RequestMethod.POST)
     public String openPageBalancePreschooler(@RequestParam("chooseMonth") String month, @RequestParam("choose") int idGroup, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.camp.it.model.company.Company;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.services.ICompanyService;
 import pl.camp.it.session.SessionObject;
 
@@ -25,6 +26,12 @@ public class adminCompanyController {
     @RequestMapping(value = "admincontroller/company/company", method = RequestMethod.GET)
     public String openPageCompany(Model model){
         if (sessionObject.getEmployee()!=null){
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -40,6 +47,12 @@ public class adminCompanyController {
     @RequestMapping(value = "admincontroller/company/company", method = RequestMethod.POST, params = "show=POKAŻ DANE")
     public String showCompany(@RequestParam("choose") int idCompany, Model model){
         if (sessionObject.getEmployee()!=null){
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             Company company = companyService.getCompanyById(idCompany);
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -57,6 +70,12 @@ public class adminCompanyController {
     public String saveAndShowCompany(@ModelAttribute Company companyEdit,
                                      @RequestParam("choose") int idCompany, Model model){
         if (sessionObject.getEmployee()!=null){
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             Company company = companyService.getCompanyById(idCompany);
             companyService.saveChangeDataCompany(company, companyEdit);
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());

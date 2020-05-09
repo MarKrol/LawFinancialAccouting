@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.camp.it.model.employee.Employee;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.month.Month;
 import pl.camp.it.model.userLogin.EmployeeLogin;
 import pl.camp.it.services.IPDFService;
@@ -41,6 +42,11 @@ public class adminPrintController {
     @RequestMapping(value = "admincontroller/print/print", method = RequestMethod.GET)
     public String openPagePrint(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -55,6 +61,11 @@ public class adminPrintController {
     @RequestMapping(value = "admincontroller/print/print", method = RequestMethod.POST)
     public String printGroup(@RequestParam("chooseMonth") String month, @RequestParam("choose") int idGroup, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -72,7 +83,7 @@ public class adminPrintController {
 
     @RequestMapping(value = "admincontroller/print/print/{idPreschooler}", method = RequestMethod.GET)
     protected void printPDF(@PathVariable String idPreschooler, HttpServletResponse response) {
-        if (sessionObject.getEmployee() != null) {
+        if (sessionObject.getEmployee() != null && !sessionObject.getEmployee().getRole().equals("TEACHER")) {
             Document document = new Document();
             try{
                 response.setContentType("application/pdf");

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.meals.FullBoardPrice;
 import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
 import pl.camp.it.model.meals.SingleBoardPrice;
@@ -40,6 +41,11 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullselectgroup", method = RequestMethod.GET)
     public String addFullSelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -54,6 +60,11 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullselectgroup", method = RequestMethod.POST)
     public String addFullSelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -67,6 +78,11 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullmonth", method = RequestMethod.GET)
     public String addFullMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -86,6 +102,11 @@ public class employeeMealFullController {
                                    @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                    @RequestParam("choose2") int idDiet, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -145,6 +166,11 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullselectgroupE", method = RequestMethod.GET)
     public String loadFullMealSelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -159,6 +185,11 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullselectgroupE", method = RequestMethod.POST)
     public String loadFullSelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             this.choose = choose;
@@ -171,6 +202,11 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullmonthE", method = RequestMethod.GET)
     public String editFullMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -190,6 +226,11 @@ public class employeeMealFullController {
                                       @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                       Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -235,6 +276,11 @@ public class employeeMealFullController {
                                       @RequestParam("choose2") int idDiet, Model model){
 
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -287,6 +333,12 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullE", method = RequestMethod.GET)
     public String editFullMealPage(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.idFullMealEdit=-1;
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -302,6 +354,12 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullE", method = RequestMethod.POST, params = "edit=EDYTUJ DIETĘ")
     public String editFullMealShow(@RequestParam("choose") int idFullMeal, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.idFullMealEdit=idFullMeal;
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -319,6 +377,11 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
     public String saveEditFullMealShow(@RequestParam("data") List<String> fullEdit, @RequestParam("choose") int idFullEdit, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
 
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -344,6 +407,12 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullE", method = RequestMethod.POST, params = "delete=USUŃ DIETĘ")
     public String deleteSingleMealShow(@RequestParam("choose") int idFullMeal, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.idFullMealEdit=idFullMeal;
             return "redirect:../../admincontroller/meals/fullD";
         }else {
@@ -354,6 +423,12 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullD",method = RequestMethod.GET)
     public String confirmDeleteFullMeal(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -371,6 +446,12 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullD",method = RequestMethod.POST,params = "nodelete=NIE")
     public String noDeleteFullMeal(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/meals/fullE";
         }else {
             return "redirect:../../login";
@@ -380,6 +461,12 @@ public class employeeMealFullController {
     @RequestMapping(value = "admincontroller/meals/fullD",method = RequestMethod.POST,params = "delete=TAK")
     public String yesDeleteSingleMeal(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             if (!preschoolerFullBoardInMonthService.isNameFullMealPreschoolerInDB
                     (fullBoardPriceService.getFullBoardPriceById(this.idFullMealEdit).getName())) {
                 fullBoardPriceService.deleteFullMeal(fullBoardPriceService.getFullBoardPriceById(this.idFullMealEdit));
@@ -409,6 +496,10 @@ public class employeeMealFullController {
     public String showViewFullMeal(Model model){
         if (sessionObject.getEmployee() != null) {
 
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -434,6 +525,11 @@ public class employeeMealFullController {
     public String showViewFullMealAllPreschooler(@RequestParam("choose1") String nameMonth,
                                                  @RequestParam("choose") int idGroup,  Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             this.monthEditSave=nameMonth;   this.tempNameMonth=nameMonth;
             this.choose=idGroup;            this.tempChoose =idGroup;
 //            model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -454,18 +550,28 @@ public class employeeMealFullController {
     @RequestMapping(value ="admincontroller/meals/fullmonthVD/{id}", method = RequestMethod.GET)
     public String ShowEditFullMealPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../../notauthorized";
+            }
+
                 this.choose=this.tempChoose;
                 this.monthEditSave=this.tempNameMonth;
                 sessionObject.setSendData(Integer.parseInt(id));
             return "redirect:../../../admincontroller/meals/fullmonthVE";
         }else{
-            return "redirect:../../login";
+            return "redirect:../../../login";
         }
     }
 
     @RequestMapping(value ="admincontroller/meals/fullmonthVE", method = RequestMethod.GET)
     public String editFullMealPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             PreschoolerFullBoardInMonth preschoolerFullBoardInMonth=
                     preschoolerFullBoardInMonthService.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(sessionObject.getSendData());
 
@@ -490,6 +596,11 @@ public class employeeMealFullController {
     @RequestMapping(value ="admincontroller/meals/fullmonthVE", method = RequestMethod.POST, params = "return=POWRÓT DO PODGLĄDU")
     public String noSaveChangeFullMealEditPOT(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/meals/fullmonthVD";
         }else{
             return "redirect:../../login";
@@ -500,6 +611,11 @@ public class employeeMealFullController {
     public String saveChangeFullMealEditPOST(@ModelAttribute PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit,
                                              @RequestParam("choose2") String nameDiet){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             preschoolerFullBoardInMonthService.editAndPersistPreschoolerFullBoardInMonth
                     (preschoolerFullBoardInMonthService.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(sessionObject.getSendData())
                             ,preschoolerFullBoardInMonthEdit,nameDiet);
@@ -512,18 +628,28 @@ public class employeeMealFullController {
     @RequestMapping(value ="admincontroller/meals/fullmonthVD/D/{id}", method = RequestMethod.GET)
     public String showDeleteFullMealPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../../../notauthorized";
+            }
+
             this.choose=this.tempChoose;
             this.monthEditSave=this.tempNameMonth;
             sessionObject.setSendData(Integer.parseInt(id));
             return "redirect:../../../../admincontroller/meals/fullmonthVDD";
         }else{
-            return "redirect:../../login";
+            return "redirect:../../../../login";
         }
     }
 
     @RequestMapping(value ="admincontroller/meals/fullmonthVDD", method = RequestMethod.GET)
     public String deleteFullMealPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             PreschoolerFullBoardInMonth preschoolerFullBoardInMonth=
                     preschoolerFullBoardInMonthService.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal(sessionObject.getSendData());
 
@@ -549,6 +675,11 @@ public class employeeMealFullController {
     @RequestMapping(value ="admincontroller/meals/fullmonthVDD", method = RequestMethod.POST, params = "noDelete=NIE")
     public String noDeleteFullMealEditPOT(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/meals/fullmonthVD";
         }else{
             return "redirect:../../login";
@@ -558,6 +689,11 @@ public class employeeMealFullController {
     @RequestMapping(value ="admincontroller/meals/fullmonthVDD", method = RequestMethod.POST, params = "delete=TAK")
     public String deleteFullMealEditPOST(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             preschoolerFullBoardInMonthService.
                     deleteFullMealPreschoolInMonthByIdPreschoolerFullMealBoardPrice(sessionObject.getSendData());
             return "redirect:../../admincontroller/meals/fullmonthVD";

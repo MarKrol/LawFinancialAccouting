@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.meals.SingleBoardPrice;
 import pl.camp.it.model.month.Month;
@@ -46,6 +47,11 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayselectgroup", method = RequestMethod.GET)
     public String addStaySelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -60,6 +66,11 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayselectgroup", method = RequestMethod.POST)
     public String addStaySelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -73,6 +84,11 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/staymonth", method = RequestMethod.GET)
     public String addStayMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -92,6 +108,10 @@ public class employeeStayController {
                                     @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                     @RequestParam("choose2") int idStay, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
 
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
 
@@ -125,6 +145,11 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayselectgroupE", method = RequestMethod.GET)
     public String addStaySelectGroupE(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -139,6 +164,11 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayselectgroupE", method = RequestMethod.POST)
     public String addStaySelectGroupChooseE(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -152,6 +182,11 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/staymonthE", method = RequestMethod.GET)
     public String addStayMonthE(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -171,6 +206,11 @@ public class employeeStayController {
                                           @RequestParam("choose1") String month,
                                           @RequestParam("choose2") int idStayMonth, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             this.idPreschoolerEditSave=idPreschooler;
             this.monthEditSave=month;
             this.idStayMonthEditSave=idStayMonth;
@@ -214,6 +254,10 @@ public class employeeStayController {
                                           @RequestParam("choose2") int idStayMonth, Model model) {
         if (sessionObject.getEmployee() != null) {
 
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
 
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -249,6 +293,12 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayE", method = RequestMethod.GET)
     public String editStayPage(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.chooseStay=-1;
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -264,6 +314,12 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayE", method = RequestMethod.POST, params = "edit=EDYTUJ POBYT")
     public String editStayShow(@RequestParam("choose") int idStay, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.chooseStay=idStay;
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -281,6 +337,11 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
     public String saveEditStayShow(@RequestParam("data")List<String> stayEdit, @RequestParam("choose") int idStay, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
 
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -306,6 +367,12 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayE", method = RequestMethod.POST, params = "delete=USUŃ POBYT")
     public String deleteStayShow(@RequestParam("choose") int idStay, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.chooseStay=idStay;
             return "redirect:../../admincontroller/stay/stayD";
         }else {
@@ -316,6 +383,12 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayD",method = RequestMethod.GET)
     public String confirmDeleteStay(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -333,6 +406,12 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayD",method = RequestMethod.POST,params = "nodelete=NIE")
     public String noDeleteStay(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/stay/stayE";
         }else {
             return "redirect:../../login";
@@ -342,6 +421,12 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/stayD",method = RequestMethod.POST,params = "delete=TAK")
     public String yesDeleteStay(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             if (!preschoolerStayMonthService.isNameStayPreschoolerInDB(stayService.getStayById(this.chooseStay).getName())) {
                 stayService.deleteStay(stayService.getStayById(this.chooseStay));
                 return "redirect:../../admincontroller/stay/stayE";
@@ -368,6 +453,10 @@ public class employeeStayController {
     @RequestMapping(value = "admincontroller/stay/staymonthVD", method = RequestMethod.GET)
     public String showViewSingleMeal(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
 
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -400,6 +489,11 @@ public class employeeStayController {
                                                    @RequestParam("choose2") int idStay,
                                                    @RequestParam("choose") int idGroup,  Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             this.monthEditSave = nameMonth;
             this.tempNameMonth = nameMonth;
             this.choose = idGroup;
@@ -416,19 +510,29 @@ public class employeeStayController {
     @RequestMapping(value ="admincontroller/stay/staymonthVD/{id}", method = RequestMethod.GET)
     public String ShowEditStayPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../../notauthorized";
+            }
+
             this.choose=this.tempChoose;
             this.monthEditSave=this.tempNameMonth;
             this.idStayMonthEditSave=this.tempIdStayEditSave;
             sessionObject.setSendData(Integer.parseInt(id));
             return "redirect:../../../admincontroller/stay/staymonthVE";
         }else{
-            return "redirect:../../login";
+            return "redirect:../../../login";
         }
     }
 
     @RequestMapping(value ="admincontroller/stay/staymonthVE", method = RequestMethod.GET)
     public String editStayPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             PreschoolerStayMonth preschoolerStayMonth=
                     preschoolerStayMonthService.getPreschoolerStayMonthById(sessionObject.getSendData());
 
@@ -451,6 +555,11 @@ public class employeeStayController {
     @RequestMapping(value ="admincontroller/stay/staymonthVE", method = RequestMethod.POST, params = "return=POWRÓT DO PODGLĄDU")
     public String noSaveChangeStayEditPOT(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/stay/staymonthVD";
         }else{
             return "redirect:../../login";
@@ -460,6 +569,11 @@ public class employeeStayController {
     @RequestMapping(value ="admincontroller/stay/staymonthVE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
     public String saveChangeStayEditPOST(@ModelAttribute PreschoolerStayMonth preschoolerStayMonthEdit){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             preschoolerStayMonthService.saveChangeStayMonth(preschoolerStayMonthService.
                     getPreschoolerStayMonthById(sessionObject.getSendData()),preschoolerStayMonthEdit);
             return "redirect:../../admincontroller/stay/staymonthVD";
@@ -471,19 +585,29 @@ public class employeeStayController {
     @RequestMapping(value ="admincontroller/stay/staymonthVD/D/{id}", method = RequestMethod.GET)
     public String showDeleteFullMealPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../../../notauthorized";
+            }
+
             this.choose=this.tempChoose;
             this.monthEditSave=this.tempNameMonth;
             this.idStayMonthEditSave=this.tempIdStayEditSave;
             sessionObject.setSendData(Integer.parseInt(id));
             return "redirect:../../../../admincontroller/stay/staymonthVDD";
         }else{
-            return "redirect:../../login";
+            return "redirect:../../../../login";
         }
     }
 
     @RequestMapping(value ="admincontroller/stay/staymonthVDD", method = RequestMethod.GET)
     public String deleteStayPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             PreschoolerStayMonth preschoolerStayMonth=
                     preschoolerStayMonthService.getPreschoolerStayMonthById(sessionObject.getSendData());
 
@@ -507,6 +631,11 @@ public class employeeStayController {
     @RequestMapping(value ="admincontroller/stay/staymonthVDD", method = RequestMethod.POST, params = "noDelete=NIE")
     public String noDeleteStayEditPOT(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/stay/staymonthVD";
         }else{
             return "redirect:../../login";
@@ -516,6 +645,11 @@ public class employeeStayController {
     @RequestMapping(value ="admincontroller/stay/staymonthVDD", method = RequestMethod.POST, params = "delete=TAK")
     public String deleteStayEditPOST(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             preschoolerStayMonthService.deleteStayPreschoolInMonthByIdPreschoolerStayBoardPrice(sessionObject.getSendData());
             return "redirect:../../admincontroller/stay/staymonthVD";
         }else{

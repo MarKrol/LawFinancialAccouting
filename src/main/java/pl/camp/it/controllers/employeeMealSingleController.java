@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.meals.SingleBoardPrice;
@@ -44,6 +45,11 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleselectgroup", method = RequestMethod.GET)
     public String addSingleSelectGroup(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -58,6 +64,11 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleselectgroup", method = RequestMethod.POST)
     public String addSingleSelectGroupChoose(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -71,6 +82,11 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singlemonth", method = RequestMethod.GET)
     public String addSingleMonth(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -91,6 +107,10 @@ public class employeeMealSingleController {
                                       @RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                       @RequestParam("choose2") int idSingleEat, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
 
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
 
@@ -126,6 +146,11 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleselectgroupE", method = RequestMethod.GET)
     public String addSingleSelectGroupE(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -140,6 +165,11 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleselectgroupE", method = RequestMethod.POST)
     public String addSingleSelectGroupChooseE(@RequestParam int choose, Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -153,6 +183,11 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singlemonthE", method = RequestMethod.GET)
     public String addSingleMonthE(Model model){
         if (sessionObject.getEmployee()!=null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -175,6 +210,11 @@ public class employeeMealSingleController {
                                                 @RequestParam("choose1") String month,
                                                 @RequestParam("choose2") int idSingleMeal, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             this.idPreschoolerEditSave=idPreschooler;
             this.monthEditSave=month;
             this.idSingleMealEditSave=idSingleMeal;
@@ -223,6 +263,10 @@ public class employeeMealSingleController {
                                                 @RequestParam("choose2") int idSingleMeal, Model model) {
         if (sessionObject.getEmployee() != null) {
 
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
 
             model.addAttribute("nameGroup",preschoolGroupService.getNameGroupPreschoolById(this.choose));
@@ -264,6 +308,12 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleE", method = RequestMethod.GET)
     public String editSingleMealPage(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.idSingleMealEditSave=-1;
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -279,6 +329,12 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleE", method = RequestMethod.POST, params = "edit=EDYTUJ POSIŁEK")
     public String editSingleMealShow(@RequestParam("choose") int idSingleMeal, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.idSingleMealEditSave=idSingleMeal;
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -296,6 +352,11 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleE", method = RequestMethod.POST, params = "save=ZAPISZ ZMIANY")
     public String saveEditSingleMealShow(@RequestParam("data") List<String> singleEdit, @RequestParam("choose") int idSingleEdit, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
 
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -321,6 +382,12 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleE", method = RequestMethod.POST, params = "delete=USUŃ POSIŁEK")
     public String deleteSingleMealShow(@RequestParam("choose") int idSingleMeal, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.idSingleMealEditSave=idSingleMeal;
             return "redirect:../../admincontroller/meals/singleD";
         }else {
@@ -331,6 +398,12 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleD",method = RequestMethod.GET)
     public String confirmDeleteSingleMeal(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -348,6 +421,12 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleD",method = RequestMethod.POST,params = "nodelete=NIE")
     public String noDeleteSingleMeal(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/meals/singleE";
         }else {
             return "redirect:../../login";
@@ -357,6 +436,12 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singleD",method = RequestMethod.POST,params = "delete=TAK")
     public String yesDeleteSingleMeal(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             if (!preschoolerSingleBoardInMonthService.isNameSingleMealPreschoolerInDB
                     (singleBoardPriceService.getNameSingleMealById(this.idSingleMealEditSave).getName())) {
                 singleBoardPriceService.deleteSingleMeal(singleBoardPriceService.getNameSingleMealById(this.idSingleMealEditSave));
@@ -384,6 +469,10 @@ public class employeeMealSingleController {
     @RequestMapping(value = "admincontroller/meals/singlemonthVD", method = RequestMethod.GET)
     public String showViewStay(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
 
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -414,6 +503,11 @@ public class employeeMealSingleController {
     public String showViewSingleMealAllPreschooler(@RequestParam("choose1") String nameMonth,
                                                    @RequestParam("choose2") int idSingleMeal,
                                                    @RequestParam("choose") int idGroup,  Model model){
+
+        if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+            return "redirect:../../notauthorized";
+        }
+
         if (sessionObject.getEmployee() != null) {
             this.monthEditSave=nameMonth;                this.tempNameMonth=nameMonth;
             this.choose=idGroup;                         this.tempChoose =idGroup;
@@ -428,19 +522,29 @@ public class employeeMealSingleController {
     @RequestMapping(value ="admincontroller/meals/singlemonthVD/{id}", method = RequestMethod.GET)
     public String ShowEditSingleMealPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../../notauthorized";
+            }
+
             this.choose=this.tempChoose;
             this.monthEditSave=this.tempNameMonth;
             this.idSingleMealEditSave=this.tempSingleMealEditSave;
             sessionObject.setSendData(Integer.parseInt(id));
             return "redirect:../../../admincontroller/meals/singlemonthVE";
         }else{
-            return "redirect:../../login";
+            return "redirect:../../../login";
         }
     }
 
     @RequestMapping(value ="admincontroller/meals/singlemonthVE", method = RequestMethod.GET)
     public String editSingleMealPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth=
                     preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(sessionObject.getSendData());
 
@@ -463,6 +567,11 @@ public class employeeMealSingleController {
     @RequestMapping(value ="admincontroller/meals/singlemonthVE", method = RequestMethod.POST, params = "return=POWRÓT DO PODGLĄDU")
     public String noSaveChangeSingleMealEditPOT(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/meals/singlemonthVD";
         }else{
             return "redirect:../../login";
@@ -472,6 +581,11 @@ public class employeeMealSingleController {
     @RequestMapping(value ="admincontroller/meals/singlemonthVE", method = RequestMethod.POST, params = "save=ZAPISZ DANE")
     public String saveChangeSingleMealEditPOST(@ModelAttribute PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonthEdit){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             preschoolerSingleBoardInMonthService.saveSingleMealAfterChange
                     (preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(sessionObject.getSendData())
                                                                                     ,preschoolerSingleBoardInMonthEdit);
@@ -484,19 +598,29 @@ public class employeeMealSingleController {
     @RequestMapping(value ="admincontroller/meals/singlemonthVD/D/{id}", method = RequestMethod.GET)
     public String showDeleteFullMealPreschooler(@PathVariable String id, Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../../../notauthorized";
+            }
+
             this.choose=this.tempChoose;
             this.monthEditSave=this.tempNameMonth;
             this.idSingleMealEditSave=this.tempSingleMealEditSave;
             sessionObject.setSendData(Integer.parseInt(id));
             return "redirect:../../../../admincontroller/meals/singlemonthVDD";
         }else{
-            return "redirect:../../login";
+            return "redirect:../../../../login";
         }
     }
 
     @RequestMapping(value ="admincontroller/meals/singlemonthVDD", method = RequestMethod.GET)
     public String deleteFullMealPreschooler(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonth=
                     preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(sessionObject.getSendData());
 
@@ -520,6 +644,11 @@ public class employeeMealSingleController {
     @RequestMapping(value ="admincontroller/meals/singlemonthVDD", method = RequestMethod.POST, params = "noDelete=NIE")
     public String noDeleteSingleMealEditPOT(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/meals/singlemonthVD";
         }else{
             return "redirect:../../login";
@@ -529,6 +658,11 @@ public class employeeMealSingleController {
     @RequestMapping(value ="admincontroller/meals/singlemonthVDD", method = RequestMethod.POST, params = "delete=TAK")
     public String deleteSingleMealEditPOST(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
+                return "redirect:../../notauthorized";
+            }
+
             preschoolerSingleBoardInMonthService.deleteSingleMealPreschoolInMonthByIdPreschoolerSingleMealBoardPrice
                     (sessionObject.getSendData());
             return "redirect:../../admincontroller/meals/singlemonthVD";

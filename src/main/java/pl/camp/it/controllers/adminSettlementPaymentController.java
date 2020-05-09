@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.camp.it.model.activities.PreschoolerActivityInMonth;
 import pl.camp.it.model.company.Company;
+import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.meals.PreschoolerFullBoardInMonth;
 import pl.camp.it.model.meals.PreschoolerSingleBoardInMonth;
 import pl.camp.it.model.month.Month;
@@ -51,6 +52,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/selectgroup", method = RequestMethod.GET)
     public String settlementSelectGroup(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -64,6 +71,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/selectgroup", method = RequestMethod.POST)
     public String settlementSelectGroupChoose(@RequestParam int choose, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -77,6 +90,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/settlement", method = RequestMethod.GET)
     public String settlementChoose(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -92,6 +111,11 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/settlementshow", method = RequestMethod.GET)
     public String settlementShow(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
 
             Preschooler preschooler = preschoolerService.getPreschoolerById(this.idPreschoolerChoose);
 
@@ -136,8 +160,15 @@ public class adminSettlementPaymentController {
     public String settlementShowPOST(@RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                      Model model) {
         if (sessionObject.getEmployee() != null) {
-                this.idPreschoolerChoose=idPreschooler;
-                this.monthChoose=month;
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
+            this.idPreschoolerChoose=idPreschooler;
+            this.monthChoose=month;
+
             return "redirect:../../admincontroller/settlement/settlementshow";
         } else {
             return "redirect:../../login";
@@ -148,6 +179,12 @@ public class adminSettlementPaymentController {
     public String settlementShowPOSTShow(@RequestParam("choose") int idPreschooler, @RequestParam("choose1") String month,
                                      Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.idPreschoolerChoose=idPreschooler;
             this.monthChoose=month;
             return "redirect:../../admincontroller/settlement/settlementshow";
@@ -159,6 +196,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/settlementshow/{what}/{id}", method = RequestMethod.GET)
     public String showEditSettlementFullMeal(@PathVariable String what, @PathVariable int id, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../../../notauthorized";
+            }
+
             if (what.equals("M")) {
                 return "redirect:../../../../admincontroller/settlement/settlementE";
             } else {
@@ -187,6 +230,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/settlementE",method = RequestMethod.GET)
     public String editSettlementFullMeal(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -209,6 +258,12 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -222,6 +277,12 @@ public class adminSettlementPaymentController {
                                                                             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementShowNoSave(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/settlement/settlementshow";
         }else {
             return "redirect:../../login";
@@ -232,6 +293,12 @@ public class adminSettlementPaymentController {
                                                                                         params = "save=ZAPISZ ZMIANY")
     public String returnSettlementShowSave(@ModelAttribute PreschoolerFullBoardInMonth preschoolerFullBoardInMonthEdit){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             preschoolerFullBoardInMonthService.saveEditSettlementPreschoolerFullBoardInMonth
                     (preschoolerFullBoardInMonthService.getPreschoolerFullBoardInMonth(this.idPreschoolerChoose, this.monthChoose),
                             preschoolerFullBoardInMonthEdit);
@@ -244,6 +311,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/settlementSingleE",method = RequestMethod.GET)
     public String editSettlementSingleMeal(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -266,6 +339,12 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementSingleShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -279,6 +358,12 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementSingleShowNoSave(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/settlement/settlementshow";
         }else {
             return "redirect:../../login";
@@ -289,6 +374,12 @@ public class adminSettlementPaymentController {
             params = "save=ZAPISZ ZMIANY")
     public String returnSettlementSingleShowSave(@ModelAttribute PreschoolerSingleBoardInMonth preschoolerSingleBoardInMonthEdit){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             preschoolerSingleBoardInMonthService.saveEditSettlementSingleMealMonth(
                     (preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(sessionObject.getSendData()))
                     ,preschoolerSingleBoardInMonthEdit);
@@ -301,6 +392,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/settlementStayE",method = RequestMethod.GET)
     public String editSettlementStay(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -323,6 +420,12 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementStayShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -336,6 +439,12 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementStayShowNoSave(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/settlement/settlementshow";
         }else {
             return "redirect:../../login";
@@ -346,6 +455,12 @@ public class adminSettlementPaymentController {
             params = "save=ZAPISZ ZMIANY")
     public String returnSettlementStayShowSave(@ModelAttribute PreschoolerStayMonth preschoolerStayMonthEdit){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             preschoolerStayMonthService.saveEditSettlementStayMonth
                     (preschoolerStayMonthService.getPreschoolerStayMonthById(sessionObject.getSendData()),preschoolerStayMonthEdit);
             return "redirect:../../admincontroller/settlement/settlementshow";
@@ -357,6 +472,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/settlement/settlementActivityE",method = RequestMethod.GET)
     public String editSettlementActivity(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -379,6 +500,12 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementActivityShowQ(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -392,6 +519,12 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnSettlementActivityShowNoSave(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/settlement/settlementshow";
         }else {
             return "redirect:../../login";
@@ -402,6 +535,12 @@ public class adminSettlementPaymentController {
             params = "save=ZAPISZ ZMIANY")
     public String returnSettlementActivityShowSave(@ModelAttribute PreschoolerActivityInMonth preschoolerActivityInMonthEdit){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             preschoolerActivityInMonthService.saveEditSettlementActivityMonth
                     (preschoolerActivityInMonthService.getPreschoolerActivityMonthById(sessionObject.getSendData()),
                             preschoolerActivityInMonthEdit);
@@ -415,6 +554,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/payment/paymentselectgroup", method = RequestMethod.GET)
     public String paymentSelectGroup(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -428,6 +573,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/payment/paymentselectgroup", method = RequestMethod.POST)
     public String paymentSelectGroupChoose(@RequestParam int choose, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -444,6 +595,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/payment/paymentshow", method = RequestMethod.GET)
     public String paymentChoose(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("nameGroup", preschoolGroupService.getNameGroupPreschoolById(this.choose));
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
@@ -476,6 +633,11 @@ public class adminSettlementPaymentController {
                              @RequestParam("date") String date, @RequestParam("choose") int idPreschooler,
                              @RequestParam("choosecompany") int idCompany, Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
 
             this.idPreschoolerChoose=idPreschooler;
             this.idCompanyChoose=idCompany;
@@ -521,6 +683,11 @@ public class adminSettlementPaymentController {
                               @RequestParam("choosecompany") int idCompany,Model model){
         if (sessionObject.getEmployee() != null) {
 
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             this.idPreschoolerChoose=idPreschooler;
             this.monthChoose=month;
             this.idCompanyChoose=idCompany;
@@ -553,6 +720,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/payment/paymentshow/{what}/{id}", method = RequestMethod.GET)
     public String showEditPayment(@PathVariable String what, @PathVariable int id, Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../../../notauthorized";
+            }
+
             if (what.equals("E")) {
                 sessionObject.setSendData(id);
                 return "redirect:../../../../admincontroller/payment/paymentE";
@@ -572,6 +745,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/payment/paymentE",method = RequestMethod.GET)
     public String editPayment(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -596,6 +775,12 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnPaymentShowNoSave(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -609,6 +794,12 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnPaymentShowNoSave(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/payment/paymentshow";
         }else {
             return "redirect:../../login";
@@ -620,10 +811,16 @@ public class adminSettlementPaymentController {
     public String returnPaymentShowSave(@RequestParam("name")String name, @RequestParam("payment")String pay,
                                         @RequestParam("date")String date, @RequestParam("choosecompany") int idCompany){
         if (sessionObject.getEmployee() != null) {
-                Payment payment = paymentService.getPaymentById(sessionObject.getSendData());
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
+            Payment payment = paymentService.getPaymentById(sessionObject.getSendData());
                 //if (payment.getCompany().getId()==idCompany) {
-                    paymentService.savePaymentChange(payment, name, Double.parseDouble(pay), date,
-                            companyService.getCompanyById(idCompany));
+            paymentService.savePaymentChange(payment, name, Double.parseDouble(pay), date,
+                  companyService.getCompanyById(idCompany));
                 //} else {
                 //    paymentService.savePaymentChangeCompany(payment, name, Double.parseDouble(pay), date,
                 //            companyService.getCompanyById(idCompany));
@@ -637,6 +834,12 @@ public class adminSettlementPaymentController {
     @RequestMapping(value = "admincontroller/payment/paymentD",method = RequestMethod.GET)
     public String deletePayment(Model model) {
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -661,6 +864,12 @@ public class adminSettlementPaymentController {
             params = "nosave=WYJŚCIE BEZ ZAPISU ZMIAN")
     public String returnPaymentShowNoDelete(Model model){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
@@ -674,6 +883,12 @@ public class adminSettlementPaymentController {
             params = "nosave=NIE")
     public String returnPaymentShowNoDelete(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             return "redirect:../../admincontroller/payment/paymentshow";
         }else {
             return "redirect:../../login";
@@ -684,6 +899,12 @@ public class adminSettlementPaymentController {
             params = "save=TAK")
     public String returnPaymentShowDelete(){
         if (sessionObject.getEmployee() != null) {
+
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString()) ||
+                    (sessionObject.getEmployee().getRole().equals("ACCOUNT"))){
+                return "redirect:../../notauthorized";
+            }
+
             Payment payment = paymentService.getPaymentById(sessionObject.getSendData());
             paymentService.deletePayment(payment);
             return "redirect:../../admincontroller/payment/paymentshow";
