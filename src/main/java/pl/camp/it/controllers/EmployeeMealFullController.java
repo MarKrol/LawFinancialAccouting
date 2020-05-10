@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-public class employeeMealFullController {
+public class EmployeeMealFullController {
 
     private int choose=-1; //id group;
     private int idPreschoolerEditSave;
@@ -37,6 +37,8 @@ public class employeeMealFullController {
     IPreschoolGroupService preschoolGroupService;
     @Autowired
     IPreschoolerFullBoardInMonthService preschoolerFullBoardInMonthService;
+    @Autowired
+    IEmployeeService employeeService;
 
     @RequestMapping(value = "admincontroller/meals/fullselectgroup", method = RequestMethod.GET)
     public String addFullSelectGroup(Model model){
@@ -49,7 +51,7 @@ public class employeeMealFullController {
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
             model.addAttribute("fullMeal", new PreschoolerFullBoardInMonth());
             return "admincontroller/meals/fullselectgroup";
         } else {
@@ -105,6 +107,12 @@ public class employeeMealFullController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
@@ -174,7 +182,7 @@ public class employeeMealFullController {
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
             model.addAttribute("fullMeal", new PreschoolerFullBoardInMonth());
             return "admincontroller/meals/fullselectgroupE";
         } else {
@@ -229,6 +237,12 @@ public class employeeMealFullController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
@@ -279,6 +293,12 @@ public class employeeMealFullController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
@@ -504,7 +524,7 @@ public class employeeMealFullController {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
 
             if (this.choose!=-1 && this.monthEditSave!=null) {
                 model.addAttribute("fullMealAllPreschoolers",
@@ -528,6 +548,12 @@ public class employeeMealFullController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndGroupPreschooler(sessionObject.getEmployee(),
+                        preschoolGroupService.getPreschoolerGroupByName(preschoolGroupService.getNameGroupPreschoolById(idGroup)))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             this.monthEditSave=nameMonth;   this.tempNameMonth=nameMonth;
@@ -553,6 +579,13 @@ public class employeeMealFullController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerFullBoardInMonthService.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal
+                                (Integer.valueOf(id)).getPreschooler())) {
+                    return "redirect:../../../notauthorized";
+                }
             }
 
                 this.choose=this.tempChoose;
@@ -599,6 +632,12 @@ public class employeeMealFullController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             return "redirect:../../admincontroller/meals/fullmonthVD";
@@ -614,6 +653,12 @@ public class employeeMealFullController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             preschoolerFullBoardInMonthService.editAndPersistPreschoolerFullBoardInMonth
@@ -631,6 +676,13 @@ public class employeeMealFullController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerFullBoardInMonthService.getPreschoolerFullMealMonthByIdPreschoolerMonthFullMeal
+                                (Integer.valueOf(id)).getPreschooler())) {
+                    return "redirect:../../../../notauthorized";
+                }
             }
 
             this.choose=this.tempChoose;
@@ -678,6 +730,12 @@ public class employeeMealFullController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             return "redirect:../../admincontroller/meals/fullmonthVD";
@@ -692,6 +750,12 @@ public class employeeMealFullController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             preschoolerFullBoardInMonthService.

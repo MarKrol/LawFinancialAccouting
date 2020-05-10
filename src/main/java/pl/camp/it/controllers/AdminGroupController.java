@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-public class adminGroupController {
+public class AdminGroupController {
 
     private int idGroup = -1;
 
@@ -69,7 +69,7 @@ public class adminGroupController {
             sessionObject.setSendData(Integer.parseInt(idGroup));
             return "redirect:../../../admincontroller/grouppreschooler/groupE";
         }else {
-            return "redirect:../../login";
+            return "redirect:../../../login";
         }
     }
 
@@ -197,7 +197,7 @@ public class adminGroupController {
             sessionObject.setSendData(Integer.parseInt(idGroup));
             return "redirect:../../../admincontroller/grouppreschooler/groupD";
         }else {
-            return "redirect:../../login";
+            return "redirect:../../../login";
         }
     }
 

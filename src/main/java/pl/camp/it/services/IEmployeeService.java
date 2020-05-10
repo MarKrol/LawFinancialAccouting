@@ -1,6 +1,9 @@
 package pl.camp.it.services;
 
 import pl.camp.it.model.employee.Employee;
+import pl.camp.it.model.parent.Parent;
+import pl.camp.it.model.preschoolGroup.PreschoolGroup;
+import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.model.userLogin.EmployeeLogin;
 
 import java.util.List;
@@ -29,4 +32,10 @@ public interface IEmployeeService {
     EmployeeLogin returnPassOrStarsEmployee(EmployeeLogin employeeLogin);
     EmployeeLogin genNewPassEmployee(Employee employee);
     String saveNewLogin(Employee employee, String newlogin);
+
+    boolean userAuthorizationByEmployeeAndGroupPreschooler(Employee employee, PreschoolGroup preschoolGroup);
+    boolean userAuthorizationByEmployeeAndPreschooler(Employee employee, Preschooler preschooler);
+    boolean userAuthorizationByEmployeeAndParent(Employee employee, Parent parent);
+
+    List<PreschoolGroup> getListPreschoolerGroupByUserRole(Employee employee);
 }

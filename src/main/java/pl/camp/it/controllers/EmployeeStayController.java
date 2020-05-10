@@ -11,10 +11,7 @@ import pl.camp.it.model.month.Month;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.model.stay.PreschoolerStayMonth;
 import pl.camp.it.model.stay.Stay;
-import pl.camp.it.services.IPreschoolGroupService;
-import pl.camp.it.services.IPreschoolerService;
-import pl.camp.it.services.IPreschoolerStayMonthService;
-import pl.camp.it.services.IStayService;
+import pl.camp.it.services.*;
 import pl.camp.it.session.SessionObject;
 
 import javax.annotation.Resource;
@@ -22,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class employeeStayController {
+public class EmployeeStayController {
 
     private int choose;
     private int idPreschoolerEditSave;
@@ -43,6 +40,8 @@ public class employeeStayController {
     IStayService stayService;
     @Autowired
     IPreschoolerStayMonthService preschoolerStayMonthService;
+    @Autowired
+    IEmployeeService employeeService;
 
     @RequestMapping(value = "admincontroller/stay/stayselectgroup", method = RequestMethod.GET)
     public String addStaySelectGroup(Model model){
@@ -55,7 +54,7 @@ public class employeeStayController {
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
             model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
             return "admincontroller/stay/stayselectgroup";
         } else {
@@ -111,6 +110,12 @@ public class employeeStayController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
@@ -153,7 +158,7 @@ public class employeeStayController {
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
             model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
             return "admincontroller/stay/stayselectgroupE";
         } else {
@@ -209,6 +214,12 @@ public class employeeStayController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             this.idPreschoolerEditSave=idPreschooler;
@@ -256,6 +267,12 @@ public class employeeStayController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
@@ -462,7 +479,7 @@ public class employeeStayController {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
             model.addAttribute("listStay",stayService.getListStay());
 
             if (this.choose!=-1 && this.monthEditSave!=null && this.idStayMonthEditSave!=-1) {
@@ -492,6 +509,12 @@ public class employeeStayController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndGroupPreschooler(sessionObject.getEmployee(),
+                        preschoolGroupService.getPreschoolerGroupByName(preschoolGroupService.getNameGroupPreschoolById(idGroup)))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             this.monthEditSave = nameMonth;
@@ -513,6 +536,12 @@ public class employeeStayController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerStayMonthService.getPreschoolerStayMonthById((Integer.valueOf(id))).getPreschooler())) {
+                    return "redirect:../../../notauthorized";
+                }
             }
 
             this.choose=this.tempChoose;
@@ -558,6 +587,12 @@ public class employeeStayController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             return "redirect:../../admincontroller/stay/staymonthVD";
@@ -572,6 +607,12 @@ public class employeeStayController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             preschoolerStayMonthService.saveChangeStayMonth(preschoolerStayMonthService.
@@ -588,6 +629,12 @@ public class employeeStayController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerStayMonthService.getPreschoolerStayMonthById(Integer.valueOf(id)).getPreschooler())){
+                    return "redirect:../../../../notauthorized";
+                }
             }
 
             this.choose=this.tempChoose;
@@ -634,6 +681,12 @@ public class employeeStayController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             return "redirect:../../admincontroller/stay/staymonthVD";
@@ -648,6 +701,12 @@ public class employeeStayController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             preschoolerStayMonthService.deleteStayPreschoolInMonthByIdPreschoolerStayBoardPrice(sessionObject.getSendData());

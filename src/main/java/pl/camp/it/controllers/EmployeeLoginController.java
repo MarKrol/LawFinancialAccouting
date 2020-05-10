@@ -23,7 +23,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Controller
-public class employeeLoginController {
+public class EmployeeLoginController {
 
     @Resource
     SessionObject sessionObject;
@@ -165,7 +165,7 @@ public class employeeLoginController {
             sessionObject.setSendData(Integer.parseInt(idEmployee));
             return "redirect:../../../admincontroller/employee/employeeL";
         } else {
-            return "redirect:../../login";
+            return "redirect:../../../login";
         }
     }
 

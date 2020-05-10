@@ -15,10 +15,7 @@ import pl.camp.it.model.preschoolGroup.PreschoolGroup;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.model.stay.PreschoolerStayMonth;
 import pl.camp.it.model.stay.Stay;
-import pl.camp.it.services.IActivityService;
-import pl.camp.it.services.IPreschoolGroupService;
-import pl.camp.it.services.IPreschoolerActivityInMonthService;
-import pl.camp.it.services.IPreschoolerService;
+import pl.camp.it.services.*;
 import pl.camp.it.session.SessionObject;
 
 import javax.annotation.Resource;
@@ -26,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class employeeActivityController {
+public class EmployeeActivityController {
 
     private int choose; //choose idGroup;
     private int idPreschoolerEdit=-1;
@@ -45,6 +42,8 @@ public class employeeActivityController {
     IActivityService activityService;
     @Autowired
     IPreschoolerActivityInMonthService preschoolerActivityInMonthService;
+    @Autowired
+    IEmployeeService employeeService;
 
     @RequestMapping(value = "admincontroller/activity/activityselectgroup", method = RequestMethod.GET)
     public String addStaySelectGroup(Model model){
@@ -57,7 +56,7 @@ public class employeeActivityController {
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
             model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
             return "admincontroller/activity/activityselectgroup";
         } else {
@@ -112,6 +111,12 @@ public class employeeActivityController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
@@ -152,7 +157,7 @@ public class employeeActivityController {
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
             model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
             return "admincontroller/activity/activityselectgroupE";
         } else {
@@ -207,6 +212,12 @@ public class employeeActivityController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             this.idPreschoolerEdit=idPreschooler;
@@ -260,6 +271,12 @@ public class employeeActivityController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);

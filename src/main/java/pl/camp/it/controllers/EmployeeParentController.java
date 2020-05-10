@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.camp.it.model.employee.EmployeeRole;
 import pl.camp.it.model.parent.Parent;
 import pl.camp.it.model.preschooler.Preschooler;
+import pl.camp.it.services.IEmployeeService;
 import pl.camp.it.services.IParentService;
 import pl.camp.it.services.IPreschoolGroupService;
 import pl.camp.it.services.IPreschoolerService;
@@ -16,7 +17,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-public class employeeParentController {
+public class EmployeeParentController {
 
     private int idGroup = -1;
 
@@ -29,6 +30,8 @@ public class employeeParentController {
     IPreschoolerService preschoolerService;
     @Autowired
     IPreschoolGroupService preschoolGroupService;
+    @Autowired
+    IEmployeeService employeeService;
 
     @RequestMapping(value = "admincontroller/preschooler/preschoolerAP", method = RequestMethod.POST,
             params = "return=NIE ZAPISUJ DANYCH")
@@ -37,6 +40,12 @@ public class employeeParentController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             return "redirect:../../admincontroller/preschooler/preschoolerVED";
@@ -52,6 +61,12 @@ public class employeeParentController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            } else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             parentService.addParentToDB(parent, preschoolerService.getPreschoolerById(sessionObject.getSendData()));
@@ -72,7 +87,7 @@ public class employeeParentController {
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
 
             if (this.idGroup != -1) {
                 List<Preschooler> preschoolers = preschoolerService.getPreschoolerList(this.idGroup);
@@ -107,13 +122,19 @@ public class employeeParentController {
         if (sessionObject.getEmployee()!=null) {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
-                return "redirect:../../notauthorized";
+                return "redirect:../../../notauthorized";
+            } else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndParent(sessionObject.getEmployee(),
+                        parentService.getParentById(Integer.parseInt(idParent)))) {
+                    return "redirect:../../../notauthorized";
+                }
             }
 
             sessionObject.setSendData(Integer.parseInt(idParent));
             return "redirect:../../../admincontroller/preschooler/parentE";
         }else {
-            return "redirect:../../login";
+            return "redirect:../../../login";
         }
     }
 
@@ -146,6 +167,12 @@ public class employeeParentController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            } else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndParent(sessionObject.getEmployee(),
+                        parentService.getParentById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             this.idGroup=parentService.getParentById(sessionObject.getSendData()).getPreschooler().getPreschoolGroup().getId();
@@ -161,6 +188,12 @@ public class employeeParentController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            } else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndParent(sessionObject.getEmployee(),
+                        parentService.getParentById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             this.idGroup=parentService.getParentById(sessionObject.getSendData()).getPreschooler().getPreschoolGroup().getId();
@@ -176,13 +209,19 @@ public class employeeParentController {
         if (sessionObject.getEmployee()!=null) {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
-                return "redirect:../../notauthorized";
+                return "redirect:../../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndParent(sessionObject.getEmployee(),
+                        parentService.getParentById(Integer.parseInt(idParent)))) {
+                    return "redirect:../../../notauthorized";
+                }
             }
 
             sessionObject.setSendData(Integer.parseInt(idParent));
             return "redirect:../../../admincontroller/preschooler/parentD";
         }else {
-            return "redirect:../../login";
+            return "redirect:../../../login";
         }
     }
 
@@ -216,6 +255,12 @@ public class employeeParentController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndParent(sessionObject.getEmployee(),
+                        parentService.getParentById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             this.idGroup=parentService.getParentById(sessionObject.getSendData()).getPreschooler().getPreschoolGroup().getId();
@@ -231,6 +276,12 @@ public class employeeParentController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndParent(sessionObject.getEmployee(),
+                        parentService.getParentById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             this.idGroup=parentService.getParentById(sessionObject.getSendData()).getPreschooler().getPreschoolGroup().getId();

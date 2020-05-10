@@ -17,7 +17,7 @@ import pl.camp.it.session.SessionObject;
 import javax.annotation.Resource;
 
 @Controller
-public class adminBalanceController {
+public class AdminBalanceController {
 
     @Resource
     SessionObject sessionObject;

@@ -20,7 +20,7 @@ import pl.camp.it.session.SessionObject;
 import javax.annotation.Resource;
 
 @Controller
-public class adminMealActivityStayController {
+public class AdminMealActivityStayController {
 
     @Resource
     SessionObject sessionObject;

@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
-public class adminSendEmailController {
+public class AdminSendEmailController {
 
     private List<PreschoolGroup> preschoolGroups = new ArrayList<>();
 

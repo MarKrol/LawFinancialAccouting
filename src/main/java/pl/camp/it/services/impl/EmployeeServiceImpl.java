@@ -6,8 +6,12 @@ import org.springframework.stereotype.Service;
 import pl.camp.it.dao.IEmployeeDAO;
 import pl.camp.it.model.employee.Employee;
 import pl.camp.it.model.employee.EmployeeRole;
+import pl.camp.it.model.parent.Parent;
+import pl.camp.it.model.preschoolGroup.PreschoolGroup;
+import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.model.userLogin.EmployeeLogin;
 import pl.camp.it.services.IEmployeeService;
+import pl.camp.it.services.IPreschoolGroupService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +22,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Autowired
     IEmployeeDAO employeeDAO;
+    @Autowired
+    IPreschoolGroupService preschoolGroupService;
 
     @Override
     public void persistEmployee(Employee employee) {
@@ -164,6 +170,50 @@ public class EmployeeServiceImpl implements IEmployeeService {
                 return null;
             }
         }
+    }
+
+    @Override
+    public boolean userAuthorizationByEmployeeAndGroupPreschooler(Employee employee, PreschoolGroup preschoolGroup) {
+        if (preschoolGroup.getEmployee()==null){
+            return false;
+        }
+
+        if (employee.getId()==preschoolGroup.getEmployee().getId()) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean userAuthorizationByEmployeeAndPreschooler(Employee employee, Preschooler preschooler) {
+        PreschoolGroup preschoolGroup = new PreschoolGroup();
+        preschoolGroup = preschooler.getPreschoolGroup();
+        return userAuthorizationByEmployeeAndGroupPreschooler(employee, preschoolGroup);
+    }
+
+    @Override
+    public boolean userAuthorizationByEmployeeAndParent(Employee employee, Parent parent) {
+        PreschoolGroup preschoolGroup = new PreschoolGroup();
+        preschoolGroup = parent.getPreschooler().getPreschoolGroup();
+        return userAuthorizationByEmployeeAndGroupPreschooler(employee, preschoolGroup);
+    }
+
+    @Override
+    public List<PreschoolGroup> getListPreschoolerGroupByUserRole(Employee employee) {
+        List<PreschoolGroup> preschoolGroups = new ArrayList<>();
+        if (employee.getRole().equals(EmployeeRole.TEACHER.toString())){
+            PreschoolGroup preschoolGroup = preschoolGroupService.getPreschoolGroupByIdEmployee(employee.getId());
+            if (preschoolGroup==null){
+                return new ArrayList<>();
+            } else {
+                preschoolGroups.add(preschoolGroup);
+            }
+        } else {
+            preschoolGroups = preschoolGroupService.getListPreschoolerGroup();
+        }
+
+        return preschoolGroups;
     }
 
     private boolean newLoginIsInDB(Employee employee, String login){

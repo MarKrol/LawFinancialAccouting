@@ -62,16 +62,17 @@
             </table>
             </div>
             <div>
-            <table border="1" rules="all" frame="void" style="margin-bottom: 10px">
+            <div style="display: block;float: right;">
+            <table border="1" rules="all" frame="void" style="margin-bottom: 10px; width: 700px;">
                 <tr>
                     <td colspan="5"><label><p class="name" th:text="${'MIESIĘCZNE ZESTAWIENIE - '+company1}"></p></label></td>
                 </tr>
                 <tr style="background-color:#87CEFA; font-weight: bold">
                     <td class="colTable" th:text="${'Lp.'}"></td>
                     <td class="colTableName" style="width: 250px" th:text="${'Nazwisko i imię'}"></td>
-                    <td class="colTable" style="width: 175px" th:text="${'Naliczenia [zł]'}"></td>
-                    <td class="colTable" style="width: 175px" th:text="${'Wpłaty [zł]'}"></td>
-                    <td class="colTable" style="width: 175px" th:text="${'Saldo [zł]*'}"></td>
+                    <td class="colTable" style="width: 150px" th:text="${'Naliczenia [zł]'}"></td>
+                    <td class="colTable" style="width: 150px" th:text="${'Wpłaty [zł]'}"></td>
+                    <td class="colTable" style="width: 150px" th:text="${'Saldo [zł]*'}"></td>
                 </tr>
 
                 <th:block th:each="preschooler, item: ${allPreschoolers}">
@@ -86,17 +87,18 @@
                 <tr><td colspan="5"><p style="margin-top: 10px; font-size: 10px; font-family: Verdana, Helvetica, Arial, sans-serif;">
                     *dodania kwota salda oznacza nadpłatę, a ujemna zadłużenie.</p></td></tr>
             </table>
-
-                <table border="1" rules="all" frame="void" style="margin-bottom: 40px">
+            </div>
+            <div style="display: block;float: right;">
+                <table border="1" rules="all" frame="void" style="margin-bottom: 40px; width: 700px;">
                     <tr>
                         <td colspan="5"><label><p class="name" th:text="${'MIESIĘCZNE ZESTAWIENIE - '+company2}"></p></label></td>
                     </tr>
                     <tr style="background-color:#f0c78f; font-weight: bold">
                         <td class="colTable" th:text="${'Lp.'}"></td>
                         <td class="colTableName" style="width: 250px" th:text="${'Nazwisko i imię'}"></td>
-                        <td class="colTable" style="width: 175px" th:text="${'Naliczenia [zł]'}"></td>
-                        <td class="colTable" style="width: 175px" th:text="${'Wpłaty [zł]'}"></td>
-                        <td class="colTable" style="width: 175px" th:text="${'Saldo [zł]*'}"></td>
+                        <td class="colTable" style="width: 150px" th:text="${'Naliczenia [zł]'}"></td>
+                        <td class="colTable" style="width: 150px" th:text="${'Wpłaty [zł]'}"></td>
+                        <td class="colTable" style="width: 150px" th:text="${'Saldo [zł]*'}"></td>
                     </tr>
 
                     <th:block th:each="preschooler, item: ${allPreschoolers2}">
@@ -111,12 +113,12 @@
                     <tr><td colspan="5"><p style="margin-top: 10px; font-size: 10px; font-family: Verdana, Helvetica, Arial, sans-serif;">
                         *dodania kwota salda oznacza nadpłatę, a ujemna zadłużenie.</p></td></tr>
                 </table>
-
+            </div>
             </div>
             </div>
         </form>
     </div>
-    <div id="footer" style="display: block; clear: left" >
+    <div id="footer" style="display: block; clear: right" >
     <div th:replace="foot/foot.html::foot"></div>
     </div>
 </div>

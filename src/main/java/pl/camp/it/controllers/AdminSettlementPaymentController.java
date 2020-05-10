@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-public class adminSettlementPaymentController {
+public class AdminSettlementPaymentController {
 
     private int choose = -1; //wybór grupy przedszkolnej
     private int idPreschoolerChoose=-1;
@@ -223,7 +223,7 @@ public class adminSettlementPaymentController {
                 }
             }
         }else {
-            return "redirect:../../login";
+            return "redirect:../../../../login";
         }
     }
 
@@ -738,7 +738,7 @@ public class adminSettlementPaymentController {
                 }
             }
         }else {
-            return "redirect:../../login";
+            return "redirect:../../../../login";
         }
     }
 

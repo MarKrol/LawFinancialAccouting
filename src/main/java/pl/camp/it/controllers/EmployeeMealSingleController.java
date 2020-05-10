@@ -11,17 +11,14 @@ import pl.camp.it.model.meals.SingleBoardPrice;
 import pl.camp.it.model.month.Month;
 import pl.camp.it.model.preschooler.Preschooler;
 import pl.camp.it.model.stay.Stay;
-import pl.camp.it.services.IPreschoolGroupService;
-import pl.camp.it.services.IPreschoolerService;
-import pl.camp.it.services.IPreschoolerSingleBoardInMonthService;
-import pl.camp.it.services.ISingleBoardPriceService;
+import pl.camp.it.services.*;
 import pl.camp.it.session.SessionObject;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-public class employeeMealSingleController {
+public class EmployeeMealSingleController {
 
     private int choose; //choose groupPreschooler
     private int idPreschoolerEditSave;
@@ -41,6 +38,8 @@ public class employeeMealSingleController {
     ISingleBoardPriceService singleBoardPriceService;
     @Autowired
     IPreschoolerSingleBoardInMonthService preschoolerSingleBoardInMonthService;
+    @Autowired
+    IEmployeeService employeeService;
 
     @RequestMapping(value = "admincontroller/meals/singleselectgroup", method = RequestMethod.GET)
     public String addSingleSelectGroup(Model model){
@@ -53,7 +52,7 @@ public class employeeMealSingleController {
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
             model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
             return "admincontroller/meals/singleselectgroup";
         } else {
@@ -110,6 +109,12 @@ public class employeeMealSingleController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
@@ -154,7 +159,7 @@ public class employeeMealSingleController {
             model.addAttribute("userRoleAfterLogged", sessionObject.getEmployee().getRole());
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
             model.addAttribute("singleMeal", new PreschoolerSingleBoardInMonth());
             return "admincontroller/meals/singleselectgroupE";
         } else {
@@ -213,6 +218,12 @@ public class employeeMealSingleController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             this.idPreschoolerEditSave=idPreschooler;
@@ -265,6 +276,12 @@ public class employeeMealSingleController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(idPreschooler))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             Preschooler preschooler = preschoolerService.getPreschoolerById(idPreschooler);
@@ -478,7 +495,7 @@ public class employeeMealSingleController {
             model.addAttribute("employeeLogged", sessionObject.getEmployee().getName() + " " +
                     sessionObject.getEmployee().getSurname());
             model.addAttribute("listMonth", Month.getMonth());
-            model.addAttribute("listPreschoolGroup", preschoolGroupService.getListPreschoolerGroup());
+            model.addAttribute("listPreschoolGroup", employeeService.getListPreschoolerGroupByUserRole(sessionObject.getEmployee()));
             model.addAttribute("listSingleMeal",singleBoardPriceService.getListSingleMeal());
 
             if (this.choose!=-1 && this.monthEditSave!=null && this.idSingleMealEditSave!=-1) {
@@ -506,6 +523,12 @@ public class employeeMealSingleController {
 
         if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
             return "redirect:../../notauthorized";
+        }else {
+            if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                    && !employeeService.userAuthorizationByEmployeeAndGroupPreschooler(sessionObject.getEmployee(),
+                    preschoolGroupService.getPreschoolerGroupByName(preschoolGroupService.getNameGroupPreschoolById(idGroup)))) {
+                return "redirect:../../notauthorized";
+            }
         }
 
         if (sessionObject.getEmployee() != null) {
@@ -525,6 +548,13 @@ public class employeeMealSingleController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById(
+                                (Integer.valueOf(id))).getPreschooler())) {
+                    return "redirect:../../../notauthorized";
+                }
             }
 
             this.choose=this.tempChoose;
@@ -570,6 +600,12 @@ public class employeeMealSingleController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             return "redirect:../../admincontroller/meals/singlemonthVD";
@@ -584,6 +620,12 @@ public class employeeMealSingleController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             preschoolerSingleBoardInMonthService.saveSingleMealAfterChange
@@ -601,6 +643,13 @@ public class employeeMealSingleController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerSingleBoardInMonthService.getPreschoolerSingleBoardMonthById
+                                (Integer.valueOf(id)).getPreschooler())) {
+                    return "redirect:../../../../notauthorized";
+                }
             }
 
             this.choose=this.tempChoose;
@@ -647,6 +696,12 @@ public class employeeMealSingleController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             return "redirect:../../admincontroller/meals/singlemonthVD";
@@ -661,6 +716,12 @@ public class employeeMealSingleController {
 
             if (sessionObject.getEmployee().getRole().equals("ACCOUNT")){
                 return "redirect:../../notauthorized";
+            }else {
+                if (sessionObject.getEmployee().getRole().equals(EmployeeRole.TEACHER.toString())
+                        && !employeeService.userAuthorizationByEmployeeAndPreschooler(sessionObject.getEmployee(),
+                        preschoolerService.getPreschoolerById(sessionObject.getSendData()))) {
+                    return "redirect:../../notauthorized";
+                }
             }
 
             preschoolerSingleBoardInMonthService.deleteSingleMealPreschoolInMonthByIdPreschoolerSingleMealBoardPrice

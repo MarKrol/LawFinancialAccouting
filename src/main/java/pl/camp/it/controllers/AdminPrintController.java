@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 
 @Controller
-public class adminPrintController {
+public class AdminPrintController {
 
     private String month;
 
